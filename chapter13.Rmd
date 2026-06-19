@@ -1,0 +1,201 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r echo=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(effectsize)
+library(agricolae)
+library(car)
+library(PMCMRplus)
+library(additivityTests)
+library(lmerTest)
+library(nlme)
+library(rsm)
+library(mixexp)
+library(daewr)
+```
+
+# Response Surface and Mixture Designs
+
+Response surface and mixture designs are used in a wide range of engineering fields. The goal is to choose levels of a group of numeric predictor variables that optimize the response variable(s). Response surfaces are based on $k$ predictors at several levels and models are typically based on a second-order model with linear, interaction, and quadratic terms among the predictors.
+Mixture designs have several inputs, but these are restricted to sum to 1 (or 100%).
+
+## Response Surface Designs
+
+The model for a second order response surface with $k$ factors is given below and
+can be implemented easily using the **rsm** package in R.
+
+$$
+Y = \beta_0 + \sum_{i=1}^k \beta_{i}X_i + \sum_{i=1}^{k-1}\sum_{i'=i+1}^k\beta_{ii'}X_iX_i'
++ \sum_{i=1}^k\beta_{ii}X_i^2 + \epsilon
+$$
+The model has $1+k+k(k-1)/2+k$ parameters. Once the regression model is fit,
+individual parameters and groups (linear terms, 2-factor interactions, quadratic terms) can be tested for significance. The fitted model can be written in scalar or matrix form.
+
+$$
+\hat{Y}=\hat{\beta}_0 + \sum_{i=1}^k \hat{\beta}_{i}X_i + \sum_{i=1}^{k-1}\sum_{i'=i+1}^k\hat{\beta}_{ii'}X_iX_i'
++ \sum_{i=1}^k\hat{\beta}_{ii}X_i^2 =
+\hat{\beta}_0+ B_1'x + x'B_2x
+$$
+where $x$, $B_1$, $B_2$ are defined as follow.
+$$
+x=\begin{bmatrix}
+X_1 \\ \vdots \\ X_k \\
+\end{bmatrix}
+\qquad
+B_1 =
+\begin{bmatrix}
+\hat{\beta}_1 \\ \vdots \\ \hat{\beta}_k\\
+\end{bmatrix}
+\qquad
+B_2 = 
+\begin{bmatrix}
+\hat{\beta}_{11} & \hat{\beta}_{12}/2 & \cdots & \hat{\beta}_{1k}/2 \\
+\hat{\beta}_{12}/2 & \hat{\beta}_{22} & \cdots & \hat{\beta}_{2k}/2 \\
+\vdots & \vdots & \ddots & \vdots \\
+\hat{\beta}_{1k}/2 & \hat{\beta}_{2k}/2 & \cdots & \hat{\beta}_{kk}\\
+\end{bmatrix}
+$$
+Taking the derivative of $\hat{Y}$ with respect to $x$, setting it equal to zero, gives the optimal set of inputs for the $k$ factors (which may fall outside of possible values). This is printed directly 
+in the summary of the **rsm** fit.
+
+$$
+\frac{\partial \hat{Y}}{\partial x}= B_1 + 2B_2x \quad \stackrel{\rm set}{=}0 \quad
+\Rightarrow \quad x^* = -\frac{1}{2}B_2^{-1}B_1
+$$
+
+Two commonly used designs for response surfaces are the **Central Composite Design** and the **Box-Behnken Design**.
+
+In the Central Composite Design, there are $k$ factors, each with three equally spaced levels coded $-1,0,+1$. A $2^k$ factorial is set up with each factor at $+/-1$. Then $2k$ observations are made with $k-1$ variables at their 0 levels and the remaining factor at $\pm \alpha$ where $\alpha$ is commonly $\sqrt{2}$, $\sqrt{3}$, or 2, these are labelled "axial points."
+Finally, there are $c$ observations with each of the $k$ factors at their center (0) levels, which permits a goodness of fit test.
+
+**Example 13.1 - Solar Drying of Avocado Pulp**
+
+A study was conducted as a response surface design with $k=4$ factors to measure solar drying of avocado pulp [@kowarit_2024]. The 4 factors are described below, and the response was moisture content of the avocado pulp (lower values are better). This is a central composite design with $\alpha=2$.
+
+- **Hot Air Temperature** ($X_1$, Celsius): -1=40, 0=55, +1=70 (axial points at 25, 85)
+- **Drying Time** ($X_2$, hours):  -1=13, 0=16.5, +1=20 (axial points at 9.5, 23.5)
+- **Raw Material Thickness** ($X_3$, cm): -1=0.5, 0=0.75, +1=1.00 (axial points at 0.25, 1.25) 
+- **Wind Speed** ($X_4$, meters/second):  -1=0.12, 0=0.19, +1=0.26  (axial points at 0.05, 0.33)
+
+There were $2^4=16$ runs with the 4 factors at +/-1, $4(2)=8$ runs at the axial points for each factor (with the other 3 factors at their 0 level), and 6 runs at the center points, for a total of 30 experimental runs.
+The R program and output are given below, with response surface and
+contour plots in Figure \@ref(fig:ch1301) and Figure \@ref(fig:ch1301a),
+respectively.
+
+```{r ch1301, fig.cap='Response Surface for avocado pulp study - 3D Plots', out.width='80%', fig.asp=.75, fig.align='center'}
+am <- read.csv("data/avocado.csv")
+head(am); tail(am)
+
+mod1 <- rsm(moisture ~ SO(hotAirTemp, dryTime,rawMatThck,windSpeed), data=am)
+summary(mod1)
+
+par(mfrow=c(2,3))
+persp(mod1, ~ hotAirTemp+dryTime+rawMatThck+windSpeed, 
+   at=summary(mod1)$canonical$xs)
+par(mfrow=c(1,1))
+```
+
+```{r ch1301a, fig.cap='Response Surface for avocado pulp study - Contour Plots', out.width='80%', fig.asp=.75, fig.align='center'}
+par(mfrow=c(2,3))
+contour(mod1, ~ hotAirTemp+dryTime+rawMatThck+windSpeed, 
+   at=summary(mod1)$canonical$xs)
+par(mfrow=c(1,1))
+```
+
+The linear (first order) terms and polynomial quadratic terms are significant as groups with $P$-values of .0142 and .0045, respectively. The two-factor interactions are not, with $P$=.3718.
+The stationary (optimal) point is $x^*$=(67.11,14.09,0.78,0.18).
+
+$$\nabla $$
+
+The Box-Behnken design places runs at every combination of $\pm 1$ for each pair of factors, with all other factors at their 0 (central) level. There are multiple runs for each factor at their central level.
+The analysis is the same as for the Central Composite Design.
+
+**Example 13.2 – Gels of Diclofenac and Curcumin for Transdermal Drug Delivery**
+
+A study (Chaudhary, et al (2011)) had 3 factors, each at 3 levels
+[@chaudhary_2011]. 
+The factors were as follow.
+
+- **Polymer Concentration** - (0.5, 1.0, 1.5 % w/w)
+- **Ethanol Concentration** (10, 15, 20 % w/w)
+- **PG Concentration** (5, 10, 15 %w/w). 
+
+There were three response variables: $Y1$ = Flux of DDEA (mg/(cm2 h)), $Y2$ = Flux of CRM (mg/(cm2 h)),
+and $Y3$ = Viscosity of Gel (cp). The experiment had $n$ = 17 runs. The design and data are given below.
+
+```{r ch1302, echo=FALSE}
+bb1 <- read.csv("boxbehnken.csv")
+knitr::kable(bb1, caption = 'Box-Behnken Design for Drug Delivery Study')
+```
+$$\nabla$$
+
+## Mixture Models
+Mixture models are similar to response surface models, with the restriction that the 
+sum of the $X$ levels is equal to 1, that is the $X$ variables are components of a mixture.
+There are four widely used models that can be implemented in the **mixexp** package in R.
+Note that these models do not include an intercept, as the X's sum to 1, and we will use as $k$
+as the number of mixture components.
+
+$$
+\mbox{Linear:} \quad E\{Y\}=\sum_{i=1}^k \beta_iX_i 
+$$
+$$
+\mbox{Quadratic:} \quad  E\{Y\}=\sum_{i=1}^k \beta_iX_i + 
+\sum_{i=1}^{k-1}\sum_{i'=i+1}^k \beta_{ii'}X_iX_{i'}
+$$
+$$
+\mbox{Full Cubic:} \quad
+E\{Y\}=\sum_{i=1}^k \beta_iX_i + 
+\sum_{i=1}^{k-1}\sum_{i'=i+1}^k \beta_{ii'}X_iX_{i'} 
++ \sum_{i=1}^{k-1}\sum_{i'=i+1}^k\delta_{ii'}X_iX_{i'}\left(X_i-X_{i'}\right) + $$
+
+$$ + \sum_{i=1}^{k-2}\sum_{i'=i+1}^{k-1}\sum_{i''=i'+1}^k\beta_{ii'i''}X_iX_{i'}X_{i''}
+$$
+$$
+\mbox{Special Cubic:} \quad
+E\{Y\}=\sum_{i=1}^k \beta_iX_i + 
+\sum_{i=1}^{k-1}\sum_{i'=i+1}^k \beta_{ii'}X_iX_{i'} +
+\sum_{i=1}^{k-2}\sum_{i'=i+1}^{k-1}\sum_{i''=i'+1}^k\beta_{ii'i''}X_iX_{i'}X_{i''}
+$$
+The goal is to choose the mixture that optimizes the output.
+
+**Example 13.3 - Breaking Strength of Lipstick Blends**
+
+A mixture experiment considered $k=3$ inputs for lipstick [@hui_2017].
+One response was breaking strength (grams), with the following inputs,
+this was Stage 1C in the paper, and the Full Cubic model was fit.
+
+- **Sweet Almond Oil** $(X_1)$
+- **Hydrogenated Polyisobutene** $(X_2)$
+- **Octydodecanol** $(X_3)$
+
+The R code and output are given below.
+
+```{r ch1303, fig.cap='Mixture Plot for lipstick study', out.width='80%', fig.asp=.75, fig.align='center'}
+lsa <- read.csv("data/lipstick_sweetalmond.csv")
+attach(lsa)
+lsa
+
+mixvars <- c("X1","X2","X3") ### Creates group of mixvars
+ls.mod1 <- MixModel(lsa,"Break",mixvars,3)
+### Fits model, must specify: dataframe,"Y",mixvars,
+### model (1=linear, 2=quadratic, 3=full cubic, 4=special cubic)
+anova(ls.mod1)
+summary(ls.mod1)
+
+MixturePlot(X3,X2,X1,Break,x3lab="Octydodecanol", x2lab="Hydrogenated Polyisobutene",
+x1lab="Sweet Almond Oil", corner.labs=c("Oct","HP","SAO"),
+constrts=FALSE,contrs=TRUE,cols=TRUE, mod=2,n.breaks=9)
+
+cbind(X1,X2,X3,Break, predict(ls.mod1))
+```
+
+The highest breaking strengths $(>360)$ appear at blends of approximately 50/50% between Sweet Almond Oil and Octydodecanol, based on the plot of the simplex. 
+
+$$\nabla $$

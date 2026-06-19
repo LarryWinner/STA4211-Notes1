@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 9 Higher Order Models | Design and Analysis of Experiments</title>
+  <meta name="description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 9 Higher Order Models | Design and Analysis of Experiments" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 9 Higher Order Models | Design and Analysis of Experiments" />
+  
+  <meta name="twitter:description" content="This is a course on Experimental Design and Analysis." />
+  
+
+<meta name="author" content="Larry Winner" />
+
+
+<meta name="date" content="2026-06-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="unbalanced-two-factor-analysis-of-variance.html"/>
+<link rel="next" href="block-designs.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STA 4211 Course Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html"><i class="fa fa-check"></i><b>1</b> Comparing Two Treatments or Populations</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#linear-functions-of-random-variables"><i class="fa fa-check"></i><b>1.1</b> Linear Functions of Random Variables</a></li>
+<li class="chapter" data-level="1.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#students-t-distribution-for-making-inference-on-population-means"><i class="fa fa-check"></i><b>1.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution for Making Inference on Population Means</a></li>
+<li class="chapter" data-level="1.3" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference"><i class="fa fa-check"></i><b>1.3</b> Inference for the Population Mean Difference</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples"><i class="fa fa-check"></i><b>1.3.1</b> Inference for the Population Mean Difference for Paired Samples</a></li>
+<li class="chapter" data-level="1.3.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-independent-samples"><i class="fa fa-check"></i><b>1.3.2</b> Inference for the Population Mean Difference for Independent Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-variance-ratios"><i class="fa fa-check"></i><b>1.4</b> Inference for the Population Variance Ratios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inferences-for-variance-ratios-for-independent-samples"><i class="fa fa-check"></i><b>1.4.1</b> Inferences for Variance Ratios for Independent Samples</a></li>
+<li class="chapter" data-level="1.4.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#test-for-equal-variances-with-paired-samples"><i class="fa fa-check"></i><b>1.4.2</b> Test for Equal Variances with Paired Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#examples"><i class="fa fa-check"></i><b>1.5</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#terminology"><i class="fa fa-check"></i><b>2.1</b> Terminology</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#basics-of-controlled-experiments"><i class="fa fa-check"></i><b>2.2</b> Basics of Controlled Experiments</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#completely-randomized-design-crd"><i class="fa fa-check"></i><b>2.3</b> Completely Randomized Design (CRD)</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#randomized-complete-block-design-rcbd-or-rbd"><i class="fa fa-check"></i><b>2.4</b> Randomized Complete Block Design (RCBD or RBD)</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#overview-of-some-standard-experimental-designs"><i class="fa fa-check"></i><b>2.5</b> Overview of Some Standard Experimental Designs</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#overview-of-observational-study-designs"><i class="fa fa-check"></i><b>2.6</b> Overview of Observational Study Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-factor-studies.html"><a href="single-factor-studies.html"><i class="fa fa-check"></i><b>3</b> Single Factor Studies</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#models-with-r2-factor-levels"><i class="fa fa-check"></i><b>3.1</b> Models with <span class="math inline">\(r=2\)</span> Factor Levels</a></li>
+<li class="chapter" data-level="3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#three-model-formulations"><i class="fa fa-check"></i><b>3.2</b> Three Model Formulations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#cell-means-model"><i class="fa fa-check"></i><b>3.2.1</b> Cell Means Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#treatment-effects-model"><i class="fa fa-check"></i><b>3.2.2</b> Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#reference-group-model"><i class="fa fa-check"></i><b>3.2.3</b> Reference Group Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance-and-f-test"><i class="fa fa-check"></i><b>3.3</b> The Analysis of Variance and <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#general-linear-test-approach"><i class="fa fa-check"></i><b>3.3.1</b> General Linear Test Approach</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#power-calculations"><i class="fa fa-check"></i><b>3.3.2</b> Power Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#technical-details"><i class="fa fa-check"></i><b>3.4</b> Technical Details</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-for-the-cell-means-model-regression-approach"><i class="fa fa-check"></i><b>3.4.1</b> Least Squares Estimation for the Cell Means Model (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#scalar-estimation-for-the-cell-means-model"><i class="fa fa-check"></i><b>3.4.2</b> Scalar Estimation for the Cell Means Model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#estimation-for-the-treatment-effects-model"><i class="fa fa-check"></i><b>3.4.3</b> Estimation for the Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.4.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-regression-approach"><i class="fa fa-check"></i><b>3.4.4</b> Least Squares Estimation (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance"><i class="fa fa-check"></i><b>3.4.5</b> The Analysis of Variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html"><i class="fa fa-check"></i><b>4</b> Analysis of Treatment Means</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#individual-treatment-means"><i class="fa fa-check"></i><b>4.1</b> Individual Treatment Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#comparing-two-treatment-means"><i class="fa fa-check"></i><b>4.2</b> Comparing Two Treatment Means</a></li>
+<li class="chapter" data-level="4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#contrasts-among-treatment-means"><i class="fa fa-check"></i><b>4.3</b> Contrasts Among Treatment Means</a></li>
+<li class="chapter" data-level="4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#simultaneous-comparisons"><i class="fa fa-check"></i><b>4.4</b> Simultaneous Comparisons</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#tukeys-honest-significant-difference-hsd"><i class="fa fa-check"></i><b>4.4.1</b> Tukey’s Honest Significant Difference (HSD)</a></li>
+<li class="chapter" data-level="4.4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#scheffes-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.2</b> Scheffe’s Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#bonferroni-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.3</b> Bonferroni Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#multiple-range-methods"><i class="fa fa-check"></i><b>4.4.4</b> Multiple Range Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html"><i class="fa fa-check"></i><b>5</b> Alternative Tests for Treatment Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#randomizationpermutation-tests"><i class="fa fa-check"></i><b>5.1</b> Randomization/Permutation Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#tests-for-equal-error-variances"><i class="fa fa-check"></i><b>5.2</b> Tests for Equal Error Variances</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#hartleys-test"><i class="fa fa-check"></i><b>5.2.1</b> Hartley’s Test</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#levenes-test"><i class="fa fa-check"></i><b>5.2.2</b> Levene’s Test</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#bartletts-test"><i class="fa fa-check"></i><b>5.2.3</b> Bartlett’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#remedial-measures"><i class="fa fa-check"></i><b>5.3</b> Remedial Measures</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#weighted-least-squares-and-welchs-test"><i class="fa fa-check"></i><b>5.3.1</b> Weighted Least Squares and Welch’s Test</a></li>
+<li class="chapter" data-level="5.3.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#post-hoc-comparisons-with-unequal-variances"><i class="fa fa-check"></i><b>5.3.2</b> Post-hoc Comparisons with Unequal Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#nonparametric-test-for-non-normal-data"><i class="fa fa-check"></i><b>5.4</b> Nonparametric Test for Non-normal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html"><i class="fa fa-check"></i><b>6</b> Balanced Two Factor Designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#two-factor-analysis-of-variance"><i class="fa fa-check"></i><b>6.2</b> Two Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#cell-means-and-factor-effects-models"><i class="fa fa-check"></i><b>6.2.1</b> Cell Means and Factor Effects Models</a></li>
+<li class="chapter" data-level="6.2.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#least-squaresmaximum-likelihood-estimators"><i class="fa fa-check"></i><b>6.2.2</b> Least Squares/Maximum Likelihood Estimators</a></li>
+<li class="chapter" data-level="6.2.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#sums-of-squares-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>6.2.3</b> Sums of Squares and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#factor-effect-contrasts"><i class="fa fa-check"></i><b>6.3</b> Factor Effect Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-there-is-no-interaction"><i class="fa fa-check"></i><b>6.3.1</b> Contrasts when there is No Interaction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-interaction-is-present"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts when Interaction is Present</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="two-factor-designs-with-1-observation-per-treatment.html"><a href="two-factor-designs-with-1-observation-per-treatment.html"><i class="fa fa-check"></i><b>7</b> Two-Factor Designs with 1 Observation per Treatment</a></li>
+<li class="chapter" data-level="8" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html"><i class="fa fa-check"></i><b>8</b> Unbalanced Two-Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#statistical-model-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>8.1</b> Statistical Model and the Analysis of Variance</a></li>
+<li class="chapter" data-level="8.2" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#least-squares-estimators-and-contrastslinear-functions-among-means"><i class="fa fa-check"></i><b>8.2</b> Least Squares Estimators and Contrasts/Linear Functions Among Means</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="higher-order-models.html"><a href="higher-order-models.html"><i class="fa fa-check"></i><b>9</b> Higher Order Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="higher-order-models.html"><a href="higher-order-models.html#three-factor-models---mean-structure"><i class="fa fa-check"></i><b>9.1</b> Three Factor Models - Mean Structure</a></li>
+<li class="chapter" data-level="9.2" data-path="higher-order-models.html"><a href="higher-order-models.html#statistical-model-and-the-analysis-of-variance-1"><i class="fa fa-check"></i><b>9.2</b> Statistical Model and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="block-designs.html"><a href="block-designs.html"><i class="fa fa-check"></i><b>10</b> Block Designs</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="block-designs.html"><a href="block-designs.html#randomized-block-and-repeated-measures-designs"><i class="fa fa-check"></i><b>10.1</b> Randomized Block and Repeated Measures Designs</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="block-designs.html"><a href="block-designs.html#model-structure-and-estimators"><i class="fa fa-check"></i><b>10.1.1</b> Model Structure and Estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="block-designs.html"><a href="block-designs.html#analysis-of-variance-and-the-f-test"><i class="fa fa-check"></i><b>10.2</b> Analysis of Variance and the <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="block-designs.html"><a href="block-designs.html#checking-model-assumptions"><i class="fa fa-check"></i><b>10.2.1</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="10.2.2" data-path="block-designs.html"><a href="block-designs.html#relative-efficiency-and-within-subject-variance-covariance-matrix"><i class="fa fa-check"></i><b>10.2.2</b> Relative Efficiency and Within-Subject Variance-Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="block-designs.html"><a href="block-designs.html#latin-square-designs"><i class="fa fa-check"></i><b>10.3</b> Latin Square Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html"><i class="fa fa-check"></i><b>11</b> Random and Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#way-random-effects-model"><i class="fa fa-check"></i><b>11.1</b> 1-Way Random Effects Model</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>11.1.1</b> Analysis of Variance</a></li>
+<li class="chapter" data-level="11.1.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-population-mean-mu_bullet"><i class="fa fa-check"></i><b>11.1.2</b> Estimating the Population Mean <span class="math inline">\(\mu_{\bullet}\)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>11.1.3</b> Estimating the Intraclass Correlation Coefficient</a></li>
+<li class="chapter" data-level="11.1.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-within-group-variance"><i class="fa fa-check"></i><b>11.1.4</b> Estimating the Within Group Variance</a></li>
+<li class="chapter" data-level="11.1.5" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-between-group-variance"><i class="fa fa-check"></i><b>11.1.5</b> Estimating the Between Group Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-random-effects-model"><i class="fa fa-check"></i><b>11.2</b> Two-Way Random Effects Model</a></li>
+<li class="chapter" data-level="11.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-mixed-effects-model"><i class="fa fa-check"></i><b>11.3</b> Two-Way Mixed Effects Model</a></li>
+<li class="chapter" data-level="11.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#three-way-mixed-effects-models"><i class="fa fa-check"></i><b>11.4</b> Three-Way Mixed Effects Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>12</b> Nested Designs</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="nested-designs.html"><a href="nested-designs.html#estimators-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>12.1</b> Estimators and the Analysis of Variance</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-designs.html"><a href="nested-designs.html#tests-contrasts-and-pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Tests, Contrasts, and Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="nested-designs.html"><a href="nested-designs.html#repeated-measures-design"><i class="fa fa-check"></i><b>12.3</b> Repeated Measures Design</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="nested-designs.html"><a href="nested-designs.html#model-structure"><i class="fa fa-check"></i><b>12.3.1</b> Model Structure</a></li>
+<li class="chapter" data-level="12.3.2" data-path="nested-designs.html"><a href="nested-designs.html#analysis-of-variance-and-f-tests"><i class="fa fa-check"></i><b>12.3.2</b> Analysis of Variance and <span class="math inline">\(F\)</span>-tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="nested-designs.html"><a href="nested-designs.html#treatment-comparisons"><i class="fa fa-check"></i><b>12.3.3</b> Treatment Comparisons</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html"><i class="fa fa-check"></i><b>13</b> Analysis of Covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#additive-model"><i class="fa fa-check"></i><b>13.1</b> Additive Model</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#adjusted-means"><i class="fa fa-check"></i><b>13.1.1</b> Adjusted means</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#interaction-model"><i class="fa fa-check"></i><b>13.2</b> Interaction Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html"><i class="fa fa-check"></i><b>14</b> Response Surface and Mixture Designs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
+<li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="higher-order-models" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">Chapter 9</span> Higher Order Models<a href="higher-order-models.html#higher-order-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Many experiments include three or more factors. Main effects
+and two-way interactions have the same interpretations as in two factor studies. A three-way interaction is when the patterns of the two-way interactions between two factors differ at different levels of the other factor(s).</p>
+<p>In screening experiments, there can be any number of factors, typically with two or three levels each. The goal in these experiments is to determine which factors have the larger effects, then conduct new experiments focusing on these factors.</p>
+<div id="three-factor-models---mean-structure" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Three Factor Models - Mean Structure<a href="higher-order-models.html#three-factor-models---mean-structure" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we consider balanced three factor models, with labels A, B, and C, and with numbers of levels <span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(c\)</span>, respectively. The number of replicates per treatment is <span class="math inline">\(n\)</span>, with an overall sample size of <span class="math inline">\(n_T=abcn\)</span>.
+The same adjustments can be made for unbalanced data as was described in the previous chapter.</p>
+<p>The population mean when factor A is at level <span class="math inline">\(i\)</span>, B is at level <span class="math inline">\(j\)</span>, and C is at level <span class="math inline">\(k\)</span> is <span class="math inline">\(\mu_{ijk}\)</span>. The marginal and overall means are given below.</p>
+<p><span class="math display">\[
+\mu_{ij\bullet}=\frac{\sum_{k=1}^c\mu_{ijk}}{c}  \qquad
+\mu_{i\bullet k}=\frac{\sum_{j=1}^b\mu_{ijk}}{b}  \qquad
+\mu_{\bullet jk}=\frac{\sum_{i=1}^a\mu_{ijk}}{a}
+\]</span>
+<span class="math display">\[
+\mu_{i\bullet\bullet}=\frac{\sum_{j=1}^b\sum_{k=1}^c\mu_{ijk}}{bc} \qquad
+\mu_{\bullet j\bullet}=\frac{\sum_{i=1}^a\sum_{k=1}^c\mu_{ijk}}{ac} \qquad
+\mu_{\bullet\bullet k}=\frac{\sum_{i=1}^a\sum_{j=1}^b\mu_{ijk}}{ab}
+\]</span>
+<span class="math display">\[
+\mu_{\bullet\bullet\bullet}=\frac{\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^c\mu_{ijk}}{abc}
+\]</span></p>
+<p>Main effects and interactions are defined below.</p>
+<p><span class="math display">\[
+\alpha_i = \mu_{i\bullet\bullet}-\mu_{\bullet\bullet\bullet} \qquad
+\beta_j = \mu_{\bullet j\bullet}-\mu_{\bullet\bullet\bullet} \qquad
+\gamma_k = \mu_{\bullet\bullet k}-\mu_{\bullet\bullet\bullet}
+\]</span>
+<span class="math display">\[
+(\alpha\beta)_{ij}=\mu_{ij\bullet}-\mu_{i\bullet\bullet}-
+\mu_{\bullet j\bullet} + \mu_{\bullet\bullet\bullet} \qquad
+(\alpha\gamma)_{ik}=\mu_{i\bullet k}-\mu_{i\bullet\bullet}-
+\mu_{\bullet\bullet k} + \mu_{\bullet\bullet\bullet}
+\]</span>
+<span class="math display">\[
+(\beta\gamma)_{jk}=\mu_{\bullet jk}-\mu_{\bullet j \bullet}-
+\mu_{\bullet\bullet k} + \mu_{\bullet\bullet\bullet}
+\]</span>
+<span class="math display">\[
+(\alpha\beta\gamma)_{ijk}=\mu_{ijk}-\mu_{ij\bullet}-\mu_{i\bullet k}-
+\mu_{\bullet jk} + \mu_{i\bullet\bullet} + \mu_{\bullet j\bullet} +
+\mu_{\bullet\bullet k} - \mu_{\bullet\bullet\bullet}
+\]</span></p>
+<p>The algorithm for obtaining the main effects and interaction effects goes as follows.</p>
+<ul>
+<li>Begin with the mean corresponding to the effect.</li>
+<li>Cover each subscript, one-at-a-time and multiply by <span class="math inline">\((-1)^1=-1\)</span>.</li>
+<li>Cover subscripts two-at-a-time and multiply by <span class="math inline">\((-1)^2=1\)</span>.</li>
+<li>Continue until all subscripts have been covered.</li>
+<li>Coefficients <span class="math inline">\(\pm 1\)</span> will sum to 0.</li>
+</ul>
+<p>The following constraints are obtained for the effects and their estimators.</p>
+<p><span class="math display">\[
+\sum_{i=1}^a\alpha_i=\sum_{j=1}^b\beta_j=\sum_{k=1}^c\gamma_k=0
+\]</span>
+<span class="math display">\[
+\sum_{i=1}^a(\alpha\beta)_{ij}=\sum_{j=1}^b(\alpha\beta)_{ij}=
+\sum_{i=1}^a(\alpha\gamma)_{ik}=\sum_{k=1}^c(\alpha\gamma)_{ij}=
+\sum_{j=1}^b(\beta\gamma)_{jk}=\sum_{k=1}^c(\beta\gamma)_{jk}=0
+\]</span>
+<span class="math display">\[
+\sum_{i=1}^a(\alpha\beta\gamma)_{ijk}=
+\sum_{j=1}^b(\alpha\beta\gamma)_{ijk}=
+\sum_{k=1}^c(\alpha\beta\gamma)_{ijk}=0
+\]</span></p>
+<p><strong>Example 8.1 - Flavonoids in Wine</strong></p>
+<p>The following “population means” are based on observed experimental values to apply the formulas above and have been adjusted to have integer values for all effects <span class="citation">(<a href="#ref-genova_2012">Genova et al. 2012</a>)</span>. There were three factors, each at two levels, described below and the response was total flavonoids.</p>
+<ul>
+<li>Factor A - <strong>Grape Type</strong> Sangiovese (Red, <span class="math inline">\(i=1\)</span>) and Muscat (White, <span class="math inline">\(i=2\)</span>)</li>
+<li>Factor B - <strong>Storage Temperature</strong> 4C <span class="math inline">\((j=1)\)</span> and -20C <span class="math inline">\((j=2)\)</span></li>
+<li>Factor C - <strong>Storage Time</strong> 24 hours (1 day, <span class="math inline">\(k=1\)</span>) and 2 weeks (14 days, <span class="math inline">\(k=2\)</span>)</li>
+</ul>
+<p>The means are given below.</p>
+<p><span class="math display">\[
+\mbox{Sangiovese:} \quad
+\mu_{111}=78 \quad \mu_{112}=68 \quad \mu_{121}=84 \quad \mu_{122}=90
+\]</span>
+<span class="math display">\[
+\mbox{Muscat:} \quad
+\mu_{211}=22 \quad \mu_{212}=12 \quad \mu_{221}=24 \quad \mu_{222}=22
+\]</span>
+<span class="math display">\[
+\mu_{11\bullet}=\frac{78+68}{2}=73 \qquad
+\mu_{12\bullet}=\frac{84+90}{2}=87
+\]</span>
+<span class="math display">\[
+\mu_{1\bullet 1}=\frac{78+84}{2}=81 \qquad
+\mu_{1\bullet 2}=\frac{68+90}{2}=79
+\]</span>
+<span class="math display">\[
+\mu_{21\bullet}=\frac{22+12}{2}=17 \qquad
+\mu_{22\bullet}=\frac{24+22}{2}=23
+\]</span>
+<span class="math display">\[
+\mu_{2\bullet 1}=\frac{22+24}{2}=23 \qquad
+\mu_{2\bullet 2}=\frac{12+22}{2}=17
+\]</span>
+<span class="math display">\[
+\mu_{\bullet 11}=\frac{78+22}{2}=50 \qquad
+\mu_{\bullet 12}=\frac{68+12}{2}=40
+\]</span>
+<span class="math display">\[
+\mu_{\bullet 21}=\frac{84+24}{2}=54 \qquad
+\mu_{\bullet 22}=\frac{90+22}{2}=56
+\]</span>
+<span class="math display">\[
+\mu_{1\bullet\bullet}=\frac{78+68+84+90}{4}=80 \quad
+\mu_{2\bullet\bullet}=\frac{22+12+24+22}{4}=20
+\]</span>
+<span class="math display">\[
+\mu_{\bullet 1\bullet}=\frac{78+68+22+12}{4}=45 \quad
+\mu_{\bullet 2\bullet}=\frac{84+90+24+22}{4}=55
+\]</span>
+<span class="math display">\[
+\mu_{\bullet\bullet 1}=\frac{78+84+22+24}{4}=52 \quad
+\mu_{\bullet\bullet 2}=\frac{68+90+12+22}{4}=48
+\]</span>
+<span class="math display">\[
+\mu_{\bullet\bullet\bullet} =
+\frac{78+68+84+90+22+12+24+22}{8}=50
+\]</span>
+The main effects and interaction effects are obtained below.</p>
+<p><span class="math display">\[
+\mbox{Grape:} \quad \alpha_1=\mu_{1\bullet\bullet}-
+\mu_{\bullet\bullet\bullet} = 80-50=30
+\qquad
+\alpha_2=20-50=-30
+\]</span>
+<span class="math display">\[
+\mbox{Temperature:} \quad
+\beta_1=\mu_{\bullet 1\bullet}-
+\mu_{\bullet\bullet\bullet} = 45-50=-5 \qquad
+\beta_2=55-50=5
+\]</span>
+<span class="math display">\[
+\mbox{Time:} \quad
+\gamma_1=\mu_{\bullet\bullet1}-
+\mu_{\bullet\bullet\bullet} = 52-50=2 \qquad
+\gamma_2=48-50=-2
+\]</span>
+<span class="math display">\[
+\mbox{Grape/Temp:} \quad
+(\alpha\beta)_{11}=
+\mu_{11\bullet}-\mu_{1\bullet\bullet}-\mu_{\bullet 1 \bullet} +
+\mu_{\bullet\bullet\bullet} = 73-80-45+50=-2
+\]</span>
+<span class="math display">\[
+(\alpha\beta)_{12}=2 \qquad
+(\alpha\beta)_{21}=2 \qquad
+(\alpha\beta)_{22}=-2
+\]</span>
+<span class="math display">\[
+\mbox{Grape/Time:} \quad
+(\alpha\gamma)_{11}=
+\mu_{1\bullet 1}-\mu_{1\bullet\bullet}-\mu_{\bullet\bullet 1} +
+\mu_{\bullet\bullet\bullet} = 81-80-52+50=-1
+\]</span>
+<span class="math display">\[
+(\alpha\gamma)_{12}=1 \qquad
+(\alpha\gamma)_{21}=1 \qquad
+(\alpha\gamma)_{22}=-1
+\]</span>
+<span class="math display">\[
+\mbox{Temp/Time:} \quad
+(\beta\gamma)_{11}=
+\mu_{\bullet  11}-\mu_{\bullet 1\bullet}-\mu_{\bullet\bullet 1} +
+\mu_{\bullet\bullet\bullet} = 50-45-52+50=3
+\]</span>
+<span class="math display">\[
+(\beta\gamma)_{12}=-3 \qquad
+(\beta\gamma)_{21}=-3 \qquad
+(\beta\gamma)_{22}=3
+\]</span>
+<span class="math display">\[
+(\alpha\beta_\gamma)_{111}=78-73-81-50+80+45+52-50=1
+\]</span>
+<span class="math display">\[
+(\alpha\beta_\gamma)_{112}=(\alpha\beta_\gamma)_{121}=
+(\alpha\beta_\gamma)_{211}=(\alpha\beta_\gamma)_{222}=-1
+\quad
+(\alpha\beta_\gamma)_{122}=(\alpha\beta_\gamma)_{212}=
+(\alpha\beta_\gamma)_{221}=1
+\]</span>
+Interaction plots are given in Figure <a href="higher-order-models.html#fig:ch0801">9.1</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch0801"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch0801-1.png" alt="Interaction plots for flavonoid mean structure" width="80%" />
+<p class="caption">
+Figure 9.1: Interaction plots for flavonoid mean structure
+</p>
+</div>
+<p>The interactions are very small. By far the largest effects are red versus white grapes.</p>
+<p><span class="math display">\[\nabla\]</span></p>
+</div>
+<div id="statistical-model-and-the-analysis-of-variance-1" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Statistical Model and the Analysis of Variance<a href="higher-order-models.html#statistical-model-and-the-analysis-of-variance-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, the model is defined, least squares estimators are given, as well as the sums of squares and <span class="math inline">\(F\)</span>-tests.</p>
+<p>The model for <span class="math inline">\(Y_{ijkl}\)</span> is given below in terms of the parameters described in the previous section.</p>
+<p><span class="math display">\[
+Y_{ijkl} = \mu_{\bullet\bullet\bullet} + \alpha_i + \beta_j + \gamma_k +
+(\alpha\beta)_{ij} + (\alpha\gamma)_{ik} + (\beta\gamma)_{jk} +
+(\alpha\beta\gamma)_{ijk} + \epsilon_{ijkl}
+\]</span>
+<span class="math display">\[
+\epsilon_{ijkl} \sim N\left(0,\sigma^2\right) \qquad
+i=1,\ldots,a; \quad j=1,\ldots,b; \quad k=1,\ldots,c; \quad
+l=1,\ldots,n
+\]</span></p>
+<p>The parameters and their least squares estimators are given here.</p>
+<p><span class="math display">\[
+\mbox{Overall Mean:} \quad  \mu_{\bullet\bullet\bullet}
+\qquad  \qquad  \hat{\mu}_{\bullet\bullet\bullet}=
+\overline{Y}_{\bullet\bullet\bullet\bullet}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Factor A Effects:} \quad \alpha_i \qquad
+\hat{\alpha}_i = \overline{Y}_{i\bullet\bullet\bullet} -
+\overline{Y}_{\bullet\bullet\bullet\bullet} \qquad i=1,\ldots,a
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Factor B Effects:} \quad \beta_j \qquad
+\hat{\beta}_j = \overline{Y}_{\bullet j \bullet\bullet} -
+\overline{Y}_{\bullet\bullet\bullet\bullet} \qquad j=1,\ldots,b
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Factor C Effects:} \quad \gamma_k \qquad
+\hat{\gamma}_k = \overline{Y}_{\bullet\bullet k \bullet} -
+\overline{Y}_{\bullet\bullet\bullet\bullet} \qquad k=1,\ldots,c
+\]</span></p>
+<p><span class="math display">\[
+\mbox{AB Interactions:} \quad (\alpha\beta)_{ij} \quad
+\hat{(\alpha\beta)}_{ij}=
+\overline{Y}_{ij\bullet\bullet} -
+\overline{Y}_{i\bullet\bullet\bullet} -
+\overline{Y}_{\bullet j \bullet\bullet} +
+\overline{Y}_{\bullet\bullet\bullet\bullet}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{AC Interactions:} \quad (\alpha\gamma)_{ik} \quad
+\hat{(\alpha\gamma)}_{ik}=
+\overline{Y}_{i\bullet k\bullet} -
+\overline{Y}_{i\bullet\bullet\bullet} -
+\overline{Y}_{\bullet\bullet k\bullet} +
+\overline{Y}_{\bullet\bullet\bullet\bullet}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{BC Interactions:} \quad (\beta\gamma)_{jk} \quad
+\hat{(\beta\gamma)}_{ij}=
+\overline{Y}_{\bullet jk\bullet} -
+\overline{Y}_{\bullet j\bullet\bullet} -
+\overline{Y}_{\bullet\bullet k\bullet} +
+\overline{Y}_{\bullet\bullet\bullet\bullet}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{ABC Interactions:} \quad (\alpha\beta\gamma)_{ijk}
+\]</span>
+<span class="math display">\[
+\hat{(\alpha\beta\gamma)}_{ijk}=
+\overline{Y}_{ijk\bullet} -
+\overline{Y}_{ij\bullet \bullet} -
+\overline{Y}_{i\bullet k\bullet} -
+\overline{Y}_{\bullet jk\bullet} +
+\overline{Y}_{i\bullet\bullet\bullet} +
+\overline{Y}_{\bullet j\bullet\bullet} +
+\overline{Y}_{\bullet\bullet k\bullet} -
+\overline{Y}_{\bullet\bullet\bullet\bullet}
+\]</span></p>
+<p>The predicted values simplify to the following values when the estimated overall mean and corresponding main effects and interactions are added together.</p>
+<p><span class="math display">\[
+\hat{Y}_{ijkl} = \hat{\mu}_{\bullet\bullet\bullet} +
+\hat{\alpha}_i + \hat{\beta}_j + \hat{\gamma}_k
++\hat{(\alpha\beta)}_{ij}+\hat{(\alpha\gamma)}_{ik}+
+\hat{(\beta\gamma)}_{jk} + \hat{(\alpha\beta\gamma)}_{ijk}=
+\overline{Y}_{ijk\bullet}
+\]</span>
+The residuals are <span class="math inline">\(e_{ijkl}=Y_{ijkl}-\overline{Y}_{ijk\bullet}\)</span>.</p>
+<p>The sums of squares, degrees of freedom and expected mean squares are given below. To save space they will be given in terms of effects estimates.</p>
+<p><span class="math display">\[
+\mbox{Total:} \quad SSTO=
+\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^c\sum_{l=1}^n
+\left(Y_{ijkl}-\overline{Y}_{\bullet\bullet\bullet\bullet}\right)^2
+\qquad df_{TO}=abcn-1
+\]</span>
+<span class="math display">\[
+\mbox{A:} \quad SSA=bcn\sum_{i=1}^a \hat{\alpha}_i^2 \qquad df_A=a-1
+\qquad E\{MSA\}=\sigma^2 + \frac{bcn\sum_{i=1}^a\alpha_i^2}{a-1}
+\]</span>
+<span class="math display">\[
+\mbox{B:} \quad SSB=acn\sum_{j=1}^b \hat{\beta}_j^2 \qquad df_B=b-1
+\qquad E\{MSB\}=\sigma^2 + \frac{acn\sum_{j=1}^b\beta_j^2}{b-1}
+\]</span>
+<span class="math display">\[
+\mbox{C:} \quad SSC=abn\sum_{k=1}^c \hat{\gamma}_k^2 \qquad df_C=c-1
+\qquad E\{MSC\}=\sigma^2 + \frac{abn\sum_{k=1}^c\gamma_k^2}{c-1}
+\]</span>
+<span class="math display">\[
+\mbox{AB:} \quad SSAB=cn\sum_{i=1}^a\sum_{j=1}^b \hat{(\alpha\beta)}_{ij}^2 \qquad df_{AB}=(a-1)(b-1)
+\]</span>
+<span class="math display">\[
+E\{MSAB\}=\sigma^2 +
+\frac{cn\sum_{i=1}^a\sum_{j=1}^b(\alpha\beta)_{ij}^2}{(a-1)(b-1)}
+\]</span>
+<span class="math display">\[
+\mbox{AC:} \quad SSAC=bn\sum_{i=1}^a\sum_{k=1}^c \hat{(\alpha\gamma)}_{ik}^2 \qquad df_{AC}=(a-1)(c-1)
+\]</span>
+<span class="math display">\[
+E\{MSAC\}=\sigma^2 +
+\frac{bn\sum_{i=1}^a\sum_{k=1}^c(\alpha\gamma)_{ik}^2}{(a-1)(c-1)}
+\]</span>
+<span class="math display">\[
+\mbox{BC:} \quad SSBC=an\sum_{j=1}^b\sum_{k=1}^c \hat{(\beta\gamma)}_{jk}^2 \qquad df_{BC}=(b-1)(c-1)
+\]</span>
+<span class="math display">\[
+E\{MSBC\}=\sigma^2 +
+\frac{an\sum_{j=1}^b\sum_{k=1}^c(\beta\gamma)_{jk}^2}{(b-1)(c-1)}
+\]</span>
+<span class="math display">\[
+\mbox{ABC:} \quad SSABC=n\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^c \hat{(\alpha\beta\gamma)}_{ijk}^2 \qquad df_{ABC}=(a-1)(b-1)(c-1)
+\]</span>
+<span class="math display">\[
+E\{MSABC\}=\sigma^2 +
+\frac{n\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^c
+(\alpha\beta\gamma)_{ijk}^2}{(a-1)(b-1)(c-1)}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Error:} \quad SSE =
+\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^c\sum_{l=1}^n
+\left(Y_{ijkl}-\overline{Y}_{ijk\bullet}\right)^2
+\quad df_{E}=abc(n-1) \quad
+E\{MSE\}=\sigma^2
+\]</span></p>
+<p>To test for main effects and interactions, the following <span class="math inline">\(F\)</span>-tests are obtained (where TS is test statistic and RR is rejection region).</p>
+<p><span class="math display">\[
+H_0^{ABC}: (\alpha\beta\gamma)_{ijk}=0 \qquad i=1,\ldots,a; \quad
+j=1,\ldots,b; \quad k=1,\ldots,c
+\]</span>
+<span class="math display">\[
+TS:F_{ABC}^*=\frac{MSABC}{MSE}  \qquad RR:F_{ABC}^* \ge
+F_{1-\alpha;(a-1)(b-1)(c-1),abc(n-1)}
+\]</span></p>
+<p><span class="math display">\[
+H_0^{AB}: (\alpha\beta)_{ij}=0 \qquad i=1,\ldots,a; \quad
+j=1,\ldots,b;
+\]</span>
+<span class="math display">\[
+TS:F_{AB}^*=\frac{MSAB}{MSE}  \qquad RR:F_{AB}^* \ge
+F_{1-\alpha;(a-1)(b-1),abc(n-1)}
+\]</span></p>
+<p><span class="math display">\[
+H_0^{AC}: (\alpha\gamma)_{ik}=0 \qquad i=1,\ldots,a; \quad
+\quad k=1,\ldots,c
+\]</span>
+<span class="math display">\[
+TS:F_{AC}^*=\frac{MSAC}{MSE}  \qquad RR:F_{AC}^* \ge
+F_{1-\alpha;(a-1)(c-1),abc(n-1)}
+\]</span></p>
+<p><span class="math display">\[
+H_0^{BC}: (\beta\gamma)_{jk}=0 \qquad  
+j=1,\ldots,b; \quad k=1,\ldots,c
+\]</span>
+<span class="math display">\[
+TS:F_{BC}^*=\frac{MSBC}{MSE}  \qquad RR:F_{BC}^* \ge
+F_{1-\alpha;(b-1)(c-1),abc(n-1)}
+\]</span></p>
+<p><span class="math display">\[
+H_0^{A}: \alpha_i=0 \qquad i=1,\ldots,a
+\]</span>
+<span class="math display">\[
+TS:F_{A}^*=\frac{MSA}{MSE}  \qquad RR:F_{A}^* \ge
+F_{1-\alpha;a-1,abc(n-1)}
+\]</span></p>
+<p><span class="math display">\[
+H_0^{B}: \beta_j=0 \qquad  
+j=1,\ldots,b
+\]</span>
+<span class="math display">\[
+TS:F_{B}^*=\frac{MSB}{MSE}  \qquad RR:F_{B}^* \ge
+F_{1-\alpha;b-1,abc(n-1)}
+\]</span></p>
+<p><span class="math display">\[
+H_0^{C}: \gamma_k=0 \qquad  k=1,\ldots,c
+\]</span>
+<span class="math display">\[
+TS:F_{C}^*=\frac{MSC}{MSE}  \qquad RR:F_{C}^* \ge
+F_{1-\alpha;c-1,abc(n-1)}
+\]</span></p>
+<p><strong>Example 8.2 - Finishing Treatments for Chef Jackets</strong></p>
+<p>A study was conducted to observe the effects of three factors for protecting chef jackets from scald injuries <span class="citation">(<a href="#ref-devarajan_2017">Deverajan, McQueen, and Wen 2017</a>)</span>. Three responses were measured: absorbed energy (kj/m^2)
+at 3 sensors (upper, middle, and lower). This example will analyze the upper sensor
+measurements.
+The three factors are as follow, there were <span class="math inline">\(n=5\)</span> replicates per treatment combination.</p>
+<ul>
+<li>Factor A <span class="math inline">\((a=4)\)</span> - <strong>Finish</strong>: Regular <span class="math inline">\((i=1)\)</span>, Water <span class="math inline">\((i=2)\)</span>, Soil <span class="math inline">\((i=3)\)</span>, Teflon <span class="math inline">\((i=4)\)</span></li>
+<li>Factor B <span class="math inline">\((b=2)\)</span> - <strong>Structure</strong>: Plain <span class="math inline">\((j=1)\)</span>, Twill <span class="math inline">\((j=2)\)</span></li>
+<li>Factor C <span class="math inline">\((c=3)\)</span> - <strong>Number of Layers</strong>: 1 <span class="math inline">\((k=1)\)</span>, 2 <span class="math inline">\((k=2)\)</span>, 3 <span class="math inline">\((k=3)\)</span></li>
+</ul>
+<p>The R code and output are given below and the interaction plot is given in
+Figure <a href="higher-order-models.html#fig:ch0802">9.2</a>.</p>
+<pre><code>##   finish structure layers trt absEnrgU absEnrgM absEnrgL
+## 1      1         1      1   1  239.846  202.176  204.611
+## 2      1         1      1   1  267.275  205.320  231.043</code></pre>
+<pre><code>##     finish structure layers trt absEnrgU absEnrgM absEnrgL
+## 119      4         2      3  24  107.863   90.537   80.929
+## 120      4         2      3  24  117.774  109.554  104.529</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch0802"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch0802-1.png" alt="Interaction plots for chef jacket study" width="80%" />
+<p class="caption">
+Figure 9.2: Interaction plots for chef jacket study
+</p>
+</div>
+<pre><code>## 
+## Call:
+## aov(formula = absEnrgU ~ finish.f * structure.f * layers.f, data = cjb)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -59.117  -7.176  -0.843   7.294  84.653 
+## 
+## Coefficients:
+##                                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                      224.4625     1.5753 142.486  &lt; 2e-16 ***
+## finish.f1                         25.7041     2.7285   9.420 2.62e-15 ***
+## finish.f2                         19.0374     2.7285   6.977 3.87e-10 ***
+## finish.f3                         28.8043     2.7285  10.557  &lt; 2e-16 ***
+## structure.f1                      -2.3958     1.5753  -1.521 0.131593    
+## layers.f1                          7.8250     2.2278   3.512 0.000679 ***
+## layers.f2                          2.6250     2.2278   1.178 0.241607    
+## finish.f1:structure.f1            12.4625     2.7285   4.567 1.47e-05 ***
+## finish.f2:structure.f1             2.3958     2.7285   0.878 0.382105    
+## finish.f3:structure.f1           -22.5709     2.7285  -8.272 7.52e-13 ***
+## finish.f1:layers.f1               -8.0917     3.8587  -2.097 0.038624 *  
+## finish.f2:layers.f1               -7.6250     3.8587  -1.976 0.051021 .  
+## finish.f3:layers.f1              -13.0416     3.8587  -3.380 0.001050 ** 
+## finish.f1:layers.f2               -1.6415     3.8587  -0.425 0.671491    
+## finish.f2:layers.f2                4.5249     3.8587   1.173 0.243841    
+## finish.f3:layers.f2                4.0582     3.8587   1.052 0.295579    
+## structure.f1:layers.f1            -0.7666     2.2278  -0.344 0.731527    
+## structure.f1:layers.f2            -0.7667     2.2278  -0.344 0.731477    
+## finish.f1:structure.f1:layers.f1  -9.7000     3.8587  -2.514 0.013609 *  
+## finish.f2:structure.f1:layers.f1  -3.9333     3.8587  -1.019 0.310607    
+## finish.f3:structure.f1:layers.f1  15.5833     3.8587   4.038 0.000108 ***
+## finish.f1:structure.f1:layers.f2  -0.5500     3.8587  -0.143 0.886966    
+## finish.f2:structure.f1:layers.f2  -2.0833     3.8587  -0.540 0.590524    
+## finish.f3:structure.f1:layers.f2   0.5833     3.8587   0.151 0.880169    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 17.26 on 96 degrees of freedom
+## Multiple R-squared:  0.9055, Adjusted R-squared:  0.8829 
+## F-statistic: 40.01 on 23 and 96 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: absEnrgU
+##                               Df Sum Sq Mean Sq  F value    Pr(&gt;F)    
+## finish.f                       3 217854   72618 243.8496 &lt; 2.2e-16 ***
+## structure.f                    1    689     689   2.3129 0.1315926    
+## layers.f                       2   7093    3546  11.9090 2.399e-05 ***
+## finish.f:structure.f           3  21899    7300  24.5126 7.328e-12 ***
+## finish.f:layers.f              6  18696    3116  10.4634 6.608e-09 ***
+## structure.f:layers.f           2    141      71   0.2368 0.7895699    
+## finish.f:structure.f:layers.f  6   7680    1280   4.2983 0.0007001 ***
+## Residuals                     96  28589     298                       
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>## [1] &quot;diff&quot;  &quot;lwr&quot;   &quot;upr&quot;   &quot;p.adj&quot;</code></pre>
+<pre><code>## [1] 137</code></pre>
+<p>With the exception of the Structure main effects and Structure/Layers interaction effects, all terms are significant. Since the 3-way interaction is significant, Structure
+and Structure/Layers should be kept in the model. For any pair of treatment means,
+Tukey’s HSD is computed as follows (there are 4(2)(3)=24 means).</p>
+<p><span class="math display">\[
+MSE = 298 \quad df_E=24(5-1)=96 \qquad
+HSD = q_{.95;24,96}\sqrt{\frac{298}{5}}=5.297(7.720)=40.893
+\]</span></p>
+<p>There are 137 (out of 24(23)/2=276) pairs of treatments that differ by more than 40.893.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-devarajan_2017" class="csl-entry">
+Deverajan, S., R. H. McQueen, and S. Wen. 2017. <span>“Can Common Finishing Treatments Used in Chef Jacket Fabrics Improve Protection Against Scald Injury?”</span> <em>Fashion &amp; Textiles</em> 4 (19): 1:15. <a href="https://doi.org/10.1186/s40691-017-0103-3">https://doi.org/10.1186/s40691-017-0103-3</a>.
+</div>
+<div id="ref-genova_2012" class="csl-entry">
+Genova, G., P. Iacopini, M. Baldi, A. Ranieri, P. Storchi, and L. Sebastiani. 2012. <span>“Temperature and Storage Effects on Antioxidant Activity of Juice from Red and White Grapes.”</span> <em>International Journal of Food Science &amp; Technology</em> 47: 13–23.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="unbalanced-two-factor-analysis-of-variance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="block-designs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "link": "https://github.com/LarryWinner/STA4211-Notes1.git/edit/main/%s",
+  "text": "Edit"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

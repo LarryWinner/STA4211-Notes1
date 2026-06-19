@@ -1,0 +1,1017 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r echo=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(effectsize)
+library(agricolae)
+library(car)
+library(PMCMRplus)
+library(additivityTests)
+library(lmerTest)
+library(nlme)
+```
+
+# Nested Designs
+
+So far, factorial designs have contained **crossed** factors. The levels of factor B were the same within the levels of factor A, and vice versa. In this chapter the levels of factor B will be different under the various levels of factor A, and are said to be **nested**. These models are often referred to as hierarchical or multilevel. 
+
+In a nested model, with factor A at the "top," the levels of factor B will differ within the levels of factor A. Consider a study to compare NCAA conferences, with the conference as factor A, and schools are factor B, with different schools being in the different conferences (although they are changing constantly). 
+
+## Estimators and the Analysis of Variance
+
+The factors can be fixed (all levels included), random (levels are sampled), or mixed (one factor fixed, the other random). We will write out the general model, and whether effects are fixed or random should be clear from the setting of the experiment. In the two-factor balanced design, factor A will have $a$ levels, within each level of A, factor B will have $b$ levels, and there will be $n$ replicates within each of the $ab$ treatments.
+The model is given here.
+
+$$
+\mbox{Factor A:}\quad \mu_{i\bullet} = \mu_{\bullet\bullet}+\alpha_i \qquad
+i=1,\ldots,a
+$$
+$$
+\mbox{Factor B within A:} \quad
+\mu_{ij}=\mu_{\bullet\bullet}+\alpha_i+\beta_{j(i)} \qquad
+i=1,\ldots,a; 
+\quad j=1,\ldots,b
+$$
+$$
+\quad \Rightarrow \quad \beta_{j(i)} =
+\mu_{ij}-\left(\mu_{\bullet\bullet}+\alpha_i\right)=\mu_{ij}-\mu_{i\bullet}
+$$
+
+When A and B are both fixed factors, all levels of interest are included and $\left\{\alpha_i\right\}$ and $\left\{\beta_{j(i)}\right\}$ are all fixed (unknown) parameters and we can use the following restrictions and model.
+
+$$
+\sum_{i=1}^a \alpha_i=0 \qquad \sum_{j=1}^b\beta_{j(i)}=0 \quad i=1,\ldots,a
+$$
+$$
+Y_{ijk}=\mu_{\bullet\bullet}+\alpha_i+\beta_{j(i)} +\epsilon_{ijk}
+\qquad i=1,\ldots,a;\quad j=1,\ldots,b; \quad k=1,\ldots,n
+$$
+$$
+\epsilon_{ijk} \sim NID\left(0,\sigma^2\right) \qquad
+E\left\{Y_{ijk}\right\}=\mu_{\bullet\bullet}+\alpha_i+\beta_{j(i)} \qquad
+V\left\{Y_{ijk}\right\}=\sigma^2
+$$
+
+When factor A is fixed and factor B is random, the model changes as follows.
+
+$$
+\sum_{i=1}^a \alpha_i=0 \qquad \qquad 
+\beta_{j(i)} \sim NID\left(0,\sigma_{\beta(\alpha)}^2\right)
+\qquad \left\{\beta_{j(i)}\right\} \bot
+\left\{\epsilon_{ijk}\right\}
+$$
+$$
+E\left\{Y_{ijk}\right\} = \mu_{\bullet\bullet}+\alpha_i  \qquad
+V\left\{Y_{ijk}\right\} = \sigma_{\beta(\alpha)}^2 + \sigma^2 
+$$
+$$
+\mbox{COV}\left\{Y_{ijk},Y_{i'j'k'}\right\} = 
+\left\{ \begin{array}{r@{\quad:\quad}l}
+    \sigma_{\beta(\alpha)}^2 +  \sigma^2 & i=i',j=j',k=k' \\
+    \sigma_{\beta(\alpha)}^2  & i=i', j=j',k\ne k' \\
+    0 & \mbox{otherwise}\\
+    \end{array} \right.
+$$
+
+When factors A and B are both random, the model changes as follows.
+
+$$
+\alpha_i\sim NID\left(0,\sigma_{\alpha}^2\right) \qquad
+\beta_{j(i)} \sim NID\left(0,\sigma_{\beta(\alpha)}^2\right)
+\qquad \left\{\alpha_i\right\} \bot\left\{\beta_{j(i)}\right\} \bot
+\left\{\epsilon_{ijk}\right\}
+$$
+$$
+E\left\{Y_{ijk}\right\} = \mu_{\bullet\bullet}  \qquad
+V\left\{Y_{ijk}\right\} = \sigma_{\alpha}^2+\sigma_{\beta(\alpha)}^2 + \sigma^2 
+$$
+$$
+\mbox{COV}\left\{Y_{ijk},Y_{i'j'k'}\right\} = 
+\left\{ \begin{array}{r@{\quad:\quad}l}
+    \sigma_{\alpha}^2 + \sigma_{\beta(\alpha)}^2 +  \sigma^2 & i=i',j=j',k=k' \\
+    \sigma_{\alpha}^2 +\sigma_{\beta(\alpha)}^2  & i=i', j=j',k\ne k' \\
+    \sigma_{\alpha}^2  & i=i',j\ne j', \forall k,k'\\
+    0 & i\neq i', \forall j,j', \forall k,k'\\
+    \end{array} \right.
+$$
+
+Estimators, fitted values, residuals, sums of squares and expected mean squares are given below.
+
+$$
+\hat{\mu}_{\bullet\bullet}=\overline{Y}_{\bullet\bullet\bullet}
+\qquad \hat{\alpha}_i=
+\overline{Y}_{i\bullet\bullet}-\overline{Y}_{\bullet\bullet\bullet}
+\qquad \hat{\beta}_{j(i)}
+=\overline{Y}_{ij\bullet}-\overline{Y}_{i\bullet\bullet}
+$$
+$$
+\hat{Y}_{ijk}=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_i+\hat{\beta}_{j(i)}
+=\overline{Y}_{ij\bullet} \qquad
+e_{ijk}=Y_{ijk}-\hat{Y}_{ijk}=Y_{ijk}-\overline{Y}_{ij\bullet}
+$$
+
+$$
+\mbox{Error:} \quad SSE = \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n
+\left(Y_{ijk}-\overline{Y}_{ij\bullet}\right)^2
+\qquad  df_E=ab(n-1)
+$$
+$$
+\mbox{Factor A:} \quad SSA =bn\sum_{i=1}^a
+\left(Y_{i\bullet\bullet}-Y_{\bullet\bullet\bullet}\right)^2
+\qquad df_A =a-1
+$$
+$$
+\mbox{Factor B within A:} \quad SSB(A) =n\sum_{i=1}^a\sum_{j=1}^b
+\left(Y_{ij\bullet}-Y_{i\bullet\bullet}\right)^2
+\qquad df_{B(A)} =a(b-1)
+$$
+
+The expected mean squares depend on whether the factors are fixed or random. In all cases, $E\{MSE\}=\sigma^2$.
+When both A and B are fixed, we obtain the following results.
+
+$$
+E\{MSA\}=\sigma^2 + \frac{bn\sum_{i=1}^a\alpha_i^2}{a-1}
+\qquad
+E\{MSB(A)\} = \sigma^2 + 
+\frac{n\sum_{i=1}^a\sum_{j=1}^b \beta_{j(i)}^2}{a(b-1)}
+$$
+
+
+
+The denominator for the $F$-tests for factors A and B in the fixed case is $MSE$.
+
+When factor A is fixed and factor B is random, the following expected mean squares are obtained.
+
+$$
+E\{MSA\}=\sigma^2 + n\sigma_{\beta(\alpha)}^2 + \frac{bn\sum_{i=1}^a\alpha_i^2}{a-1}
+\qquad
+E\{MSB(A)\} = \sigma^2 + 
+n\sigma_{\beta(\alpha)}^2
+$$
+
+In this mixed case, the error term for factor B is $MSE$, but the error term for factor A is $MSB(A)$ due to the covariance structure.
+
+When factors A and B are both random, we obtain the following expected mean squares.
+
+$$
+E\{MSA\}=\sigma^2 + n\sigma_{\beta(\alpha)}^2 + bn\sigma_{\alpha}^2
+\qquad
+E\{MSB(A)\} = \sigma^2 + 
+n\sigma_{\beta(\alpha)}^2
+$$
+
+The error terms are the same in the random effects case are the same as in the mixed effects case.
+Variance components can be estimated as in the previous chapter.
+
+## Tests, Contrasts, and Pairwise Comparisons
+
+When both factors are fixed, $MSE$ is an unbiased estimator of
+$V\left\{Y_{ijk}\right\}$ and we can estimate/test contrasts among levels of factor A and B within A. 
+
+First, we can test for effects among the levels of factor A.
+
+$$
+H_0^A: \alpha_1=\cdots = \alpha_a=0 \qquad
+TS: F_A^*=\frac{MSA}{MSE}   \qquad
+RR: F_A^* \geq F_{1-\alpha;a-1,ab(n-1)}
+$$
+The estimators of the population means for levels of factor A 
+and their properties are given below.
+
+$$
+E\left\{\overline{Y}_{i\bullet\bullet}\right\}=\mu_i=
+\mu_{\bullet\bullet}+\alpha_i   \qquad
+V\left\{\overline{Y}_{i\bullet\bullet}\right\}=\frac{\sigma^2}{bn}
+\qquad
+\hat{V}\left\{\overline{Y}_{i\bullet\bullet}\right\}=\frac{MSE}{bn}
+$$
+Any contrast among the levels of factor A can be written as follows, with $\sum_{i=1}^ac_i=0$.
+
+$$
+L_A = \sum_{i=1}^ac_i\mu_i \qquad
+\hat{L}_A=\sum_{i=1}^ac_i \overline{Y}_{i\bullet\bullet}
+\qquad
+\hat{V}\left\{\hat{L}_A\right\}=\frac{MSE}{bn}\sum_{i=1}^ac_i^2
+$$
+
+$$
+(1-\alpha)100\% \mbox{ Confidence Interval for } L_A:
+\quad 
+\hat{L}_A \pm t_{1-\alpha/2; ab(n-1)}\sqrt{\frac{MSE}{bn}\sum_{i=1}^ac_i^2}
+$$
+
+$$
+\mbox{Tukey's:} \quad HSD=q_{1-\alpha;a,ab(n-1)}\sqrt{\frac{MSE}{bn}}
+\qquad
+\mbox{Simultaneous CI's:} \quad
+\left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i'\bullet\bullet}\right)
+\pm HSD
+$$
+
+Next, consider inference for factor B when both factors are fixed.
+
+$$
+H_0^B(A): \beta_{1(1)}=\cdots = \beta_{b(a)}=0 \qquad
+TS: F_{B(A)}^*=\frac{MSB(A)}{MSE}   
+$$
+$$
+RR: F_{B(A)}^* \geq F_{1-\alpha;a(b-1),ab(n-1)}
+$$
+
+$$
+E\left\{\overline{Y}_{ij\bullet}\right\}=
+\mu_{\bullet\bullet}+\alpha_i + \beta_{j(i)}  \qquad
+V\left\{\overline{Y}_{ij\bullet}\right\}=\frac{\sigma^2}{n}
+\qquad
+\hat{V}\left\{\overline{Y}_{ij\bullet}\right\}=\frac{MSE}{n}
+$$
+
+Tukey's method can be applied to compare the $b$ means within each level of factor A as well.
+
+$$
+ HSD_B=q_{1-\alpha;b,ab(n-1)}\sqrt{\frac{MSE}{n}}
+\qquad
+\mbox{Simultaneous CI's:} \quad
+\left(\overline{Y}_{ij\bullet}-\overline{Y}_{ij'\bullet}\right)
+\pm HSD_B
+$$
+
+
+**Example 11.1 - Determination of Alcohol Content in Liquor**
+
+A study was conducted to measure alcohol content in 3 types of spirits
+[@oliveira_2017]. The researchers bought 3 brands each of Vodka, Whisky, and Cachaca. Factor A with $a=3$ is the spirit type (Vodka, Whisky, Cachaca).
+The brands are nested within the spirit types with $b=3$.
+Each of the brands $(ab=3(3)=9)$ was measured $n=24$ times.
+The response is $Y$, the difference between the measured alcohol content and the content provided on the bottle's label.
+We will treat both factors as fixed in this analysis.
+Note that the **TukeyHSD** function does not work well with the nested (brand) factor.
+
+```{r ch1101}
+sac <- read.csv("data/spirits_alccont.csv")
+head(sac); tail(sac)
+sac$spiritType.f <- factor(sac$spiritType)
+sac$brandSprt.f <- factor(sac$brandSprt)
+sac$Y <- sac$alcCntnt - sac$labelAC
+
+plot(sac$Y ~ sac$spiritType, pch=16, col=sac$brandSprt, cex=0.6)
+
+A_mean <- as.vector(tapply(sac$Y, sac$spiritType.f, mean))
+BA_mean <- as.vector(tapply(sac$Y, sac$brandSprt.f, mean))
+all_mean <- mean(sac$Y)
+a <- length(A_mean)
+b <- length(BA_mean) / a
+n <- length(sac$Y) / (a*b)
+
+Ybar_i.. <- rep(A_mean, each=b*n)
+Ybar_ij. <- rep(BA_mean, each=n)
+Ybar_... <- rep(all_mean, a*b*n)
+
+SSA <- sum((Ybar_i..-Ybar_...)^2); df_A <- a-1; MSA <- SSA/df_A
+SSBA <- sum((Ybar_ij.-Ybar_i..)^2); df_BA <- a*(b-1); MSBA <- SSBA/df_BA
+SSE <- sum((sac$Y-Ybar_ij.)^2); df_E <- a*b*(n-1); MSE <- SSE/df_E
+SSTO <- sum((sac$Y-Ybar_...)^2); df_TO <- a*b*n-1
+
+aov.out1 <- cbind(df_A,SSA,MSA,MSA/MSE,qf(.95,df_A,df_E),1-pf(MSA/MSE,df_A,df_E),SSA/SSTO, SSA/(SSA+SSE))
+aov.out2 <- cbind(df_BA,SSBA,MSBA,MSBA/MSE,qf(.95,df_BA,df_E),
+                  1-pf(MSBA/MSE,df_BA,df_E),SSBA/SSTO,SSBA/(SSBA+SSE))
+aov.out3 <- cbind(df_E, SSE, MSE,NA,NA,NA,NA,NA)
+aov.out4 <- cbind(df_TO,SSTO,NA,NA,NA,NA,NA,NA)
+aov.out <- rbind(aov.out1,aov.out2,aov.out3,aov.out4)
+colnames(aov.out) <- c("df","SS","MS","F*","F(.95)","P(>F*)","eta^2", "Part eta^2")
+rownames(aov.out) <- c("Type","Brand(Type)","Error","Total")
+round(aov.out,4)
+
+HSD_A <- qtukey(.95,a,df_E)*sqrt(MSE/(b*n))
+HSD_B <- qtukey(.95,b,df_E)*sqrt(MSE/n)
+
+HSD_A.out <- matrix(rep(0,8*a*(a-1)/2), ncol=8)
+HSD_B.out <- matrix(rep(0,9*a*b*(b-1)/2), ncol=9)
+row_A.count <- 0
+row_B.count <- 0
+
+for (i1 in 2:a) {
+  for (i2 in 1:(i1-1)) {
+    row_A.count <- row_A.count + 1
+    HSD_A.out[row_A.count,1] <- i1
+    HSD_A.out[row_A.count,2] <- i2
+    HSD_A.out[row_A.count,3] <- A_mean[i1]
+    HSD_A.out[row_A.count,4] <- A_mean[i2]
+    HSD_A.out[row_A.count,5] <- A_mean[i1]-A_mean[i2]
+    HSD_A.out[row_A.count,6] <- (A_mean[i1]-A_mean[i2])-HSD_A
+    HSD_A.out[row_A.count,7] <- (A_mean[i1]-A_mean[i2])+HSD_A
+    HSD_A.out[row_A.count,8] <- 
+      1-ptukey(abs((A_mean[i1]-A_mean[i2])/sqrt(MSE/(b*n))),a,df_E)
+  }
+}
+colnames(HSD_A.out) <- c("i","i'","Ybar_i","Ybar_i'","Diff","LB","UB","p adj")
+round(HSD_A.out,4)
+    
+for (i1 in 1:a) {
+  for (i2 in ((i1-1)*a+2):((i1-1)*a+b)) {
+    for (i3 in ((i1-1)*a+1):(i2-1)) {
+    row_B.count <- row_B.count + 1
+    HSD_B.out[row_B.count,1] <- i1
+    HSD_B.out[row_B.count,2] <- i2
+    HSD_B.out[row_B.count,3] <- i3
+    HSD_B.out[row_B.count,4] <- BA_mean[i2]
+    HSD_B.out[row_B.count,5] <- BA_mean[i3]
+    HSD_B.out[row_B.count,6] <- BA_mean[i2]-BA_mean[i3]
+    HSD_B.out[row_B.count,7] <- (BA_mean[i2]-BA_mean[i3])-HSD_B
+    HSD_B.out[row_B.count,8] <- (BA_mean[i2]-BA_mean[i3])+HSD_B
+    HSD_B.out[row_B.count,9] <- 
+      1-ptukey(abs((BA_mean[i2]-BA_mean[i3])/sqrt(MSE/n)),b,df_E)
+    }
+  }
+}
+colnames(HSD_B.out) <- c("i","j","j'","Ybar_j(i)","Ybar_j'(i)","Diff","LB","UB","p adj")
+round(HSD_B.out,4)
+
+mod1 <- aov(Y ~ spiritType.f + spiritType.f/brandSprt.f, data=sac)
+anova(mod1)
+TukeyHSD(mod1, "spiritType.f")
+
+options(es.use_symbols=TRUE)
+
+eta_squared(mod1)
+eta_squared(mod1, partial=FALSE)
+```
+There is evidence for differences among the $a=3$ types of spirits.
+The differences between measured and reported proofs are significantly higher for Cachaca $(i=3)$ than for Whisky $(i=2)$ and for Vodka $(i=1)$.
+
+There are also differences among brands within spirits types. In particular, brands 5 and 6 (within Whisky) are significantly higher than brand 4.
+$$\nabla $$
+When factor A is fixed and B is random, we would like to compare the levels of factor A, and estimate the variance for factor B. The error term for factor A is now $MSB(A)$ as opposed to $MSE$.
+
+$$
+H_0^A: \alpha_1=\cdots = \alpha_a=0 \qquad
+TS: F_A^*=\frac{MSA}{MSB(A)}   \qquad
+RR: F_A^* \geq F_{1-\alpha;a-1,a(b-1)}
+$$
+The estimators of the population means for levels of factor A 
+and their properties are given below.
+
+$$
+E\left\{\overline{Y}_{i\bullet\bullet}\right\}=\mu_i=
+\mu_{\bullet\bullet}+\alpha_i   \qquad
+V\left\{\overline{Y}_{i\bullet\bullet}\right\}=
+\frac{\sigma^2+\sigma_{\beta(\alpha)}^2}{bn}
+\qquad
+\hat{V}\left\{\overline{Y}_{i\bullet\bullet}\right\}=\frac{MSB(A)}{bn}
+$$
+
+For Tukey's method, relative to the fixed effects case, we replace $MSE$ with $MSB(A)$ and adjust the degrees of freedom.
+
+$$
+HSD = q_{1-\alpha;a,a(b-1)}\sqrt{\frac{MSB(A)}{bn}}
+$$
+$$
+(1-\alpha)100\% \mbox{ CI for } \quad \alpha_i-\alpha_{i'}:
+\qquad 
+\left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i'\bullet\bullet}
+\right) \pm HSD
+$$
+A point estimate for the variance among the levels of factor A and its corresponding approximate Confidence Interval based on Satterthwaite's approximation are given below. First, we test whether the variance component for factor B is 0.
+
+$$
+H_0^{B(A)}:\sigma_{\beta(\alpha)}^2=0 \qquad
+TS: F_{B(A)}^*=\frac{MSB(A)}{MSE}   \qquad
+RR: F_{B(A)}^* \geq F_{1-\alpha;a(b-1),ab(n-1)}
+$$
+$$
+E\{MSB(A)\}=\sigma^2+n\sigma_{\beta(\alpha)}^2 \qquad E\{MSE\}=\sigma^2
+\quad \Rightarrow \quad s_{\beta(\alpha)}^2=\frac{MSB(A)-MSE}{n}
+$$
+$$
+df_{\beta(\alpha)} = \frac{\left(s_{\beta(\alpha)}^2\right)^2}{
+\left[\frac{\left(\frac{1}{n}MSB(A)\right)^2}{a(b-1)} +
+\frac{\left(-\frac{1}{n}MSE\right)^2}{ab(n-1)} \right]
+}
+$$
+$$
+\mbox{Approximate } (1-\alpha)100\% \mbox{ CI for }
+\sigma_{\beta(\alpha)}^2: \quad
+\left[
+\frac{df_{\beta(\alpha)}s_{\beta(\alpha)}^2}{
+\chi_{1-\alpha/2; df_{\beta(\alpha)}}^2},
+\frac{df_{\beta(\alpha)}s_{\beta(\alpha)}^2}{
+\chi_{\alpha/2; df_{\beta(\alpha)}}^2}
+\right]
+$$
+
+**Example 11.2 - Momentum of Animal Traps**
+
+A study compared $a=8$ models of animal traps in terms of momentum
+[@cook_1989]. Within each model, $b=3$ traps were built. Each trap was measured $n=10$ times. We will treat the models as a fixed factor, and the traps within models as a random factor (any number could have been assembled for each model). The response measured was the momentum at HDISP (when both jaws displayed half way). The response has been multiplied by 100 to avoid small variance estimates.
+
+```{r ch1102}
+at <- read.csv("data/animal_trap.csv")
+head(at); tail(at)
+at$model.f <- factor(at$model)
+at$trapModel.f <- factor(at$trapModel)
+at$Y <- 100*at$momentum
+
+plot(at$Y ~ at$model, pch=16, col=at$trapModel, cex=0.6)
+
+A_mean <- as.vector(tapply(at$Y, at$model.f, mean))
+BA_mean <- as.vector(tapply(at$Y, at$trapModel.f, mean))
+all_mean <- mean(at$Y)
+a <- length(A_mean)
+b <- length(BA_mean) / a
+n <- length(at$Y) / (a*b)
+
+Ybar_i.. <- rep(A_mean, each=b*n)
+Ybar_ij. <- rep(BA_mean, each=n)
+Ybar_... <- rep(all_mean, a*b*n)
+
+SSA <- sum((Ybar_i..-Ybar_...)^2); df_A <- a-1; MSA <- SSA/df_A
+SSBA <- sum((Ybar_ij.-Ybar_i..)^2); df_BA <- a*(b-1); MSBA <- SSBA/df_BA
+SSE <- sum((at$Y-Ybar_ij.)^2); df_E <- a*b*(n-1); MSE <- SSE/df_E
+SSTO <- sum((at$Y-Ybar_...)^2); df_TO <- a*b*n-1
+
+aov.out1 <- cbind(df_A,SSA,MSA,MSA/MSBA,qf(.95,df_A,df_BA),1-pf(MSA/MSBA,df_A,df_BA),SSA/SSTO, SSA/(SSA+SSE))
+aov.out2 <- cbind(df_BA,SSBA,MSBA,MSBA/MSE,qf(.95,df_BA,df_E),
+                  1-pf(MSBA/MSE,df_BA,df_E),SSBA/SSTO,SSBA/(SSBA+SSE))
+aov.out3 <- cbind(df_E, SSE, MSE,NA,NA,NA,NA,NA)
+aov.out4 <- cbind(df_TO,SSTO,NA,NA,NA,NA,NA,NA)
+aov.out <- rbind(aov.out1,aov.out2,aov.out3,aov.out4)
+colnames(aov.out) <- c("df","SS","MS","F*","F(.95)","P(>F*)","eta^2", "Part eta^2")
+rownames(aov.out) <- c("Model","Trap(Model)","Error","Total")
+round(aov.out,4)
+
+HSD_A <- qtukey(.95,a,df_BA)*sqrt(MSBA/(b*n))
+
+HSD_A.out <- matrix(rep(0,8*a*(a-1)/2), ncol=8)
+row_A.count <- 0
+
+for (i1 in 2:a) {
+  for (i2 in 1:(i1-1)) {
+    row_A.count <- row_A.count + 1
+    HSD_A.out[row_A.count,1] <- i1
+    HSD_A.out[row_A.count,2] <- i2
+    HSD_A.out[row_A.count,3] <- A_mean[i1]
+    HSD_A.out[row_A.count,4] <- A_mean[i2]
+    HSD_A.out[row_A.count,5] <- A_mean[i1]-A_mean[i2]
+    HSD_A.out[row_A.count,6] <- (A_mean[i1]-A_mean[i2])-HSD_A
+    HSD_A.out[row_A.count,7] <- (A_mean[i1]-A_mean[i2])+HSD_A
+    HSD_A.out[row_A.count,8] <- 
+      1-ptukey(abs((A_mean[i1]-A_mean[i2])/sqrt(MSBA/(b*n))),a,df_BA)
+  }
+}
+colnames(HSD_A.out) <- c("i","i'","Ybar_i","Ybar_i'","Diff","LB","UB","p adj")
+round(HSD_A.out,4)
+
+s2_ba <- (MSBA-MSE)/n
+df_ba <- s2_ba^2 / ((MSBA/n)^2/df_BA + (-MSE/n)^2/df_E)
+s2_ba_L <- df_ba*s2_ba/qchisq(1-.05/2,df_ba)
+s2_ba_U <- df_ba*s2_ba/qchisq(.05/2,df_ba)
+s2_L <- SSE/qchisq(1-.05/2,df_E)
+s2_U <- SSE/qchisq(.05/2,df_E)
+
+s2.out1 <- cbind(df_ba, s2_ba, s2_ba_L, s2_ba_U)
+s2.out2 <- cbind(df_E, MSE, s2_L, s2_U)
+s2.out <- rbind(s2.out1, s2.out2)
+colnames(s2.out) <- c("df", "s^2", "LB", "UB")
+rownames(s2.out) <- c("Trap(Model)", "Error")
+round(s2.out,4)
+
+mod1 <- aov(Y ~ model.f + model.f/trapModel.f, data=at)
+anova(mod1)
+
+options(contrasts=c("contr.sum", "contr.poly"))
+mod2 <- lmer(Y ~ model.f + (1|model.f:trapModel.f), data=at)
+summary(mod2)
+anova(mod2)
+```
+
+There are many differences among the 28 pairs of trap models.
+Also, within models there is relatively high variation among the individual traps.
+$$ \nabla $$
+
+
+When factors A and B are both random, we are generally interested in estimating their variance components and testing whether they are 0.
+
+$$
+H_0^A:\sigma_{\alpha}^2=0  \qquad
+TS:F_A^*=\frac{MSA}{MSB(A)} \qquad
+RR:F_A^* \geq F_{1-\alpha;a-1,a(b-1)}
+$$
+
+$$
+E\{MSA\}=\sigma^2 + n\sigma_{\beta(\alpha)}^2 + bn\sigma_{\alpha}^2
+\qquad 
+E\{MSB(A)\}=\sigma^2 + n\sigma_{\beta(\alpha)}^2
+$$
+$$
+s_{\alpha}^2 = \frac{MSA-MSB(A)}{bn}
+\qquad
+df_{\alpha}=\frac{\left(s_{\alpha}^2\right)^2}{
+\left[\frac{\left(\frac{1}{bn}MSA\right)^2}{a-1} +
+\frac{\left(-\frac{1}{bn}MSB(A)\right)^2}{a(b-1)} \right]
+}
+$$
+
+$$
+\mbox{Approximate } (1-\alpha)100\% \mbox{ CI for }
+\sigma_{\alpha}^2: \quad
+\left[
+\frac{df_{\alpha}s_{\alpha}^2}{
+\chi_{1-\alpha/2; df_{\alpha}}^2},
+\frac{df_{\alpha}s_{\alpha}^2}{
+\chi_{\alpha/2; df_{\alpha}}^2}
+\right]
+$$
+The test and Confidence Interval for $\sigma_{\beta(\alpha)}^2$ are
+the same for the random effects model as for the mixed effects model.
+
+**Example 11.3 - Measurements on Semiconductor Wafers**
+
+An instructional paper described making measurements on semiconducter wafers [@jensen_2002]. There were $a=20$ lots (batches) sampled, within each lot, there were $b=2$ wafers sampled, and each wafer was measured at $n=9$ locations (replicates). The response variable was not given for proprietary reasons. In this example, we treat lot and wafer(lot) as random factors. There are two wafer variables, **wafer1** takes on the values
+1 and 2 within each lot, **wafer2** gives each wafer a unique value (1-40) and is less risky of creating an error in computing.
+
+```{r ch1103, echo=FALSE}
+scq <- read.csv("data/semicon_qual.csv")
+head(scq); tail(scq)
+scq$lotNum.f <- factor(scq$lotNum)
+scq$wafer1.f <- factor(scq$wafer1)
+
+plot(scq$Y ~ scq$lotNum, pch=16, col=scq$wafer1, cex=0.6)
+
+A_mean <- as.vector(tapply(scq$Y, scq$lotNum.f, mean))
+BA_mean <- as.vector(tapply(scq$Y, scq$wafer1.f, mean))
+all_mean <- mean(scq$Y)
+a <- length(A_mean)
+b <- length(BA_mean) / a
+n <- length(scq$Y) / (a*b)
+
+Ybar_i.. <- rep(A_mean, each=b*n)
+Ybar_ij. <- rep(BA_mean, each=n)
+Ybar_... <- rep(all_mean, a*b*n)
+
+SSA <- sum((Ybar_i..-Ybar_...)^2); df_A <- a-1; MSA <- SSA/df_A
+SSBA <- sum((Ybar_ij.-Ybar_i..)^2); df_BA <- a*(b-1); MSBA <- SSBA/df_BA
+SSE <- sum((scq$Y-Ybar_ij.)^2); df_E <- a*b*(n-1); MSE <- SSE/df_E
+SSTO <- sum((scq$Y-Ybar_...)^2); df_TO <- a*b*n-1
+
+aov.out1 <- cbind(df_A,SSA,MSA,MSA/MSBA,qf(.95,df_A,df_BA),1-pf(MSA/MSBA,df_A,df_BA),SSA/SSTO, SSA/(SSA+SSE))
+aov.out2 <- cbind(df_BA,SSBA,MSBA,MSBA/MSE,qf(.95,df_BA,df_E),
+                  1-pf(MSBA/MSE,df_BA,df_E),SSBA/SSTO,SSBA/(SSBA+SSE))
+aov.out3 <- cbind(df_E, SSE, MSE,NA,NA,NA,NA,NA)
+aov.out4 <- cbind(df_TO,SSTO,NA,NA,NA,NA,NA,NA)
+aov.out <- rbind(aov.out1,aov.out2,aov.out3,aov.out4)
+colnames(aov.out) <- c("df","SS","MS","F*","F(.95)","P(>F*)","eta^2", "Part eta^2")
+rownames(aov.out) <- c("Lot","Wafer(Lot)","Error","Total")
+round(aov.out,4)
+
+s2_a <- (MSA-MSBA)/(b*n)
+df_a <- s2_a^2 / ((MSA/(b*n))^2/df_A + (-MSBA/(b*n))^2/df_BA)
+s2_a_L <- df_a*s2_a/qchisq(1-.05/2,df_a)
+s2_a_U <- df_a*s2_a/qchisq(.05/2,df_a)
+s2_ba <- (MSBA-MSE)/n
+df_ba <- s2_ba^2 / ((MSBA/n)^2/df_BA + (-MSE/n)^2/df_E)
+s2_ba_L <- df_ba*s2_ba/qchisq(1-.05/2,df_ba)
+s2_ba_U <- df_ba*s2_ba/qchisq(.05/2,df_ba)
+s2_L <- SSE/qchisq(1-.05/2,df_E)
+s2_U <- SSE/qchisq(.05/2,df_E)
+
+s2.out1 <- cbind(df_a, s2_a, s2_a_L, s2_a_U)
+s2.out2 <- cbind(df_ba, s2_ba, s2_ba_L, s2_ba_U)
+s2.out3 <- cbind(df_E, MSE, s2_L, s2_U)
+s2.out <- rbind(s2.out1, s2.out2, s2.out3)
+colnames(s2.out) <- c("df", "s^2", "LB", "UB")
+rownames(s2.out) <- c("Lot", "Wafer(Lot)", "Error")
+round(s2.out,4)
+
+mod1 <- aov(Y ~ lotNum.f + lotNum.f/wafer1.f, data=scq)
+anova(mod1)
+
+options(contrasts=c("contr.sum", "contr.poly"))
+mod2 <- lmer(Y ~ 1 +(1|lotNum.f) + (1|lotNum.f:wafer1.f), data=scq)
+summary(mod2)
+```
+
+The largest source of variation is among lots $\left(s_{\alpha}^2=35.64\right)$,
+followed by error (within wafer) $\left(s^2=19.03\right)$, followed by between wafers within lots $\left(s_{\beta(\alpha)}^2=8.77\right)$.
+
+$$ \nabla $$
+
+## Repeated Measures Design
+
+In this section we cover a second type of repeated measures design where subjects are randomized to treatments as in the Completely Randomized Design, then are measured at multiple time points. Recall in the chapter on block designs, there was a repeated measures design where each subject (block) received each treatment. In this case, each subject receives only one of the treatments.
+
+**Note that the notation used here is not the same as Kutner, et al**.
+
+### Model Structure
+
+The elements are described below for the case with a single treatment factor (it can be extended to multiple factors) and a balanced design.
+ 
+- **Treatments** - The primary factor of interest, with $a$ (fixed) levels.
+- **Subjects** - Individuals included in the experiment $b$ (random) units per treatment.
+- **Time Points** - When the measurements are obtained on each subject, with $c$ (fixed) time points per individual.
+
+We will use $i$ to represent treatment, $j$ represent the subject within treatment and $k$ to represent time point. The model is given below.
+
+$$
+Y_{ijk}=\mu_{\bullet\bullet\bullet} + \alpha_i + \beta_{j(i)} +
+\gamma_k + (\alpha\gamma)_{ik} + \epsilon_{ijk}  \quad
+i=1,\ldots,a; \quad j=1,\ldots,b; \quad k=1,\ldots,c
+$$
+
+$$
+\sum_{i=1}^a\alpha_i=\sum_{k=1}^c\gamma_k=
+\sum_{i=1}^a(\alpha\gamma)_{ik}=\sum_{k=1}^c(\alpha\gamma)_{ik}=0
+$$
+$$
+\beta_{j(i)} \sim NID\left(0,\sigma_{\beta(\alpha)}^2\right) \qquad
+\epsilon_{ijk} \sim NID\left(0,\sigma^2\right) \qquad
+\left\{\beta_{j(i)}\right\} \bot
+\left\{\epsilon_{ijk}\right\}
+$$
+
+$$
+E\left\{Y_{ijk}\right\}=
+\mu_{\bullet\bullet\bullet} + \alpha_i + \gamma_k + (\alpha\gamma)_{ik}
+\qquad
+V\left\{Y_{ijk}\right\}=\sigma_{\beta(\alpha)}^2+\sigma^2
+$$
+$$
+\mbox{COV}\left\{Y_{ijk},Y_{i'j'k'}\right\} = 
+\left\{ \begin{array}{r@{\quad:\quad}l}
+   \sigma_{\beta(\alpha)}^2 +  \sigma^2 & i=i',j=j',k=k' \\
+    \sigma_{\beta(\alpha)}^2  & i=i', j=j',k\ne k' \\
+    0 & \mbox{otherwise}\\
+    \end{array} \right.
+$$
+The variance-covariance within subjects has $\sigma_{\beta(\alpha)}^2 +  \sigma^2$ on the main diagonal and $\sigma_{\beta(\alpha)}^2$
+on the off diagonals. In practice, particularly when there are many time points, this structure is too simple and a more complex structure can be fit.
+
+$$
+\mbox{COV}\left\{
+\begin{bmatrix}
+Y_{ij1} \\ Y_{ij2} \\ \vdots \\Y_{ijc} \\
+\end{bmatrix}
+\right\}
+= 
+\begin{bmatrix}
+\sigma_{\beta(\alpha)}^2 +  \sigma^2 &
+\sigma_{\beta(\alpha)}^2  &  \cdots &
+\sigma_{\beta(\alpha)}^2 \\
+\sigma_{\beta(\alpha)}^2 & 
+\sigma_{\beta(\alpha)}^2 +  \sigma^2 &
+\cdots & \sigma_{\beta(\alpha)}^2 \\
+\vdots & \vdots & \ddots & \vdots \\
+\sigma_{\beta(\alpha)}^2 & \sigma_{\beta(\alpha)}^2 & 
+\cdots & \sigma_{\beta(\alpha)}^2 +  \sigma^2\\
+\end{bmatrix}
+$$
+
+### Analysis of Variance and $F$-tests
+
+For the various factors, we have he following sums of squares, degrees of freedom, and expected mean squares.
+
+$$
+\mbox{Treatments:} \quad
+SSA = bc\sum_{i=1}^a\left(\overline{Y}_{i\bullet\bullet}-
+\overline{Y}_{\bullet\bullet\bullet}\right)^2 \qquad  df_A=a-1
+$$
+$$
+E\{MSA\}=\sigma^2 + c\sigma_{\beta(\alpha)}^2 + \frac{bc\sum_{i=1}^a\alpha_i^2}{a-1}
+$$
+
+$$
+\mbox{Subjects(Trts):} \quad
+SSB(A) = c\sum_{i=1}^a\sum_{j=1}^b \left(
+\overline{Y}_{ij\bullet}-\overline{Y}_{i\bullet\bullet}\right)^2
+\qquad
+df_{B(A)}=a(b-1)
+$$
+$$
+E\{MSB(A)\}=\sigma^2 + c\sigma_{\beta(\alpha)}^2 
+$$
+$$
+\mbox{Time:} \quad
+SSC=ab\sum_{k=1}^c
+\left(\overline{Y}_{\bullet\bullet k}-
+\overline{Y}_{\bullet\bullet\bullet}\right)^2 \qquad  df_C=c-1
+$$
+$$
+E\{MSC\} = \sigma^2 + \frac{ab\sum_{k=1}^c\gamma_k^2}{c-1}
+$$
+$$
+\mbox{TreatmentxTime:} \quad SSAC=
+b\sum_{i=1}^a\sum_{k=1}^c\left(
+\overline{Y}_{i\bullet k}-
+\overline{Y}_{i\bullet\bullet}-
+\overline{Y}_{\bullet\bullet k}+
+\overline{Y}_{\bullet\bullet\bullet}\right)^2
+$$
+$$
+df_{AC}=(a-1)(c-1)  \qquad
+E\{MSAC\} =\sigma^2 + 
+\frac{b\sum_{i=1}^a\sum_{k=1}^c(\alpha\gamma)_{ik}^2}{(a-1)(c-1)}
+$$
+
+The error sum of squares represents the Subject(Treatment)xTime interaction and has expectation $E\{MSE\}=\sigma^2$.
+
+$$
+SSE=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^c \left(
+Y_{ijk}-\overline{Y}_{ij\bullet}-\overline{Y}_{i\bullet k}+
+\overline{Y}_{i\bullet\bullet}
+\right)^2 \qquad
+df_E = a(b-1)(c-1)
+$$
+
+To test for treatment effects, compare $MSA$ to $MSB(A)$.
+To test for Time effects and TimexTreatment interaction, compare their mean squares to $MSE$.
+
+$$
+H_0^A: \alpha_1=\cdots=\alpha_a 
+\qquad
+TS: F_A^*=\frac{MSA}{MSB(A)} \qquad
+RR: F_A^*\geq F_{1-\alpha;a-1,a(b-1)}
+$$
+
+$$
+H_0^C:\gamma_1=\cdots =\gamma_k=0
+\qquad
+TS:F_C^*=\frac{MSC}{MSE} \qquad
+RR: F_C^* \geq F_{1-\alpha;c-1,a(b-1)(c-1)}
+$$
+$$
+H_0^{AC}:(\alpha\gamma)_{11}=\cdots =(\alpha\gamma)_{ac}=0
+\qquad
+TS:F_{AC}^*=\frac{MSAC}{MSE} \qquad
+RR: F_{AC}^* \geq F_{1-\alpha;(a-1)(c-1),a(b-1)(c-1)}
+$$
+Depending on whether the TreatmentxTime interaction is important,
+treatments can be compared within time points (interaction important)
+or marginally (interaction unimportant).
+
+### Treatment Comparisons
+
+First, consider the case where the interaction is not important, when
+the "time effect" is consistent across treatments.
+Then we can use Tukey's method for comparing all pairs of treatments,
+keeping in mind that for treatments, $MSB(A)$ is the error term.
+
+$$
+HSD = q_{1-\alpha;a,a(b-1)}\sqrt{\frac{MSB(A)}{bc}}
+$$
+$$
+(1-\alpha)100\% \mbox{ CI for } \alpha_i-\alpha_{i'}:
+\quad
+\left(\overline{Y}_{i\bullet\bullet}-
+\overline{Y}_{i\bullet\bullet}\right) \pm HSD
+$$
+When the TreatmentxTime interaction is important, we may wish to compare the treatments within the time periods. This involves taking the standard error for the difference between means within the time periods as a linear
+function of $MSB(A)$ and $MSE$ and using Satterthwaite's approximation for the degrees of freedom.
+
+$$
+V\left\{\overline{Y}_{i\bullet k} - 
+\overline{Y}_{i'\bullet k}\right\} =
+\frac{2\left(\sigma^2+\sigma_{\beta(\alpha)}^2\right)}{b} \qquad
+E\{MSB(A)+(c-1)MSE\}=c\left(\sigma^2+\sigma_{\beta(\alpha)}^2\right)
+$$
+
+So if we divide $MSB(A)+(c-1)MSE$ by $bc$ and multiply by 2, this has expectation equal to the variance of the mean difference. 
+
+$$
+\hat{V}\left\{\overline{Y}_{i\bullet k} - 
+\overline{Y}_{i'\bullet k}\right\} = 
+\frac{2\left(MSB(A)+(c-1)MSE\right)}{bc}
+$$
+$$
+df^* = \frac{\left(MSB(A)+(c-1)MSE\right)^2}{
+\left[ \frac{\left(MSB(A)\right)^2}{a(b-1)} + 
+\frac{\left((c-1)MSE\right)^2}{a(b-1)(c-1)} \right]
+}
+$$
+
+Then we can use Tukey's method to compare all pairs of treatments within specific time points.
+
+$$
+HSD_k= q_{1-\alpha;a,df^*}\sqrt{\frac{MSB(A)+(c-1)MSE}{bc}}
+$$
+$$
+(1-\alpha)100\% \mbox{ Confidence Intervals:} \quad
+\left(\overline{Y}_{i\bullet k}-
+\overline{Y}_{i'\bullet k}\right) \pm HSD_k
+$$
+**Example 11.4 - Treating Cats with Anxiety**
+
+A study was conducted to test a drug zylkene versus placebo in cats with anxiety [@beata_2007]. There were $a=2$ treatments (zylkene $i=1$ and placebo $i=2$), with $b=17$ cats randomized to each treatment (34 total) and each cat was observed at each of $c=5$ time points. The response was a clinical globel impression (higher scores mean less anxiety and are better). R code and output are given below.
+
+```{r ch1104}
+caz <- read.csv("data/cat_zyl_uni.csv")
+head(caz); tail(caz)
+caz$trt.f <- factor(caz$trt, levels=0:1, labels=c("placebo", "zylkene"))
+caz$timepnt.f <- factor(caz$timepnt)
+caz$id1.f <- factor(rep(1:34,each=5))
+
+
+A_mean <- as.vector(tapply(caz$y, caz$trt, mean))
+BA_mean <- as.vector(tapply(caz$y, caz$id1.f, mean))
+C_mean <- as.vector(tapply(caz$y, caz$timepnt.f, mean))
+AC_mean <- as.vector(tapply(caz$y,list(caz$timepnt.f,caz$trt.f),mean))
+all_mean <- mean(caz$y)
+a <- length(A_mean)
+b <- length(BA_mean) / a
+c <- length(C_mean)
+
+Ybar_i.. <- rep(A_mean, each=b*c)
+Ybar_ij. <- rep(BA_mean, each=c)
+Ybar_..k <- rep(C_mean, times=a*b)
+Ybar_i.k <- c(rep(AC_mean[1:c],times=b),rep(AC_mean[(c+1):(2*c)], times=b))
+Ybar_... <- rep(all_mean, a*b*c)
+
+SSA <- sum((Ybar_i..-Ybar_...)^2); df_A <- a-1; MSA <- SSA/df_A
+SSBA <- sum((Ybar_ij.-Ybar_i..)^2); df_BA <- a*(b-1); MSBA <- SSBA/df_BA
+SSC <- sum((Ybar_..k-Ybar_...)^2); df_C <- c-1; MSC <- SSC/df_C
+SSAC <- sum((Ybar_i.k-Ybar_i..-Ybar_..k+Ybar_...)^2); df_AC <- (a-1)*(c-1)
+   MSAC <- SSAC/df_AC
+SSE <- sum((caz$y-Ybar_ij.-Ybar_i.k+Ybar_i..)^2); 
+   df_E <- a*(b-1)*(c-1); MSE <- SSE/df_E
+SSTO <- sum((caz$y-Ybar_...)^2); df_TO <- a*b*c-1  
+
+aov.out1 <- cbind(df_A,SSA,MSA,MSA/MSBA,qf(.95,df_A,df_BA),
+                  1-pf(MSA/MSBA,df_A,df_BA),SSA/SSTO)
+aov.out2 <- cbind(df_BA,SSBA,MSBA,MSBA/MSE,qf(.95,df_BA,df_E),
+                  1-pf(MSBA/MSE,df_BA,df_E),SSBA/SSTO)
+aov.out3 <- cbind(df_C,SSC,MSC,MSC/MSE,qf(.95,df_C,df_E),
+                  1-pf(MSC/MSE,df_C,df_E),SSC/SSTO)
+aov.out4 <- cbind(df_AC,SSAC,MSAC,MSAC/MSE,qf(.95,df_AC,df_E),
+                  1-pf(MSAC/MSE,df_AC,df_E),SSAC/SSTO)
+aov.out5 <- cbind(df_E, SSE, MSE,NA,NA,NA,NA)
+aov.out6 <- cbind(df_TO,SSTO,NA,NA,NA,NA,NA)
+aov.out <- rbind(aov.out1,aov.out2,aov.out3,aov.out4,aov.out5,aov.out6)
+colnames(aov.out) <- c("df","SS","MS","F*","F(.95)","P(>F*)","eta^2")
+rownames(aov.out) <- c("Drug","Cat(Drug)","Time",
+                       "DrugxTime", "Error","Total")
+round(aov.out,4)
+
+mod1 <- aov(y ~ trt.f + trt.f/id1.f + timepnt.f + trt.f:timepnt.f,
+            data=caz)
+anova(mod1)
+
+## This model uses correct error term for treatment (B(A))
+mod2 <- aov(y ~ trt.f*timepnt.f + Error(id1.f), data=caz)
+summary(mod2)
+
+
+options(es.use_symbols=TRUE)
+
+eta_squared(mod1)
+eta_squared(mod1, partial=FALSE)
+
+
+
+```
+ 
+Based on the ANOVA model, fit based on the formulas described in 
+this section, we observe a significant interaction between Treatment and Time $\left(F_{AC}^*=4.167, P=.0033\right)$, as well as significant main effects for Treatment and Time. 
+Here, we will compare the two treatments within the five time points using 95% Confidence Intervals for $\mu_Z-\mu_P$ within each time point (1 comparison per time). We will use $i=1$ to represent Zylkene and $i=2$ to represent Placebo.
+
+$$
+\hat{V}\left\{\overline{Y}_{1\bullet k}-\overline{Y}_{2\bullet k}\right\} =
+\frac{2\left(MSB(A)+(c-1)MSE\right)}{bc} =
+\frac{2\left(66.62+(5-1)(3.04)\right)}{17(5)}=1.854
+$$
+$$
+df^* = \frac{\left(66.62+4(3.04)\right)^2}{
+       \left[\frac{(66.62)^2}{32}+\frac{(4(3.04))^2}{128}\right]}=
+       \frac{6206.29}{139.85}=44.4
+$$
+$$
+t_{.975;44.4}=2.015 \quad \Rightarrow 
+\quad
+\left(\overline{Y}_{1\bullet k}-\overline{Y}_{2\bullet k}\right)\pm
+2.015\sqrt{1.854}
+ \equiv  
+\left(\overline{Y}_{1\bullet k}-\overline{Y}_{2\bullet k}\right)\pm
+2.74
+$$
+For the 5 time points, we compute the following Confidence Intervals.
+
+$$
+k=1: \quad (10.94-9.06) \pm 2.74 \quad \equiv \quad 1.88\pm 2.74
+\equiv (-0.86,4.62)
+$$
+$$
+k=2: \quad (12.12-10.18) \pm 2.74  \equiv  1.94\pm 2.74
+\equiv (-0.80,4.68)
+$$
+$$
+k=3: \quad (13.59-10.88) \pm 2.74  \equiv  2.71\pm 2.74
+\equiv (-0.03,5.45)
+$$
+$$
+k=4: \quad (15.18-11.41) \pm 3.77  \equiv  3.77\pm 2.74
+\equiv (1.03,6.51)
+$$
+$$
+k=5: \quad (16.12-11.41) \pm 4.71  \equiv  4.71\pm 2.74
+\equiv (1.97,7.45)
+$$
+At time point 3, they are very close to being significantly different as the interval just contains 0. At time points 4 and 5, Zylkene gives significantly higher scores than placebo.
+
+Next, we consider two other covariance structures among measurements within cats: **unstructured** and **AR(1)** which is autoregressive of order 1.
+We will use the **lme** function in the **nlme** package to fit them.
+
+The unstructured case has no restrictions on the variances and covariances.
+
+$$
+\mbox{COV}\left\{
+\begin{bmatrix}
+Y_{ij1} \\ Y_{ij2} \\ \vdots \\Y_{ijc} \\
+\end{bmatrix}
+\right\}
+= 
+\begin{bmatrix}
+\sigma_{1}^2   &
+\sigma_{12}  &  \cdots &
+\sigma_{1c} \\
+\sigma_{12} & 
+\sigma_2^2 &
+\cdots & \sigma_{2c} \\
+\vdots & \vdots & \ddots & \vdots \\
+\sigma_{1c} & \sigma_{2c} & 
+\cdots & \sigma_c^2\\
+\end{bmatrix}
+$$
+
+For the AR(1) case, the variances are all equal, and the covariances (and correlations) decrease multiplicatively as the observations are further apart in time. This can be extended to allow for heterogeneity of variances, which is not covered here. In the following, we assume $|\phi |<1$.
+
+
+$$
+\mbox{COV}\left\{
+\begin{bmatrix}
+Y_{ij1} \\ Y_{ij2} \\ \vdots \\Y_{ijc} \\
+\end{bmatrix}
+\right\}
+= 
+\begin{bmatrix}
+\sigma^2 &
+\phi\sigma^2  &  \cdots &
+\phi^{c-1}\sigma^2 \\
+\phi\sigma^2 & 
+\sigma^2 &
+\cdots & \phi^{c-2}\sigma^2 \\
+\vdots & \vdots & \ddots & \vdots \\
+\phi^{c-1}\sigma^2 & \phi^{c-2}\sigma^2 & 
+\cdots & \sigma^2\\
+\end{bmatrix}
+$$
+
+```{r ch1105}
+caz <- read.csv("data/cat_zyl_uni.csv")
+head(caz); tail(caz)
+caz$trt.f <- factor(caz$trt, levels=0:1, labels=c("placebo", "zylkene"))
+caz$timepnt.f <- factor(caz$timepnt)
+caz$id1.f <- factor(rep(1:34,each=5))
+
+### Uses linear mixed effect model for various covariance structures
+###   within cats
+
+## Compound Symmetry that prints marginal V-Cov matrix = ZGZ'+R w/in cats
+##   Same as anova model above
+fit.cs1 <- lme(y ~ trt.f*timepnt.f, data=caz,
+  random= list(id = pdCompSymm(~ trt.f - 1)))
+summary(fit.cs1)
+anova(fit.cs1)
+AIC(fit.cs1)
+getVarCov(fit.cs1, individual="1",type="marginal")
+
+## Unstructured Covariance Structure 
+fit.un <- lme(y ~ trt.f*timepnt.f, data=caz,
+  random= ~1 | id1.f,
+  corr = corSymm(form= ~ 1 | id1.f),
+  weights = varIdent(form = ~ 1 | timepnt.f), 
+  control=lmeControl(maxIter=100, opt="optim"))
+summary(fit.un)
+anova(fit.un)
+AIC(fit.un)
+getVarCov(fit.un, individual="1",type="conditional")
+
+## AR(1) Covariance Structure
+fit.ar1 <- lme(y ~ trt.f*timepnt.f, data=caz,
+random= ~1 | id1.f,
+corr = corAR1(, form= ~ 1 | id1.f))
+summary(fit.ar1)
+anova(fit.ar1)
+AIC(fit.ar1)
+getVarCov(fit.ar1, individual="1",type="conditional")
+
+```
+
+The AR(1) model allows the covariance of the observations within cats to decrease as they are farther apart in time. Based on having the smallest $AIC$ value, it gives the best fit of the three models without having excess variance parameters. 
+
+$$
+\hat{\mbox{COV}}\left\{Y_{ijk},Y_{ijk'}\right\} = 15.708(0.905)^{|k-k'|}
+$$
+

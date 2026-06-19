@@ -3,6 +3,8 @@ bookdown::gitbook:
   config:
     toc:
       before: |
-        <li><a href="./">SHORT TITLE HERE</a></li>
+        <li><a href="./">STA 4211 Course Notes</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+    link: https://github.com/LarryWinner/STA4211-Notes1.git/edit/main/%s
+    text: "Edit"

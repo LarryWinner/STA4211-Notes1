@@ -1,0 +1,1786 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 12 Nested Designs | Design and Analysis of Experiments</title>
+  <meta name="description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 12 Nested Designs | Design and Analysis of Experiments" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 12 Nested Designs | Design and Analysis of Experiments" />
+  
+  <meta name="twitter:description" content="This is a course on Experimental Design and Analysis." />
+  
+
+<meta name="author" content="Larry Winner" />
+
+
+<meta name="date" content="2026-06-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="random-and-mixed-effects-models.html"/>
+<link rel="next" href="analysis-of-covariance-ancova.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STA 4211 Course Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html"><i class="fa fa-check"></i><b>1</b> Comparing Two Treatments or Populations</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#linear-functions-of-random-variables"><i class="fa fa-check"></i><b>1.1</b> Linear Functions of Random Variables</a></li>
+<li class="chapter" data-level="1.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#students-t-distribution-for-making-inference-on-population-means"><i class="fa fa-check"></i><b>1.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution for Making Inference on Population Means</a></li>
+<li class="chapter" data-level="1.3" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference"><i class="fa fa-check"></i><b>1.3</b> Inference for the Population Mean Difference</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples"><i class="fa fa-check"></i><b>1.3.1</b> Inference for the Population Mean Difference for Paired Samples</a></li>
+<li class="chapter" data-level="1.3.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-independent-samples"><i class="fa fa-check"></i><b>1.3.2</b> Inference for the Population Mean Difference for Independent Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-variance-ratios"><i class="fa fa-check"></i><b>1.4</b> Inference for the Population Variance Ratios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inferences-for-variance-ratios-for-independent-samples"><i class="fa fa-check"></i><b>1.4.1</b> Inferences for Variance Ratios for Independent Samples</a></li>
+<li class="chapter" data-level="1.4.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#test-for-equal-variances-with-paired-samples"><i class="fa fa-check"></i><b>1.4.2</b> Test for Equal Variances with Paired Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#examples"><i class="fa fa-check"></i><b>1.5</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#terminology"><i class="fa fa-check"></i><b>2.1</b> Terminology</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#basics-of-controlled-experiments"><i class="fa fa-check"></i><b>2.2</b> Basics of Controlled Experiments</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#completely-randomized-design-crd"><i class="fa fa-check"></i><b>2.3</b> Completely Randomized Design (CRD)</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#randomized-complete-block-design-rcbd-or-rbd"><i class="fa fa-check"></i><b>2.4</b> Randomized Complete Block Design (RCBD or RBD)</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#overview-of-some-standard-experimental-designs"><i class="fa fa-check"></i><b>2.5</b> Overview of Some Standard Experimental Designs</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#overview-of-observational-study-designs"><i class="fa fa-check"></i><b>2.6</b> Overview of Observational Study Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-factor-studies.html"><a href="single-factor-studies.html"><i class="fa fa-check"></i><b>3</b> Single Factor Studies</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#models-with-r2-factor-levels"><i class="fa fa-check"></i><b>3.1</b> Models with <span class="math inline">\(r=2\)</span> Factor Levels</a></li>
+<li class="chapter" data-level="3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#three-model-formulations"><i class="fa fa-check"></i><b>3.2</b> Three Model Formulations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#cell-means-model"><i class="fa fa-check"></i><b>3.2.1</b> Cell Means Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#treatment-effects-model"><i class="fa fa-check"></i><b>3.2.2</b> Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#reference-group-model"><i class="fa fa-check"></i><b>3.2.3</b> Reference Group Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance-and-f-test"><i class="fa fa-check"></i><b>3.3</b> The Analysis of Variance and <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#general-linear-test-approach"><i class="fa fa-check"></i><b>3.3.1</b> General Linear Test Approach</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#power-calculations"><i class="fa fa-check"></i><b>3.3.2</b> Power Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#technical-details"><i class="fa fa-check"></i><b>3.4</b> Technical Details</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-for-the-cell-means-model-regression-approach"><i class="fa fa-check"></i><b>3.4.1</b> Least Squares Estimation for the Cell Means Model (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#scalar-estimation-for-the-cell-means-model"><i class="fa fa-check"></i><b>3.4.2</b> Scalar Estimation for the Cell Means Model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#estimation-for-the-treatment-effects-model"><i class="fa fa-check"></i><b>3.4.3</b> Estimation for the Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.4.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-regression-approach"><i class="fa fa-check"></i><b>3.4.4</b> Least Squares Estimation (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance"><i class="fa fa-check"></i><b>3.4.5</b> The Analysis of Variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html"><i class="fa fa-check"></i><b>4</b> Analysis of Treatment Means</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#individual-treatment-means"><i class="fa fa-check"></i><b>4.1</b> Individual Treatment Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#comparing-two-treatment-means"><i class="fa fa-check"></i><b>4.2</b> Comparing Two Treatment Means</a></li>
+<li class="chapter" data-level="4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#contrasts-among-treatment-means"><i class="fa fa-check"></i><b>4.3</b> Contrasts Among Treatment Means</a></li>
+<li class="chapter" data-level="4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#simultaneous-comparisons"><i class="fa fa-check"></i><b>4.4</b> Simultaneous Comparisons</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#tukeys-honest-significant-difference-hsd"><i class="fa fa-check"></i><b>4.4.1</b> Tukey’s Honest Significant Difference (HSD)</a></li>
+<li class="chapter" data-level="4.4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#scheffes-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.2</b> Scheffe’s Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#bonferroni-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.3</b> Bonferroni Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#multiple-range-methods"><i class="fa fa-check"></i><b>4.4.4</b> Multiple Range Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html"><i class="fa fa-check"></i><b>5</b> Alternative Tests for Treatment Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#randomizationpermutation-tests"><i class="fa fa-check"></i><b>5.1</b> Randomization/Permutation Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#tests-for-equal-error-variances"><i class="fa fa-check"></i><b>5.2</b> Tests for Equal Error Variances</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#hartleys-test"><i class="fa fa-check"></i><b>5.2.1</b> Hartley’s Test</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#levenes-test"><i class="fa fa-check"></i><b>5.2.2</b> Levene’s Test</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#bartletts-test"><i class="fa fa-check"></i><b>5.2.3</b> Bartlett’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#remedial-measures"><i class="fa fa-check"></i><b>5.3</b> Remedial Measures</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#weighted-least-squares-and-welchs-test"><i class="fa fa-check"></i><b>5.3.1</b> Weighted Least Squares and Welch’s Test</a></li>
+<li class="chapter" data-level="5.3.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#post-hoc-comparisons-with-unequal-variances"><i class="fa fa-check"></i><b>5.3.2</b> Post-hoc Comparisons with Unequal Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#nonparametric-test-for-non-normal-data"><i class="fa fa-check"></i><b>5.4</b> Nonparametric Test for Non-normal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html"><i class="fa fa-check"></i><b>6</b> Balanced Two Factor Designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#two-factor-analysis-of-variance"><i class="fa fa-check"></i><b>6.2</b> Two Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#cell-means-and-factor-effects-models"><i class="fa fa-check"></i><b>6.2.1</b> Cell Means and Factor Effects Models</a></li>
+<li class="chapter" data-level="6.2.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#least-squaresmaximum-likelihood-estimators"><i class="fa fa-check"></i><b>6.2.2</b> Least Squares/Maximum Likelihood Estimators</a></li>
+<li class="chapter" data-level="6.2.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#sums-of-squares-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>6.2.3</b> Sums of Squares and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#factor-effect-contrasts"><i class="fa fa-check"></i><b>6.3</b> Factor Effect Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-there-is-no-interaction"><i class="fa fa-check"></i><b>6.3.1</b> Contrasts when there is No Interaction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-interaction-is-present"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts when Interaction is Present</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="two-factor-designs-with-1-observation-per-treatment.html"><a href="two-factor-designs-with-1-observation-per-treatment.html"><i class="fa fa-check"></i><b>7</b> Two-Factor Designs with 1 Observation per Treatment</a></li>
+<li class="chapter" data-level="8" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html"><i class="fa fa-check"></i><b>8</b> Unbalanced Two-Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#statistical-model-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>8.1</b> Statistical Model and the Analysis of Variance</a></li>
+<li class="chapter" data-level="8.2" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#least-squares-estimators-and-contrastslinear-functions-among-means"><i class="fa fa-check"></i><b>8.2</b> Least Squares Estimators and Contrasts/Linear Functions Among Means</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="higher-order-models.html"><a href="higher-order-models.html"><i class="fa fa-check"></i><b>9</b> Higher Order Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="higher-order-models.html"><a href="higher-order-models.html#three-factor-models---mean-structure"><i class="fa fa-check"></i><b>9.1</b> Three Factor Models - Mean Structure</a></li>
+<li class="chapter" data-level="9.2" data-path="higher-order-models.html"><a href="higher-order-models.html#statistical-model-and-the-analysis-of-variance-1"><i class="fa fa-check"></i><b>9.2</b> Statistical Model and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="block-designs.html"><a href="block-designs.html"><i class="fa fa-check"></i><b>10</b> Block Designs</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="block-designs.html"><a href="block-designs.html#randomized-block-and-repeated-measures-designs"><i class="fa fa-check"></i><b>10.1</b> Randomized Block and Repeated Measures Designs</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="block-designs.html"><a href="block-designs.html#model-structure-and-estimators"><i class="fa fa-check"></i><b>10.1.1</b> Model Structure and Estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="block-designs.html"><a href="block-designs.html#analysis-of-variance-and-the-f-test"><i class="fa fa-check"></i><b>10.2</b> Analysis of Variance and the <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="block-designs.html"><a href="block-designs.html#checking-model-assumptions"><i class="fa fa-check"></i><b>10.2.1</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="10.2.2" data-path="block-designs.html"><a href="block-designs.html#relative-efficiency-and-within-subject-variance-covariance-matrix"><i class="fa fa-check"></i><b>10.2.2</b> Relative Efficiency and Within-Subject Variance-Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="block-designs.html"><a href="block-designs.html#latin-square-designs"><i class="fa fa-check"></i><b>10.3</b> Latin Square Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html"><i class="fa fa-check"></i><b>11</b> Random and Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#way-random-effects-model"><i class="fa fa-check"></i><b>11.1</b> 1-Way Random Effects Model</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>11.1.1</b> Analysis of Variance</a></li>
+<li class="chapter" data-level="11.1.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-population-mean-mu_bullet"><i class="fa fa-check"></i><b>11.1.2</b> Estimating the Population Mean <span class="math inline">\(\mu_{\bullet}\)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>11.1.3</b> Estimating the Intraclass Correlation Coefficient</a></li>
+<li class="chapter" data-level="11.1.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-within-group-variance"><i class="fa fa-check"></i><b>11.1.4</b> Estimating the Within Group Variance</a></li>
+<li class="chapter" data-level="11.1.5" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-between-group-variance"><i class="fa fa-check"></i><b>11.1.5</b> Estimating the Between Group Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-random-effects-model"><i class="fa fa-check"></i><b>11.2</b> Two-Way Random Effects Model</a></li>
+<li class="chapter" data-level="11.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-mixed-effects-model"><i class="fa fa-check"></i><b>11.3</b> Two-Way Mixed Effects Model</a></li>
+<li class="chapter" data-level="11.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#three-way-mixed-effects-models"><i class="fa fa-check"></i><b>11.4</b> Three-Way Mixed Effects Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>12</b> Nested Designs</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="nested-designs.html"><a href="nested-designs.html#estimators-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>12.1</b> Estimators and the Analysis of Variance</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-designs.html"><a href="nested-designs.html#tests-contrasts-and-pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Tests, Contrasts, and Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="nested-designs.html"><a href="nested-designs.html#repeated-measures-design"><i class="fa fa-check"></i><b>12.3</b> Repeated Measures Design</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="nested-designs.html"><a href="nested-designs.html#model-structure"><i class="fa fa-check"></i><b>12.3.1</b> Model Structure</a></li>
+<li class="chapter" data-level="12.3.2" data-path="nested-designs.html"><a href="nested-designs.html#analysis-of-variance-and-f-tests"><i class="fa fa-check"></i><b>12.3.2</b> Analysis of Variance and <span class="math inline">\(F\)</span>-tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="nested-designs.html"><a href="nested-designs.html#treatment-comparisons"><i class="fa fa-check"></i><b>12.3.3</b> Treatment Comparisons</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html"><i class="fa fa-check"></i><b>13</b> Analysis of Covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#additive-model"><i class="fa fa-check"></i><b>13.1</b> Additive Model</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#adjusted-means"><i class="fa fa-check"></i><b>13.1.1</b> Adjusted means</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#interaction-model"><i class="fa fa-check"></i><b>13.2</b> Interaction Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html"><i class="fa fa-check"></i><b>14</b> Response Surface and Mixture Designs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
+<li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="nested-designs" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">Chapter 12</span> Nested Designs<a href="nested-designs.html#nested-designs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>So far, factorial designs have contained <strong>crossed</strong> factors. The levels of factor B were the same within the levels of factor A, and vice versa. In this chapter the levels of factor B will be different under the various levels of factor A, and are said to be <strong>nested</strong>. These models are often referred to as hierarchical or multilevel.</p>
+<p>In a nested model, with factor A at the “top,” the levels of factor B will differ within the levels of factor A. Consider a study to compare NCAA conferences, with the conference as factor A, and schools are factor B, with different schools being in the different conferences (although they are changing constantly).</p>
+<div id="estimators-and-the-analysis-of-variance" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">12.1</span> Estimators and the Analysis of Variance<a href="nested-designs.html#estimators-and-the-analysis-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The factors can be fixed (all levels included), random (levels are sampled), or mixed (one factor fixed, the other random). We will write out the general model, and whether effects are fixed or random should be clear from the setting of the experiment. In the two-factor balanced design, factor A will have <span class="math inline">\(a\)</span> levels, within each level of A, factor B will have <span class="math inline">\(b\)</span> levels, and there will be <span class="math inline">\(n\)</span> replicates within each of the <span class="math inline">\(ab\)</span> treatments.
+The model is given here.</p>
+<p><span class="math display">\[
+\mbox{Factor A:}\quad \mu_{i\bullet} = \mu_{\bullet\bullet}+\alpha_i \qquad
+i=1,\ldots,a
+\]</span>
+<span class="math display">\[
+\mbox{Factor B within A:} \quad
+\mu_{ij}=\mu_{\bullet\bullet}+\alpha_i+\beta_{j(i)} \qquad
+i=1,\ldots,a;
+\quad j=1,\ldots,b
+\]</span>
+<span class="math display">\[
+\quad \Rightarrow \quad \beta_{j(i)} =
+\mu_{ij}-\left(\mu_{\bullet\bullet}+\alpha_i\right)=\mu_{ij}-\mu_{i\bullet}
+\]</span></p>
+<p>When A and B are both fixed factors, all levels of interest are included and <span class="math inline">\(\left\{\alpha_i\right\}\)</span> and <span class="math inline">\(\left\{\beta_{j(i)}\right\}\)</span> are all fixed (unknown) parameters and we can use the following restrictions and model.</p>
+<p><span class="math display">\[
+\sum_{i=1}^a \alpha_i=0 \qquad \sum_{j=1}^b\beta_{j(i)}=0 \quad i=1,\ldots,a
+\]</span>
+<span class="math display">\[
+Y_{ijk}=\mu_{\bullet\bullet}+\alpha_i+\beta_{j(i)} +\epsilon_{ijk}
+\qquad i=1,\ldots,a;\quad j=1,\ldots,b; \quad k=1,\ldots,n
+\]</span>
+<span class="math display">\[
+\epsilon_{ijk} \sim NID\left(0,\sigma^2\right) \qquad
+E\left\{Y_{ijk}\right\}=\mu_{\bullet\bullet}+\alpha_i+\beta_{j(i)} \qquad
+V\left\{Y_{ijk}\right\}=\sigma^2
+\]</span></p>
+<p>When factor A is fixed and factor B is random, the model changes as follows.</p>
+<p><span class="math display">\[
+\sum_{i=1}^a \alpha_i=0 \qquad \qquad
+\beta_{j(i)} \sim NID\left(0,\sigma_{\beta(\alpha)}^2\right)
+\qquad \left\{\beta_{j(i)}\right\} \bot
+\left\{\epsilon_{ijk}\right\}
+\]</span>
+<span class="math display">\[
+E\left\{Y_{ijk}\right\} = \mu_{\bullet\bullet}+\alpha_i  \qquad
+V\left\{Y_{ijk}\right\} = \sigma_{\beta(\alpha)}^2 + \sigma^2
+\]</span>
+<span class="math display">\[
+\mbox{COV}\left\{Y_{ijk},Y_{i&#39;j&#39;k&#39;}\right\} =
+\left\{ \begin{array}{r@{\quad:\quad}l}
+    \sigma_{\beta(\alpha)}^2 +  \sigma^2 &amp; i=i&#39;,j=j&#39;,k=k&#39; \\
+    \sigma_{\beta(\alpha)}^2  &amp; i=i&#39;, j=j&#39;,k\ne k&#39; \\
+    0 &amp; \mbox{otherwise}\\
+    \end{array} \right.
+\]</span></p>
+<p>When factors A and B are both random, the model changes as follows.</p>
+<p><span class="math display">\[
+\alpha_i\sim NID\left(0,\sigma_{\alpha}^2\right) \qquad
+\beta_{j(i)} \sim NID\left(0,\sigma_{\beta(\alpha)}^2\right)
+\qquad \left\{\alpha_i\right\} \bot\left\{\beta_{j(i)}\right\} \bot
+\left\{\epsilon_{ijk}\right\}
+\]</span>
+<span class="math display">\[
+E\left\{Y_{ijk}\right\} = \mu_{\bullet\bullet}  \qquad
+V\left\{Y_{ijk}\right\} = \sigma_{\alpha}^2+\sigma_{\beta(\alpha)}^2 + \sigma^2
+\]</span>
+<span class="math display">\[
+\mbox{COV}\left\{Y_{ijk},Y_{i&#39;j&#39;k&#39;}\right\} =
+\left\{ \begin{array}{r@{\quad:\quad}l}
+    \sigma_{\alpha}^2 + \sigma_{\beta(\alpha)}^2 +  \sigma^2 &amp; i=i&#39;,j=j&#39;,k=k&#39; \\
+    \sigma_{\alpha}^2 +\sigma_{\beta(\alpha)}^2  &amp; i=i&#39;, j=j&#39;,k\ne k&#39; \\
+    \sigma_{\alpha}^2  &amp; i=i&#39;,j\ne j&#39;, \forall k,k&#39;\\
+    0 &amp; i\neq i&#39;, \forall j,j&#39;, \forall k,k&#39;\\
+    \end{array} \right.
+\]</span></p>
+<p>Estimators, fitted values, residuals, sums of squares and expected mean squares are given below.</p>
+<p><span class="math display">\[
+\hat{\mu}_{\bullet\bullet}=\overline{Y}_{\bullet\bullet\bullet}
+\qquad \hat{\alpha}_i=
+\overline{Y}_{i\bullet\bullet}-\overline{Y}_{\bullet\bullet\bullet}
+\qquad \hat{\beta}_{j(i)}
+=\overline{Y}_{ij\bullet}-\overline{Y}_{i\bullet\bullet}
+\]</span>
+<span class="math display">\[
+\hat{Y}_{ijk}=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_i+\hat{\beta}_{j(i)}
+=\overline{Y}_{ij\bullet} \qquad
+e_{ijk}=Y_{ijk}-\hat{Y}_{ijk}=Y_{ijk}-\overline{Y}_{ij\bullet}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Error:} \quad SSE = \sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^n
+\left(Y_{ijk}-\overline{Y}_{ij\bullet}\right)^2
+\qquad  df_E=ab(n-1)
+\]</span>
+<span class="math display">\[
+\mbox{Factor A:} \quad SSA =bn\sum_{i=1}^a
+\left(Y_{i\bullet\bullet}-Y_{\bullet\bullet\bullet}\right)^2
+\qquad df_A =a-1
+\]</span>
+<span class="math display">\[
+\mbox{Factor B within A:} \quad SSB(A) =n\sum_{i=1}^a\sum_{j=1}^b
+\left(Y_{ij\bullet}-Y_{i\bullet\bullet}\right)^2
+\qquad df_{B(A)} =a(b-1)
+\]</span></p>
+<p>The expected mean squares depend on whether the factors are fixed or random. In all cases, <span class="math inline">\(E\{MSE\}=\sigma^2\)</span>.
+When both A and B are fixed, we obtain the following results.</p>
+<p><span class="math display">\[
+E\{MSA\}=\sigma^2 + \frac{bn\sum_{i=1}^a\alpha_i^2}{a-1}
+\qquad
+E\{MSB(A)\} = \sigma^2 +
+\frac{n\sum_{i=1}^a\sum_{j=1}^b \beta_{j(i)}^2}{a(b-1)}
+\]</span></p>
+<p>The denominator for the <span class="math inline">\(F\)</span>-tests for factors A and B in the fixed case is <span class="math inline">\(MSE\)</span>.</p>
+<p>When factor A is fixed and factor B is random, the following expected mean squares are obtained.</p>
+<p><span class="math display">\[
+E\{MSA\}=\sigma^2 + n\sigma_{\beta(\alpha)}^2 + \frac{bn\sum_{i=1}^a\alpha_i^2}{a-1}
+\qquad
+E\{MSB(A)\} = \sigma^2 +
+n\sigma_{\beta(\alpha)}^2
+\]</span></p>
+<p>In this mixed case, the error term for factor B is <span class="math inline">\(MSE\)</span>, but the error term for factor A is <span class="math inline">\(MSB(A)\)</span> due to the covariance structure.</p>
+<p>When factors A and B are both random, we obtain the following expected mean squares.</p>
+<p><span class="math display">\[
+E\{MSA\}=\sigma^2 + n\sigma_{\beta(\alpha)}^2 + bn\sigma_{\alpha}^2
+\qquad
+E\{MSB(A)\} = \sigma^2 +
+n\sigma_{\beta(\alpha)}^2
+\]</span></p>
+<p>The error terms are the same in the random effects case are the same as in the mixed effects case.
+Variance components can be estimated as in the previous chapter.</p>
+</div>
+<div id="tests-contrasts-and-pairwise-comparisons" class="section level2 hasAnchor" number="12.2">
+<h2><span class="header-section-number">12.2</span> Tests, Contrasts, and Pairwise Comparisons<a href="nested-designs.html#tests-contrasts-and-pairwise-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When both factors are fixed, <span class="math inline">\(MSE\)</span> is an unbiased estimator of
+<span class="math inline">\(V\left\{Y_{ijk}\right\}\)</span> and we can estimate/test contrasts among levels of factor A and B within A.</p>
+<p>First, we can test for effects among the levels of factor A.</p>
+<p><span class="math display">\[
+H_0^A: \alpha_1=\cdots = \alpha_a=0 \qquad
+TS: F_A^*=\frac{MSA}{MSE}   \qquad
+RR: F_A^* \geq F_{1-\alpha;a-1,ab(n-1)}
+\]</span>
+The estimators of the population means for levels of factor A
+and their properties are given below.</p>
+<p><span class="math display">\[
+E\left\{\overline{Y}_{i\bullet\bullet}\right\}=\mu_i=
+\mu_{\bullet\bullet}+\alpha_i   \qquad
+V\left\{\overline{Y}_{i\bullet\bullet}\right\}=\frac{\sigma^2}{bn}
+\qquad
+\hat{V}\left\{\overline{Y}_{i\bullet\bullet}\right\}=\frac{MSE}{bn}
+\]</span>
+Any contrast among the levels of factor A can be written as follows, with <span class="math inline">\(\sum_{i=1}^ac_i=0\)</span>.</p>
+<p><span class="math display">\[
+L_A = \sum_{i=1}^ac_i\mu_i \qquad
+\hat{L}_A=\sum_{i=1}^ac_i \overline{Y}_{i\bullet\bullet}
+\qquad
+\hat{V}\left\{\hat{L}_A\right\}=\frac{MSE}{bn}\sum_{i=1}^ac_i^2
+\]</span></p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ Confidence Interval for } L_A:
+\quad
+\hat{L}_A \pm t_{1-\alpha/2; ab(n-1)}\sqrt{\frac{MSE}{bn}\sum_{i=1}^ac_i^2}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Tukey&#39;s:} \quad HSD=q_{1-\alpha;a,ab(n-1)}\sqrt{\frac{MSE}{bn}}
+\qquad
+\mbox{Simultaneous CI&#39;s:} \quad
+\left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i&#39;\bullet\bullet}\right)
+\pm HSD
+\]</span></p>
+<p>Next, consider inference for factor B when both factors are fixed.</p>
+<p><span class="math display">\[
+H_0^B(A): \beta_{1(1)}=\cdots = \beta_{b(a)}=0 \qquad
+TS: F_{B(A)}^*=\frac{MSB(A)}{MSE}   
+\]</span>
+<span class="math display">\[
+RR: F_{B(A)}^* \geq F_{1-\alpha;a(b-1),ab(n-1)}
+\]</span></p>
+<p><span class="math display">\[
+E\left\{\overline{Y}_{ij\bullet}\right\}=
+\mu_{\bullet\bullet}+\alpha_i + \beta_{j(i)}  \qquad
+V\left\{\overline{Y}_{ij\bullet}\right\}=\frac{\sigma^2}{n}
+\qquad
+\hat{V}\left\{\overline{Y}_{ij\bullet}\right\}=\frac{MSE}{n}
+\]</span></p>
+<p>Tukey’s method can be applied to compare the <span class="math inline">\(b\)</span> means within each level of factor A as well.</p>
+<p><span class="math display">\[
+HSD_B=q_{1-\alpha;b,ab(n-1)}\sqrt{\frac{MSE}{n}}
+\qquad
+\mbox{Simultaneous CI&#39;s:} \quad
+\left(\overline{Y}_{ij\bullet}-\overline{Y}_{ij&#39;\bullet}\right)
+\pm HSD_B
+\]</span></p>
+<p><strong>Example 11.1 - Determination of Alcohol Content in Liquor</strong></p>
+<p>A study was conducted to measure alcohol content in 3 types of spirits
+<span class="citation">(<a href="#ref-oliveira_2017">Oliveira et al. 2017</a>)</span>. The researchers bought 3 brands each of Vodka, Whisky, and Cachaca. Factor A with <span class="math inline">\(a=3\)</span> is the spirit type (Vodka, Whisky, Cachaca).
+The brands are nested within the spirit types with <span class="math inline">\(b=3\)</span>.
+Each of the brands <span class="math inline">\((ab=3(3)=9)\)</span> was measured <span class="math inline">\(n=24\)</span> times.
+The response is <span class="math inline">\(Y\)</span>, the difference between the measured alcohol content and the content provided on the bottle’s label.
+We will treat both factors as fixed in this analysis.
+Note that the <strong>TukeyHSD</strong> function does not work well with the nested (brand) factor.</p>
+<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb418-1"><a href="nested-designs.html#cb418-1" tabindex="-1"></a>sac <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/spirits_alccont.csv&quot;</span>)</span>
+<span id="cb418-2"><a href="nested-designs.html#cb418-2" tabindex="-1"></a><span class="fu">head</span>(sac); <span class="fu">tail</span>(sac)</span></code></pre></div>
+<pre><code>##   spiritType brandSprt labelAC alcCntnt
+## 1          1         1    37.5    36.81
+## 2          1         1    37.5    36.43
+## 3          1         1    37.5    37.02
+## 4          1         1    37.5    37.38
+## 5          1         1    37.5    36.70
+## 6          1         1    37.5    36.97</code></pre>
+<pre><code>##     spiritType brandSprt labelAC alcCntnt
+## 211          3         9      39    38.89
+## 212          3         9      39    38.78
+## 213          3         9      39    38.41
+## 214          3         9      39    39.27
+## 215          3         9      39    39.03
+## 216          3         9      39    38.94</code></pre>
+<div class="sourceCode" id="cb421"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb421-1"><a href="nested-designs.html#cb421-1" tabindex="-1"></a>sac<span class="sc">$</span>spiritType.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(sac<span class="sc">$</span>spiritType)</span>
+<span id="cb421-2"><a href="nested-designs.html#cb421-2" tabindex="-1"></a>sac<span class="sc">$</span>brandSprt.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(sac<span class="sc">$</span>brandSprt)</span>
+<span id="cb421-3"><a href="nested-designs.html#cb421-3" tabindex="-1"></a>sac<span class="sc">$</span>Y <span class="ot">&lt;-</span> sac<span class="sc">$</span>alcCntnt <span class="sc">-</span> sac<span class="sc">$</span>labelAC</span>
+<span id="cb421-4"><a href="nested-designs.html#cb421-4" tabindex="-1"></a></span>
+<span id="cb421-5"><a href="nested-designs.html#cb421-5" tabindex="-1"></a><span class="fu">plot</span>(sac<span class="sc">$</span>Y <span class="sc">~</span> sac<span class="sc">$</span>spiritType, <span class="at">pch=</span><span class="dv">16</span>, <span class="at">col=</span>sac<span class="sc">$</span>brandSprt, <span class="at">cex=</span><span class="fl">0.6</span>)</span></code></pre></div>
+<p><img src="bookdownproj_STA4211Notes1_files/figure-html/ch1101-1.png" width="672" /></p>
+<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb422-1"><a href="nested-designs.html#cb422-1" tabindex="-1"></a>A_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(sac<span class="sc">$</span>Y, sac<span class="sc">$</span>spiritType.f, mean))</span>
+<span id="cb422-2"><a href="nested-designs.html#cb422-2" tabindex="-1"></a>BA_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(sac<span class="sc">$</span>Y, sac<span class="sc">$</span>brandSprt.f, mean))</span>
+<span id="cb422-3"><a href="nested-designs.html#cb422-3" tabindex="-1"></a>all_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(sac<span class="sc">$</span>Y)</span>
+<span id="cb422-4"><a href="nested-designs.html#cb422-4" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(A_mean)</span>
+<span id="cb422-5"><a href="nested-designs.html#cb422-5" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">length</span>(BA_mean) <span class="sc">/</span> a</span>
+<span id="cb422-6"><a href="nested-designs.html#cb422-6" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(sac<span class="sc">$</span>Y) <span class="sc">/</span> (a<span class="sc">*</span>b)</span>
+<span id="cb422-7"><a href="nested-designs.html#cb422-7" tabindex="-1"></a></span>
+<span id="cb422-8"><a href="nested-designs.html#cb422-8" tabindex="-1"></a>Ybar_i.. <span class="ot">&lt;-</span> <span class="fu">rep</span>(A_mean, <span class="at">each=</span>b<span class="sc">*</span>n)</span>
+<span id="cb422-9"><a href="nested-designs.html#cb422-9" tabindex="-1"></a>Ybar_ij. <span class="ot">&lt;-</span> <span class="fu">rep</span>(BA_mean, <span class="at">each=</span>n)</span>
+<span id="cb422-10"><a href="nested-designs.html#cb422-10" tabindex="-1"></a>Ybar_... <span class="ot">&lt;-</span> <span class="fu">rep</span>(all_mean, a<span class="sc">*</span>b<span class="sc">*</span>n)</span>
+<span id="cb422-11"><a href="nested-designs.html#cb422-11" tabindex="-1"></a></span>
+<span id="cb422-12"><a href="nested-designs.html#cb422-12" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_i..<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_A <span class="ot">&lt;-</span> a<span class="dv">-1</span>; MSA <span class="ot">&lt;-</span> SSA<span class="sc">/</span>df_A</span>
+<span id="cb422-13"><a href="nested-designs.html#cb422-13" tabindex="-1"></a>SSBA <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_ij.<span class="sc">-</span>Ybar_i..)<span class="sc">^</span><span class="dv">2</span>); df_BA <span class="ot">&lt;-</span> a<span class="sc">*</span>(b<span class="dv">-1</span>); MSBA <span class="ot">&lt;-</span> SSBA<span class="sc">/</span>df_BA</span>
+<span id="cb422-14"><a href="nested-designs.html#cb422-14" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> <span class="fu">sum</span>((sac<span class="sc">$</span>Y<span class="sc">-</span>Ybar_ij.)<span class="sc">^</span><span class="dv">2</span>); df_E <span class="ot">&lt;-</span> a<span class="sc">*</span>b<span class="sc">*</span>(n<span class="dv">-1</span>); MSE <span class="ot">&lt;-</span> SSE<span class="sc">/</span>df_E</span>
+<span id="cb422-15"><a href="nested-designs.html#cb422-15" tabindex="-1"></a>SSTO <span class="ot">&lt;-</span> <span class="fu">sum</span>((sac<span class="sc">$</span>Y<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_TO <span class="ot">&lt;-</span> a<span class="sc">*</span>b<span class="sc">*</span>n<span class="dv">-1</span></span>
+<span id="cb422-16"><a href="nested-designs.html#cb422-16" tabindex="-1"></a></span>
+<span id="cb422-17"><a href="nested-designs.html#cb422-17" tabindex="-1"></a>aov.out1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_A,SSA,MSA,MSA<span class="sc">/</span>MSE,<span class="fu">qf</span>(.<span class="dv">95</span>,df_A,df_E),<span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSA<span class="sc">/</span>MSE,df_A,df_E),SSA<span class="sc">/</span>SSTO, SSA<span class="sc">/</span>(SSA<span class="sc">+</span>SSE))</span>
+<span id="cb422-18"><a href="nested-designs.html#cb422-18" tabindex="-1"></a>aov.out2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_BA,SSBA,MSBA,MSBA<span class="sc">/</span>MSE,<span class="fu">qf</span>(.<span class="dv">95</span>,df_BA,df_E),</span>
+<span id="cb422-19"><a href="nested-designs.html#cb422-19" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSBA<span class="sc">/</span>MSE,df_BA,df_E),SSBA<span class="sc">/</span>SSTO,SSBA<span class="sc">/</span>(SSBA<span class="sc">+</span>SSE))</span>
+<span id="cb422-20"><a href="nested-designs.html#cb422-20" tabindex="-1"></a>aov.out3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_E, SSE, MSE,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb422-21"><a href="nested-designs.html#cb422-21" tabindex="-1"></a>aov.out4 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_TO,SSTO,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb422-22"><a href="nested-designs.html#cb422-22" tabindex="-1"></a>aov.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(aov.out1,aov.out2,aov.out3,aov.out4)</span>
+<span id="cb422-23"><a href="nested-designs.html#cb422-23" tabindex="-1"></a><span class="fu">colnames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;df&quot;</span>,<span class="st">&quot;SS&quot;</span>,<span class="st">&quot;MS&quot;</span>,<span class="st">&quot;F*&quot;</span>,<span class="st">&quot;F(.95)&quot;</span>,<span class="st">&quot;P(&gt;F*)&quot;</span>,<span class="st">&quot;eta^2&quot;</span>, <span class="st">&quot;Part eta^2&quot;</span>)</span>
+<span id="cb422-24"><a href="nested-designs.html#cb422-24" tabindex="-1"></a><span class="fu">rownames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Type&quot;</span>,<span class="st">&quot;Brand(Type)&quot;</span>,<span class="st">&quot;Error&quot;</span>,<span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb422-25"><a href="nested-designs.html#cb422-25" tabindex="-1"></a><span class="fu">round</span>(aov.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##              df      SS     MS      F* F(.95) P(&gt;F*)  eta^2 Part eta^2
+## Type          2  3.1967 1.5983 13.2669 3.0395      0 0.0992     0.1136
+## Brand(Type)   6  4.0872 0.6812  5.6543 2.1426      0 0.1268     0.1408
+## Error       207 24.9385 0.1205      NA     NA     NA     NA         NA
+## Total       215 32.2224     NA      NA     NA     NA     NA         NA</code></pre>
+<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb424-1"><a href="nested-designs.html#cb424-1" tabindex="-1"></a>HSD_A <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(.<span class="dv">95</span>,a,df_E)<span class="sc">*</span><span class="fu">sqrt</span>(MSE<span class="sc">/</span>(b<span class="sc">*</span>n))</span>
+<span id="cb424-2"><a href="nested-designs.html#cb424-2" tabindex="-1"></a>HSD_B <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(.<span class="dv">95</span>,b,df_E)<span class="sc">*</span><span class="fu">sqrt</span>(MSE<span class="sc">/</span>n)</span>
+<span id="cb424-3"><a href="nested-designs.html#cb424-3" tabindex="-1"></a></span>
+<span id="cb424-4"><a href="nested-designs.html#cb424-4" tabindex="-1"></a>HSD_A.out <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">8</span><span class="sc">*</span>a<span class="sc">*</span>(a<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">8</span>)</span>
+<span id="cb424-5"><a href="nested-designs.html#cb424-5" tabindex="-1"></a>HSD_B.out <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">9</span><span class="sc">*</span>a<span class="sc">*</span>b<span class="sc">*</span>(b<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">9</span>)</span>
+<span id="cb424-6"><a href="nested-designs.html#cb424-6" tabindex="-1"></a>row_A.count <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb424-7"><a href="nested-designs.html#cb424-7" tabindex="-1"></a>row_B.count <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb424-8"><a href="nested-designs.html#cb424-8" tabindex="-1"></a></span>
+<span id="cb424-9"><a href="nested-designs.html#cb424-9" tabindex="-1"></a><span class="cf">for</span> (i1 <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>a) {</span>
+<span id="cb424-10"><a href="nested-designs.html#cb424-10" tabindex="-1"></a>  <span class="cf">for</span> (i2 <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(i1<span class="dv">-1</span>)) {</span>
+<span id="cb424-11"><a href="nested-designs.html#cb424-11" tabindex="-1"></a>    row_A.count <span class="ot">&lt;-</span> row_A.count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb424-12"><a href="nested-designs.html#cb424-12" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">1</span>] <span class="ot">&lt;-</span> i1</span>
+<span id="cb424-13"><a href="nested-designs.html#cb424-13" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">2</span>] <span class="ot">&lt;-</span> i2</span>
+<span id="cb424-14"><a href="nested-designs.html#cb424-14" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">3</span>] <span class="ot">&lt;-</span> A_mean[i1]</span>
+<span id="cb424-15"><a href="nested-designs.html#cb424-15" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">4</span>] <span class="ot">&lt;-</span> A_mean[i2]</span>
+<span id="cb424-16"><a href="nested-designs.html#cb424-16" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">5</span>] <span class="ot">&lt;-</span> A_mean[i1]<span class="sc">-</span>A_mean[i2]</span>
+<span id="cb424-17"><a href="nested-designs.html#cb424-17" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">6</span>] <span class="ot">&lt;-</span> (A_mean[i1]<span class="sc">-</span>A_mean[i2])<span class="sc">-</span>HSD_A</span>
+<span id="cb424-18"><a href="nested-designs.html#cb424-18" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">7</span>] <span class="ot">&lt;-</span> (A_mean[i1]<span class="sc">-</span>A_mean[i2])<span class="sc">+</span>HSD_A</span>
+<span id="cb424-19"><a href="nested-designs.html#cb424-19" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">8</span>] <span class="ot">&lt;-</span> </span>
+<span id="cb424-20"><a href="nested-designs.html#cb424-20" tabindex="-1"></a>      <span class="dv">1</span><span class="sc">-</span><span class="fu">ptukey</span>(<span class="fu">abs</span>((A_mean[i1]<span class="sc">-</span>A_mean[i2])<span class="sc">/</span><span class="fu">sqrt</span>(MSE<span class="sc">/</span>(b<span class="sc">*</span>n))),a,df_E)</span>
+<span id="cb424-21"><a href="nested-designs.html#cb424-21" tabindex="-1"></a>  }</span>
+<span id="cb424-22"><a href="nested-designs.html#cb424-22" tabindex="-1"></a>}</span>
+<span id="cb424-23"><a href="nested-designs.html#cb424-23" tabindex="-1"></a><span class="fu">colnames</span>(HSD_A.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;i&quot;</span>,<span class="st">&quot;i&#39;&quot;</span>,<span class="st">&quot;Ybar_i&quot;</span>,<span class="st">&quot;Ybar_i&#39;&quot;</span>,<span class="st">&quot;Diff&quot;</span>,<span class="st">&quot;LB&quot;</span>,<span class="st">&quot;UB&quot;</span>,<span class="st">&quot;p adj&quot;</span>)</span>
+<span id="cb424-24"><a href="nested-designs.html#cb424-24" tabindex="-1"></a><span class="fu">round</span>(HSD_A.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##      i i&#39;  Ybar_i Ybar_i&#39;    Diff      LB     UB p adj
+## [1,] 2  1 -0.3062 -0.3037 -0.0025 -0.1391 0.1341 0.999
+## [2,] 3  1 -0.0469 -0.3037  0.2568  0.1202 0.3934 0.000
+## [3,] 3  2 -0.0469 -0.3062  0.2593  0.1227 0.3959 0.000</code></pre>
+<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb426-1"><a href="nested-designs.html#cb426-1" tabindex="-1"></a><span class="cf">for</span> (i1 <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>a) {</span>
+<span id="cb426-2"><a href="nested-designs.html#cb426-2" tabindex="-1"></a>  <span class="cf">for</span> (i2 <span class="cf">in</span> ((i1<span class="dv">-1</span>)<span class="sc">*</span>a<span class="sc">+</span><span class="dv">2</span>)<span class="sc">:</span>((i1<span class="dv">-1</span>)<span class="sc">*</span>a<span class="sc">+</span>b)) {</span>
+<span id="cb426-3"><a href="nested-designs.html#cb426-3" tabindex="-1"></a>    <span class="cf">for</span> (i3 <span class="cf">in</span> ((i1<span class="dv">-1</span>)<span class="sc">*</span>a<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(i2<span class="dv">-1</span>)) {</span>
+<span id="cb426-4"><a href="nested-designs.html#cb426-4" tabindex="-1"></a>    row_B.count <span class="ot">&lt;-</span> row_B.count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb426-5"><a href="nested-designs.html#cb426-5" tabindex="-1"></a>    HSD_B.out[row_B.count,<span class="dv">1</span>] <span class="ot">&lt;-</span> i1</span>
+<span id="cb426-6"><a href="nested-designs.html#cb426-6" tabindex="-1"></a>    HSD_B.out[row_B.count,<span class="dv">2</span>] <span class="ot">&lt;-</span> i2</span>
+<span id="cb426-7"><a href="nested-designs.html#cb426-7" tabindex="-1"></a>    HSD_B.out[row_B.count,<span class="dv">3</span>] <span class="ot">&lt;-</span> i3</span>
+<span id="cb426-8"><a href="nested-designs.html#cb426-8" tabindex="-1"></a>    HSD_B.out[row_B.count,<span class="dv">4</span>] <span class="ot">&lt;-</span> BA_mean[i2]</span>
+<span id="cb426-9"><a href="nested-designs.html#cb426-9" tabindex="-1"></a>    HSD_B.out[row_B.count,<span class="dv">5</span>] <span class="ot">&lt;-</span> BA_mean[i3]</span>
+<span id="cb426-10"><a href="nested-designs.html#cb426-10" tabindex="-1"></a>    HSD_B.out[row_B.count,<span class="dv">6</span>] <span class="ot">&lt;-</span> BA_mean[i2]<span class="sc">-</span>BA_mean[i3]</span>
+<span id="cb426-11"><a href="nested-designs.html#cb426-11" tabindex="-1"></a>    HSD_B.out[row_B.count,<span class="dv">7</span>] <span class="ot">&lt;-</span> (BA_mean[i2]<span class="sc">-</span>BA_mean[i3])<span class="sc">-</span>HSD_B</span>
+<span id="cb426-12"><a href="nested-designs.html#cb426-12" tabindex="-1"></a>    HSD_B.out[row_B.count,<span class="dv">8</span>] <span class="ot">&lt;-</span> (BA_mean[i2]<span class="sc">-</span>BA_mean[i3])<span class="sc">+</span>HSD_B</span>
+<span id="cb426-13"><a href="nested-designs.html#cb426-13" tabindex="-1"></a>    HSD_B.out[row_B.count,<span class="dv">9</span>] <span class="ot">&lt;-</span> </span>
+<span id="cb426-14"><a href="nested-designs.html#cb426-14" tabindex="-1"></a>      <span class="dv">1</span><span class="sc">-</span><span class="fu">ptukey</span>(<span class="fu">abs</span>((BA_mean[i2]<span class="sc">-</span>BA_mean[i3])<span class="sc">/</span><span class="fu">sqrt</span>(MSE<span class="sc">/</span>n)),b,df_E)</span>
+<span id="cb426-15"><a href="nested-designs.html#cb426-15" tabindex="-1"></a>    }</span>
+<span id="cb426-16"><a href="nested-designs.html#cb426-16" tabindex="-1"></a>  }</span>
+<span id="cb426-17"><a href="nested-designs.html#cb426-17" tabindex="-1"></a>}</span>
+<span id="cb426-18"><a href="nested-designs.html#cb426-18" tabindex="-1"></a><span class="fu">colnames</span>(HSD_B.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;i&quot;</span>,<span class="st">&quot;j&quot;</span>,<span class="st">&quot;j&#39;&quot;</span>,<span class="st">&quot;Ybar_j(i)&quot;</span>,<span class="st">&quot;Ybar_j&#39;(i)&quot;</span>,<span class="st">&quot;Diff&quot;</span>,<span class="st">&quot;LB&quot;</span>,<span class="st">&quot;UB&quot;</span>,<span class="st">&quot;p adj&quot;</span>)</span>
+<span id="cb426-19"><a href="nested-designs.html#cb426-19" tabindex="-1"></a><span class="fu">round</span>(HSD_B.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##       i j j&#39; Ybar_j(i) Ybar_j&#39;(i)    Diff      LB     UB  p adj
+##  [1,] 1 2  1   -0.2400    -0.4308  0.1908 -0.0457 0.4274 0.1399
+##  [2,] 1 3  1   -0.2404    -0.4308  0.1904 -0.0461 0.4270 0.1411
+##  [3,] 1 3  2   -0.2404    -0.2400 -0.0004 -0.2370 0.2361 1.0000
+##  [4,] 2 5  4   -0.1388    -0.5892  0.4504  0.2139 0.6870 0.0000
+##  [5,] 2 6  4   -0.1908    -0.5892  0.3983  0.1618 0.6349 0.0003
+##  [6,] 2 6  5   -0.1908    -0.1388 -0.0521 -0.2886 0.1845 0.8618
+##  [7,] 3 8  7    0.0792    -0.0900  0.1692 -0.0674 0.4057 0.2121
+##  [8,] 3 9  7   -0.1300    -0.0900 -0.0400 -0.2765 0.1965 0.9159
+##  [9,] 3 9  8   -0.1300     0.0792 -0.2092 -0.4457 0.0274 0.0949</code></pre>
+<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb428-1"><a href="nested-designs.html#cb428-1" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Y <span class="sc">~</span> spiritType.f <span class="sc">+</span> spiritType.f<span class="sc">/</span>brandSprt.f, <span class="at">data=</span>sac)</span>
+<span id="cb428-2"><a href="nested-designs.html#cb428-2" tabindex="-1"></a><span class="fu">anova</span>(mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Y
+##                           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## spiritType.f               2  3.1967 1.59834 13.2669 3.791e-06 ***
+## spiritType.f:brandSprt.f   6  4.0872 0.68120  5.6543 1.850e-05 ***
+## Residuals                207 24.9385 0.12048                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb430-1"><a href="nested-designs.html#cb430-1" tabindex="-1"></a><span class="fu">TukeyHSD</span>(mod1, <span class="st">&quot;spiritType.f&quot;</span>)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = Y ~ spiritType.f + spiritType.f/brandSprt.f, data = sac)
+## 
+## $spiritType.f
+##           diff        lwr       upr     p adj
+## 2-1 -0.0025000 -0.1390648 0.1340648 0.9989709
+## 3-1  0.2568056  0.1202407 0.3933704 0.0000435
+## 3-2  0.2593056  0.1227407 0.3958704 0.0000362</code></pre>
+<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb432-1"><a href="nested-designs.html#cb432-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">es.use_symbols=</span><span class="cn">TRUE</span>)</span>
+<span id="cb432-2"><a href="nested-designs.html#cb432-2" tabindex="-1"></a></span>
+<span id="cb432-3"><a href="nested-designs.html#cb432-3" tabindex="-1"></a><span class="fu">eta_squared</span>(mod1)</span></code></pre></div>
+<pre><code>## # Effect Size for ANOVA (Type I)
+## 
+## Parameter                | η² (partial) |       95% CI
+## ------------------------------------------------------
+## spiritType.f             |         0.11 | [0.05, 1.00]
+## spiritType.f:brandSprt.f |         0.14 | [0.06, 1.00]
+## 
+## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
+<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb434-1"><a href="nested-designs.html#cb434-1" tabindex="-1"></a><span class="fu">eta_squared</span>(mod1, <span class="at">partial=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## # Effect Size for ANOVA (Type I)
+## 
+## Parameter                |   η² |       95% CI
+## ----------------------------------------------
+## spiritType.f             | 0.10 | [0.04, 1.00]
+## spiritType.f:brandSprt.f | 0.13 | [0.05, 1.00]
+## 
+## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
+<p>There is evidence for differences among the <span class="math inline">\(a=3\)</span> types of spirits.
+The differences between measured and reported proofs are significantly higher for Cachaca <span class="math inline">\((i=3)\)</span> than for Whisky <span class="math inline">\((i=2)\)</span> and for Vodka <span class="math inline">\((i=1)\)</span>.</p>
+<p>There are also differences among brands within spirits types. In particular, brands 5 and 6 (within Whisky) are significantly higher than brand 4.
+<span class="math display">\[\nabla \]</span>
+When factor A is fixed and B is random, we would like to compare the levels of factor A, and estimate the variance for factor B. The error term for factor A is now <span class="math inline">\(MSB(A)\)</span> as opposed to <span class="math inline">\(MSE\)</span>.</p>
+<p><span class="math display">\[
+H_0^A: \alpha_1=\cdots = \alpha_a=0 \qquad
+TS: F_A^*=\frac{MSA}{MSB(A)}   \qquad
+RR: F_A^* \geq F_{1-\alpha;a-1,a(b-1)}
+\]</span>
+The estimators of the population means for levels of factor A
+and their properties are given below.</p>
+<p><span class="math display">\[
+E\left\{\overline{Y}_{i\bullet\bullet}\right\}=\mu_i=
+\mu_{\bullet\bullet}+\alpha_i   \qquad
+V\left\{\overline{Y}_{i\bullet\bullet}\right\}=
+\frac{\sigma^2+\sigma_{\beta(\alpha)}^2}{bn}
+\qquad
+\hat{V}\left\{\overline{Y}_{i\bullet\bullet}\right\}=\frac{MSB(A)}{bn}
+\]</span></p>
+<p>For Tukey’s method, relative to the fixed effects case, we replace <span class="math inline">\(MSE\)</span> with <span class="math inline">\(MSB(A)\)</span> and adjust the degrees of freedom.</p>
+<p><span class="math display">\[
+HSD = q_{1-\alpha;a,a(b-1)}\sqrt{\frac{MSB(A)}{bn}}
+\]</span>
+<span class="math display">\[
+(1-\alpha)100\% \mbox{ CI for } \quad \alpha_i-\alpha_{i&#39;}:
+\qquad
+\left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i&#39;\bullet\bullet}
+\right) \pm HSD
+\]</span>
+A point estimate for the variance among the levels of factor A and its corresponding approximate Confidence Interval based on Satterthwaite’s approximation are given below. First, we test whether the variance component for factor B is 0.</p>
+<p><span class="math display">\[
+H_0^{B(A)}:\sigma_{\beta(\alpha)}^2=0 \qquad
+TS: F_{B(A)}^*=\frac{MSB(A)}{MSE}   \qquad
+RR: F_{B(A)}^* \geq F_{1-\alpha;a(b-1),ab(n-1)}
+\]</span>
+<span class="math display">\[
+E\{MSB(A)\}=\sigma^2+n\sigma_{\beta(\alpha)}^2 \qquad E\{MSE\}=\sigma^2
+\quad \Rightarrow \quad s_{\beta(\alpha)}^2=\frac{MSB(A)-MSE}{n}
+\]</span>
+<span class="math display">\[
+df_{\beta(\alpha)} = \frac{\left(s_{\beta(\alpha)}^2\right)^2}{
+\left[\frac{\left(\frac{1}{n}MSB(A)\right)^2}{a(b-1)} +
+\frac{\left(-\frac{1}{n}MSE\right)^2}{ab(n-1)} \right]
+}
+\]</span>
+<span class="math display">\[
+\mbox{Approximate } (1-\alpha)100\% \mbox{ CI for }
+\sigma_{\beta(\alpha)}^2: \quad
+\left[
+\frac{df_{\beta(\alpha)}s_{\beta(\alpha)}^2}{
+\chi_{1-\alpha/2; df_{\beta(\alpha)}}^2},
+\frac{df_{\beta(\alpha)}s_{\beta(\alpha)}^2}{
+\chi_{\alpha/2; df_{\beta(\alpha)}}^2}
+\right]
+\]</span></p>
+<p><strong>Example 11.2 - Momentum of Animal Traps</strong></p>
+<p>A study compared <span class="math inline">\(a=8\)</span> models of animal traps in terms of momentum
+<span class="citation">(<a href="#ref-cook_1989">Cook and Proulx 1989</a>)</span>. Within each model, <span class="math inline">\(b=3\)</span> traps were built. Each trap was measured <span class="math inline">\(n=10\)</span> times. We will treat the models as a fixed factor, and the traps within models as a random factor (any number could have been assembled for each model). The response measured was the momentum at HDISP (when both jaws displayed half way). The response has been multiplied by 100 to avoid small variance estimates.</p>
+<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="nested-designs.html#cb436-1" tabindex="-1"></a>at <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/animal_trap.csv&quot;</span>)</span>
+<span id="cb436-2"><a href="nested-designs.html#cb436-2" tabindex="-1"></a><span class="fu">head</span>(at); <span class="fu">tail</span>(at)</span></code></pre></div>
+<pre><code>##   trapGrp model trapModel momentum
+## 1       1     1        11  0.51423
+## 2       1     1        11  0.53202
+## 3       1     1        11  0.51550
+## 4       1     1        11  0.46825
+## 5       1     1        11  0.48496
+## 6       1     1        11  0.51743</code></pre>
+<pre><code>##     trapGrp model trapModel momentum
+## 235      24     8        83  0.92003
+## 236      24     8        83  0.91039
+## 237      24     8        83  0.95544
+## 238      24     8        83  0.84232
+## 239      24     8        83  0.92145
+## 240      24     8        83  0.87547</code></pre>
+<div class="sourceCode" id="cb439"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb439-1"><a href="nested-designs.html#cb439-1" tabindex="-1"></a>at<span class="sc">$</span>model.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(at<span class="sc">$</span>model)</span>
+<span id="cb439-2"><a href="nested-designs.html#cb439-2" tabindex="-1"></a>at<span class="sc">$</span>trapModel.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(at<span class="sc">$</span>trapModel)</span>
+<span id="cb439-3"><a href="nested-designs.html#cb439-3" tabindex="-1"></a>at<span class="sc">$</span>Y <span class="ot">&lt;-</span> <span class="dv">100</span><span class="sc">*</span>at<span class="sc">$</span>momentum</span>
+<span id="cb439-4"><a href="nested-designs.html#cb439-4" tabindex="-1"></a></span>
+<span id="cb439-5"><a href="nested-designs.html#cb439-5" tabindex="-1"></a><span class="fu">plot</span>(at<span class="sc">$</span>Y <span class="sc">~</span> at<span class="sc">$</span>model, <span class="at">pch=</span><span class="dv">16</span>, <span class="at">col=</span>at<span class="sc">$</span>trapModel, <span class="at">cex=</span><span class="fl">0.6</span>)</span></code></pre></div>
+<p><img src="bookdownproj_STA4211Notes1_files/figure-html/ch1102-1.png" width="672" /></p>
+<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb440-1"><a href="nested-designs.html#cb440-1" tabindex="-1"></a>A_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(at<span class="sc">$</span>Y, at<span class="sc">$</span>model.f, mean))</span>
+<span id="cb440-2"><a href="nested-designs.html#cb440-2" tabindex="-1"></a>BA_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(at<span class="sc">$</span>Y, at<span class="sc">$</span>trapModel.f, mean))</span>
+<span id="cb440-3"><a href="nested-designs.html#cb440-3" tabindex="-1"></a>all_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(at<span class="sc">$</span>Y)</span>
+<span id="cb440-4"><a href="nested-designs.html#cb440-4" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(A_mean)</span>
+<span id="cb440-5"><a href="nested-designs.html#cb440-5" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">length</span>(BA_mean) <span class="sc">/</span> a</span>
+<span id="cb440-6"><a href="nested-designs.html#cb440-6" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(at<span class="sc">$</span>Y) <span class="sc">/</span> (a<span class="sc">*</span>b)</span>
+<span id="cb440-7"><a href="nested-designs.html#cb440-7" tabindex="-1"></a></span>
+<span id="cb440-8"><a href="nested-designs.html#cb440-8" tabindex="-1"></a>Ybar_i.. <span class="ot">&lt;-</span> <span class="fu">rep</span>(A_mean, <span class="at">each=</span>b<span class="sc">*</span>n)</span>
+<span id="cb440-9"><a href="nested-designs.html#cb440-9" tabindex="-1"></a>Ybar_ij. <span class="ot">&lt;-</span> <span class="fu">rep</span>(BA_mean, <span class="at">each=</span>n)</span>
+<span id="cb440-10"><a href="nested-designs.html#cb440-10" tabindex="-1"></a>Ybar_... <span class="ot">&lt;-</span> <span class="fu">rep</span>(all_mean, a<span class="sc">*</span>b<span class="sc">*</span>n)</span>
+<span id="cb440-11"><a href="nested-designs.html#cb440-11" tabindex="-1"></a></span>
+<span id="cb440-12"><a href="nested-designs.html#cb440-12" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_i..<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_A <span class="ot">&lt;-</span> a<span class="dv">-1</span>; MSA <span class="ot">&lt;-</span> SSA<span class="sc">/</span>df_A</span>
+<span id="cb440-13"><a href="nested-designs.html#cb440-13" tabindex="-1"></a>SSBA <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_ij.<span class="sc">-</span>Ybar_i..)<span class="sc">^</span><span class="dv">2</span>); df_BA <span class="ot">&lt;-</span> a<span class="sc">*</span>(b<span class="dv">-1</span>); MSBA <span class="ot">&lt;-</span> SSBA<span class="sc">/</span>df_BA</span>
+<span id="cb440-14"><a href="nested-designs.html#cb440-14" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> <span class="fu">sum</span>((at<span class="sc">$</span>Y<span class="sc">-</span>Ybar_ij.)<span class="sc">^</span><span class="dv">2</span>); df_E <span class="ot">&lt;-</span> a<span class="sc">*</span>b<span class="sc">*</span>(n<span class="dv">-1</span>); MSE <span class="ot">&lt;-</span> SSE<span class="sc">/</span>df_E</span>
+<span id="cb440-15"><a href="nested-designs.html#cb440-15" tabindex="-1"></a>SSTO <span class="ot">&lt;-</span> <span class="fu">sum</span>((at<span class="sc">$</span>Y<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_TO <span class="ot">&lt;-</span> a<span class="sc">*</span>b<span class="sc">*</span>n<span class="dv">-1</span></span>
+<span id="cb440-16"><a href="nested-designs.html#cb440-16" tabindex="-1"></a></span>
+<span id="cb440-17"><a href="nested-designs.html#cb440-17" tabindex="-1"></a>aov.out1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_A,SSA,MSA,MSA<span class="sc">/</span>MSBA,<span class="fu">qf</span>(.<span class="dv">95</span>,df_A,df_BA),<span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSA<span class="sc">/</span>MSBA,df_A,df_BA),SSA<span class="sc">/</span>SSTO, SSA<span class="sc">/</span>(SSA<span class="sc">+</span>SSE))</span>
+<span id="cb440-18"><a href="nested-designs.html#cb440-18" tabindex="-1"></a>aov.out2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_BA,SSBA,MSBA,MSBA<span class="sc">/</span>MSE,<span class="fu">qf</span>(.<span class="dv">95</span>,df_BA,df_E),</span>
+<span id="cb440-19"><a href="nested-designs.html#cb440-19" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSBA<span class="sc">/</span>MSE,df_BA,df_E),SSBA<span class="sc">/</span>SSTO,SSBA<span class="sc">/</span>(SSBA<span class="sc">+</span>SSE))</span>
+<span id="cb440-20"><a href="nested-designs.html#cb440-20" tabindex="-1"></a>aov.out3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_E, SSE, MSE,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb440-21"><a href="nested-designs.html#cb440-21" tabindex="-1"></a>aov.out4 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_TO,SSTO,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb440-22"><a href="nested-designs.html#cb440-22" tabindex="-1"></a>aov.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(aov.out1,aov.out2,aov.out3,aov.out4)</span>
+<span id="cb440-23"><a href="nested-designs.html#cb440-23" tabindex="-1"></a><span class="fu">colnames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;df&quot;</span>,<span class="st">&quot;SS&quot;</span>,<span class="st">&quot;MS&quot;</span>,<span class="st">&quot;F*&quot;</span>,<span class="st">&quot;F(.95)&quot;</span>,<span class="st">&quot;P(&gt;F*)&quot;</span>,<span class="st">&quot;eta^2&quot;</span>, <span class="st">&quot;Part eta^2&quot;</span>)</span>
+<span id="cb440-24"><a href="nested-designs.html#cb440-24" tabindex="-1"></a><span class="fu">rownames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Model&quot;</span>,<span class="st">&quot;Trap(Model)&quot;</span>,<span class="st">&quot;Error&quot;</span>,<span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb440-25"><a href="nested-designs.html#cb440-25" tabindex="-1"></a><span class="fu">round</span>(aov.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##              df        SS        MS      F* F(.95) P(&gt;F*)  eta^2 Part eta^2
+## Model         7 35845.161 5120.7372 48.6523 2.6572      0 0.9013     0.9411
+## Trap(Model)  16  1684.028  105.2518 10.1408 1.6905      0 0.0423     0.4290
+## Error       216  2241.867   10.3790      NA     NA     NA     NA         NA
+## Total       239 39771.056        NA      NA     NA     NA     NA         NA</code></pre>
+<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb442-1"><a href="nested-designs.html#cb442-1" tabindex="-1"></a>HSD_A <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(.<span class="dv">95</span>,a,df_BA)<span class="sc">*</span><span class="fu">sqrt</span>(MSBA<span class="sc">/</span>(b<span class="sc">*</span>n))</span>
+<span id="cb442-2"><a href="nested-designs.html#cb442-2" tabindex="-1"></a></span>
+<span id="cb442-3"><a href="nested-designs.html#cb442-3" tabindex="-1"></a>HSD_A.out <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">8</span><span class="sc">*</span>a<span class="sc">*</span>(a<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">8</span>)</span>
+<span id="cb442-4"><a href="nested-designs.html#cb442-4" tabindex="-1"></a>row_A.count <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb442-5"><a href="nested-designs.html#cb442-5" tabindex="-1"></a></span>
+<span id="cb442-6"><a href="nested-designs.html#cb442-6" tabindex="-1"></a><span class="cf">for</span> (i1 <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>a) {</span>
+<span id="cb442-7"><a href="nested-designs.html#cb442-7" tabindex="-1"></a>  <span class="cf">for</span> (i2 <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(i1<span class="dv">-1</span>)) {</span>
+<span id="cb442-8"><a href="nested-designs.html#cb442-8" tabindex="-1"></a>    row_A.count <span class="ot">&lt;-</span> row_A.count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb442-9"><a href="nested-designs.html#cb442-9" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">1</span>] <span class="ot">&lt;-</span> i1</span>
+<span id="cb442-10"><a href="nested-designs.html#cb442-10" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">2</span>] <span class="ot">&lt;-</span> i2</span>
+<span id="cb442-11"><a href="nested-designs.html#cb442-11" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">3</span>] <span class="ot">&lt;-</span> A_mean[i1]</span>
+<span id="cb442-12"><a href="nested-designs.html#cb442-12" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">4</span>] <span class="ot">&lt;-</span> A_mean[i2]</span>
+<span id="cb442-13"><a href="nested-designs.html#cb442-13" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">5</span>] <span class="ot">&lt;-</span> A_mean[i1]<span class="sc">-</span>A_mean[i2]</span>
+<span id="cb442-14"><a href="nested-designs.html#cb442-14" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">6</span>] <span class="ot">&lt;-</span> (A_mean[i1]<span class="sc">-</span>A_mean[i2])<span class="sc">-</span>HSD_A</span>
+<span id="cb442-15"><a href="nested-designs.html#cb442-15" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">7</span>] <span class="ot">&lt;-</span> (A_mean[i1]<span class="sc">-</span>A_mean[i2])<span class="sc">+</span>HSD_A</span>
+<span id="cb442-16"><a href="nested-designs.html#cb442-16" tabindex="-1"></a>    HSD_A.out[row_A.count,<span class="dv">8</span>] <span class="ot">&lt;-</span> </span>
+<span id="cb442-17"><a href="nested-designs.html#cb442-17" tabindex="-1"></a>      <span class="dv">1</span><span class="sc">-</span><span class="fu">ptukey</span>(<span class="fu">abs</span>((A_mean[i1]<span class="sc">-</span>A_mean[i2])<span class="sc">/</span><span class="fu">sqrt</span>(MSBA<span class="sc">/</span>(b<span class="sc">*</span>n))),a,df_BA)</span>
+<span id="cb442-18"><a href="nested-designs.html#cb442-18" tabindex="-1"></a>  }</span>
+<span id="cb442-19"><a href="nested-designs.html#cb442-19" tabindex="-1"></a>}</span>
+<span id="cb442-20"><a href="nested-designs.html#cb442-20" tabindex="-1"></a><span class="fu">colnames</span>(HSD_A.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;i&quot;</span>,<span class="st">&quot;i&#39;&quot;</span>,<span class="st">&quot;Ybar_i&quot;</span>,<span class="st">&quot;Ybar_i&#39;&quot;</span>,<span class="st">&quot;Diff&quot;</span>,<span class="st">&quot;LB&quot;</span>,<span class="st">&quot;UB&quot;</span>,<span class="st">&quot;p adj&quot;</span>)</span>
+<span id="cb442-21"><a href="nested-designs.html#cb442-21" tabindex="-1"></a><span class="fu">round</span>(HSD_A.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##       i i&#39;  Ybar_i Ybar_i&#39;    Diff      LB      UB  p adj
+##  [1,] 2  1 55.8800 53.8400  2.0400 -7.1310 11.2110 0.9925
+##  [2,] 3  1 59.1267 53.8400  5.2866 -3.8843 14.4576 0.5132
+##  [3,] 3  2 59.1267 55.8800  3.2466 -5.9243 12.4176 0.9124
+##  [4,] 4  1 68.8299 53.8400 14.9899  5.8189 24.1609 0.0007
+##  [5,] 4  2 68.8299 55.8800 12.9499  3.7789 22.1209 0.0032
+##  [6,] 4  3 68.8299 59.1267  9.7033  0.5323 18.8742 0.0342
+##  [7,] 5  1 77.1966 53.8400 23.3566 14.1856 32.5276 0.0000
+##  [8,] 5  2 77.1966 55.8800 21.3166 12.1456 30.4876 0.0000
+##  [9,] 5  3 77.1966 59.1267 18.0700  8.8990 27.2409 0.0001
+## [10,] 5  4 77.1966 68.8299  8.3667 -0.8043 17.5377 0.0874
+## [11,] 6  1 81.1433 53.8400 27.3033 18.1323 36.4742 0.0000
+## [12,] 6  2 81.1433 55.8800 25.2633 16.0923 34.4342 0.0000
+## [13,] 6  3 81.1433 59.1267 22.0166 12.8457 31.1876 0.0000
+## [14,] 6  4 81.1433 68.8299 12.3134  3.1424 21.4843 0.0051
+## [15,] 6  5 81.1433 77.1966  3.9467 -5.2243 13.1176 0.8020
+## [16,] 7  1 82.5467 53.8400 28.7066 19.5357 37.8776 0.0000
+## [17,] 7  2 82.5467 55.8800 26.6666 17.4957 35.8376 0.0000
+## [18,] 7  3 82.5467 59.1267 23.4200 14.2490 32.5910 0.0000
+## [19,] 7  4 82.5467 68.8299 13.7167  4.5458 22.8877 0.0018
+## [20,] 7  5 82.5467 77.1966  5.3500 -3.8209 14.5210 0.4993
+## [21,] 7  6 82.5467 81.1433  1.4034 -7.7676 10.5743 0.9993
+## [22,] 8  1 86.8833 53.8400 33.0433 23.8723 42.2143 0.0000
+## [23,] 8  2 86.8833 55.8800 31.0033 21.8323 40.1743 0.0000
+## [24,] 8  3 86.8833 59.1267 27.7567 18.5857 36.9276 0.0000
+## [25,] 8  4 86.8833 68.8299 18.0534  8.8824 27.2244 0.0001
+## [26,] 8  5 86.8833 77.1966  9.6867  0.5157 18.8577 0.0346
+## [27,] 8  6 86.8833 81.1433  5.7400 -3.4309 14.9110 0.4177
+## [28,] 8  7 86.8833 82.5467  4.3367 -4.8343 13.5076 0.7234</code></pre>
+<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb444-1"><a href="nested-designs.html#cb444-1" tabindex="-1"></a>s2_ba <span class="ot">&lt;-</span> (MSBA<span class="sc">-</span>MSE)<span class="sc">/</span>n</span>
+<span id="cb444-2"><a href="nested-designs.html#cb444-2" tabindex="-1"></a>df_ba <span class="ot">&lt;-</span> s2_ba<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> ((MSBA<span class="sc">/</span>n)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_BA <span class="sc">+</span> (<span class="sc">-</span>MSE<span class="sc">/</span>n)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_E)</span>
+<span id="cb444-3"><a href="nested-designs.html#cb444-3" tabindex="-1"></a>s2_ba_L <span class="ot">&lt;-</span> df_ba<span class="sc">*</span>s2_ba<span class="sc">/</span><span class="fu">qchisq</span>(<span class="dv">1</span><span class="fl">-.05</span><span class="sc">/</span><span class="dv">2</span>,df_ba)</span>
+<span id="cb444-4"><a href="nested-designs.html#cb444-4" tabindex="-1"></a>s2_ba_U <span class="ot">&lt;-</span> df_ba<span class="sc">*</span>s2_ba<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">05</span><span class="sc">/</span><span class="dv">2</span>,df_ba)</span>
+<span id="cb444-5"><a href="nested-designs.html#cb444-5" tabindex="-1"></a>s2_L <span class="ot">&lt;-</span> SSE<span class="sc">/</span><span class="fu">qchisq</span>(<span class="dv">1</span><span class="fl">-.05</span><span class="sc">/</span><span class="dv">2</span>,df_E)</span>
+<span id="cb444-6"><a href="nested-designs.html#cb444-6" tabindex="-1"></a>s2_U <span class="ot">&lt;-</span> SSE<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">05</span><span class="sc">/</span><span class="dv">2</span>,df_E)</span>
+<span id="cb444-7"><a href="nested-designs.html#cb444-7" tabindex="-1"></a></span>
+<span id="cb444-8"><a href="nested-designs.html#cb444-8" tabindex="-1"></a>s2.out1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_ba, s2_ba, s2_ba_L, s2_ba_U)</span>
+<span id="cb444-9"><a href="nested-designs.html#cb444-9" tabindex="-1"></a>s2.out2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_E, MSE, s2_L, s2_U)</span>
+<span id="cb444-10"><a href="nested-designs.html#cb444-10" tabindex="-1"></a>s2.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(s2.out1, s2.out2)</span>
+<span id="cb444-11"><a href="nested-designs.html#cb444-11" tabindex="-1"></a><span class="fu">colnames</span>(s2.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;s^2&quot;</span>, <span class="st">&quot;LB&quot;</span>, <span class="st">&quot;UB&quot;</span>)</span>
+<span id="cb444-12"><a href="nested-designs.html#cb444-12" tabindex="-1"></a><span class="fu">rownames</span>(s2.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Trap(Model)&quot;</span>, <span class="st">&quot;Error&quot;</span>)</span>
+<span id="cb444-13"><a href="nested-designs.html#cb444-13" tabindex="-1"></a><span class="fu">round</span>(s2.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##                   df     s^2     LB      UB
+## Trap(Model)  12.9907  9.4873 4.9852 24.6343
+## Error       216.0000 10.3790 8.6693 12.6524</code></pre>
+<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb446-1"><a href="nested-designs.html#cb446-1" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Y <span class="sc">~</span> model.f <span class="sc">+</span> model.f<span class="sc">/</span>trapModel.f, <span class="at">data=</span>at)</span>
+<span id="cb446-2"><a href="nested-designs.html#cb446-2" tabindex="-1"></a><span class="fu">anova</span>(mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Y
+##                      Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## model.f               7  35845  5120.7 493.374 &lt; 2.2e-16 ***
+## model.f:trapModel.f  16   1684   105.3  10.141 &lt; 2.2e-16 ***
+## Residuals           216   2242    10.4                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb448-1"><a href="nested-designs.html#cb448-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb448-2"><a href="nested-designs.html#cb448-2" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(Y <span class="sc">~</span> model.f <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>model.f<span class="sc">:</span>trapModel.f), <span class="at">data=</span>at)</span>
+<span id="cb448-3"><a href="nested-designs.html#cb448-3" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: Y ~ model.f + (1 | model.f:trapModel.f)
+##    Data: at
+## 
+## REML criterion at convergence: 1269.7
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -1.92671 -0.74501 -0.08267  0.72379  2.48273 
+## 
+## Random effects:
+##  Groups              Name        Variance Std.Dev.
+##  model.f:trapModel.f (Intercept)  9.487   3.080   
+##  Residual                        10.379   3.222   
+## Number of obs: 240, groups:  model.f:trapModel.f, 24
+## 
+## Fixed effects:
+##             Estimate Std. Error       df t value Pr(&gt;|t|)    
+## (Intercept)  70.6808     0.6622  16.0000 106.731  &lt; 2e-16 ***
+## model.f1    -16.8408     1.7521  16.0000  -9.612 4.75e-08 ***
+## model.f2    -14.8008     1.7521  16.0000  -8.447 2.72e-07 ***
+## model.f3    -11.5542     1.7521  16.0000  -6.594 6.17e-06 ***
+## model.f4     -1.8509     1.7521  16.0000  -1.056  0.30648    
+## model.f5      6.5158     1.7521  16.0000   3.719  0.00187 ** 
+## model.f6     10.4625     1.7521  16.0000   5.971 1.96e-05 ***
+## model.f7     11.8658     1.7521  16.0000   6.772 4.48e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##          (Intr) mdl.f1 mdl.f2 mdl.f3 mdl.f4 mdl.f5 mdl.f6
+## model.f1  0.000                                          
+## model.f2  0.000 -0.143                                   
+## model.f3  0.000 -0.143 -0.143                            
+## model.f4  0.000 -0.143 -0.143 -0.143                     
+## model.f5  0.000 -0.143 -0.143 -0.143 -0.143              
+## model.f6  0.000 -0.143 -0.143 -0.143 -0.143 -0.143       
+## model.f7  0.000 -0.143 -0.143 -0.143 -0.143 -0.143 -0.143</code></pre>
+<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb450-1"><a href="nested-designs.html#cb450-1" tabindex="-1"></a><span class="fu">anova</span>(mod2)</span></code></pre></div>
+<pre><code>## Type III Analysis of Variance Table with Satterthwaite&#39;s method
+##         Sum Sq Mean Sq NumDF DenDF F value    Pr(&gt;F)    
+## model.f 3534.7  504.96     7    16  48.652 1.319e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>There are many differences among the 28 pairs of trap models.
+Also, within models there is relatively high variation among the individual traps.
+<span class="math display">\[ \nabla \]</span></p>
+<p>When factors A and B are both random, we are generally interested in estimating their variance components and testing whether they are 0.</p>
+<p><span class="math display">\[
+H_0^A:\sigma_{\alpha}^2=0  \qquad
+TS:F_A^*=\frac{MSA}{MSB(A)} \qquad
+RR:F_A^* \geq F_{1-\alpha;a-1,a(b-1)}
+\]</span></p>
+<p><span class="math display">\[
+E\{MSA\}=\sigma^2 + n\sigma_{\beta(\alpha)}^2 + bn\sigma_{\alpha}^2
+\qquad
+E\{MSB(A)\}=\sigma^2 + n\sigma_{\beta(\alpha)}^2
+\]</span>
+<span class="math display">\[
+s_{\alpha}^2 = \frac{MSA-MSB(A)}{bn}
+\qquad
+df_{\alpha}=\frac{\left(s_{\alpha}^2\right)^2}{
+\left[\frac{\left(\frac{1}{bn}MSA\right)^2}{a-1} +
+\frac{\left(-\frac{1}{bn}MSB(A)\right)^2}{a(b-1)} \right]
+}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Approximate } (1-\alpha)100\% \mbox{ CI for }
+\sigma_{\alpha}^2: \quad
+\left[
+\frac{df_{\alpha}s_{\alpha}^2}{
+\chi_{1-\alpha/2; df_{\alpha}}^2},
+\frac{df_{\alpha}s_{\alpha}^2}{
+\chi_{\alpha/2; df_{\alpha}}^2}
+\right]
+\]</span>
+The test and Confidence Interval for <span class="math inline">\(\sigma_{\beta(\alpha)}^2\)</span> are
+the same for the random effects model as for the mixed effects model.</p>
+<p><strong>Example 11.3 - Measurements on Semiconductor Wafers</strong></p>
+<p>An instructional paper described making measurements on semiconducter wafers <span class="citation">(<a href="#ref-jensen_2002">Jensen 2002</a>)</span>. There were <span class="math inline">\(a=20\)</span> lots (batches) sampled, within each lot, there were <span class="math inline">\(b=2\)</span> wafers sampled, and each wafer was measured at <span class="math inline">\(n=9\)</span> locations (replicates). The response variable was not given for proprietary reasons. In this example, we treat lot and wafer(lot) as random factors. There are two wafer variables, <strong>wafer1</strong> takes on the values
+1 and 2 within each lot, <strong>wafer2</strong> gives each wafer a unique value (1-40) and is less risky of creating an error in computing.</p>
+<pre><code>##   lotNum wafer wafer1 replicate       Y
+## 1      1     1      1         1 181.247
+## 2      1     1      1         2 181.280
+## 3      1     1      1         3 185.021
+## 4      1     1      1         4 180.144
+## 5      1     1      1         5 192.570
+## 6      1     1      1         6 178.741</code></pre>
+<pre><code>##     lotNum wafer wafer1 replicate       Y
+## 355     20     2     40         4 161.783
+## 356     20     2     40         5 160.013
+## 357     20     2     40         6 160.981
+## 358     20     2     40         7 162.384
+## 359     20     2     40         8 163.720
+## 360     20     2     40         9 161.716</code></pre>
+<p><img src="bookdownproj_STA4211Notes1_files/figure-html/ch1103-1.png" width="672" /></p>
+<pre><code>##             df        SS       MS     F* F(.95) P(&gt;F*)  eta^2 Part eta^2
+## Lot         19 14050.871 739.5195 7.5475 2.1370      0 0.6358     0.6976
+## Wafer(Lot)  20  1959.633  97.9817 5.1488 1.6035      0 0.0887     0.2435
+## Error      320  6089.584  19.0299     NA     NA     NA     NA         NA
+## Total      359 22100.088       NA     NA     NA     NA     NA         NA</code></pre>
+<pre><code>##                  df     s^2      LB      UB
+## Lot         14.0642 35.6410 19.1268 88.4214
+## Wafer(Lot)  12.9551  8.7724  4.6061 22.8150
+## Error      320.0000 19.0299 16.3941 22.3605</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Y
+##                    Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## lotNum.f           19 14050.9  739.52 38.8608 &lt; 2.2e-16 ***
+## lotNum.f:wafer1.f  20  1959.6   97.98  5.1488 3.708e-11 ***
+## Residuals         320  6089.6   19.03                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: Y ~ 1 + (1 | lotNum.f) + (1 | lotNum.f:wafer1.f)
+##    Data: scq
+## 
+## REML criterion at convergence: 2184.6
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.2897 -0.5826 -0.1729  0.4287  3.7529 
+## 
+## Random effects:
+##  Groups            Name        Variance Std.Dev.
+##  lotNum.f:wafer1.f (Intercept)  8.772   2.962   
+##  lotNum.f          (Intercept) 35.641   5.970   
+##  Residual                      19.030   4.362   
+## Number of obs: 360, groups:  lotNum.f:wafer1.f, 40; lotNum.f, 20
+## 
+## Fixed effects:
+##             Estimate Std. Error      df t value Pr(&gt;|t|)    
+## (Intercept)  174.342      1.433  19.000   121.6   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The largest source of variation is among lots <span class="math inline">\(\left(s_{\alpha}^2=35.64\right)\)</span>,
+followed by error (within wafer) <span class="math inline">\(\left(s^2=19.03\right)\)</span>, followed by between wafers within lots <span class="math inline">\(\left(s_{\beta(\alpha)}^2=8.77\right)\)</span>.</p>
+<p><span class="math display">\[ \nabla \]</span></p>
+</div>
+<div id="repeated-measures-design" class="section level2 hasAnchor" number="12.3">
+<h2><span class="header-section-number">12.3</span> Repeated Measures Design<a href="nested-designs.html#repeated-measures-design" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section we cover a second type of repeated measures design where subjects are randomized to treatments as in the Completely Randomized Design, then are measured at multiple time points. Recall in the chapter on block designs, there was a repeated measures design where each subject (block) received each treatment. In this case, each subject receives only one of the treatments.</p>
+<p><strong>Note that the notation used here is not the same as Kutner, et al</strong>.</p>
+<div id="model-structure" class="section level3 hasAnchor" number="12.3.1">
+<h3><span class="header-section-number">12.3.1</span> Model Structure<a href="nested-designs.html#model-structure" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The elements are described below for the case with a single treatment factor (it can be extended to multiple factors) and a balanced design.</p>
+<ul>
+<li><strong>Treatments</strong> - The primary factor of interest, with <span class="math inline">\(a\)</span> (fixed) levels.</li>
+<li><strong>Subjects</strong> - Individuals included in the experiment <span class="math inline">\(b\)</span> (random) units per treatment.</li>
+<li><strong>Time Points</strong> - When the measurements are obtained on each subject, with <span class="math inline">\(c\)</span> (fixed) time points per individual.</li>
+</ul>
+<p>We will use <span class="math inline">\(i\)</span> to represent treatment, <span class="math inline">\(j\)</span> represent the subject within treatment and <span class="math inline">\(k\)</span> to represent time point. The model is given below.</p>
+<p><span class="math display">\[
+Y_{ijk}=\mu_{\bullet\bullet\bullet} + \alpha_i + \beta_{j(i)} +
+\gamma_k + (\alpha\gamma)_{ik} + \epsilon_{ijk}  \quad
+i=1,\ldots,a; \quad j=1,\ldots,b; \quad k=1,\ldots,c
+\]</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^a\alpha_i=\sum_{k=1}^c\gamma_k=
+\sum_{i=1}^a(\alpha\gamma)_{ik}=\sum_{k=1}^c(\alpha\gamma)_{ik}=0
+\]</span>
+<span class="math display">\[
+\beta_{j(i)} \sim NID\left(0,\sigma_{\beta(\alpha)}^2\right) \qquad
+\epsilon_{ijk} \sim NID\left(0,\sigma^2\right) \qquad
+\left\{\beta_{j(i)}\right\} \bot
+\left\{\epsilon_{ijk}\right\}
+\]</span></p>
+<p><span class="math display">\[
+E\left\{Y_{ijk}\right\}=
+\mu_{\bullet\bullet\bullet} + \alpha_i + \gamma_k + (\alpha\gamma)_{ik}
+\qquad
+V\left\{Y_{ijk}\right\}=\sigma_{\beta(\alpha)}^2+\sigma^2
+\]</span>
+<span class="math display">\[
+\mbox{COV}\left\{Y_{ijk},Y_{i&#39;j&#39;k&#39;}\right\} =
+\left\{ \begin{array}{r@{\quad:\quad}l}
+   \sigma_{\beta(\alpha)}^2 +  \sigma^2 &amp; i=i&#39;,j=j&#39;,k=k&#39; \\
+    \sigma_{\beta(\alpha)}^2  &amp; i=i&#39;, j=j&#39;,k\ne k&#39; \\
+    0 &amp; \mbox{otherwise}\\
+    \end{array} \right.
+\]</span>
+The variance-covariance within subjects has <span class="math inline">\(\sigma_{\beta(\alpha)}^2 +  \sigma^2\)</span> on the main diagonal and <span class="math inline">\(\sigma_{\beta(\alpha)}^2\)</span>
+on the off diagonals. In practice, particularly when there are many time points, this structure is too simple and a more complex structure can be fit.</p>
+<p><span class="math display">\[
+\mbox{COV}\left\{
+\begin{bmatrix}
+Y_{ij1} \\ Y_{ij2} \\ \vdots \\Y_{ijc} \\
+\end{bmatrix}
+\right\}
+=
+\begin{bmatrix}
+\sigma_{\beta(\alpha)}^2 +  \sigma^2 &amp;
+\sigma_{\beta(\alpha)}^2  &amp;  \cdots &amp;
+\sigma_{\beta(\alpha)}^2 \\
+\sigma_{\beta(\alpha)}^2 &amp;
+\sigma_{\beta(\alpha)}^2 +  \sigma^2 &amp;
+\cdots &amp; \sigma_{\beta(\alpha)}^2 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\sigma_{\beta(\alpha)}^2 &amp; \sigma_{\beta(\alpha)}^2 &amp;
+\cdots &amp; \sigma_{\beta(\alpha)}^2 +  \sigma^2\\
+\end{bmatrix}
+\]</span></p>
+</div>
+<div id="analysis-of-variance-and-f-tests" class="section level3 hasAnchor" number="12.3.2">
+<h3><span class="header-section-number">12.3.2</span> Analysis of Variance and <span class="math inline">\(F\)</span>-tests<a href="nested-designs.html#analysis-of-variance-and-f-tests" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>For the various factors, we have he following sums of squares, degrees of freedom, and expected mean squares.</p>
+<p><span class="math display">\[
+\mbox{Treatments:} \quad
+SSA = bc\sum_{i=1}^a\left(\overline{Y}_{i\bullet\bullet}-
+\overline{Y}_{\bullet\bullet\bullet}\right)^2 \qquad  df_A=a-1
+\]</span>
+<span class="math display">\[
+E\{MSA\}=\sigma^2 + c\sigma_{\beta(\alpha)}^2 + \frac{bc\sum_{i=1}^a\alpha_i^2}{a-1}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Subjects(Trts):} \quad
+SSB(A) = c\sum_{i=1}^a\sum_{j=1}^b \left(
+\overline{Y}_{ij\bullet}-\overline{Y}_{i\bullet\bullet}\right)^2
+\qquad
+df_{B(A)}=a(b-1)
+\]</span>
+<span class="math display">\[
+E\{MSB(A)\}=\sigma^2 + c\sigma_{\beta(\alpha)}^2
+\]</span>
+<span class="math display">\[
+\mbox{Time:} \quad
+SSC=ab\sum_{k=1}^c
+\left(\overline{Y}_{\bullet\bullet k}-
+\overline{Y}_{\bullet\bullet\bullet}\right)^2 \qquad  df_C=c-1
+\]</span>
+<span class="math display">\[
+E\{MSC\} = \sigma^2 + \frac{ab\sum_{k=1}^c\gamma_k^2}{c-1}
+\]</span>
+<span class="math display">\[
+\mbox{TreatmentxTime:} \quad SSAC=
+b\sum_{i=1}^a\sum_{k=1}^c\left(
+\overline{Y}_{i\bullet k}-
+\overline{Y}_{i\bullet\bullet}-
+\overline{Y}_{\bullet\bullet k}+
+\overline{Y}_{\bullet\bullet\bullet}\right)^2
+\]</span>
+<span class="math display">\[
+df_{AC}=(a-1)(c-1)  \qquad
+E\{MSAC\} =\sigma^2 +
+\frac{b\sum_{i=1}^a\sum_{k=1}^c(\alpha\gamma)_{ik}^2}{(a-1)(c-1)}
+\]</span></p>
+<p>The error sum of squares represents the Subject(Treatment)xTime interaction and has expectation <span class="math inline">\(E\{MSE\}=\sigma^2\)</span>.</p>
+<p><span class="math display">\[
+SSE=\sum_{i=1}^a\sum_{j=1}^b\sum_{k=1}^c \left(
+Y_{ijk}-\overline{Y}_{ij\bullet}-\overline{Y}_{i\bullet k}+
+\overline{Y}_{i\bullet\bullet}
+\right)^2 \qquad
+df_E = a(b-1)(c-1)
+\]</span></p>
+<p>To test for treatment effects, compare <span class="math inline">\(MSA\)</span> to <span class="math inline">\(MSB(A)\)</span>.
+To test for Time effects and TimexTreatment interaction, compare their mean squares to <span class="math inline">\(MSE\)</span>.</p>
+<p><span class="math display">\[
+H_0^A: \alpha_1=\cdots=\alpha_a
+\qquad
+TS: F_A^*=\frac{MSA}{MSB(A)} \qquad
+RR: F_A^*\geq F_{1-\alpha;a-1,a(b-1)}
+\]</span></p>
+<p><span class="math display">\[
+H_0^C:\gamma_1=\cdots =\gamma_k=0
+\qquad
+TS:F_C^*=\frac{MSC}{MSE} \qquad
+RR: F_C^* \geq F_{1-\alpha;c-1,a(b-1)(c-1)}
+\]</span>
+<span class="math display">\[
+H_0^{AC}:(\alpha\gamma)_{11}=\cdots =(\alpha\gamma)_{ac}=0
+\qquad
+TS:F_{AC}^*=\frac{MSAC}{MSE} \qquad
+RR: F_{AC}^* \geq F_{1-\alpha;(a-1)(c-1),a(b-1)(c-1)}
+\]</span>
+Depending on whether the TreatmentxTime interaction is important,
+treatments can be compared within time points (interaction important)
+or marginally (interaction unimportant).</p>
+</div>
+<div id="treatment-comparisons" class="section level3 hasAnchor" number="12.3.3">
+<h3><span class="header-section-number">12.3.3</span> Treatment Comparisons<a href="nested-designs.html#treatment-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>First, consider the case where the interaction is not important, when
+the “time effect” is consistent across treatments.
+Then we can use Tukey’s method for comparing all pairs of treatments,
+keeping in mind that for treatments, <span class="math inline">\(MSB(A)\)</span> is the error term.</p>
+<p><span class="math display">\[
+HSD = q_{1-\alpha;a,a(b-1)}\sqrt{\frac{MSB(A)}{bc}}
+\]</span>
+<span class="math display">\[
+(1-\alpha)100\% \mbox{ CI for } \alpha_i-\alpha_{i&#39;}:
+\quad
+\left(\overline{Y}_{i\bullet\bullet}-
+\overline{Y}_{i\bullet\bullet}\right) \pm HSD
+\]</span>
+When the TreatmentxTime interaction is important, we may wish to compare the treatments within the time periods. This involves taking the standard error for the difference between means within the time periods as a linear
+function of <span class="math inline">\(MSB(A)\)</span> and <span class="math inline">\(MSE\)</span> and using Satterthwaite’s approximation for the degrees of freedom.</p>
+<p><span class="math display">\[
+V\left\{\overline{Y}_{i\bullet k} -
+\overline{Y}_{i&#39;\bullet k}\right\} =
+\frac{2\left(\sigma^2+\sigma_{\beta(\alpha)}^2\right)}{b} \qquad
+E\{MSB(A)+(c-1)MSE\}=c\left(\sigma^2+\sigma_{\beta(\alpha)}^2\right)
+\]</span></p>
+<p>So if we divide <span class="math inline">\(MSB(A)+(c-1)MSE\)</span> by <span class="math inline">\(bc\)</span> and multiply by 2, this has expectation equal to the variance of the mean difference.</p>
+<p><span class="math display">\[
+\hat{V}\left\{\overline{Y}_{i\bullet k} -
+\overline{Y}_{i&#39;\bullet k}\right\} =
+\frac{2\left(MSB(A)+(c-1)MSE\right)}{bc}
+\]</span>
+<span class="math display">\[
+df^* = \frac{\left(MSB(A)+(c-1)MSE\right)^2}{
+\left[ \frac{\left(MSB(A)\right)^2}{a(b-1)} +
+\frac{\left((c-1)MSE\right)^2}{a(b-1)(c-1)} \right]
+}
+\]</span></p>
+<p>Then we can use Tukey’s method to compare all pairs of treatments within specific time points.</p>
+<p><span class="math display">\[
+HSD_k= q_{1-\alpha;a,df^*}\sqrt{\frac{MSB(A)+(c-1)MSE}{bc}}
+\]</span>
+<span class="math display">\[
+(1-\alpha)100\% \mbox{ Confidence Intervals:} \quad
+\left(\overline{Y}_{i\bullet k}-
+\overline{Y}_{i&#39;\bullet k}\right) \pm HSD_k
+\]</span>
+<strong>Example 11.4 - Treating Cats with Anxiety</strong></p>
+<p>A study was conducted to test a drug zylkene versus placebo in cats with anxiety <span class="citation">(<a href="#ref-beata_2007">Beata, Cordel, and Marlois 2007</a>)</span>. There were <span class="math inline">\(a=2\)</span> treatments (zylkene <span class="math inline">\(i=1\)</span> and placebo <span class="math inline">\(i=2\)</span>), with <span class="math inline">\(b=17\)</span> cats randomized to each treatment (34 total) and each cat was observed at each of <span class="math inline">\(c=5\)</span> time points. The response was a clinical globel impression (higher scores mean less anxiety and are better). R code and output are given below.</p>
+<div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="nested-designs.html#cb458-1" tabindex="-1"></a>caz <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/cat_zyl_uni.csv&quot;</span>)</span>
+<span id="cb458-2"><a href="nested-designs.html#cb458-2" tabindex="-1"></a><span class="fu">head</span>(caz); <span class="fu">tail</span>(caz)</span></code></pre></div>
+<pre><code>##   id weight age gender trt timepnt y
+## 1  2    4.0  67      1   0       1 9
+## 2  2    4.0  67      1   0       2 9
+## 3  2    4.0  67      1   0       3 9
+## 4  2    4.0  67      1   0       4 9
+## 5  2    4.0  67      1   0       5 9
+## 6  4    3.5  78      2   0       1 9</code></pre>
+<pre><code>##     id weight age gender trt timepnt  y
+## 165 31    3.1  90      1   1       5 23
+## 166 32    4.0  56      1   1       1  8
+## 167 32    4.0  56      1   1       2 11
+## 168 32    4.0  56      1   1       3 13
+## 169 32    4.0  56      1   1       4 14
+## 170 32    4.0  56      1   1       5 17</code></pre>
+<div class="sourceCode" id="cb461"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb461-1"><a href="nested-designs.html#cb461-1" tabindex="-1"></a>caz<span class="sc">$</span>trt.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(caz<span class="sc">$</span>trt, <span class="at">levels=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;placebo&quot;</span>, <span class="st">&quot;zylkene&quot;</span>))</span>
+<span id="cb461-2"><a href="nested-designs.html#cb461-2" tabindex="-1"></a>caz<span class="sc">$</span>timepnt.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(caz<span class="sc">$</span>timepnt)</span>
+<span id="cb461-3"><a href="nested-designs.html#cb461-3" tabindex="-1"></a>caz<span class="sc">$</span>id1.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">34</span>,<span class="at">each=</span><span class="dv">5</span>))</span>
+<span id="cb461-4"><a href="nested-designs.html#cb461-4" tabindex="-1"></a></span>
+<span id="cb461-5"><a href="nested-designs.html#cb461-5" tabindex="-1"></a></span>
+<span id="cb461-6"><a href="nested-designs.html#cb461-6" tabindex="-1"></a>A_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(caz<span class="sc">$</span>y, caz<span class="sc">$</span>trt, mean))</span>
+<span id="cb461-7"><a href="nested-designs.html#cb461-7" tabindex="-1"></a>BA_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(caz<span class="sc">$</span>y, caz<span class="sc">$</span>id1.f, mean))</span>
+<span id="cb461-8"><a href="nested-designs.html#cb461-8" tabindex="-1"></a>C_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(caz<span class="sc">$</span>y, caz<span class="sc">$</span>timepnt.f, mean))</span>
+<span id="cb461-9"><a href="nested-designs.html#cb461-9" tabindex="-1"></a>AC_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(caz<span class="sc">$</span>y,<span class="fu">list</span>(caz<span class="sc">$</span>timepnt.f,caz<span class="sc">$</span>trt.f),mean))</span>
+<span id="cb461-10"><a href="nested-designs.html#cb461-10" tabindex="-1"></a>all_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(caz<span class="sc">$</span>y)</span>
+<span id="cb461-11"><a href="nested-designs.html#cb461-11" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(A_mean)</span>
+<span id="cb461-12"><a href="nested-designs.html#cb461-12" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">length</span>(BA_mean) <span class="sc">/</span> a</span>
+<span id="cb461-13"><a href="nested-designs.html#cb461-13" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">length</span>(C_mean)</span>
+<span id="cb461-14"><a href="nested-designs.html#cb461-14" tabindex="-1"></a></span>
+<span id="cb461-15"><a href="nested-designs.html#cb461-15" tabindex="-1"></a>Ybar_i.. <span class="ot">&lt;-</span> <span class="fu">rep</span>(A_mean, <span class="at">each=</span>b<span class="sc">*</span>c)</span>
+<span id="cb461-16"><a href="nested-designs.html#cb461-16" tabindex="-1"></a>Ybar_ij. <span class="ot">&lt;-</span> <span class="fu">rep</span>(BA_mean, <span class="at">each=</span>c)</span>
+<span id="cb461-17"><a href="nested-designs.html#cb461-17" tabindex="-1"></a>Ybar_..k <span class="ot">&lt;-</span> <span class="fu">rep</span>(C_mean, <span class="at">times=</span>a<span class="sc">*</span>b)</span>
+<span id="cb461-18"><a href="nested-designs.html#cb461-18" tabindex="-1"></a>Ybar_i.k <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(AC_mean[<span class="dv">1</span><span class="sc">:</span>c],<span class="at">times=</span>b),<span class="fu">rep</span>(AC_mean[(c<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>c)], <span class="at">times=</span>b))</span>
+<span id="cb461-19"><a href="nested-designs.html#cb461-19" tabindex="-1"></a>Ybar_... <span class="ot">&lt;-</span> <span class="fu">rep</span>(all_mean, a<span class="sc">*</span>b<span class="sc">*</span>c)</span>
+<span id="cb461-20"><a href="nested-designs.html#cb461-20" tabindex="-1"></a></span>
+<span id="cb461-21"><a href="nested-designs.html#cb461-21" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_i..<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_A <span class="ot">&lt;-</span> a<span class="dv">-1</span>; MSA <span class="ot">&lt;-</span> SSA<span class="sc">/</span>df_A</span>
+<span id="cb461-22"><a href="nested-designs.html#cb461-22" tabindex="-1"></a>SSBA <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_ij.<span class="sc">-</span>Ybar_i..)<span class="sc">^</span><span class="dv">2</span>); df_BA <span class="ot">&lt;-</span> a<span class="sc">*</span>(b<span class="dv">-1</span>); MSBA <span class="ot">&lt;-</span> SSBA<span class="sc">/</span>df_BA</span>
+<span id="cb461-23"><a href="nested-designs.html#cb461-23" tabindex="-1"></a>SSC <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_..k<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_C <span class="ot">&lt;-</span> c<span class="dv">-1</span>; MSC <span class="ot">&lt;-</span> SSC<span class="sc">/</span>df_C</span>
+<span id="cb461-24"><a href="nested-designs.html#cb461-24" tabindex="-1"></a>SSAC <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_i.k<span class="sc">-</span>Ybar_i..<span class="sc">-</span>Ybar_..k<span class="sc">+</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_AC <span class="ot">&lt;-</span> (a<span class="dv">-1</span>)<span class="sc">*</span>(c<span class="dv">-1</span>)</span>
+<span id="cb461-25"><a href="nested-designs.html#cb461-25" tabindex="-1"></a>   MSAC <span class="ot">&lt;-</span> SSAC<span class="sc">/</span>df_AC</span>
+<span id="cb461-26"><a href="nested-designs.html#cb461-26" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> <span class="fu">sum</span>((caz<span class="sc">$</span>y<span class="sc">-</span>Ybar_ij.<span class="sc">-</span>Ybar_i.k<span class="sc">+</span>Ybar_i..)<span class="sc">^</span><span class="dv">2</span>); </span>
+<span id="cb461-27"><a href="nested-designs.html#cb461-27" tabindex="-1"></a>   df_E <span class="ot">&lt;-</span> a<span class="sc">*</span>(b<span class="dv">-1</span>)<span class="sc">*</span>(c<span class="dv">-1</span>); MSE <span class="ot">&lt;-</span> SSE<span class="sc">/</span>df_E</span>
+<span id="cb461-28"><a href="nested-designs.html#cb461-28" tabindex="-1"></a>SSTO <span class="ot">&lt;-</span> <span class="fu">sum</span>((caz<span class="sc">$</span>y<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_TO <span class="ot">&lt;-</span> a<span class="sc">*</span>b<span class="sc">*</span>c<span class="dv">-1</span>  </span>
+<span id="cb461-29"><a href="nested-designs.html#cb461-29" tabindex="-1"></a></span>
+<span id="cb461-30"><a href="nested-designs.html#cb461-30" tabindex="-1"></a>aov.out1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_A,SSA,MSA,MSA<span class="sc">/</span>MSBA,<span class="fu">qf</span>(.<span class="dv">95</span>,df_A,df_BA),</span>
+<span id="cb461-31"><a href="nested-designs.html#cb461-31" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSA<span class="sc">/</span>MSBA,df_A,df_BA),SSA<span class="sc">/</span>SSTO)</span>
+<span id="cb461-32"><a href="nested-designs.html#cb461-32" tabindex="-1"></a>aov.out2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_BA,SSBA,MSBA,MSBA<span class="sc">/</span>MSE,<span class="fu">qf</span>(.<span class="dv">95</span>,df_BA,df_E),</span>
+<span id="cb461-33"><a href="nested-designs.html#cb461-33" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSBA<span class="sc">/</span>MSE,df_BA,df_E),SSBA<span class="sc">/</span>SSTO)</span>
+<span id="cb461-34"><a href="nested-designs.html#cb461-34" tabindex="-1"></a>aov.out3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_C,SSC,MSC,MSC<span class="sc">/</span>MSE,<span class="fu">qf</span>(.<span class="dv">95</span>,df_C,df_E),</span>
+<span id="cb461-35"><a href="nested-designs.html#cb461-35" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSC<span class="sc">/</span>MSE,df_C,df_E),SSC<span class="sc">/</span>SSTO)</span>
+<span id="cb461-36"><a href="nested-designs.html#cb461-36" tabindex="-1"></a>aov.out4 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_AC,SSAC,MSAC,MSAC<span class="sc">/</span>MSE,<span class="fu">qf</span>(.<span class="dv">95</span>,df_AC,df_E),</span>
+<span id="cb461-37"><a href="nested-designs.html#cb461-37" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSAC<span class="sc">/</span>MSE,df_AC,df_E),SSAC<span class="sc">/</span>SSTO)</span>
+<span id="cb461-38"><a href="nested-designs.html#cb461-38" tabindex="-1"></a>aov.out5 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_E, SSE, MSE,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb461-39"><a href="nested-designs.html#cb461-39" tabindex="-1"></a>aov.out6 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_TO,SSTO,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb461-40"><a href="nested-designs.html#cb461-40" tabindex="-1"></a>aov.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(aov.out1,aov.out2,aov.out3,aov.out4,aov.out5,aov.out6)</span>
+<span id="cb461-41"><a href="nested-designs.html#cb461-41" tabindex="-1"></a><span class="fu">colnames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;df&quot;</span>,<span class="st">&quot;SS&quot;</span>,<span class="st">&quot;MS&quot;</span>,<span class="st">&quot;F*&quot;</span>,<span class="st">&quot;F(.95)&quot;</span>,<span class="st">&quot;P(&gt;F*)&quot;</span>,<span class="st">&quot;eta^2&quot;</span>)</span>
+<span id="cb461-42"><a href="nested-designs.html#cb461-42" tabindex="-1"></a><span class="fu">rownames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Drug&quot;</span>,<span class="st">&quot;Cat(Drug)&quot;</span>,<span class="st">&quot;Time&quot;</span>,</span>
+<span id="cb461-43"><a href="nested-designs.html#cb461-43" tabindex="-1"></a>                       <span class="st">&quot;DrugxTime&quot;</span>, <span class="st">&quot;Error&quot;</span>,<span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb461-44"><a href="nested-designs.html#cb461-44" tabindex="-1"></a><span class="fu">round</span>(aov.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##            df        SS       MS      F* F(.95) P(&gt;F*)  eta^2
+## Drug        1  382.5000 382.5000  5.7412 4.1491 0.0226 0.1167
+## Cat(Drug)  32 2131.9765  66.6243 21.9512 1.5341 0.0000 0.6505
+## Time        4  324.1176  81.0294 26.6974 2.4425 0.0000 0.0989
+## DrugxTime   4   50.5882  12.6471  4.1669 2.4425 0.0033 0.0154
+## Error     128  388.4941   3.0351      NA     NA     NA     NA
+## Total     169 3277.6765       NA      NA     NA     NA     NA</code></pre>
+<div class="sourceCode" id="cb463"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb463-1"><a href="nested-designs.html#cb463-1" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> trt.f <span class="sc">+</span> trt.f<span class="sc">/</span>id1.f <span class="sc">+</span> timepnt.f <span class="sc">+</span> trt.f<span class="sc">:</span>timepnt.f,</span>
+<span id="cb463-2"><a href="nested-designs.html#cb463-2" tabindex="-1"></a>            <span class="at">data=</span>caz)</span>
+<span id="cb463-3"><a href="nested-designs.html#cb463-3" tabindex="-1"></a><span class="fu">anova</span>(mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: y
+##                  Df  Sum Sq Mean Sq  F value    Pr(&gt;F)    
+## trt.f             1  382.50  382.50 126.0251 &lt; 2.2e-16 ***
+## timepnt.f         4  324.12   81.03  26.6974 4.137e-16 ***
+## trt.f:id1.f      32 2131.98   66.62  21.9512 &lt; 2.2e-16 ***
+## trt.f:timepnt.f   4   50.59   12.65   4.1669  0.003316 ** 
+## Residuals       128  388.49    3.04                       
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb465"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb465-1"><a href="nested-designs.html#cb465-1" tabindex="-1"></a><span class="do">## This model uses correct error term for treatment (B(A))</span></span>
+<span id="cb465-2"><a href="nested-designs.html#cb465-2" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(y <span class="sc">~</span> trt.f<span class="sc">*</span>timepnt.f <span class="sc">+</span> <span class="fu">Error</span>(id1.f), <span class="at">data=</span>caz)</span>
+<span id="cb465-3"><a href="nested-designs.html#cb465-3" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<pre><code>## 
+## Error: id1.f
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)  
+## trt.f      1  382.5   382.5   5.741 0.0226 *
+## Residuals 32 2132.0    66.6                 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Error: Within
+##                  Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## timepnt.f         4  324.1   81.03  26.697 4.14e-16 ***
+## trt.f:timepnt.f   4   50.6   12.65   4.167  0.00332 ** 
+## Residuals       128  388.5    3.04                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb467"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb467-1"><a href="nested-designs.html#cb467-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">es.use_symbols=</span><span class="cn">TRUE</span>)</span>
+<span id="cb467-2"><a href="nested-designs.html#cb467-2" tabindex="-1"></a></span>
+<span id="cb467-3"><a href="nested-designs.html#cb467-3" tabindex="-1"></a><span class="fu">eta_squared</span>(mod1)</span></code></pre></div>
+<pre><code>## # Effect Size for ANOVA (Type I)
+## 
+## Parameter       | η² (partial) |       95% CI
+## ---------------------------------------------
+## trt.f           |         0.50 | [0.40, 1.00]
+## timepnt.f       |         0.45 | [0.34, 1.00]
+## trt.f:id1.f     |         0.85 | [0.80, 1.00]
+## trt.f:timepnt.f |         0.12 | [0.03, 1.00]
+## 
+## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
+<div class="sourceCode" id="cb469"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb469-1"><a href="nested-designs.html#cb469-1" tabindex="-1"></a><span class="fu">eta_squared</span>(mod1, <span class="at">partial=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>## # Effect Size for ANOVA (Type I)
+## 
+## Parameter       |   η² |       95% CI
+## -------------------------------------
+## trt.f           | 0.12 | [0.04, 1.00]
+## timepnt.f       | 0.10 | [0.02, 1.00]
+## trt.f:id1.f     | 0.65 | [0.53, 1.00]
+## trt.f:timepnt.f | 0.02 | [0.00, 1.00]
+## 
+## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
+<p>Based on the ANOVA model, fit based on the formulas described in
+this section, we observe a significant interaction between Treatment and Time <span class="math inline">\(\left(F_{AC}^*=4.167, P=.0033\right)\)</span>, as well as significant main effects for Treatment and Time.
+Here, we will compare the two treatments within the five time points using 95% Confidence Intervals for <span class="math inline">\(\mu_Z-\mu_P\)</span> within each time point (1 comparison per time). We will use <span class="math inline">\(i=1\)</span> to represent Zylkene and <span class="math inline">\(i=2\)</span> to represent Placebo.</p>
+<p><span class="math display">\[
+\hat{V}\left\{\overline{Y}_{1\bullet k}-\overline{Y}_{2\bullet k}\right\} =
+\frac{2\left(MSB(A)+(c-1)MSE\right)}{bc} =
+\frac{2\left(66.62+(5-1)(3.04)\right)}{17(5)}=1.854
+\]</span>
+<span class="math display">\[
+df^* = \frac{\left(66.62+4(3.04)\right)^2}{
+       \left[\frac{(66.62)^2}{32}+\frac{(4(3.04))^2}{128}\right]}=
+       \frac{6206.29}{139.85}=44.4
+\]</span>
+<span class="math display">\[
+t_{.975;44.4}=2.015 \quad \Rightarrow
+\quad
+\left(\overline{Y}_{1\bullet k}-\overline{Y}_{2\bullet k}\right)\pm
+2.015\sqrt{1.854}
+\equiv  
+\left(\overline{Y}_{1\bullet k}-\overline{Y}_{2\bullet k}\right)\pm
+2.74
+\]</span>
+For the 5 time points, we compute the following Confidence Intervals.</p>
+<p><span class="math display">\[
+k=1: \quad (10.94-9.06) \pm 2.74 \quad \equiv \quad 1.88\pm 2.74
+\equiv (-0.86,4.62)
+\]</span>
+<span class="math display">\[
+k=2: \quad (12.12-10.18) \pm 2.74  \equiv  1.94\pm 2.74
+\equiv (-0.80,4.68)
+\]</span>
+<span class="math display">\[
+k=3: \quad (13.59-10.88) \pm 2.74  \equiv  2.71\pm 2.74
+\equiv (-0.03,5.45)
+\]</span>
+<span class="math display">\[
+k=4: \quad (15.18-11.41) \pm 3.77  \equiv  3.77\pm 2.74
+\equiv (1.03,6.51)
+\]</span>
+<span class="math display">\[
+k=5: \quad (16.12-11.41) \pm 4.71  \equiv  4.71\pm 2.74
+\equiv (1.97,7.45)
+\]</span>
+At time point 3, they are very close to being significantly different as the interval just contains 0. At time points 4 and 5, Zylkene gives significantly higher scores than placebo.</p>
+<p>Next, we consider two other covariance structures among measurements within cats: <strong>unstructured</strong> and <strong>AR(1)</strong> which is autoregressive of order 1.
+We will use the <strong>lme</strong> function in the <strong>nlme</strong> package to fit them.</p>
+<p>The unstructured case has no restrictions on the variances and covariances.</p>
+<p><span class="math display">\[
+\mbox{COV}\left\{
+\begin{bmatrix}
+Y_{ij1} \\ Y_{ij2} \\ \vdots \\Y_{ijc} \\
+\end{bmatrix}
+\right\}
+=
+\begin{bmatrix}
+\sigma_{1}^2   &amp;
+\sigma_{12}  &amp;  \cdots &amp;
+\sigma_{1c} \\
+\sigma_{12} &amp;
+\sigma_2^2 &amp;
+\cdots &amp; \sigma_{2c} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\sigma_{1c} &amp; \sigma_{2c} &amp;
+\cdots &amp; \sigma_c^2\\
+\end{bmatrix}
+\]</span></p>
+<p>For the AR(1) case, the variances are all equal, and the covariances (and correlations) decrease multiplicatively as the observations are further apart in time. This can be extended to allow for heterogeneity of variances, which is not covered here. In the following, we assume <span class="math inline">\(|\phi |&lt;1\)</span>.</p>
+<p><span class="math display">\[
+\mbox{COV}\left\{
+\begin{bmatrix}
+Y_{ij1} \\ Y_{ij2} \\ \vdots \\Y_{ijc} \\
+\end{bmatrix}
+\right\}
+=
+\begin{bmatrix}
+\sigma^2 &amp;
+\phi\sigma^2  &amp;  \cdots &amp;
+\phi^{c-1}\sigma^2 \\
+\phi\sigma^2 &amp;
+\sigma^2 &amp;
+\cdots &amp; \phi^{c-2}\sigma^2 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\phi^{c-1}\sigma^2 &amp; \phi^{c-2}\sigma^2 &amp;
+\cdots &amp; \sigma^2\\
+\end{bmatrix}
+\]</span></p>
+<div class="sourceCode" id="cb471"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb471-1"><a href="nested-designs.html#cb471-1" tabindex="-1"></a>caz <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/cat_zyl_uni.csv&quot;</span>)</span>
+<span id="cb471-2"><a href="nested-designs.html#cb471-2" tabindex="-1"></a><span class="fu">head</span>(caz); <span class="fu">tail</span>(caz)</span></code></pre></div>
+<pre><code>##   id weight age gender trt timepnt y
+## 1  2    4.0  67      1   0       1 9
+## 2  2    4.0  67      1   0       2 9
+## 3  2    4.0  67      1   0       3 9
+## 4  2    4.0  67      1   0       4 9
+## 5  2    4.0  67      1   0       5 9
+## 6  4    3.5  78      2   0       1 9</code></pre>
+<pre><code>##     id weight age gender trt timepnt  y
+## 165 31    3.1  90      1   1       5 23
+## 166 32    4.0  56      1   1       1  8
+## 167 32    4.0  56      1   1       2 11
+## 168 32    4.0  56      1   1       3 13
+## 169 32    4.0  56      1   1       4 14
+## 170 32    4.0  56      1   1       5 17</code></pre>
+<div class="sourceCode" id="cb474"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb474-1"><a href="nested-designs.html#cb474-1" tabindex="-1"></a>caz<span class="sc">$</span>trt.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(caz<span class="sc">$</span>trt, <span class="at">levels=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;placebo&quot;</span>, <span class="st">&quot;zylkene&quot;</span>))</span>
+<span id="cb474-2"><a href="nested-designs.html#cb474-2" tabindex="-1"></a>caz<span class="sc">$</span>timepnt.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(caz<span class="sc">$</span>timepnt)</span>
+<span id="cb474-3"><a href="nested-designs.html#cb474-3" tabindex="-1"></a>caz<span class="sc">$</span>id1.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">34</span>,<span class="at">each=</span><span class="dv">5</span>))</span>
+<span id="cb474-4"><a href="nested-designs.html#cb474-4" tabindex="-1"></a></span>
+<span id="cb474-5"><a href="nested-designs.html#cb474-5" tabindex="-1"></a><span class="do">### Uses linear mixed effect model for various covariance structures</span></span>
+<span id="cb474-6"><a href="nested-designs.html#cb474-6" tabindex="-1"></a><span class="do">###   within cats</span></span>
+<span id="cb474-7"><a href="nested-designs.html#cb474-7" tabindex="-1"></a></span>
+<span id="cb474-8"><a href="nested-designs.html#cb474-8" tabindex="-1"></a><span class="do">## Compound Symmetry that prints marginal V-Cov matrix = ZGZ&#39;+R w/in cats</span></span>
+<span id="cb474-9"><a href="nested-designs.html#cb474-9" tabindex="-1"></a><span class="do">##   Same as anova model above</span></span>
+<span id="cb474-10"><a href="nested-designs.html#cb474-10" tabindex="-1"></a>fit.cs1 <span class="ot">&lt;-</span> <span class="fu">lme</span>(y <span class="sc">~</span> trt.f<span class="sc">*</span>timepnt.f, <span class="at">data=</span>caz,</span>
+<span id="cb474-11"><a href="nested-designs.html#cb474-11" tabindex="-1"></a>  <span class="at">random=</span> <span class="fu">list</span>(<span class="at">id =</span> <span class="fu">pdCompSymm</span>(<span class="sc">~</span> trt.f <span class="sc">-</span> <span class="dv">1</span>)))</span>
+<span id="cb474-12"><a href="nested-designs.html#cb474-12" tabindex="-1"></a><span class="fu">summary</span>(fit.cs1)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: caz 
+##        AIC      BIC    logLik
+##   798.2436 838.2209 -386.1218
+## 
+## Random effects:
+##  Formula: ~trt.f - 1 | id
+##  Structure: Compound Symmetry
+##              StdDev   Corr
+## trt.fplacebo 3.566192     
+## trt.fzylkene 3.566192 0   
+## Residual     1.742159     
+## 
+## Fixed effects:  y ~ trt.f * timepnt.f 
+##                       Value Std.Error  DF   t-value p-value
+## (Intercept)       12.088235 0.6260226 128 19.309583  0.0000
+## trt.f1            -1.500000 0.6260226  32 -2.396080  0.0226
+## timepnt.f1        -2.088235 0.2672349 128 -7.814231  0.0000
+## timepnt.f2        -0.941176 0.2672349 128 -3.521907  0.0006
+## timepnt.f3         0.147059 0.2672349 128  0.550298  0.5831
+## timepnt.f4         1.205882 0.2672349 128  4.512443  0.0000
+## trt.f1:timepnt.f1  0.558824 0.2672349 128  2.091132  0.0385
+## trt.f1:timepnt.f2  0.529412 0.2672349 128  1.981073  0.0497
+## trt.f1:timepnt.f3  0.147059 0.2672349 128  0.550298  0.5831
+## trt.f1:timepnt.f4 -0.382353 0.2672349 128 -1.430775  0.1549
+##  Correlation: 
+##                   (Intr) trt.f1 tmpn.1 tmpn.2 tmpn.3 tmpn.4 t.1:.1 t.1:.2
+## trt.f1             0.00                                                  
+## timepnt.f1         0.00   0.00                                           
+## timepnt.f2         0.00   0.00  -0.25                                    
+## timepnt.f3         0.00   0.00  -0.25  -0.25                             
+## timepnt.f4         0.00   0.00  -0.25  -0.25  -0.25                      
+## trt.f1:timepnt.f1  0.00   0.00   0.00   0.00   0.00   0.00               
+## trt.f1:timepnt.f2  0.00   0.00   0.00   0.00   0.00   0.00  -0.25        
+## trt.f1:timepnt.f3  0.00   0.00   0.00   0.00   0.00   0.00  -0.25  -0.25 
+## trt.f1:timepnt.f4  0.00   0.00   0.00   0.00   0.00   0.00  -0.25  -0.25 
+##                   t.1:.3
+## trt.f1                  
+## timepnt.f1              
+## timepnt.f2              
+## timepnt.f3              
+## timepnt.f4              
+## trt.f1:timepnt.f1       
+## trt.f1:timepnt.f2       
+## trt.f1:timepnt.f3       
+## trt.f1:timepnt.f4 -0.25 
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -3.21774790 -0.51423747 -0.04419265  0.71213362  2.31966939 
+## 
+## Number of Observations: 170
+## Number of Groups: 34</code></pre>
+<div class="sourceCode" id="cb476"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb476-1"><a href="nested-designs.html#cb476-1" tabindex="-1"></a><span class="fu">anova</span>(fit.cs1)</span></code></pre></div>
+<pre><code>##                 numDF denDF  F-value p-value
+## (Intercept)         1   128 372.8600  &lt;.0001
+## trt.f               1    32   5.7412  0.0226
+## timepnt.f           4   128  26.6973  &lt;.0001
+## trt.f:timepnt.f     4   128   4.1669  0.0033</code></pre>
+<div class="sourceCode" id="cb478"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb478-1"><a href="nested-designs.html#cb478-1" tabindex="-1"></a><span class="fu">AIC</span>(fit.cs1)</span></code></pre></div>
+<pre><code>## [1] 798.2436</code></pre>
+<div class="sourceCode" id="cb480"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb480-1"><a href="nested-designs.html#cb480-1" tabindex="-1"></a><span class="fu">getVarCov</span>(fit.cs1, <span class="at">individual=</span><span class="st">&quot;1&quot;</span>,<span class="at">type=</span><span class="st">&quot;marginal&quot;</span>)</span></code></pre></div>
+<pre><code>## id 1 
+## Marginal variance covariance matrix
+##        1      2      3      4      5
+## 1 15.753 12.718 12.718 12.718 12.718
+## 2 12.718 15.753 12.718 12.718 12.718
+## 3 12.718 12.718 15.753 12.718 12.718
+## 4 12.718 12.718 12.718 15.753 12.718
+## 5 12.718 12.718 12.718 12.718 15.753
+##   Standard Deviations: 3.969 3.969 3.969 3.969 3.969</code></pre>
+<div class="sourceCode" id="cb482"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb482-1"><a href="nested-designs.html#cb482-1" tabindex="-1"></a><span class="do">## Unstructured Covariance Structure </span></span>
+<span id="cb482-2"><a href="nested-designs.html#cb482-2" tabindex="-1"></a>fit.un <span class="ot">&lt;-</span> <span class="fu">lme</span>(y <span class="sc">~</span> trt.f<span class="sc">*</span>timepnt.f, <span class="at">data=</span>caz,</span>
+<span id="cb482-3"><a href="nested-designs.html#cb482-3" tabindex="-1"></a>  <span class="at">random=</span> <span class="sc">~</span><span class="dv">1</span> <span class="sc">|</span> id1.f,</span>
+<span id="cb482-4"><a href="nested-designs.html#cb482-4" tabindex="-1"></a>  <span class="at">corr =</span> <span class="fu">corSymm</span>(<span class="at">form=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> id1.f),</span>
+<span id="cb482-5"><a href="nested-designs.html#cb482-5" tabindex="-1"></a>  <span class="at">weights =</span> <span class="fu">varIdent</span>(<span class="at">form =</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> timepnt.f), </span>
+<span id="cb482-6"><a href="nested-designs.html#cb482-6" tabindex="-1"></a>  <span class="at">control=</span><span class="fu">lmeControl</span>(<span class="at">maxIter=</span><span class="dv">100</span>, <span class="at">opt=</span><span class="st">&quot;optim&quot;</span>))</span>
+<span id="cb482-7"><a href="nested-designs.html#cb482-7" tabindex="-1"></a><span class="fu">summary</span>(fit.un)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: caz 
+##        AIC      BIC    logLik
+##   749.8307 829.7852 -348.9153
+## 
+## Random effects:
+##  Formula: ~1 | id1.f
+##         (Intercept) Residual
+## StdDev:    3.073923 1.391268
+## 
+## Correlation Structure: General
+##  Formula: ~1 | id1.f 
+##  Parameter estimate(s):
+##  Correlation: 
+##   1      2      3      4     
+## 2  0.031                     
+## 3 -0.011  0.621              
+## 4  0.219  0.697  0.886       
+## 5 -0.041  0.550  0.805  0.929
+## Variance function:
+##  Structure: Different standard deviations per stratum
+##  Formula: ~1 | timepnt.f 
+##  Parameter estimates:
+##        1        2        3        4        5 
+## 1.000000 1.139761 1.712557 2.374562 2.335903 
+## Fixed effects:  y ~ trt.f * timepnt.f 
+##                       Value Std.Error  DF   t-value p-value
+## (Intercept)       12.088235 0.6264483 128 19.296463  0.0000
+## trt.f1            -1.500000 0.6264483  32 -2.394452  0.0227
+## timepnt.f1        -2.088235 0.3723377 128 -5.608445  0.0000
+## timepnt.f2        -0.941176 0.2328305 128 -4.042325  0.0001
+## timepnt.f3         0.147059 0.1790910 128  0.821140  0.4131
+## timepnt.f4         1.205882 0.2300381 128  5.242098  0.0000
+## trt.f1:timepnt.f1  0.558824 0.3723377 128  1.500851  0.1359
+## trt.f1:timepnt.f2  0.529412 0.2328305 128  2.273808  0.0246
+## trt.f1:timepnt.f3  0.147059 0.1790910 128  0.821140  0.4131
+## trt.f1:timepnt.f4 -0.382353 0.2300381 128 -1.662129  0.0989
+##  Correlation: 
+##                   (Intr) trt.f1 tmpn.1 tmpn.2 tmpn.3 tmpn.4 t.1:.1 t.1:.2
+## trt.f1             0.000                                                 
+## timepnt.f1        -0.421  0.000                                          
+## timepnt.f2        -0.325  0.000  0.380                                   
+## timepnt.f3         0.091  0.000 -0.415 -0.198                            
+## timepnt.f4         0.533  0.000 -0.742 -0.683  0.090                     
+## trt.f1:timepnt.f1  0.000 -0.421  0.000  0.000  0.000  0.000              
+## trt.f1:timepnt.f2  0.000 -0.325  0.000  0.000  0.000  0.000  0.380       
+## trt.f1:timepnt.f3  0.000  0.091  0.000  0.000  0.000  0.000 -0.415 -0.198
+## trt.f1:timepnt.f4  0.000  0.533  0.000  0.000  0.000  0.000 -0.742 -0.683
+##                   t.1:.3
+## trt.f1                  
+## timepnt.f1              
+## timepnt.f2              
+## timepnt.f3              
+## timepnt.f4              
+## trt.f1:timepnt.f1       
+## trt.f1:timepnt.f2       
+## trt.f1:timepnt.f3       
+## trt.f1:timepnt.f4  0.090
+## 
+## Standardized Within-Group Residuals:
+##        Min         Q1        Med         Q3        Max 
+## -2.3359672 -0.6444285 -0.1169039  0.6566682  2.7544055 
+## 
+## Number of Observations: 170
+## Number of Groups: 34</code></pre>
+<div class="sourceCode" id="cb484"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb484-1"><a href="nested-designs.html#cb484-1" tabindex="-1"></a><span class="fu">anova</span>(fit.un)</span></code></pre></div>
+<pre><code>##                 numDF denDF  F-value p-value
+## (Intercept)         1   128 385.9196  &lt;.0001
+## trt.f               1    32   3.9783  0.0547
+## timepnt.f           4   128   9.7978  &lt;.0001
+## trt.f:timepnt.f     4   128   2.7241  0.0323</code></pre>
+<div class="sourceCode" id="cb486"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb486-1"><a href="nested-designs.html#cb486-1" tabindex="-1"></a><span class="fu">AIC</span>(fit.un)</span></code></pre></div>
+<pre><code>## [1] 749.8307</code></pre>
+<div class="sourceCode" id="cb488"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb488-1"><a href="nested-designs.html#cb488-1" tabindex="-1"></a><span class="fu">getVarCov</span>(fit.un, <span class="at">individual=</span><span class="st">&quot;1&quot;</span>,<span class="at">type=</span><span class="st">&quot;conditional&quot;</span>)</span></code></pre></div>
+<pre><code>## id1.f 1 
+## Conditional variance covariance matrix
+##           1        2         3       4        5
+## 1  1.935600 0.067913 -0.037752  1.0086 -0.18467
+## 2  0.067913 2.514500  2.348000  3.6492  2.83350
+## 3 -0.037752 2.348000  5.676900  6.9764  6.23720
+## 4  1.008600 3.649200  6.976400 10.9140  9.97360
+## 5 -0.184670 2.833500  6.237200  9.9736 10.56200
+##   Standard Deviations: 1.3913 1.5857 2.3826 3.3037 3.2499</code></pre>
+<div class="sourceCode" id="cb490"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb490-1"><a href="nested-designs.html#cb490-1" tabindex="-1"></a><span class="do">## AR(1) Covariance Structure</span></span>
+<span id="cb490-2"><a href="nested-designs.html#cb490-2" tabindex="-1"></a>fit.ar1 <span class="ot">&lt;-</span> <span class="fu">lme</span>(y <span class="sc">~</span> trt.f<span class="sc">*</span>timepnt.f, <span class="at">data=</span>caz,</span>
+<span id="cb490-3"><a href="nested-designs.html#cb490-3" tabindex="-1"></a><span class="at">random=</span> <span class="sc">~</span><span class="dv">1</span> <span class="sc">|</span> id1.f,</span>
+<span id="cb490-4"><a href="nested-designs.html#cb490-4" tabindex="-1"></a><span class="at">corr =</span> <span class="fu">corAR1</span>(, <span class="at">form=</span> <span class="sc">~</span> <span class="dv">1</span> <span class="sc">|</span> id1.f))</span>
+<span id="cb490-5"><a href="nested-designs.html#cb490-5" tabindex="-1"></a><span class="fu">summary</span>(fit.ar1)</span></code></pre></div>
+<pre><code>## Linear mixed-effects model fit by REML
+##   Data: caz 
+##        AIC      BIC    logLik
+##   744.0077 783.9849 -359.0038
+## 
+## Random effects:
+##  Formula: ~1 | id1.f
+##         (Intercept) Residual
+## StdDev: 0.001180249 3.963392
+## 
+## Correlation Structure: AR(1)
+##  Formula: ~1 | id1.f 
+##  Parameter estimate(s):
+##       Phi 
+## 0.9047053 
+## Fixed effects:  y ~ trt.f * timepnt.f 
+##                       Value Std.Error  DF   t-value p-value
+## (Intercept)       12.088235 0.6296157 128 19.199388  0.0000
+## trt.f1            -1.500000 0.6296157  32 -2.382406  0.0233
+## timepnt.f1        -2.088235 0.3074310 128 -6.792533  0.0000
+## timepnt.f2        -0.941176 0.2261102 128 -4.162469  0.0001
+## timepnt.f3         0.147059 0.1916021 128  0.767522  0.4442
+## timepnt.f4         1.205882 0.2261102 128  5.333163  0.0000
+## trt.f1:timepnt.f1  0.558824 0.3074310 128  1.817720  0.0714
+## trt.f1:timepnt.f2  0.529412 0.2261102 128  2.341389  0.0208
+## trt.f1:timepnt.f3  0.147059 0.1916021 128  0.767522  0.4442
+## trt.f1:timepnt.f4 -0.382353 0.2261102 128 -1.691003  0.0933
+##  Correlation: 
+##                   (Intr) trt.f1 tmpn.1 tmpn.2 tmpn.3 tmpn.4 t.1:.1 t.1:.2
+## trt.f1             0.000                                                 
+## timepnt.f1        -0.075  0.000                                          
+## timepnt.f2         0.051  0.000  0.414                                   
+## timepnt.f3         0.120  0.000 -0.310 -0.003                            
+## timepnt.f4         0.051  0.000 -0.677 -0.640 -0.003                     
+## trt.f1:timepnt.f1  0.000 -0.075  0.000  0.000  0.000  0.000              
+## trt.f1:timepnt.f2  0.000  0.051  0.000  0.000  0.000  0.000  0.414       
+## trt.f1:timepnt.f3  0.000  0.120  0.000  0.000  0.000  0.000 -0.310 -0.003
+## trt.f1:timepnt.f4  0.000  0.051  0.000  0.000  0.000  0.000 -0.677 -0.640
+##                   t.1:.3
+## trt.f1                  
+## timepnt.f1              
+## timepnt.f2              
+## timepnt.f3              
+## timepnt.f4              
+## trt.f1:timepnt.f1       
+## trt.f1:timepnt.f2       
+## trt.f1:timepnt.f3       
+## trt.f1:timepnt.f4 -0.003
+## 
+## Standardized Within-Group Residuals:
+##         Min          Q1         Med          Q3         Max 
+## -2.37467405 -0.60851025 -0.04452508  0.72724395  2.41919926 
+## 
+## Number of Observations: 170
+## Number of Groups: 34</code></pre>
+<div class="sourceCode" id="cb492"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb492-1"><a href="nested-designs.html#cb492-1" tabindex="-1"></a><span class="fu">anova</span>(fit.ar1)</span></code></pre></div>
+<pre><code>##                 numDF denDF  F-value p-value
+## (Intercept)         1   128 369.4090  &lt;.0001
+## trt.f               1    32   6.7869  0.0138
+## timepnt.f           4   128  12.4477  &lt;.0001
+## trt.f:timepnt.f     4   128   2.0486  0.0914</code></pre>
+<div class="sourceCode" id="cb494"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb494-1"><a href="nested-designs.html#cb494-1" tabindex="-1"></a><span class="fu">AIC</span>(fit.ar1)</span></code></pre></div>
+<pre><code>## [1] 744.0077</code></pre>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb496-1"><a href="nested-designs.html#cb496-1" tabindex="-1"></a><span class="fu">getVarCov</span>(fit.ar1, <span class="at">individual=</span><span class="st">&quot;1&quot;</span>,<span class="at">type=</span><span class="st">&quot;conditional&quot;</span>)</span></code></pre></div>
+<pre><code>## id1.f 1 
+## Conditional variance covariance matrix
+##        1      2      3      4      5
+## 1 15.708 14.212 12.857 11.632 10.524
+## 2 14.212 15.708 14.212 12.857 11.632
+## 3 12.857 14.212 15.708 14.212 12.857
+## 4 11.632 12.857 14.212 15.708 14.212
+## 5 10.524 11.632 12.857 14.212 15.708
+##   Standard Deviations: 3.9634 3.9634 3.9634 3.9634 3.9634</code></pre>
+<p>The AR(1) model allows the covariance of the observations within cats to decrease as they are farther apart in time. Based on having the smallest <span class="math inline">\(AIC\)</span> value, it gives the best fit of the three models without having excess variance parameters.</p>
+<p><span class="math display">\[
+\hat{\mbox{COV}}\left\{Y_{ijk},Y_{ijk&#39;}\right\} = 15.708(0.905)^{|k-k&#39;|}
+\]</span></p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-beata_2007" class="csl-entry">
+Beata, C., J. Cordel, and N. Marlois. 2007. <span>“Effect of Alpha-Casozepine (Zylkene) on Cats with Anxiety.”</span> <em>Journal of Veterinary Behavior: Clinical Applications and Research</em> 2 (2): 40–46.
+</div>
+<div id="ref-cook_1989" class="csl-entry">
+Cook, S. R., and G. Proulx. 1989. <span>“Mechanical Evaluation and Performance Improvement of the Rotating Jaw Conibear 120 Trap.”</span> <em>Journal of Testing and Evaluation</em> 17 (3): 190–95.
+</div>
+<div id="ref-jensen_2002" class="csl-entry">
+Jensen, C. R. 2002. <span>“Variance Components Calculations: Common Methods and Misapplications in the Semiconductor Industry.”</span> <em>Quality Engineering</em> 14 (4): 647–57.
+</div>
+<div id="ref-oliveira_2017" class="csl-entry">
+Oliveira, A. S., F. M. Dalla Nora, R. O. Mello, P. A. Mello, B. Tischer, A. B. Costa, and J. S. Barin. 2017. <span>“One-Shot, Reagent-Free Determination of the Alcohol Content of Distilled Beverages by Thermal Infrared Enthalpimetry.”</span> <em>Talanta</em> 171: 335–40. <a href="https://doi.org/10.1016/j.talanta.2017.05.011">https://doi.org/10.1016/j.talanta.2017.05.011</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="random-and-mixed-effects-models.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analysis-of-covariance-ancova.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "link": "https://github.com/LarryWinner/STA4211-Notes1.git/edit/main/%s",
+  "text": "Edit"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

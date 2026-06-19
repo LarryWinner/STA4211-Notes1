@@ -1,8 +1,7 @@
-book_filename: "bookdownproj"
+book_filename: "bookdownproj_STA4211Notes1"
 output_dir: docs
 delete_merged_file: true
-edit: https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/edit/main/%s
-view: https://github.com/YOUR GITHUB USERNAME/YOUR REPO NAME/blob/main/%s
+repo: https://github.com/LarryWinner/STA4211-Notes1.git/blob/main/%s
 language:
   ui:
     chapter_name: "Chapter "

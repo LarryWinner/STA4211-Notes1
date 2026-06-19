@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Analysis of Treatment Means | Design and Analysis of Experiments</title>
+  <meta name="description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Analysis of Treatment Means | Design and Analysis of Experiments" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Analysis of Treatment Means | Design and Analysis of Experiments" />
+  
+  <meta name="twitter:description" content="This is a course on Experimental Design and Analysis." />
+  
+
+<meta name="author" content="Larry Winner" />
+
+
+<meta name="date" content="2026-06-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="single-factor-studies.html"/>
+<link rel="next" href="alternative-tests-for-treatment-effects.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STA 4211 Course Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html"><i class="fa fa-check"></i><b>1</b> Comparing Two Treatments or Populations</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#linear-functions-of-random-variables"><i class="fa fa-check"></i><b>1.1</b> Linear Functions of Random Variables</a></li>
+<li class="chapter" data-level="1.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#students-t-distribution-for-making-inference-on-population-means"><i class="fa fa-check"></i><b>1.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution for Making Inference on Population Means</a></li>
+<li class="chapter" data-level="1.3" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference"><i class="fa fa-check"></i><b>1.3</b> Inference for the Population Mean Difference</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples"><i class="fa fa-check"></i><b>1.3.1</b> Inference for the Population Mean Difference for Paired Samples</a></li>
+<li class="chapter" data-level="1.3.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-independent-samples"><i class="fa fa-check"></i><b>1.3.2</b> Inference for the Population Mean Difference for Independent Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-variance-ratios"><i class="fa fa-check"></i><b>1.4</b> Inference for the Population Variance Ratios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inferences-for-variance-ratios-for-independent-samples"><i class="fa fa-check"></i><b>1.4.1</b> Inferences for Variance Ratios for Independent Samples</a></li>
+<li class="chapter" data-level="1.4.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#test-for-equal-variances-with-paired-samples"><i class="fa fa-check"></i><b>1.4.2</b> Test for Equal Variances with Paired Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#examples"><i class="fa fa-check"></i><b>1.5</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#terminology"><i class="fa fa-check"></i><b>2.1</b> Terminology</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#basics-of-controlled-experiments"><i class="fa fa-check"></i><b>2.2</b> Basics of Controlled Experiments</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#completely-randomized-design-crd"><i class="fa fa-check"></i><b>2.3</b> Completely Randomized Design (CRD)</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#randomized-complete-block-design-rcbd-or-rbd"><i class="fa fa-check"></i><b>2.4</b> Randomized Complete Block Design (RCBD or RBD)</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#overview-of-some-standard-experimental-designs"><i class="fa fa-check"></i><b>2.5</b> Overview of Some Standard Experimental Designs</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#overview-of-observational-study-designs"><i class="fa fa-check"></i><b>2.6</b> Overview of Observational Study Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-factor-studies.html"><a href="single-factor-studies.html"><i class="fa fa-check"></i><b>3</b> Single Factor Studies</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#models-with-r2-factor-levels"><i class="fa fa-check"></i><b>3.1</b> Models with <span class="math inline">\(r=2\)</span> Factor Levels</a></li>
+<li class="chapter" data-level="3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#three-model-formulations"><i class="fa fa-check"></i><b>3.2</b> Three Model Formulations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#cell-means-model"><i class="fa fa-check"></i><b>3.2.1</b> Cell Means Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#treatment-effects-model"><i class="fa fa-check"></i><b>3.2.2</b> Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#reference-group-model"><i class="fa fa-check"></i><b>3.2.3</b> Reference Group Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance-and-f-test"><i class="fa fa-check"></i><b>3.3</b> The Analysis of Variance and <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#general-linear-test-approach"><i class="fa fa-check"></i><b>3.3.1</b> General Linear Test Approach</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#power-calculations"><i class="fa fa-check"></i><b>3.3.2</b> Power Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#technical-details"><i class="fa fa-check"></i><b>3.4</b> Technical Details</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-for-the-cell-means-model-regression-approach"><i class="fa fa-check"></i><b>3.4.1</b> Least Squares Estimation for the Cell Means Model (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#scalar-estimation-for-the-cell-means-model"><i class="fa fa-check"></i><b>3.4.2</b> Scalar Estimation for the Cell Means Model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#estimation-for-the-treatment-effects-model"><i class="fa fa-check"></i><b>3.4.3</b> Estimation for the Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.4.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-regression-approach"><i class="fa fa-check"></i><b>3.4.4</b> Least Squares Estimation (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance"><i class="fa fa-check"></i><b>3.4.5</b> The Analysis of Variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html"><i class="fa fa-check"></i><b>4</b> Analysis of Treatment Means</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#individual-treatment-means"><i class="fa fa-check"></i><b>4.1</b> Individual Treatment Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#comparing-two-treatment-means"><i class="fa fa-check"></i><b>4.2</b> Comparing Two Treatment Means</a></li>
+<li class="chapter" data-level="4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#contrasts-among-treatment-means"><i class="fa fa-check"></i><b>4.3</b> Contrasts Among Treatment Means</a></li>
+<li class="chapter" data-level="4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#simultaneous-comparisons"><i class="fa fa-check"></i><b>4.4</b> Simultaneous Comparisons</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#tukeys-honest-significant-difference-hsd"><i class="fa fa-check"></i><b>4.4.1</b> Tukey’s Honest Significant Difference (HSD)</a></li>
+<li class="chapter" data-level="4.4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#scheffes-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.2</b> Scheffe’s Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#bonferroni-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.3</b> Bonferroni Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#multiple-range-methods"><i class="fa fa-check"></i><b>4.4.4</b> Multiple Range Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html"><i class="fa fa-check"></i><b>5</b> Alternative Tests for Treatment Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#randomizationpermutation-tests"><i class="fa fa-check"></i><b>5.1</b> Randomization/Permutation Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#tests-for-equal-error-variances"><i class="fa fa-check"></i><b>5.2</b> Tests for Equal Error Variances</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#hartleys-test"><i class="fa fa-check"></i><b>5.2.1</b> Hartley’s Test</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#levenes-test"><i class="fa fa-check"></i><b>5.2.2</b> Levene’s Test</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#bartletts-test"><i class="fa fa-check"></i><b>5.2.3</b> Bartlett’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#remedial-measures"><i class="fa fa-check"></i><b>5.3</b> Remedial Measures</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#weighted-least-squares-and-welchs-test"><i class="fa fa-check"></i><b>5.3.1</b> Weighted Least Squares and Welch’s Test</a></li>
+<li class="chapter" data-level="5.3.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#post-hoc-comparisons-with-unequal-variances"><i class="fa fa-check"></i><b>5.3.2</b> Post-hoc Comparisons with Unequal Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#nonparametric-test-for-non-normal-data"><i class="fa fa-check"></i><b>5.4</b> Nonparametric Test for Non-normal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html"><i class="fa fa-check"></i><b>6</b> Balanced Two Factor Designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#two-factor-analysis-of-variance"><i class="fa fa-check"></i><b>6.2</b> Two Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#cell-means-and-factor-effects-models"><i class="fa fa-check"></i><b>6.2.1</b> Cell Means and Factor Effects Models</a></li>
+<li class="chapter" data-level="6.2.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#least-squaresmaximum-likelihood-estimators"><i class="fa fa-check"></i><b>6.2.2</b> Least Squares/Maximum Likelihood Estimators</a></li>
+<li class="chapter" data-level="6.2.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#sums-of-squares-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>6.2.3</b> Sums of Squares and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#factor-effect-contrasts"><i class="fa fa-check"></i><b>6.3</b> Factor Effect Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-there-is-no-interaction"><i class="fa fa-check"></i><b>6.3.1</b> Contrasts when there is No Interaction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-interaction-is-present"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts when Interaction is Present</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="two-factor-designs-with-1-observation-per-treatment.html"><a href="two-factor-designs-with-1-observation-per-treatment.html"><i class="fa fa-check"></i><b>7</b> Two-Factor Designs with 1 Observation per Treatment</a></li>
+<li class="chapter" data-level="8" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html"><i class="fa fa-check"></i><b>8</b> Unbalanced Two-Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#statistical-model-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>8.1</b> Statistical Model and the Analysis of Variance</a></li>
+<li class="chapter" data-level="8.2" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#least-squares-estimators-and-contrastslinear-functions-among-means"><i class="fa fa-check"></i><b>8.2</b> Least Squares Estimators and Contrasts/Linear Functions Among Means</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="higher-order-models.html"><a href="higher-order-models.html"><i class="fa fa-check"></i><b>9</b> Higher Order Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="higher-order-models.html"><a href="higher-order-models.html#three-factor-models---mean-structure"><i class="fa fa-check"></i><b>9.1</b> Three Factor Models - Mean Structure</a></li>
+<li class="chapter" data-level="9.2" data-path="higher-order-models.html"><a href="higher-order-models.html#statistical-model-and-the-analysis-of-variance-1"><i class="fa fa-check"></i><b>9.2</b> Statistical Model and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="block-designs.html"><a href="block-designs.html"><i class="fa fa-check"></i><b>10</b> Block Designs</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="block-designs.html"><a href="block-designs.html#randomized-block-and-repeated-measures-designs"><i class="fa fa-check"></i><b>10.1</b> Randomized Block and Repeated Measures Designs</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="block-designs.html"><a href="block-designs.html#model-structure-and-estimators"><i class="fa fa-check"></i><b>10.1.1</b> Model Structure and Estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="block-designs.html"><a href="block-designs.html#analysis-of-variance-and-the-f-test"><i class="fa fa-check"></i><b>10.2</b> Analysis of Variance and the <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="block-designs.html"><a href="block-designs.html#checking-model-assumptions"><i class="fa fa-check"></i><b>10.2.1</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="10.2.2" data-path="block-designs.html"><a href="block-designs.html#relative-efficiency-and-within-subject-variance-covariance-matrix"><i class="fa fa-check"></i><b>10.2.2</b> Relative Efficiency and Within-Subject Variance-Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="block-designs.html"><a href="block-designs.html#latin-square-designs"><i class="fa fa-check"></i><b>10.3</b> Latin Square Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html"><i class="fa fa-check"></i><b>11</b> Random and Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#way-random-effects-model"><i class="fa fa-check"></i><b>11.1</b> 1-Way Random Effects Model</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>11.1.1</b> Analysis of Variance</a></li>
+<li class="chapter" data-level="11.1.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-population-mean-mu_bullet"><i class="fa fa-check"></i><b>11.1.2</b> Estimating the Population Mean <span class="math inline">\(\mu_{\bullet}\)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>11.1.3</b> Estimating the Intraclass Correlation Coefficient</a></li>
+<li class="chapter" data-level="11.1.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-within-group-variance"><i class="fa fa-check"></i><b>11.1.4</b> Estimating the Within Group Variance</a></li>
+<li class="chapter" data-level="11.1.5" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-between-group-variance"><i class="fa fa-check"></i><b>11.1.5</b> Estimating the Between Group Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-random-effects-model"><i class="fa fa-check"></i><b>11.2</b> Two-Way Random Effects Model</a></li>
+<li class="chapter" data-level="11.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-mixed-effects-model"><i class="fa fa-check"></i><b>11.3</b> Two-Way Mixed Effects Model</a></li>
+<li class="chapter" data-level="11.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#three-way-mixed-effects-models"><i class="fa fa-check"></i><b>11.4</b> Three-Way Mixed Effects Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>12</b> Nested Designs</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="nested-designs.html"><a href="nested-designs.html#estimators-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>12.1</b> Estimators and the Analysis of Variance</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-designs.html"><a href="nested-designs.html#tests-contrasts-and-pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Tests, Contrasts, and Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="nested-designs.html"><a href="nested-designs.html#repeated-measures-design"><i class="fa fa-check"></i><b>12.3</b> Repeated Measures Design</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="nested-designs.html"><a href="nested-designs.html#model-structure"><i class="fa fa-check"></i><b>12.3.1</b> Model Structure</a></li>
+<li class="chapter" data-level="12.3.2" data-path="nested-designs.html"><a href="nested-designs.html#analysis-of-variance-and-f-tests"><i class="fa fa-check"></i><b>12.3.2</b> Analysis of Variance and <span class="math inline">\(F\)</span>-tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="nested-designs.html"><a href="nested-designs.html#treatment-comparisons"><i class="fa fa-check"></i><b>12.3.3</b> Treatment Comparisons</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html"><i class="fa fa-check"></i><b>13</b> Analysis of Covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#additive-model"><i class="fa fa-check"></i><b>13.1</b> Additive Model</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#adjusted-means"><i class="fa fa-check"></i><b>13.1.1</b> Adjusted means</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#interaction-model"><i class="fa fa-check"></i><b>13.2</b> Interaction Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html"><i class="fa fa-check"></i><b>14</b> Response Surface and Mixture Designs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
+<li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analysis-of-treatment-means" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Analysis of Treatment Means<a href="analysis-of-treatment-means.html#analysis-of-treatment-means" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this chapter, we will consider estimation and inference concerning treatment/group means.
+We will first consider estimating individual treatment means.
+Then, we will consider <strong>Contrasts</strong> among treatment means.
+Finally, we consider all pairwise comparisons.</p>
+<div id="individual-treatment-means" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Individual Treatment Means<a href="analysis-of-treatment-means.html#individual-treatment-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For the cell means model, we may be interested in making inference regarding the individual treatment.group means. The model is of the following form. Note that this is a shortened version of material covered in Chapter 1.</p>
+<p><span class="math display">\[
+Y_{ij}=\mu_i + \epsilon_{ij}
+\qquad i=1,\ldots,r; \quad j=1,\ldots, n_i \qquad \epsilon_{ij} \sim NID\left(0,\sigma^2\right)
+\]</span></p>
+<p>The least squares estimator for <span class="math inline">\(\mu_i\)</span> is <span class="math inline">\(\hat{\mu}_i=\overline{Y}_{i\bullet}\)</span>.</p>
+<p><span class="math display">\[
+\hat{\mu}_i = \overline{Y}_{i\bullet} = \frac{1}{n_i}\sum_{j=1}^{n_i} Y_{ij} \qquad
+E\left\{\overline{Y}_{i\bullet}\right\}=\frac{1}{n_i}n_i\mu_i = \mu_i \qquad
+V\left\{\overline{Y}_{i\bullet}\right\}=\frac{1}{n_i^2}n_i\sigma^2=
+\frac{\sigma^2}{n_i}
+\]</span>
+For this model, the treatment means are independent and we have the following distributional properties.</p>
+<p><span class="math display">\[
+\overline{Y}_{i\bullet} \sim N\left(\mu_i,\frac{\sigma^2}{n_i}\right)
+\qquad \qquad
+\frac{SSE}{\sigma^2}=\frac{\left(n_T-r\right)MSE}{\sigma^2} \sim \chi_{n_T-r}^2
+\]</span></p>
+<p>Further, <span class="math inline">\(\overline{Y}_{i\bullet}\)</span> and <span class="math inline">\(MSE\)</span> are independent.</p>
+<p>Consider two independent random variables, <span class="math inline">\(Z \sim N(0,1)\)</span> and <span class="math inline">\(W\sim \chi_{\nu}^2\)</span>.
+The ratio <span class="math inline">\(T=Z/\sqrt{W/\nu}\)</span> is distributed as <strong>Student’s t</strong> with <span class="math inline">\(\nu\)</span> degrees of freedom.
+In this application, we have the following results.
+<span class="math display">\[
+Z=\frac{\overline{Y}_{i\bullet}-\mu_i}{\sqrt{\sigma^2/n_i}} \sim N(0,1) \qquad \qquad
+W=\frac{\left(n_T-r\right)MSE}{\sigma^2} \sim \chi_{n_T-r}^2
+\]</span>
+<span class="math display">\[
+T=\frac{Z}{\sqrt{W/\nu}}=
+\frac{\frac{\overline{Y}_{i\bullet}-\mu_i}{\sqrt{\sigma^2/n_i}}}{
+\sqrt{\frac{\left(n_T-r\right)MSE}{\sigma^2}/\left(n_T-r\right)}
+}=\frac{\overline{Y}_{i\bullet}-\mu_i}{\sqrt{MSE/n_i}} \sim t_{n_T-r}
+\]</span>
+Since <span class="math inline">\(\sigma^2\)</span> is unknown in practice and must be estimated with <span class="math inline">\(s^2=MSE\)</span>,
+we obtain this result, where <span class="math inline">\(t_{n-r}\)</span> represents Student’s <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n_T-r\)</span> degrees of freedom.</p>
+<p><span class="math display">\[
+\hat{V}\left\{\overline{Y}_{i\bullet}\right\}=\frac{MSE}{n_i} \qquad  
+\hat{SE}\left\{\overline{Y}_{i\bullet}\right\}=\sqrt{\frac{MSE}{n_i}}
+\qquad
+\frac{\overline{Y}_{i\bullet}-\mu_i}{\hat{SE}\left\{\overline{Y}_{i\bullet}\right\}}
+\sim t_{n_T-r}
+\]</span></p>
+<p>This leads to a <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Interval for <span class="math inline">\(\mu_i\)</span> of this form.</p>
+<p><span class="math display">\[\overline{Y}_{i\bullet} \pm t_{1-\alpha/2;n_T-r}\hat{SE}\left\{\overline{Y}_{i\bullet}\right\}
+\quad \equiv \quad
+\overline{Y}_{i\bullet} \pm t_{1-\alpha/2;n_T-r}\sqrt{\frac{MSE}{n_i}}
+\]</span></p>
+<p>In the rare situation that we wish to test <span class="math inline">\(H_0:\mu_i=c\)</span> for some pre-specified constant <span class="math inline">\(c\)</span>, we can compute the <span class="math inline">\(t\)</span>-statistic as follows.</p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad t_i^* = \frac{\overline{Y}_{i\bullet}-c}{\hat{SE}\left\{\overline{Y}_{i\bullet}\right\}} \qquad
+\mbox{Rejection Region:} \quad \left|t_i^*\right| \ge t_{1-\alpha/2;n_T-r}
+\]</span></p>
+</div>
+<div id="comparing-two-treatment-means" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Comparing Two Treatment Means<a href="analysis-of-treatment-means.html#comparing-two-treatment-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In some cases, researchers may wish to compare two specific treatment means. In this case, suppose the goal is to compare treatments <span class="math inline">\(i\)</span> and <span class="math inline">\(i&#39;\)</span>. The parameter of interest is <span class="math inline">\(D=\mu_i-\mu_{i&#39;}\)</span> and the estimator is <span class="math inline">\(\hat{D}=\overline{Y}_{i\bullet}-\overline{Y}_{i&#39;\bullet}\)</span>.
+The mean and variance of <span class="math inline">\(\hat{D}\)</span> are given below.</p>
+<p><span class="math display">\[
+E\left\{\hat{D}\right\}=E\left\{\overline{Y}_{i\bullet}-\overline{Y}_{i&#39;\bullet}\right\}=\mu_i-\mu_{i&#39;}=D
+\]</span>
+<span class="math display">\[
+V\left\{\hat{D}\right\}=
+V\left\{\overline{Y}_{i\bullet}\right\} +
+V\left\{\overline{Y}_{i&#39;\bullet}\right\}
+=\sigma^2\left(\frac{1}{n_i}+\frac{1}{n_{i&#39;}}\right)
+\]</span>
+As <span class="math inline">\(\sigma^2\)</span> is not known in practice, the estimated variance of <span class="math inline">\(\hat{D}\)</span> replaces <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(MSE\)</span>.</p>
+<p><span class="math display">\[
+\hat{V}\left\{\hat{D}\right\}=
+\hat{V}\left\{\overline{Y}_{i\bullet}\right\} +
+\hat{V}\left\{\overline{Y}_{i&#39;\bullet}\right\}
+=MSE\left(\frac{1}{n_i}+\frac{1}{n_{i&#39;}}\right)
+\]</span></p>
+<p>A <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Interval for <span class="math inline">\(D=\mu_i-\mu_{i&#39;}\)</span> is obtained as follows, as well as a test of <span class="math inline">\(H_0:D=0\)</span> versus <span class="math inline">\(H_A:D\ne 0\)</span>.</p>
+<p><span class="math display">\[
+\mbox{Confidence Interval:} \quad
+\hat{D} \pm t_{1-\alpha/2;n_T-r}\hat{SE}\left\{\hat{D}\right\}  \equiv
+\hat{D} \pm t_{1-\alpha/2;n_T-r}
+\sqrt{MSE\left(\frac{1}{n_i}+\frac{1}{n_{i&#39;}}\right)}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad t^*=\frac{\hat{D}}{\hat{SE}\left\{\hat{D}\right\}}
+\qquad \mbox{Rejection Region:} \quad
+\left|t^*\right| \ge t_{1-\alpha/2;n_T-r}
+\]</span></p>
+<p>The only difference between this and the 2-sample <span class="math inline">\(t\)</span>-test is that all <span class="math inline">\(r\)</span> treatments/groups are used to estimate <span class="math inline">\(\sigma^2\)</span>, and increasing the degrees of freedom to <span class="math inline">\(n_T-r\)</span>. We will consider adjustments for comparing all pairs of treatments later in the chapter.</p>
+</div>
+<div id="contrasts-among-treatment-means" class="section level2 hasAnchor" number="4.3">
+<h2><span class="header-section-number">4.3</span> Contrasts Among Treatment Means<a href="analysis-of-treatment-means.html#contrasts-among-treatment-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A <strong>Contrast</strong> is any linear function of treatment means such that the coefficients sum to 0. Thus, for instance <span class="math inline">\(D=\mu_i-\mu_{i&#39;}\)</span> is a contrast among treatment means that only involves the difference between treatments <span class="math inline">\(i\)</span> and <span class="math inline">\(i&#39;\)</span>. In general, we define contrasts as follows.</p>
+<p><span class="math display">\[
+L = \sum_{i=1}^rc_i\mu_i \qquad \mbox{such that: } \sum_{i=1}^rc_i=0
+\]</span></p>
+<p>The estimator for <span class="math inline">\(L\)</span> is <span class="math inline">\(\hat{L}\)</span> that replaces the <span class="math inline">\(\left\{\mu_i\right\}\)</span> with the treatment means <span class="math inline">\(\left\{\overline{Y}_{i\bullet}\right\}\)</span>.</p>
+<p><span class="math display">\[
+\hat{L}=\sum_{i=1}^rc_i\overline{Y}_{i\bullet} \qquad
+E\left\{\hat{L}\right\}=\sum_{i=1}^rc_i\mu_i=L
+\]</span></p>
+<p><span class="math display">\[
+V\left\{\hat{L}\right\}=\sum_{i=1}^r c_i^2\frac{\sigma^2}{n_i}
+\qquad \qquad
+\hat{V}\left\{\hat{L}\right\}=MSE\sum_{i=1}^r\frac{c_i^2}{n_i}
+\]</span>
+We can make use of the <span class="math inline">\(t\)</span>-distribution to obtain confidence intervals and tests regarding contrasts. Also, we can use an <span class="math inline">\(F\)</span>-test as well.</p>
+<p><span class="math display">\[
+\frac{\hat{L}-L}{\hat{SE}\left\{\hat{L}\right\}} \sim t_{n_T-r}
+\quad \Rightarrow \quad (1-\alpha)100\% \mbox{ CI for L:} \quad
+\hat{L} \pm t_{1-\alpha/2;n_T-r}\hat{SE}\left\{\hat{L}\right\}
+\]</span></p>
+<p>For testing <span class="math inline">\(H_0:L=0\)</span> versus <span class="math inline">\(H_A:L\ne 0\)</span>, we can use either a <span class="math inline">\(t\)</span>-test or <span class="math inline">\(F\)</span>-test, which provide the same conclusions and <span class="math inline">\(P\)</span>-values.
+The <span class="math inline">\(t\)</span>-test is given here.</p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad t^*=\frac{\hat{L}}{\hat{SE}\left\{\hat{L}\right\}}
+\qquad \mbox{Rejection Region:}\quad \left|t^*\right| \ge t_{1-\alpha/2;n_T-r}
+\]</span></p>
+<p>For the <span class="math inline">\(F\)</span>-test, we first define the sum of squares for the contrast, then construct the <span class="math inline">\(F\)</span>-statistic.</p>
+<p><span class="math display">\[
+\mbox{Contrast Sum of Squares:} \quad
+SSL = \frac{\left(\hat{L}\right)^2}{\sum_{i=1}^r\frac{c_i^2}{n_i}}
+\]</span>
+<span class="math display">\[n_1=\cdots =n_r=n \quad \Rightarrow \quad
+SSL=n\frac{\left(\hat{L}\right)^2}{\sum_{i=1}^rc_i^2}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad F^*=\frac{SSL}{MSE} \qquad
+\mbox{Rejection Region:} \quad F^* \ge F_{1-\alpha;1,n_T-r}
+\]</span></p>
+<p>Two contrasts <span class="math inline">\(L_1=\sum_{i=1}^ra_i\mu_i\)</span> and <span class="math inline">\(L_2=\sum_{i=1}^rb_i\mu_i\)</span>
+where <span class="math inline">\(\sum_{i=1}^ra_i=\sum_{i=1}^rb_i=0\)</span> are said to be <strong>Orthogonal Contrasts</strong> if the product of their coefficients divided by their sample sizes is 0.</p>
+<p><span class="math display">\[
+L_1,L_2\mbox{ are orthogonal if:} \quad \sum_{i=1}^r\frac{a_ib_i}{n_i}=0
+\]</span></p>
+<p>When the experiment is balanced, this simplifies to <span class="math inline">\(\sum_{i=1}^ra_ib_i=0\)</span>.
+Among <span class="math inline">\(r\)</span> treatments/groups, we can construct <span class="math inline">\(r-1\)</span> pairwise orthogonal contrasts, whose sums of squares and degrees of freedom sum to <span class="math inline">\(SSTR\)</span> and <span class="math inline">\(df_{TR}\)</span>, respectively.</p>
+<p><strong>Example 3.1 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p>Here, we re-describe the virtual training study to set up some interesting contrasts among the training methods.
+A study in South Korea compared <span class="math inline">\(r=4\)</span> methods of training to conduct a lifeboat launching task <span class="citation">(<a href="#ref-jung_2018">Jung and Ahn 2018</a>)</span>.
+The treatments and their labels from the paper are given below and the response <span class="math inline">\(Y\)</span> was a procedural knowledge score for subjects post training.</p>
+<ul>
+<li><strong>Lecture/Materials</strong> - Traditional Lecture with no computer component (LEC/MAT)</li>
+<li><strong>Monitor/Keyboard</strong> - Trained virtually with a monitor, keyboard, and mouse (MON/KEY)</li>
+<li><strong>Head-Mounted Display/Joypad</strong> - Trained virtually with HMD and joypad (HMD/JOY)</li>
+<li><strong>Head-Mounted Display/Wearable Sensors</strong> - (HMD/WEA)</li>
+</ul>
+<p>There were a total of <span class="math inline">\(n_T=64\)</span> subjects and they were randomized so that 16 subjects received each treatment <span class="math inline">\(\left(n_1=n_2=n_3=n_4=16\right)\)</span>.</p>
+<p>Consider the following 3 contrasts.</p>
+<ul>
+<li><strong>Lecture Materials versus Virtual Training</strong> <span class="math inline">\(a_1=3,a_2=a_3=a_4=-1\)</span></li>
+<li><strong>Monitor/Keyboard versus Head Mounted Display</strong> <span class="math inline">\(b_1=0,b_2=2,b_3=b_4=-1\)</span></li>
+<li><strong>Head Mounted Displays: Joypad versus Wearables</strong> <span class="math inline">\(d_1=d_2=0,d_3=1,d_4=-1\)</span></li>
+</ul>
+<p>All of these are contrasts, as their coefficients sum to zero.
+Further, they are pairwise orthogonal.</p>
+<p><span class="math display">\[
+\sum_{i=1}^ra_ib_i=3(0)+(-1)(2)+(-1)(-1)+(-1)(-1)=0-2+1+1=0
+\]</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^ra_id_i=3(0)+2(0)+(-1)(1)+(-1)(-1)=0+0-1+1=0
+\]</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^rb_id_i=0(0)+2(0)+(-1)(1)+(-1)(-1)=0+0-1+1=0
+\]</span>
+Table <a href="analysis-of-treatment-means.html#tab:ch0301">4.1</a> gives calculations necessary to obtain the Confidence Intervals, <span class="math inline">\(t\)</span>-tests, sums of squares and <span class="math inline">\(F\)</span>-tests for the three contrasts.
+Recall from the last chapter, the following quantities.</p>
+<p><span class="math display">\[
+SSTR=65.628 \quad df_{TR}=3 \qquad SSE=265.815 \quad df_E=60 \quad MSE=4.430
+\]</span>
+The critical <span class="math inline">\(t\)</span>-value for <span class="math inline">\(\alpha=.05\)</span> and <span class="math inline">\(df_E=60\)</span> is <span class="math inline">\(t_{.975,60}=2.000\)</span>.</p>
+<p>For contrast <span class="math inline">\(L_1\)</span>, comparing the virtual training methods to the “control” treatment has the following values.</p>
+<p><span class="math display">\[
+\hat{L}_1=3\overline{Y}_{1\bullet}-\overline{Y}_{2\bullet}
+-\overline{Y}_{3\bullet}-\overline{Y}_{4\bullet}=-6.526
+\]</span>
+<span class="math display">\[
+\hat{SE}\left\{\hat{L}_1\right\}=\sqrt{MSE\sum_{i=1}^4\frac{a_i^2}{n_i}}=
+\sqrt{4.430(0.75)}=1.823
+\]</span>
+<span class="math display">\[
+95\% \mbox{ CI for } L_1: \quad -6.526 \pm 2.000(1.823)  \equiv
+-6.526 \pm 3.646  \equiv  (-10.172,-2.880)
+\]</span>
+<span class="math display">\[
+\mbox{Test Statistic:} \quad t_1^* = \frac{-6.526}{1.823}=-3.580
+\]</span>
+<span class="math display">\[
+\mbox{Rejection Region:}\quad \left|t_1^*\right|\ge 2.000
+\qquad
+P=2P\left(t_{60}\ge |-3.580|\right)=.0007
+\]</span></p>
+<p><span class="math display">\[
+SSL_1 = \frac{\left(\hat{L}_1\right)^2}{\sum_{i=1}^r\frac{a_i^2}{n_i}}=
+\frac{(-6.526)^2}{0.75}=56.785
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad F_1^* = \frac{SSL_1}{MSE}=\frac{56.785}{4.430}=12.818
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Rejection Region:}\quad F_1^*\ge F_{.95,1,60}=4.001
+\qquad
+P=P\left(F_{1,60}\ge 12.818\right)=.0007
+\]</span></p>
+<p>Without going through the calculations, we obtain the following values for <span class="math inline">\(L_2\)</span> and <span class="math inline">\(L_3\)</span>.</p>
+<p><span class="math display">\[
+L_2: \quad \hat{L}_2=-1.805 \quad \hat{SE}\left\{\hat{L}_2\right\}=1.289 \quad
+SSL_2=8.688
+\]</span>
+<span class="math display">\[
+L_3: \quad \hat{L}_3=-0.139 \quad \hat{SE}\left\{\hat{L}_3\right\}=0.744 \quad
+SSL_3=0.155
+\]</span>
+The sums of squares for the three pairwise orthogonal contrasts sum up to the treatment sum of squares.</p>
+<p><span class="math display">\[
+SSL_1+SSL_2+SSL_3=56.785+8.688+0.155=65.628=SSTR
+\]</span>
+The main take away is that the three virtual training methods (as a group) have significantly higher scores than the Lecture/Material control group.
+There appears to be no significant differences among the virtual training methods.</p>
+<table>
+<caption><span id="tab:ch0301">Table 4.1: </span>Lifeboat Virtual Training Contrast Calculations</caption>
+<colgroup>
+<col width="18%" />
+<col width="3%" />
+<col width="7%" />
+<col width="3%" />
+<col width="3%" />
+<col width="3%" />
+<col width="9%" />
+<col width="9%" />
+<col width="9%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="left">n</th>
+<th align="left">Mean</th>
+<th align="left">a</th>
+<th align="left">b</th>
+<th align="left">d</th>
+<th align="left">L1</th>
+<th align="left">L2</th>
+<th align="left">L3</th>
+<th align="left"><span class="math inline">\(a^2/n\)</span></th>
+<th align="left"><span class="math inline">\(b^2/n\)</span></th>
+<th align="left"><span class="math inline">\(d^2/n\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">LEC/MAT (i=1)</td>
+<td align="left">16</td>
+<td align="left">4.931</td>
+<td align="left">3</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">14.793</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0.5625</td>
+<td align="left">0</td>
+<td align="left">0</td>
+</tr>
+<tr class="even">
+<td align="left">MON/KEY (i=2)</td>
+<td align="left">16</td>
+<td align="left">7.708</td>
+<td align="left">-1</td>
+<td align="left">2</td>
+<td align="left">0</td>
+<td align="left">-7.708</td>
+<td align="left">15.416</td>
+<td align="left">0</td>
+<td align="left">0.0625</td>
+<td align="left">0.25</td>
+<td align="left">0</td>
+</tr>
+<tr class="odd">
+<td align="left">HMD/JOY (i=3)</td>
+<td align="left">16</td>
+<td align="left">6.736</td>
+<td align="left">-1</td>
+<td align="left">-1</td>
+<td align="left">1</td>
+<td align="left">-6.736</td>
+<td align="left">-6.736</td>
+<td align="left">6.736</td>
+<td align="left">0.0625</td>
+<td align="left">0.0625</td>
+<td align="left">0.0625</td>
+</tr>
+<tr class="even">
+<td align="left">HMD/WEA (i=4)</td>
+<td align="left">16</td>
+<td align="left">6.875</td>
+<td align="left">-1</td>
+<td align="left">-1</td>
+<td align="left">-1</td>
+<td align="left">-6.875</td>
+<td align="left">-6.875</td>
+<td align="left">6.875</td>
+<td align="left">0.0625</td>
+<td align="left">0.0625</td>
+<td align="left">0.0625</td>
+</tr>
+<tr class="odd">
+<td align="left">Sum</td>
+<td align="left">64</td>
+<td align="left"></td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">-6.526</td>
+<td align="left">1.805</td>
+<td align="left">-0.139</td>
+<td align="left">0.75</td>
+<td align="left">0.375</td>
+<td align="left">0.125</td>
+</tr>
+</tbody>
+</table>
+<p>While it is possible to construct contrasts directly in R,
+it is very easy to compute them directly, as we show below.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="analysis-of-treatment-means.html#cb87-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
+<span id="cb87-2"><a href="analysis-of-treatment-means.html#cb87-2" tabindex="-1"></a><span class="fu">head</span>(vt,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   grp.trt procKnow
+## 1       1   4.5614
+## 2       1   6.6593</code></pre>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="analysis-of-treatment-means.html#cb89-1" tabindex="-1"></a><span class="fu">attach</span>(vt)</span>
+<span id="cb89-2"><a href="analysis-of-treatment-means.html#cb89-2" tabindex="-1"></a></span>
+<span id="cb89-3"><a href="analysis-of-treatment-means.html#cb89-3" tabindex="-1"></a>vt.n <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(procKnow, grp.trt, length))     <span class="do">## Obtain n_i</span></span>
+<span id="cb89-4"><a href="analysis-of-treatment-means.html#cb89-4" tabindex="-1"></a>vt.mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(procKnow, grp.trt, mean))    <span class="do">## Obtain ybar_i</span></span>
+<span id="cb89-5"><a href="analysis-of-treatment-means.html#cb89-5" tabindex="-1"></a>vt.var <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(procKnow, grp.trt, var))      <span class="do">## Obtain s_i^2</span></span>
+<span id="cb89-6"><a href="analysis-of-treatment-means.html#cb89-6" tabindex="-1"></a><span class="fu">cbind</span>(vt.n, vt.mean, vt.var)</span></code></pre></div>
+<pre><code>##      vt.n  vt.mean   vt.var
+## [1,]   16 4.930550 3.763633
+## [2,]   16 7.708337 2.044874
+## [3,]   16 6.736106 7.952409
+## [4,]   16 6.874994 3.960078</code></pre>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="analysis-of-treatment-means.html#cb91-1" tabindex="-1"></a>n_T <span class="ot">&lt;-</span> <span class="fu">sum</span>(vt.n)</span>
+<span id="cb91-2"><a href="analysis-of-treatment-means.html#cb91-2" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">length</span>(vt.n)</span>
+<span id="cb91-3"><a href="analysis-of-treatment-means.html#cb91-3" tabindex="-1"></a>ybar. <span class="ot">&lt;-</span> <span class="fu">sum</span>(vt.n<span class="sc">*</span>vt.mean)<span class="sc">/</span>n_T</span>
+<span id="cb91-4"><a href="analysis-of-treatment-means.html#cb91-4" tabindex="-1"></a>SSTR <span class="ot">&lt;-</span> <span class="fu">sum</span>(vt.n<span class="sc">*</span>(vt.mean<span class="sc">-</span>ybar.)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb91-5"><a href="analysis-of-treatment-means.html#cb91-5" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> <span class="fu">sum</span>((vt.n<span class="dv">-1</span>)<span class="sc">*</span>vt.var)</span>
+<span id="cb91-6"><a href="analysis-of-treatment-means.html#cb91-6" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> SSE<span class="sc">/</span>(n_T<span class="sc">-</span>r)</span>
+<span id="cb91-7"><a href="analysis-of-treatment-means.html#cb91-7" tabindex="-1"></a></span>
+<span id="cb91-8"><a href="analysis-of-treatment-means.html#cb91-8" tabindex="-1"></a>L1.a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb91-9"><a href="analysis-of-treatment-means.html#cb91-9" tabindex="-1"></a>L2.b <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb91-10"><a href="analysis-of-treatment-means.html#cb91-10" tabindex="-1"></a>L3.c <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb91-11"><a href="analysis-of-treatment-means.html#cb91-11" tabindex="-1"></a></span>
+<span id="cb91-12"><a href="analysis-of-treatment-means.html#cb91-12" tabindex="-1"></a>L1.hat <span class="ot">&lt;-</span> <span class="fu">sum</span>(L1.a<span class="sc">*</span>vt.mean)</span>
+<span id="cb91-13"><a href="analysis-of-treatment-means.html#cb91-13" tabindex="-1"></a>L2.hat <span class="ot">&lt;-</span> <span class="fu">sum</span>(L2.b<span class="sc">*</span>vt.mean)</span>
+<span id="cb91-14"><a href="analysis-of-treatment-means.html#cb91-14" tabindex="-1"></a>L3.hat <span class="ot">&lt;-</span> <span class="fu">sum</span>(L3.c<span class="sc">*</span>vt.mean)</span>
+<span id="cb91-15"><a href="analysis-of-treatment-means.html#cb91-15" tabindex="-1"></a></span>
+<span id="cb91-16"><a href="analysis-of-treatment-means.html#cb91-16" tabindex="-1"></a>SE.L1.hat <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(MSE<span class="sc">*</span><span class="fu">sum</span>(L1.a<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>vt.n))</span>
+<span id="cb91-17"><a href="analysis-of-treatment-means.html#cb91-17" tabindex="-1"></a>SE.L2.hat <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(MSE<span class="sc">*</span><span class="fu">sum</span>(L2.b<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>vt.n))</span>
+<span id="cb91-18"><a href="analysis-of-treatment-means.html#cb91-18" tabindex="-1"></a>SE.L3.hat <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(MSE<span class="sc">*</span><span class="fu">sum</span>(L3.c<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>vt.n))</span>
+<span id="cb91-19"><a href="analysis-of-treatment-means.html#cb91-19" tabindex="-1"></a></span>
+<span id="cb91-20"><a href="analysis-of-treatment-means.html#cb91-20" tabindex="-1"></a>SSL<span class="fl">.1</span> <span class="ot">&lt;-</span> L1.hat<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="fu">sum</span>(L1.a<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>vt.n)</span>
+<span id="cb91-21"><a href="analysis-of-treatment-means.html#cb91-21" tabindex="-1"></a>SSL<span class="fl">.2</span> <span class="ot">&lt;-</span> L2.hat<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="fu">sum</span>(L2.b<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>vt.n)</span>
+<span id="cb91-22"><a href="analysis-of-treatment-means.html#cb91-22" tabindex="-1"></a>SSL<span class="fl">.3</span> <span class="ot">&lt;-</span> L3.hat<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span><span class="fu">sum</span>(L3.c<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>vt.n)</span>
+<span id="cb91-23"><a href="analysis-of-treatment-means.html#cb91-23" tabindex="-1"></a></span>
+<span id="cb91-24"><a href="analysis-of-treatment-means.html#cb91-24" tabindex="-1"></a>L1.out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(L1.hat, SE.L1.hat, L1.hat<span class="sc">/</span>SE.L1.hat,</span>
+<span id="cb91-25"><a href="analysis-of-treatment-means.html#cb91-25" tabindex="-1"></a>                L1.hat<span class="sc">-</span><span class="fu">qt</span>(.<span class="dv">975</span>,n_T<span class="sc">-</span>r)<span class="sc">*</span>SE.L1.hat, </span>
+<span id="cb91-26"><a href="analysis-of-treatment-means.html#cb91-26" tabindex="-1"></a>                L1.hat<span class="sc">+</span><span class="fu">qt</span>(.<span class="dv">975</span>,n_T<span class="sc">-</span>r)<span class="sc">*</span>SE.L1.hat,</span>
+<span id="cb91-27"><a href="analysis-of-treatment-means.html#cb91-27" tabindex="-1"></a>                SSL<span class="fl">.1</span>, SSL<span class="fl">.1</span><span class="sc">/</span>MSE, <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(SSL<span class="fl">.1</span><span class="sc">/</span>MSE,<span class="dv">1</span>,n_T<span class="sc">-</span>r))</span>
+<span id="cb91-28"><a href="analysis-of-treatment-means.html#cb91-28" tabindex="-1"></a>L2.out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(L2.hat, SE.L2.hat, L2.hat<span class="sc">/</span>SE.L2.hat,</span>
+<span id="cb91-29"><a href="analysis-of-treatment-means.html#cb91-29" tabindex="-1"></a>                L2.hat<span class="sc">-</span><span class="fu">qt</span>(.<span class="dv">975</span>,n_T<span class="sc">-</span>r)<span class="sc">*</span>SE.L2.hat, </span>
+<span id="cb91-30"><a href="analysis-of-treatment-means.html#cb91-30" tabindex="-1"></a>                L2.hat<span class="sc">+</span><span class="fu">qt</span>(.<span class="dv">975</span>,n_T<span class="sc">-</span>r)<span class="sc">*</span>SE.L2.hat,</span>
+<span id="cb91-31"><a href="analysis-of-treatment-means.html#cb91-31" tabindex="-1"></a>                SSL<span class="fl">.2</span>, SSL<span class="fl">.2</span><span class="sc">/</span>MSE, <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(SSL<span class="fl">.2</span><span class="sc">/</span>MSE,<span class="dv">1</span>,n_T<span class="sc">-</span>r))</span>
+<span id="cb91-32"><a href="analysis-of-treatment-means.html#cb91-32" tabindex="-1"></a>L3.out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(L3.hat, SE.L3.hat, L3.hat<span class="sc">/</span>SE.L3.hat,</span>
+<span id="cb91-33"><a href="analysis-of-treatment-means.html#cb91-33" tabindex="-1"></a>                L3.hat<span class="sc">-</span><span class="fu">qt</span>(.<span class="dv">975</span>,n_T<span class="sc">-</span>r)<span class="sc">*</span>SE.L3.hat, </span>
+<span id="cb91-34"><a href="analysis-of-treatment-means.html#cb91-34" tabindex="-1"></a>                L3.hat<span class="sc">+</span><span class="fu">qt</span>(.<span class="dv">975</span>,n_T<span class="sc">-</span>r)<span class="sc">*</span>SE.L3.hat,</span>
+<span id="cb91-35"><a href="analysis-of-treatment-means.html#cb91-35" tabindex="-1"></a>                SSL<span class="fl">.3</span>, SSL<span class="fl">.3</span><span class="sc">/</span>MSE, <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(SSL<span class="fl">.3</span><span class="sc">/</span>MSE,<span class="dv">1</span>,n_T<span class="sc">-</span>r))</span>
+<span id="cb91-36"><a href="analysis-of-treatment-means.html#cb91-36" tabindex="-1"></a>L.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(L1.out, L2.out, L3.out)</span>
+<span id="cb91-37"><a href="analysis-of-treatment-means.html#cb91-37" tabindex="-1"></a><span class="fu">colnames</span>(L.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Lhat&quot;</span>, <span class="st">&quot;Std Err&quot;</span>, <span class="st">&quot;t*&quot;</span>, <span class="st">&quot;LB&quot;</span>, <span class="st">&quot;UB&quot;</span>, <span class="st">&quot;SS&quot;</span>, <span class="st">&quot;F*&quot;</span>, <span class="st">&quot;P(&gt;F*)&quot;</span>)</span>
+<span id="cb91-38"><a href="analysis-of-treatment-means.html#cb91-38" tabindex="-1"></a><span class="fu">rownames</span>(L.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;L1:(3,-1,-1,-1)&quot;</span>,<span class="st">&quot;L2:(0,2,-1,-1)&quot;</span>,<span class="st">&quot;L3:(0,0,1,-1)&quot;</span>)</span>
+<span id="cb91-39"><a href="analysis-of-treatment-means.html#cb91-39" tabindex="-1"></a><span class="fu">round</span>(L.out,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##                   Lhat Std Err     t*      LB     UB     SS     F* P(&gt;F*)
+## L1:(3,-1,-1,-1) -6.528   1.823 -3.581 -10.174 -2.882 56.816 12.825  0.001
+## L2:(0,2,-1,-1)   1.806   1.289  1.401  -0.773  4.384  8.694  1.962  0.166
+## L3:(0,0,1,-1)   -0.139   0.744 -0.187  -1.627  1.350  0.154  0.035  0.853</code></pre>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="analysis-of-treatment-means.html#cb93-1" tabindex="-1"></a><span class="fu">detach</span>(vt)</span></code></pre></div>
+<p><span class="math display">\[\nabla\]</span></p>
+</div>
+<div id="simultaneous-comparisons" class="section level2 hasAnchor" number="4.4">
+<h2><span class="header-section-number">4.4</span> Simultaneous Comparisons<a href="analysis-of-treatment-means.html#simultaneous-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Often when fitting models, we wish to make multiple comparisons simultaneously. If we have <span class="math inline">\(k\)</span> independent comparisons and we make each one with significance level of <span class="math inline">\(\alpha\)</span>, the chances that all conclusions are correct is <span class="math inline">\((1-\alpha)^k\)</span> which is less than <span class="math inline">\(1-\alpha\)</span>.</p>
+<p>Other issues arise when researchers wait until observing the data to choose which comparisons to make (like comparing the maximum and minimum observed means). This practice has the effect of inflating the Type I error rate, <span class="math inline">\(\alpha\)</span>, and is referred to as <strong>data snooping</strong>.</p>
+<p>There are various methods for making simultaneous corrections. One common method is to do each comparison with <span class="math inline">\(\alpha^*=\alpha/k\)</span>, and then <span class="math inline">\(\left(1-\alpha^*\right)^k \ge (1-\alpha)\)</span>.</p>
+<p>For instance, if we wish to compute <span class="math inline">\(k=5\)</span> confidence intervals, and we want them all to contain their true parameter with <span class="math inline">\(95\%\)</span> confidence, <span class="math inline">\(\alpha=0.05\)</span> and <span class="math inline">\(\alpha^*=\alpha/k=0.01\)</span>, then we should construct 99%
+confidence intervals for the individual parameters. Note that <span class="math inline">\((1-.01)^5=.9510&gt;.95\)</span>.</p>
+<p>In this section, several procedures are described for making simultaneous comparisons.</p>
+<div id="tukeys-honest-significant-difference-hsd" class="section level3 hasAnchor" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Tukey’s Honest Significant Difference (HSD)<a href="analysis-of-treatment-means.html#tukeys-honest-significant-difference-hsd" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This method is widely used for ANOVA models. It makes use of
+the <strong>Studentized Range Distribution</strong> with critical values given in many
+textbooks, online, and on the course slides. In R, the <strong>qtukey</strong> function can be used to obtain critical values and the <strong>ptukey</strong> function can be used to obtain adjusted <span class="math inline">\(P\)</span>-values.</p>
+<p>The basis for the distribution is as follows, where <span class="math inline">\(Y_1,\ldots,Y_r\)</span> are independent and normally distributed with mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>. Further, let <span class="math inline">\(s^2\)</span> be an unbiased estimator of <span class="math inline">\(\sigma^2\)</span> that is independent of <span class="math inline">\(Y_1,\ldots,Y_r\)</span>, with degrees of freedom <span class="math inline">\(\nu\)</span>.
+Note that <span class="math inline">\(s^2\)</span> cannot be computed from <span class="math inline">\(Y_1,\ldots,Y_r\)</span> in this situation, but it does work when we are comparing treatment/group means below.
+Let <span class="math inline">\(w\)</span> be the range of <span class="math inline">\(Y_1,\ldots,Y_r\)</span> and <span class="math inline">\(w/s\)</span> be the studentized range, indexed by the sample size, <span class="math inline">\(r\)</span> and the degrees of freedom for <span class="math inline">\(s\)</span>, <span class="math inline">\(\nu\)</span>. We will use <span class="math inline">\(q_{1-\alpha;r,\nu}\)</span> represent the <span class="math inline">\(1-\alpha\)</span> quantile of the Studentized Range distribution.</p>
+<p><span class="math display">\[
+w=\max\left(Y_1,\ldots,Y_r\right)-\min\left(Y_1,\ldots,Y_r\right)
+\qquad \frac{w}{s}=q(r,\nu)
+\]</span></p>
+<p><span class="math display">\[
+P\left(\frac{w}{s}=q(r,\nu)\le q_{1-\alpha;r,\nu}\right)=1-\alpha
+\]</span>
+<span class="math display">\[
+\quad \Rightarrow \quad P\left(\frac{\left|Y_i-Y_{i&#39;}\right|}{s}
+\le q_{1-\alpha;r,\nu}\right)=1-\alpha \quad \mbox{for all } i,i&#39;
+\]</span></p>
+<p>Now, consider making all pairwise comparisons among means under the assumption of equal means <span class="math inline">\(\left(\mu_1=\cdots = \mu_r = \mu\right)\)</span>
+and equal sample sizes <span class="math inline">\(\left(n_1=\cdots = n_r=n\right)\)</span>.</p>
+<p>Then, we have the following results for the sampling distribution
+of <span class="math inline">\(\overline{Y}_{i\bullet}\)</span> and its estimated variance, which is unbiased with <span class="math inline">\(n_T-r\)</span> degrees of freedom. Furthermore the sample means
+<span class="math inline">\(\left\{\overline{Y}_{i\bullet}\right\}\)</span> and <span class="math inline">\(MSE\)</span> are independent.</p>
+<p><span class="math display">\[
+\overline{Y}_{i\bullet} \sim N\left(\mu,\frac{\sigma^2}{n}\right)
+\qquad \qquad
+\hat{V}\left\{\overline{Y}_{i\bullet}\right\}=\frac{MSE}{n}
+\]</span>
+<span class="math display">\[
+\quad \Rightarrow \quad
+P\left(\frac{\left|\overline{Y}_{i\bullet}-
+\overline{Y}_{i&#39;\bullet}\right|}{\sqrt{MSE/n}}
+\le q_{1-\alpha;r,\nu}\right)=1-\alpha \quad \mbox{for all } i,i&#39;
+\]</span></p>
+<p>Then we conclude <span class="math inline">\(\mu_i \ne \mu_{i&#39;}\)</span> if the following criteria is met.</p>
+<p><span class="math display">\[
+\frac{\left|\overline{Y}_{i\bullet}-
+\overline{Y}_{i&#39;\bullet}\right|}{\sqrt{MSE/n}}
+\ge q_{1-\alpha;r,\nu}
+\quad \Rightarrow \quad
+\left|\overline{Y}_{i\bullet}-
+\overline{Y}_{i&#39;\bullet}\right|
+\ge q_{1-\alpha;r,\nu}\sqrt{\frac{MSE}{n}}
+\]</span>
+Subsequently this method was generalized to allow for unequal sample sizes
+with the following decision rule. Conclude <span class="math inline">\(\mu_i \ne \mu_{i&#39;}\)</span> if the following result holds.</p>
+<p><span class="math display">\[
+\left|\overline{Y}_{i\bullet}-
+\overline{Y}_{i&#39;\bullet}\right|
+\ge \frac{q_{1-\alpha;r,\nu}}{\sqrt{2}}\sqrt{MSE
+\left(\frac{1}{n_i}+\frac{1}{n_{i&#39;}}\right)}
+\]</span>
+An equivalent way of writing this test, in terms of <span class="math inline">\(D=\mu_i-\mu_{i&#39;}\)</span>
+and <span class="math inline">\(\hat{D}=\overline{Y}_{i\bullet}-\overline{Y}_{i&#39;\bullet}\)</span> is to
+reject <span class="math inline">\(H_0: D=0\)</span> based on the following test.</p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad
+q^*=\frac{\sqrt{2}\hat{D}}{\hat{SE}\left\{\hat{D}\right\}} \qquad
+\mbox{Rejection Region:} \quad \left|q^*\right| \ge
+q_{1-\alpha;r,\nu}
+\]</span>
+The adjusted <span class="math inline">\(P\)</span>-value is the area above <span class="math inline">\(\left|q^*\right|\)</span>
+in the Studentized Range distribution.</p>
+<p>To obtain simultaneous <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Intervals for
+all <span class="math inline">\(r(r-1)/2\)</span> mean differences we can simply invert the test as follows.</p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ for } \mu_i-\mu_{i&#39;}: \quad
+\left(\overline{Y}_{i\bullet}-
+\overline{Y}_{i&#39;\bullet}\right) \pm
+\frac{1}{\sqrt{2}}q_{1-\alpha;r,n_T-r}
+\sqrt{MSE
+\left(\frac{1}{n_i}+\frac{1}{n_{i&#39;}}\right)}
+\]</span></p>
+<p><strong>Example 3.2 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p>First, we obtain <span class="math inline">\(r=4\)</span>, <span class="math inline">\(\nu=64-4=60\)</span>, and <span class="math inline">\(q_{.95;4,60}=3.737\)</span>
+for this study.
+Using calculations from before, we have the following results.</p>
+<p><span class="math display">\[
+n_1=n_2=n_3=n_4=16 \qquad \overline{y}_{1\bullet}=4.931 \quad
+\overline{y}_{2\bullet}=7.708 \quad
+\overline{y}_{3\bullet}=6.736 \quad
+\overline{y}_{4\bullet}=6.875
+\]</span></p>
+<p><span class="math display">\[
+MSE = 4.430 \qquad \hat{SE}\left\{\hat{D}\right\}=
+\sqrt{4.430\left(\frac{1}{16}+\frac{1}{16}\right)}=0.744
+\]</span></p>
+<p>Next we compute the Tukey HSD for all pairs of means (as this is a balanced design).</p>
+<p><span class="math display">\[
+HSD_{ii&#39;}=\frac{3.737}{\sqrt{2}}(0.744)=2.642(0.744)=1.966
+\]</span></p>
+<p>That is, any pairs of means that differ by more than 1.966 in absolute value will be declared significantly different. We also
+obtain simultaneous 95% Confidence Intervals by adding and subtracting 1.966 to each difference <span class="math inline">\(\hat{D}\)</span>.
+Here we compute the values for the comparison of treatments 1 (LEC/MAT) and 2 (MON/KEY). Then we will use the R function <strong>TukeyHSD</strong> after fitting the model with an <strong>aov</strong> object.</p>
+<p><span class="math display">\[
+\hat{D}_{21}=\overline{Y}_{2\bullet}-\overline{Y}_{1\bullet}=
+7.708-4.931=2.777
+\]</span></p>
+<p><span class="math display">\[
+95\% \mbox{ Simultaneous CI for } \mu_2-\mu_1: \quad
+2.777 \pm 1.966 \quad \equiv \quad (0.811,4.743)
+\]</span></p>
+<p>Thus, we can conclude that the Monitor/Keyboard condition provides higher scores on average than the Lecture/Material condition. That is <span class="math inline">\(\mu_2&gt;\mu_1\)</span>.
+We next obtain the adjusted <span class="math inline">\(P\)</span>-value, making use of the <strong>ptukey</strong> function in R. First, though, we have to scale it back to a studentized range, <span class="math inline">\(q^*\)</span>.</p>
+<p><span class="math display">\[
+q^* = \frac{\sqrt{2}\hat{D}}{\hat{SE}\left\{\hat{D}\right\}}=
+\frac{\sqrt{2}(2.777)}{0.744}=5.279  \qquad
+P= P\left(q_{4,60}\ge |5.279|\right)=.0023
+\]</span></p>
+<p>Now, we use R to run all possible comparisons. Note that we have
+to fit an <strong>aov</strong> object and not a <strong>lm</strong> object to use the <strong>TukeyHSD</strong> function.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="analysis-of-treatment-means.html#cb94-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
+<span id="cb94-2"><a href="analysis-of-treatment-means.html#cb94-2" tabindex="-1"></a><span class="fu">head</span>(vt,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   grp.trt procKnow
+## 1       1   4.5614
+## 2       1   6.6593</code></pre>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="analysis-of-treatment-means.html#cb96-1" tabindex="-1"></a>vt<span class="sc">$</span>grp.trt.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(vt<span class="sc">$</span>grp.trt, <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb96-2"><a href="analysis-of-treatment-means.html#cb96-2" tabindex="-1"></a>                       <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;LEC/MAT&quot;</span>,<span class="st">&quot;MON/KEY&quot;</span>,<span class="st">&quot;HMD/JOY&quot;</span>, <span class="st">&quot;HMD/WEA&quot;</span>))</span>
+<span id="cb96-3"><a href="analysis-of-treatment-means.html#cb96-3" tabindex="-1"></a></span>
+<span id="cb96-4"><a href="analysis-of-treatment-means.html#cb96-4" tabindex="-1"></a>vt.mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(procKnow <span class="sc">~</span> grp.trt.f, <span class="at">data=</span>vt)</span>
+<span id="cb96-5"><a href="analysis-of-treatment-means.html#cb96-5" tabindex="-1"></a><span class="fu">summary.lm</span>(vt.mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = procKnow ~ grp.trt.f, data = vt)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.0831 -1.4444  0.5774  1.5495  3.1900 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        4.9306     0.5262   9.370 2.37e-13 ***
+## grp.trt.fMON/KEY   2.7778     0.7442   3.733 0.000423 ***
+## grp.trt.fHMD/JOY   1.8056     0.7442   2.426 0.018277 *  
+## grp.trt.fHMD/WEA   1.9444     0.7442   2.613 0.011329 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.105 on 60 degrees of freedom
+## Multiple R-squared:  0.1981, Adjusted R-squared:  0.158 
+## F-statistic: 4.941 on 3 and 60 DF,  p-value: 0.003931</code></pre>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="analysis-of-treatment-means.html#cb98-1" tabindex="-1"></a><span class="fu">anova</span>(vt.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: procKnow
+##           Df  Sum Sq Mean Sq F value   Pr(&gt;F)   
+## grp.trt.f  3  65.664 21.8880  4.9406 0.003931 **
+## Residuals 60 265.815  4.4302                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="analysis-of-treatment-means.html#cb100-1" tabindex="-1"></a>HSD.vt <span class="ot">&lt;-</span> <span class="fu">TukeyHSD</span>(vt.mod1)</span>
+<span id="cb100-2"><a href="analysis-of-treatment-means.html#cb100-2" tabindex="-1"></a>HSD.vt</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = procKnow ~ grp.trt.f, data = vt)
+## 
+## $grp.trt.f
+##                       diff        lwr       upr     p adj
+## MON/KEY-LEC/MAT  2.7777875  0.8113167 4.7442583 0.0023332
+## HMD/JOY-LEC/MAT  1.8055562 -0.1609146 3.7720271 0.0829543
+## HMD/WEA-LEC/MAT  1.9444437 -0.0220271 3.9109146 0.0537097
+## HMD/JOY-MON/KEY -0.9722312 -2.9387021 0.9942396 0.5624876
+## HMD/WEA-MON/KEY -0.8333437 -2.7998146 1.1331271 0.6788308
+## HMD/WEA-HMD/JOY  0.1388875 -1.8275833 2.1053583 0.9976681</code></pre>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="analysis-of-treatment-means.html#cb102-1" tabindex="-1"></a><span class="fu">plot</span>(HSD.vt, <span class="at">las=</span><span class="dv">1</span>, <span class="at">cex.axis=</span><span class="fl">0.4</span>, <span class="at">col=</span><span class="st">&quot;purple&quot;</span>)</span></code></pre></div>
+<p><img src="bookdownproj_STA4211Notes1_files/figure-html/ch0303-1.png" width="672" /></p>
+<p>Note that only treatments 2 and 1 are significantly different. The Confidence Interval does not contain 0 and the adjusted <span class="math inline">\(P\)</span>-value is below 0.05. Treatments 1 and 4 are close to being significantly different,
+but the Confidence Interval contains 0 and the <span class="math inline">\(P\)</span>-value is above 0.05.</p>
+<p><span class="math display">\[\nabla\]</span></p>
+</div>
+<div id="scheffes-method-for-multiple-comparisons" class="section level3 hasAnchor" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Scheffe’s Method for Multiple Comparisons<a href="analysis-of-treatment-means.html#scheffes-method-for-multiple-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This method is very conservative, but due to its procedure,
+it can be applied to all possible contrasts among treatment means.
+Using previous results on contrasts, we have the following set up for the procedure.</p>
+<p><span class="math display">\[
+L=\sum_{i=1}^rc_i \mu_i \qquad \mbox{ such that } \sum_{i=1}^rc_i=0
+\]</span></p>
+<p><span class="math display">\[
+\hat{L}=\sum_{i=1}^rc_i\overline{Y}_{i\bullet}  \qquad
+\hat{SE}\left\{\hat{L}\right\}=\sqrt{MSE\sum_{i=1}^r\frac{c_i^2}{n_i}}
+\]</span></p>
+<p>Then we construct simultaneous intervals of the following form.</p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ Simultaneous CI for }L: \quad
+\hat{L} \pm \left(\sqrt{(r-1)F_{1-\alpha;r-1,n_T-r}}\right)
+\hat{SE}\left\{\hat{L}\right\}
+\]</span>
+The critical <span class="math inline">\(F\)</span>-value is the same critical value for testing <span class="math inline">\(H_0:\mu_1=\cdots = \mu_r\)</span> for the Analysis of Variance.
+Note that when this hypothesis is true, all contrasts are 0.</p>
+<p>We can also simultaneously test whether a set of contrasts are 0.</p>
+<p><span class="math inline">\(H_0:L=\sum_{i=1}^r c_i\mu_i=0\)</span> vs <span class="math inline">\(H_A:L=\sum_{i=1}^r c_i\mu_i \ne 0\)</span></p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad
+F^*=\frac{\left(\hat{L}\right)^2}{(r-1)\hat{V}\left\{\hat{L}\right\}}
+\qquad
+\mbox{Rejection Region:} \quad F^*\geq F_{1-\alpha;r-1,n_T-r}
+\]</span></p>
+<p><strong>Example 3.3 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p>Consider the three pairwise orthogonal contrasts that we previously estimated.</p>
+<ul>
+<li><span class="math inline">\(L_1\)</span>: Lecture/Materials vs Virtual Training</li>
+<li><span class="math inline">\(L_2\)</span>: Monitor/Keyboard versus Head Mounted Displays</li>
+<li><span class="math inline">\(L_3\)</span>: HMD/Joypad versus HMD/Wearables</li>
+</ul>
+<p>The critical <span class="math inline">\(F\)</span>-value we need is <span class="math inline">\(F_{.95;3,60}=2.758\)</span>,
+leading to the following critical value for the Scheffe simultaneous confidence intervals.</p>
+<p><span class="math display">\[
+\sqrt{(r-1)F_{1-\alpha;r-1,n_T-r}}=
+\sqrt{(4-1)2.758}=2.876
+\]</span>
+Next, we give the estimated contrasts, their standard errors, and simultaneous 95% Confidence Intervals for the population based contrasts.</p>
+<p><span class="math display">\[
+\hat{L}_1=-6.526 \qquad \hat{SE}\left\{\hat{L}_1\right\}=1.823
+\]</span>
+<span class="math display">\[
+\hat{L}_2=1.805 \qquad \hat{SE}\left\{\hat{L}_2\right\}=1.289
+\]</span></p>
+<p><span class="math display">\[
+\hat{L}_3=-0.139 \qquad \hat{SE}\left\{\hat{L}_3\right\}=0.744
+\]</span></p>
+<p><span class="math display">\[
+95\% \mbox{ CI for: }L_1=3\mu_1-\mu_2-\mu_3-\mu_4:
+\quad -6.526 \pm 2.876(1.823)
+\]</span></p>
+<p><span class="math display">\[
+\equiv -6.526\pm 5.243 \equiv
+(-11.769,-1.283)
+\]</span></p>
+<p><span class="math display">\[
+95\% \mbox{ CI for: }L_2=2\mu_2-\mu_3-\mu_4:
+\quad 1.805 \pm 2.876(1.289)
+\]</span></p>
+<p><span class="math display">\[
+\equiv 1.805\pm 3.707 \equiv
+(-1.902,5.512)
+\]</span></p>
+<p><span class="math display">\[
+95\% \mbox{ CI for: }L_3=\mu_3-\mu_4:
+\quad -0.139 \pm 2.876(0.744)
+\]</span></p>
+<p><span class="math display">\[
+\equiv -0.139\pm 2.140 \equiv
+(-2.779,2.001)
+\]</span></p>
+<p>As a comparison between no adjustment for multiple Confidence Intervals and the Scheffe adjustment, consider the case of <span class="math inline">\(L_1\)</span>.
+When there was no adjustment, the interval was <span class="math inline">\((-10.172,-2.880)\)</span>.
+When the Scheffe adjustment was used, it was <span class="math inline">\((-11.769,-1.283)\)</span>.
+Again, Scheffe’s method can be used for all possible contrasts simultaneously.</p>
+<p><span class="math display">\[\nabla\]</span></p>
+</div>
+<div id="bonferroni-method-for-multiple-comparisons" class="section level3 hasAnchor" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Bonferroni Method for Multiple Comparisons<a href="analysis-of-treatment-means.html#bonferroni-method-for-multiple-comparisons" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Bonferroni method is widely used in many situations where multiple tests
+are conducted (not just among treatment means).
+If we have <span class="math inline">\(g\)</span> pre-planned comparisons or contrasts to be made, we make
+each comparison at the <span class="math inline">\(\alpha^*=\alpha/g\)</span> significance level. Note
+that a special case of this is making <span class="math inline">\(g=r(r-1)/2\)</span> comparisons among all pairs of treatment means. In that case, Tukey’s HSD will provide more powerful tests than the Bonferroni method (unless <span class="math inline">\(r\)</span>=2, and there is only one comparison).</p>
+<p><span class="math display">\[
+L=\sum_{i=1}^rc_i \mu_i \qquad \mbox{ such that } \sum_{i=1}^rc_i=0
+\]</span></p>
+<p><span class="math display">\[
+\hat{L}=\sum_{i=1}^rc_i\overline{Y}_{i\bullet}  \qquad
+\hat{SE}\left\{\hat{L}\right\}=\sqrt{MSE\sum_{i=1}^r\frac{c_i^2}{n_i}}
+\]</span></p>
+<p>Then we construct simultaneous confidence intervals of the following form.</p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ Simultaneous CI for }L: \quad
+\hat{L} \pm t_{1-\alpha/(2g);n_T-r}
+\hat{SE}\left\{\hat{L}\right\}
+\]</span></p>
+<p>Tables that give critical <span class="math inline">\(t\)</span>-values for the Bonferroni method are available in textbooks, online, and on the course slides.</p>
+<p>Simultaneous tests for <span class="math inline">\(g\)</span> pre-planned contrasts can be conducted to test whether the contrast is equal to zero.</p>
+<p><span class="math display">\[
+H_0:L=\sum_{i=1}^rc_i\mu_i=0 \qquad H_A:L=\sum_{i=1}^rc_i\mu_i \ne 0
+\]</span>
+<span class="math display">\[
+\mbox{Test Statistic:} \quad t^*=\frac{\hat{L}}{\hat{SE}\left\{\hat{L}\right\}}
+\qquad \mbox{Rejection Region:} \quad \left|t^*\right| \ge t_{1-\alpha/(2g),n_T-r}
+\]</span>
+<span class="math display">\[
+\mbox{Adjusted P-value:} \quad P=\min\left(1,g\times 2P\left(t_{n_T-r}\ge \left|t^*\right|\right)\right)
+\]</span></p>
+<p><strong>Example 3.4 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p>Consider the <span class="math inline">\(g=3\)</span> pairwise orthogonal contrasts that we previously estimated.</p>
+<ul>
+<li><span class="math inline">\(L_1\)</span> Lecture/Materials vs Virtual Training</li>
+<li><span class="math inline">\(L_2\)</span> Monitor/Keyboard versus Head Mounted Displays</li>
+<li><span class="math inline">\(L_3\)</span> HMD/Joypad versus HMD/Wearables</li>
+</ul>
+<p>The critical <span class="math inline">\(t\)</span>-value we need is <span class="math inline">\(t_{1-.05/(2(3));60}=2.463\)</span>.
+We will conduct the three simultaneous <span class="math inline">\(t\)</span>-tests and obtain their adjusted <span class="math inline">\(P\)</span>-values.</p>
+<p>Next, we give the estimated contrasts, their standard errors, and simultaneous <span class="math inline">\(t\)</span>-tests with an overall experimentwise error rate of <span class="math inline">\(\alpha=0.05\)</span> for the population based contrasts. Note that the individual tests are being conducted at <span class="math inline">\(\alpha^*=.05/3=.0167\)</span> error rate.</p>
+<p><span class="math display">\[
+\hat{L}_1=-6.526 \qquad \hat{SE}\left\{\hat{L}_1\right\}=1.823 \qquad t_1^*=\frac{-6.526}{1.823}=-3.580
+\]</span>
+<span class="math display">\[
+\hat{L}_2=1.805 \qquad \hat{SE}\left\{\hat{L}_2\right\}=1.289 \qquad t_2^*=\frac{1.805}{1.289}=1.400
+\]</span></p>
+<p><span class="math display">\[
+\hat{L}_3=-0.139 \qquad \hat{SE}\left\{\hat{L}_3\right\}=0.744 \qquad t_3^*=\frac{-0.139}{0.744}=-0.187
+\]</span>
+Thus, again, only the first contrast is significant. We compute the 3 adjusted <span class="math inline">\(P\)</span>-values by first obtaining the 2-sided tail areas for the <span class="math inline">\(g=3\)</span> <span class="math inline">\(t\)</span>-statistics, then applying the Bonferroni adjustments.</p>
+<p><span class="math display">\[
+2P\left(t_{60}\ge|3.580|\right) = 2(.00034)=.0007
+\qquad P_1 = \min\left(1,3(.0007)\right) = .0021
+\]</span>
+<span class="math display">\[
+2P\left(t_{60}\ge|1.400|\right) = 2(.0833)=.1666
+\qquad
+P_2 = \min\left(1,3(.1666)\right) = .4998
+\]</span></p>
+<p><span class="math display">\[
+2P\left(t_{60}\ge|-0.187|\right) = 2(.4261)=.8522
+\qquad
+P_3 = \min\left(1,3(.8522)\right) = 1
+\]</span></p>
+<p>Note that if we used the Bonferroni method for comparing all <span class="math inline">\(g=4(4-1)/2=6\)</span> pairs of treatment means, the critical <span class="math inline">\(t\)</span>-value would be <span class="math inline">\(t_{1-.05/(2(6));60}=2.729\)</span>.
+Since the standard error for the difference in two mean for this example is <span class="math inline">\(\hat{SE}\left\{\hat{D}\right\}=0.744\)</span>, the simultaneous confidence intervals would be of the following form.</p>
+<p><span class="math display">\[
+\hat{D}_{ii&#39;} \pm 2.729(0.744) \quad \equiv \quad \hat{D}_{ii&#39;} \pm 2.030
+\]</span></p>
+<p>These intervals are slightly wider than the Tukey based intervals <span class="math inline">\(\left(\hat{D}_{ii&#39;} \pm 1.966\right)\)</span>. The same conclusions among treatment means are made.</p>
+<p><span class="math display">\[\nabla\]</span></p>
+</div>
+<div id="multiple-range-methods" class="section level3 hasAnchor" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Multiple Range Methods<a href="analysis-of-treatment-means.html#multiple-range-methods" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this section, we briefly describe two methods that use multiple ranges for comparisons:
+<strong>Student-Newman-Keuls’</strong> (often shortened to SNK) and <strong>Duncan’s</strong> methods.
+They both are based on ordering the observed means. Neither can be used to construct simultaneous confidence intervals.</p>
+<p><span class="math display">\[
+\overline{Y}_{(1)\bullet} \le \cdots \le \overline{Y}_{(r)\bullet} \qquad n_{(i)} \mbox{ is the sample size for the ordered groups}
+\]</span></p>
+<p>Each method uses different critical values for testing pairs of treatment means, depending on how many means are between them. They both begin by comparing the extreme means, which
+encompass <span class="math inline">\(r\)</span> means.</p>
+<p>For the SNK method, we reject <span class="math inline">\(H_0:\mu_{(i)}-\mu_{(i&#39;)}=0\)</span> where <span class="math inline">\(i&gt;i&#39;\)</span> if the following result holds, where <span class="math inline">\(q_{1-\alpha;k,n_T-r}\)</span> is obtained from the studentized range distribution.</p>
+<p><span class="math display">\[
+\overline{Y}_{(i)\bullet}- \overline{Y}_{(i&#39;)\bullet} \ge
+\frac{q_{1-\alpha;k,n_T-r}}{\sqrt{2}}
+\sqrt{MSE\left(\frac{1}{n_{(i)}}+\frac{1}{n_{(i&#39;)}}\right)} \qquad k=i-i&#39;+1
+\]</span></p>
+<p>If we fail to reject this hypothesis, no means between these are compared.</p>
+<p>For Duncan’s method, the error rates are increased as the means are farther apart in terms of the number of means between them. This makes it “easier” to detect differences at the cost of increasing overall error rates.
+In this case we reject <span class="math inline">\(H_0:\mu_{(i)}-\mu_{(i&#39;)}=0\)</span> if the following result holds.
+As with the SNK method, if two means are not significantly different, no means between them are compared.</p>
+<p><span class="math display">\[
+\overline{Y}_{(i)\bullet}- \overline{Y}_{(i&#39;)\bullet} \ge
+\frac{q_{(1-\alpha)^{k-1};k,n_T-r}}{\sqrt{2}}
+\sqrt{MSE\left(\frac{1}{n_{(i)}}+\frac{1}{n_{(i&#39;)}}\right)} \qquad k=i-i&#39;+1
+\]</span></p>
+<p><strong>Example 3.5 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p>For this example, we have the following values.</p>
+<p><span class="math display">\[
+r=4 \qquad n_1=\cdots=n_r=16 \qquad MSE=4.430 \qquad \hat{SE}\left\{\hat{D}\right\}=
+\sqrt{4.430\left(\frac{1}{16}+\frac{1}{16}\right)}=0.744
+\]</span></p>
+<p><span class="math display">\[
+\overline{Y}_{(1)\bullet}=4.931 \quad
+\overline{Y}_{(2)\bullet}=6.736 \quad
+\overline{Y}_{(3)\bullet}=6.875 \quad
+\overline{Y}_{(4)\bullet}=7.708
+\]</span>
+We first test <span class="math inline">\(H_0:\mu_{(4)}-\mu_{(1)}=0\)</span> with range <span class="math inline">\(k=4-1+1=4\)</span>.
+Using the <strong>qtukey</strong> function in R, we obtain the following critical values and rejection regions (RR) based on
+the studentized range distribution with overall experimentwise error rate <span class="math inline">\(\alpha=.05\)</span>.</p>
+<p><span class="math display">\[
+\mbox{SNK:} \quad q(.95;4,60)=3.737   \qquad \mbox{RR:} \quad
+\overline{Y}_{(4)\bullet}- \overline{Y}_{(1)\bullet} \ge
+\frac{3.737}{\sqrt{2}}(0.744)=1.966
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Duncan:} \quad q((.95)^{4-1};4,60)=3.073   \qquad \mbox{RR:} \quad
+\overline{Y}_{(4)\bullet}- \overline{Y}_{(1)\bullet} \ge
+\frac{3.073}{\sqrt{2}}(0.744)=1.617
+\]</span>
+The observed difference is <span class="math inline">\(\overline{y}_{(4)\bullet}- \overline{y}_{(1)\bullet}=7.708-4.931=2.777\)</span>. Both methods conclude these means are significantly different.</p>
+<p>Next, we obtain the critical values and rejection regions for testing <span class="math inline">\(H_0:\mu_{(4)}-\mu_{(2)}=0\)</span> and <span class="math inline">\(H_0:\mu_{(3)}-\mu_{(1)}=0\)</span>, each with a range of <span class="math inline">\(k=3\)</span>.</p>
+<p><span class="math display">\[
+\mbox{SNK:} \quad q(.95;3,60)=3.399   \qquad \mbox{RR:} \quad
+\overline{Y}_{(i)\bullet}- \overline{Y}_{(i&#39;)\bullet} \ge
+\frac{3.399}{\sqrt{2}}(0.744)=1.788
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Duncan:} \quad q((.95)^{3-1};3,60)=2.976   \qquad \mbox{RR:} \quad
+\overline{Y}_{(i)\bullet}- \overline{Y}_{(i&#39;)\bullet} \ge
+\frac{2.976}{\sqrt{2}}(0.744)=1.566
+\]</span></p>
+<p>The observed differences are as follow.</p>
+<p><span class="math display">\[
+\overline{y}_{(4)\bullet}- \overline{y}_{(2)\bullet}=7.708-6.736=0.972 \qquad
+\overline{y}_{(3)\bullet}- \overline{y}_{(1)\bullet}=6.875-4.931=1.944
+\]</span></p>
+<p>Neither test rejects <span class="math inline">\(H_0:\mu_{(4)}-\mu_{(2)}=0\)</span> and both reject
+<span class="math inline">\(H_0:\mu_{(3)}-\mu_{(1)}=0\)</span>. Thus, we do not compare <span class="math inline">\(\mu_{(4)}\)</span> and <span class="math inline">\(\mu_{(3)}\)</span>,
+or compare <span class="math inline">\(\mu_{(3)}\)</span> and <span class="math inline">\(\mu_{(2)}\)</span>, as both of these are between <span class="math inline">\(\mu_{(4)}\)</span> and <span class="math inline">\(\mu_{(2)}\)</span> .
+We will conduct the following test though, with <span class="math inline">\(k=2\)</span>,
+<span class="math inline">\(H_0:\mu_{(2)}-\mu_{(1)}=0\)</span></p>
+<p><span class="math display">\[
+\mbox{SNK:} \quad q(.95,2,60)=2.829   \qquad \mbox{RR:} \quad
+\overline{Y}_{(i)\bullet}- \overline{Y}_{(i&#39;)\bullet} \ge
+\frac{2.829}{\sqrt{2}}(0.744)=1.488
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Duncan:} \quad q((.95)^{2-1},2,60)=2.829   \qquad \mbox{RR:} \quad
+\overline{Y}_{(2)\bullet}- \overline{Y}_{(1)\bullet} \ge
+\frac{2.829}{\sqrt{2}}(0.744)=1.488
+\]</span></p>
+<p>The observed differences are as follow.</p>
+<p><span class="math display">\[
+\overline{y}_{(2)\bullet}- \overline{y}_{(1)\bullet}=6.736-4.931=1.805
+\]</span></p>
+<p>Thus, we reject
+<span class="math inline">\(H_0:\mu_{(2)}-\mu_{(1)}=0\)</span>.</p>
+<p>Based on both the SNK and Duncan methods, we conclude that all three virtual reality methods perform better than the control (Lecture/Material) method.
+These methods are available in the <strong>agricolae</strong> package in R.
+Note that the treatment factor must be defined as a factor outside of <strong>aov</strong> or <strong>lm</strong>
+object to be used in the <strong>SNK.test</strong> and <strong>duncan.test</strong> functions.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="analysis-of-treatment-means.html#cb103-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
+<span id="cb103-2"><a href="analysis-of-treatment-means.html#cb103-2" tabindex="-1"></a><span class="fu">head</span>(vt,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   grp.trt procKnow
+## 1       1   4.5614
+## 2       1   6.6593</code></pre>
+<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="analysis-of-treatment-means.html#cb105-1" tabindex="-1"></a>vt<span class="sc">$</span>grp.trt.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(vt<span class="sc">$</span>grp.trt)</span>
+<span id="cb105-2"><a href="analysis-of-treatment-means.html#cb105-2" tabindex="-1"></a>vt.mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(procKnow <span class="sc">~</span> grp.trt.f, <span class="at">data=</span>vt)</span>
+<span id="cb105-3"><a href="analysis-of-treatment-means.html#cb105-3" tabindex="-1"></a><span class="fu">summary</span>(vt.mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = procKnow ~ grp.trt.f, data = vt)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.0831 -1.4444  0.5774  1.5495  3.1900 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   4.9306     0.5262   9.370 2.37e-13 ***
+## grp.trt.f2    2.7778     0.7442   3.733 0.000423 ***
+## grp.trt.f3    1.8056     0.7442   2.426 0.018277 *  
+## grp.trt.f4    1.9444     0.7442   2.613 0.011329 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.105 on 60 degrees of freedom
+## Multiple R-squared:  0.1981, Adjusted R-squared:  0.158 
+## F-statistic: 4.941 on 3 and 60 DF,  p-value: 0.003931</code></pre>
+<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="analysis-of-treatment-means.html#cb107-1" tabindex="-1"></a><span class="fu">anova</span>(vt.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: procKnow
+##           Df  Sum Sq Mean Sq F value   Pr(&gt;F)   
+## grp.trt.f  3  65.664 21.8880  4.9406 0.003931 **
+## Residuals 60 265.815  4.4302                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="analysis-of-treatment-means.html#cb109-1" tabindex="-1"></a><span class="fu">library</span>(agricolae)</span>
+<span id="cb109-2"><a href="analysis-of-treatment-means.html#cb109-2" tabindex="-1"></a><span class="fu">SNK.test</span>(vt.mod1, <span class="st">&quot;grp.trt.f&quot;</span>, <span class="at">console=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+## Study: vt.mod1 ~ &quot;grp.trt.f&quot;
+## 
+## Student Newman Keuls Test
+## for procKnow 
+## 
+## Mean Square Error:  4.430248 
+## 
+## grp.trt.f,  means
+## 
+##   procKnow      std  r        se    Min    Max      Q25     Q50      Q75
+## 1 4.930550 1.940008 16 0.5262039 0.3268 6.7509 4.230175 5.67085 6.375725
+## 2 7.708337 1.429991 16 0.5262039 5.0733 9.7848 6.682275 8.33320 8.707800
+## 3 6.736106 2.820002 16 0.5262039 1.6530 9.9261 5.298875 7.04235 9.101975
+## 4 6.874994 1.989995 16 0.5262039 3.2286 9.8754 5.344875 6.84850 8.346350
+## 
+## Alpha: 0.05 ; DF Error: 60 
+## 
+## Critical Range
+##        2        3        4 
+## 1.488551 1.788389 1.966471 
+## 
+## Means with the same letter are not significantly different.
+## 
+##   procKnow groups
+## 2 7.708337      a
+## 4 6.874994      a
+## 3 6.736106      a
+## 1 4.930550      b</code></pre>
+<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="analysis-of-treatment-means.html#cb111-1" tabindex="-1"></a><span class="fu">duncan.test</span>(vt.mod1, <span class="st">&quot;grp.trt.f&quot;</span>, <span class="at">console=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+## Study: vt.mod1 ~ &quot;grp.trt.f&quot;
+## 
+## Duncan&#39;s new multiple range test
+## for procKnow 
+## 
+## Mean Square Error:  4.430248 
+## 
+## grp.trt.f,  means
+## 
+##   procKnow      std  r        se    Min    Max      Q25     Q50      Q75
+## 1 4.930550 1.940008 16 0.5262039 0.3268 6.7509 4.230175 5.67085 6.375725
+## 2 7.708337 1.429991 16 0.5262039 5.0733 9.7848 6.682275 8.33320 8.707800
+## 3 6.736106 2.820002 16 0.5262039 1.6530 9.9261 5.298875 7.04235 9.101975
+## 4 6.874994 1.989995 16 0.5262039 3.2286 9.8754 5.344875 6.84850 8.346350
+## 
+## Alpha: 0.05 ; DF Error: 60 
+## 
+## Critical Range
+##        2        3        4 
+## 1.488551 1.565916 1.616955 
+## 
+## Means with the same letter are not significantly different.
+## 
+##   procKnow groups
+## 2 7.708337      a
+## 4 6.874994      a
+## 3 6.736106      a
+## 1 4.930550      b</code></pre>
+<p><span class="math display">\[\nabla\]</span></p>
+
+<pre><code>## Loading required package: carData</code></pre>
+<pre><code>## 
+## Attaching package: &#39;car&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     recode</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     some</code></pre>
+<pre><code>## Warning: package &#39;PMCMRplus&#39; was built under R version 4.5.3</code></pre>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-jung_2018" class="csl-entry">
+Jung, J., and Y. J. Ahn. 2018. <span>“Effects of Interface on Procedural Skill Transfer in Virtual Training: Lifeboat Launching Operation Study.”</span> <em>Computer Animation and Virtual Worlds</em> 29: e1812. <a href="https://doi.org/10.1002/cav.1812">https://doi.org/10.1002/cav.1812</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="single-factor-studies.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="alternative-tests-for-treatment-effects.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "link": "https://github.com/LarryWinner/STA4211-Notes1.git/edit/main/%s",
+  "text": "Edit"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

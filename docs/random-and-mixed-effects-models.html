@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 Random and Mixed Effects Models | Design and Analysis of Experiments</title>
+  <meta name="description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 Random and Mixed Effects Models | Design and Analysis of Experiments" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 Random and Mixed Effects Models | Design and Analysis of Experiments" />
+  
+  <meta name="twitter:description" content="This is a course on Experimental Design and Analysis." />
+  
+
+<meta name="author" content="Larry Winner" />
+
+
+<meta name="date" content="2026-06-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="block-designs.html"/>
+<link rel="next" href="nested-designs.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STA 4211 Course Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html"><i class="fa fa-check"></i><b>1</b> Comparing Two Treatments or Populations</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#linear-functions-of-random-variables"><i class="fa fa-check"></i><b>1.1</b> Linear Functions of Random Variables</a></li>
+<li class="chapter" data-level="1.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#students-t-distribution-for-making-inference-on-population-means"><i class="fa fa-check"></i><b>1.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution for Making Inference on Population Means</a></li>
+<li class="chapter" data-level="1.3" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference"><i class="fa fa-check"></i><b>1.3</b> Inference for the Population Mean Difference</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples"><i class="fa fa-check"></i><b>1.3.1</b> Inference for the Population Mean Difference for Paired Samples</a></li>
+<li class="chapter" data-level="1.3.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-independent-samples"><i class="fa fa-check"></i><b>1.3.2</b> Inference for the Population Mean Difference for Independent Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-variance-ratios"><i class="fa fa-check"></i><b>1.4</b> Inference for the Population Variance Ratios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inferences-for-variance-ratios-for-independent-samples"><i class="fa fa-check"></i><b>1.4.1</b> Inferences for Variance Ratios for Independent Samples</a></li>
+<li class="chapter" data-level="1.4.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#test-for-equal-variances-with-paired-samples"><i class="fa fa-check"></i><b>1.4.2</b> Test for Equal Variances with Paired Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#examples"><i class="fa fa-check"></i><b>1.5</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#terminology"><i class="fa fa-check"></i><b>2.1</b> Terminology</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#basics-of-controlled-experiments"><i class="fa fa-check"></i><b>2.2</b> Basics of Controlled Experiments</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#completely-randomized-design-crd"><i class="fa fa-check"></i><b>2.3</b> Completely Randomized Design (CRD)</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#randomized-complete-block-design-rcbd-or-rbd"><i class="fa fa-check"></i><b>2.4</b> Randomized Complete Block Design (RCBD or RBD)</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#overview-of-some-standard-experimental-designs"><i class="fa fa-check"></i><b>2.5</b> Overview of Some Standard Experimental Designs</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#overview-of-observational-study-designs"><i class="fa fa-check"></i><b>2.6</b> Overview of Observational Study Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-factor-studies.html"><a href="single-factor-studies.html"><i class="fa fa-check"></i><b>3</b> Single Factor Studies</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#models-with-r2-factor-levels"><i class="fa fa-check"></i><b>3.1</b> Models with <span class="math inline">\(r=2\)</span> Factor Levels</a></li>
+<li class="chapter" data-level="3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#three-model-formulations"><i class="fa fa-check"></i><b>3.2</b> Three Model Formulations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#cell-means-model"><i class="fa fa-check"></i><b>3.2.1</b> Cell Means Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#treatment-effects-model"><i class="fa fa-check"></i><b>3.2.2</b> Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#reference-group-model"><i class="fa fa-check"></i><b>3.2.3</b> Reference Group Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance-and-f-test"><i class="fa fa-check"></i><b>3.3</b> The Analysis of Variance and <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#general-linear-test-approach"><i class="fa fa-check"></i><b>3.3.1</b> General Linear Test Approach</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#power-calculations"><i class="fa fa-check"></i><b>3.3.2</b> Power Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#technical-details"><i class="fa fa-check"></i><b>3.4</b> Technical Details</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-for-the-cell-means-model-regression-approach"><i class="fa fa-check"></i><b>3.4.1</b> Least Squares Estimation for the Cell Means Model (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#scalar-estimation-for-the-cell-means-model"><i class="fa fa-check"></i><b>3.4.2</b> Scalar Estimation for the Cell Means Model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#estimation-for-the-treatment-effects-model"><i class="fa fa-check"></i><b>3.4.3</b> Estimation for the Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.4.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-regression-approach"><i class="fa fa-check"></i><b>3.4.4</b> Least Squares Estimation (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance"><i class="fa fa-check"></i><b>3.4.5</b> The Analysis of Variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html"><i class="fa fa-check"></i><b>4</b> Analysis of Treatment Means</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#individual-treatment-means"><i class="fa fa-check"></i><b>4.1</b> Individual Treatment Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#comparing-two-treatment-means"><i class="fa fa-check"></i><b>4.2</b> Comparing Two Treatment Means</a></li>
+<li class="chapter" data-level="4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#contrasts-among-treatment-means"><i class="fa fa-check"></i><b>4.3</b> Contrasts Among Treatment Means</a></li>
+<li class="chapter" data-level="4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#simultaneous-comparisons"><i class="fa fa-check"></i><b>4.4</b> Simultaneous Comparisons</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#tukeys-honest-significant-difference-hsd"><i class="fa fa-check"></i><b>4.4.1</b> Tukey’s Honest Significant Difference (HSD)</a></li>
+<li class="chapter" data-level="4.4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#scheffes-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.2</b> Scheffe’s Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#bonferroni-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.3</b> Bonferroni Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#multiple-range-methods"><i class="fa fa-check"></i><b>4.4.4</b> Multiple Range Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html"><i class="fa fa-check"></i><b>5</b> Alternative Tests for Treatment Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#randomizationpermutation-tests"><i class="fa fa-check"></i><b>5.1</b> Randomization/Permutation Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#tests-for-equal-error-variances"><i class="fa fa-check"></i><b>5.2</b> Tests for Equal Error Variances</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#hartleys-test"><i class="fa fa-check"></i><b>5.2.1</b> Hartley’s Test</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#levenes-test"><i class="fa fa-check"></i><b>5.2.2</b> Levene’s Test</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#bartletts-test"><i class="fa fa-check"></i><b>5.2.3</b> Bartlett’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#remedial-measures"><i class="fa fa-check"></i><b>5.3</b> Remedial Measures</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#weighted-least-squares-and-welchs-test"><i class="fa fa-check"></i><b>5.3.1</b> Weighted Least Squares and Welch’s Test</a></li>
+<li class="chapter" data-level="5.3.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#post-hoc-comparisons-with-unequal-variances"><i class="fa fa-check"></i><b>5.3.2</b> Post-hoc Comparisons with Unequal Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#nonparametric-test-for-non-normal-data"><i class="fa fa-check"></i><b>5.4</b> Nonparametric Test for Non-normal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html"><i class="fa fa-check"></i><b>6</b> Balanced Two Factor Designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#two-factor-analysis-of-variance"><i class="fa fa-check"></i><b>6.2</b> Two Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#cell-means-and-factor-effects-models"><i class="fa fa-check"></i><b>6.2.1</b> Cell Means and Factor Effects Models</a></li>
+<li class="chapter" data-level="6.2.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#least-squaresmaximum-likelihood-estimators"><i class="fa fa-check"></i><b>6.2.2</b> Least Squares/Maximum Likelihood Estimators</a></li>
+<li class="chapter" data-level="6.2.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#sums-of-squares-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>6.2.3</b> Sums of Squares and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#factor-effect-contrasts"><i class="fa fa-check"></i><b>6.3</b> Factor Effect Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-there-is-no-interaction"><i class="fa fa-check"></i><b>6.3.1</b> Contrasts when there is No Interaction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-interaction-is-present"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts when Interaction is Present</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="two-factor-designs-with-1-observation-per-treatment.html"><a href="two-factor-designs-with-1-observation-per-treatment.html"><i class="fa fa-check"></i><b>7</b> Two-Factor Designs with 1 Observation per Treatment</a></li>
+<li class="chapter" data-level="8" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html"><i class="fa fa-check"></i><b>8</b> Unbalanced Two-Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#statistical-model-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>8.1</b> Statistical Model and the Analysis of Variance</a></li>
+<li class="chapter" data-level="8.2" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#least-squares-estimators-and-contrastslinear-functions-among-means"><i class="fa fa-check"></i><b>8.2</b> Least Squares Estimators and Contrasts/Linear Functions Among Means</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="higher-order-models.html"><a href="higher-order-models.html"><i class="fa fa-check"></i><b>9</b> Higher Order Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="higher-order-models.html"><a href="higher-order-models.html#three-factor-models---mean-structure"><i class="fa fa-check"></i><b>9.1</b> Three Factor Models - Mean Structure</a></li>
+<li class="chapter" data-level="9.2" data-path="higher-order-models.html"><a href="higher-order-models.html#statistical-model-and-the-analysis-of-variance-1"><i class="fa fa-check"></i><b>9.2</b> Statistical Model and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="block-designs.html"><a href="block-designs.html"><i class="fa fa-check"></i><b>10</b> Block Designs</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="block-designs.html"><a href="block-designs.html#randomized-block-and-repeated-measures-designs"><i class="fa fa-check"></i><b>10.1</b> Randomized Block and Repeated Measures Designs</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="block-designs.html"><a href="block-designs.html#model-structure-and-estimators"><i class="fa fa-check"></i><b>10.1.1</b> Model Structure and Estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="block-designs.html"><a href="block-designs.html#analysis-of-variance-and-the-f-test"><i class="fa fa-check"></i><b>10.2</b> Analysis of Variance and the <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="block-designs.html"><a href="block-designs.html#checking-model-assumptions"><i class="fa fa-check"></i><b>10.2.1</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="10.2.2" data-path="block-designs.html"><a href="block-designs.html#relative-efficiency-and-within-subject-variance-covariance-matrix"><i class="fa fa-check"></i><b>10.2.2</b> Relative Efficiency and Within-Subject Variance-Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="block-designs.html"><a href="block-designs.html#latin-square-designs"><i class="fa fa-check"></i><b>10.3</b> Latin Square Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html"><i class="fa fa-check"></i><b>11</b> Random and Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#way-random-effects-model"><i class="fa fa-check"></i><b>11.1</b> 1-Way Random Effects Model</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>11.1.1</b> Analysis of Variance</a></li>
+<li class="chapter" data-level="11.1.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-population-mean-mu_bullet"><i class="fa fa-check"></i><b>11.1.2</b> Estimating the Population Mean <span class="math inline">\(\mu_{\bullet}\)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>11.1.3</b> Estimating the Intraclass Correlation Coefficient</a></li>
+<li class="chapter" data-level="11.1.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-within-group-variance"><i class="fa fa-check"></i><b>11.1.4</b> Estimating the Within Group Variance</a></li>
+<li class="chapter" data-level="11.1.5" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-between-group-variance"><i class="fa fa-check"></i><b>11.1.5</b> Estimating the Between Group Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-random-effects-model"><i class="fa fa-check"></i><b>11.2</b> Two-Way Random Effects Model</a></li>
+<li class="chapter" data-level="11.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-mixed-effects-model"><i class="fa fa-check"></i><b>11.3</b> Two-Way Mixed Effects Model</a></li>
+<li class="chapter" data-level="11.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#three-way-mixed-effects-models"><i class="fa fa-check"></i><b>11.4</b> Three-Way Mixed Effects Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>12</b> Nested Designs</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="nested-designs.html"><a href="nested-designs.html#estimators-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>12.1</b> Estimators and the Analysis of Variance</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-designs.html"><a href="nested-designs.html#tests-contrasts-and-pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Tests, Contrasts, and Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="nested-designs.html"><a href="nested-designs.html#repeated-measures-design"><i class="fa fa-check"></i><b>12.3</b> Repeated Measures Design</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="nested-designs.html"><a href="nested-designs.html#model-structure"><i class="fa fa-check"></i><b>12.3.1</b> Model Structure</a></li>
+<li class="chapter" data-level="12.3.2" data-path="nested-designs.html"><a href="nested-designs.html#analysis-of-variance-and-f-tests"><i class="fa fa-check"></i><b>12.3.2</b> Analysis of Variance and <span class="math inline">\(F\)</span>-tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="nested-designs.html"><a href="nested-designs.html#treatment-comparisons"><i class="fa fa-check"></i><b>12.3.3</b> Treatment Comparisons</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html"><i class="fa fa-check"></i><b>13</b> Analysis of Covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#additive-model"><i class="fa fa-check"></i><b>13.1</b> Additive Model</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#adjusted-means"><i class="fa fa-check"></i><b>13.1.1</b> Adjusted means</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#interaction-model"><i class="fa fa-check"></i><b>13.2</b> Interaction Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html"><i class="fa fa-check"></i><b>14</b> Response Surface and Mixture Designs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
+<li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="random-and-mixed-effects-models" class="section level1 hasAnchor" number="11">
+<h1><span class="header-section-number">Chapter 11</span> Random and Mixed Effects Models<a href="random-and-mixed-effects-models.html#random-and-mixed-effects-models" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In some situations, experiments include random treatment factors. In these cases, the treatment/group levels observed in the study represent a sample from a larger population of such levels. Interest is in the overall mean response, as well as in variation in responses across and within treatments/groups.</p>
+<p>In this chapter, we consider <strong>1-Way Random Effects</strong>, <strong>2-Way Random Effects</strong>, <strong>2-Way Mixed Effects</strong>, and <strong>3-Way Mixed Effects</strong> Models.</p>
+<div id="way-random-effects-model" class="section level2 hasAnchor" number="11.1">
+<h2><span class="header-section-number">11.1</span> 1-Way Random Effects Model<a href="random-and-mixed-effects-models.html#way-random-effects-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This model has a single factor, with levels that represent a sample from a population of such levels. The goal is to make inferences regarding the overall mean and variances between groups and within groups. The statistical model for the balanced case is given below.</p>
+<p><span class="math display">\[
+Y_{ij} = \mu_i + \epsilon_{ij} \qquad i=1,\ldots,r;\quad j=1,\ldots,n
+\]</span>
+<span class="math display">\[
+\mu_i \sim N\left(\mu_{\bullet},\sigma_{\mu}^2\right) \mbox{ independent }
+\qquad
+\epsilon_{ij} \sim N\left(0,\sigma^2\right) \mbox{ independent }
+\qquad \{\mu_i\},\{\epsilon_{ij}\} \mbox{ independent }
+\]</span>
+Alternatively, we could formulate the model as follows.
+<span class="math display">\[
+Y_{ij} = \mu_{\bullet} + \tau_i + \epsilon_{ij} \qquad i=1,\ldots,r;\quad j=1,\ldots,n
+\]</span>
+<span class="math display">\[
+\tau_i \sim N\left(0,\sigma_{\tau}^2\right) \mbox{ independent }
+\qquad
+\epsilon_{ij} \sim N\left(0,\sigma^2\right) \mbox{ independent }
+\qquad \{\tau_i\},\{\epsilon_{ij}\} \mbox{ independent }
+\]</span>
+For the original model, <span class="math inline">\(\mu_{\bullet}\)</span> is the overall population mean response, <span class="math inline">\(\sigma_{\mu}^2\)</span> is the between group variance, and <span class="math inline">\(\sigma^2\)</span> is the within group variance. The experiment is conducted as follows.</p>
+<ul>
+<li>Sample <span class="math inline">\(r\)</span> groups from a population of groups.</li>
+<li>Sample <span class="math inline">\(n\)</span> units from within each group.</li>
+<li>Observe the <span class="math inline">\(n_T=rn\)</span> responses.</li>
+</ul>
+<p>The mean and variance-covariance structure of the observations are given below.</p>
+<p><span class="math display">\[
+E\left\{Y_{ij}\right\}=E\left\{\mu_i+\epsilon_{ij}\right\}=\mu_{\bullet}+0=\mu_{\bullet}
+\]</span></p>
+<p><span class="math display">\[
+V\left\{Y_{ij}\right\}=V\left\{\mu_i+\epsilon_{ij}\right\}=
+V\left\{\mu_i\right\} + V\left\{\epsilon_{ij}\right\}
++2\mbox{COV}\left\{\mu_i,\epsilon_{ij}\right\}=\]</span>
+<span class="math display">\[=\sigma_{\mu}^2+\sigma^2+2(0)
+=\sigma_{\mu}^2+\sigma^2=\sigma_Y^2
+\]</span>
+For two measurements within the same group <span class="math inline">\((j \ne j&#39;)\)</span>, we have the following covariance, which differs from the fixed effects case (where the observations are independent).
+<span class="math display">\[
+\mbox{COV}\left\{Y_{ij},Y_{ij&#39;}\right\} =
+\mbox{COV}\left\{\mu_i+\epsilon_{ij},\mu_i+\epsilon_{ij&#39;}\right\} =\]</span></p>
+<p><span class="math display">\[
+\mbox{COV}\left\{\mu_i,\mu_i\right\} +
+\mbox{COV}\left\{\mu_i,\epsilon_{ij&#39;}\right\} +
+\mbox{COV}\left\{\epsilon_{ij},\mu_i\right\} +
+\mbox{COV}\left\{\epsilon_{ij},\epsilon_{ij&#39;}\right\} = \sigma_{\mu}^2+0+0+0=\sigma_{\mu}^2
+\]</span>
+<span class="math display">\[
+\mbox{COV}\left\{Y_{ij},Y_{i&#39;j&#39;}\right\} =0 \quad i \neq i&#39; \quad \forall j,j&#39;
+\]</span></p>
+<p>For the case, with <span class="math inline">\(r=n=2\)</span>, the mean and variance-covariance structure for <span class="math inline">\(Y\)</span> are given in the following matrix forms.</p>
+<p><span class="math display">\[
+Y=\begin{bmatrix}
+Y_{11} \\ Y_{12} \\ Y_{21} \\ Y_{22} \\
+\end{bmatrix}
+\qquad
+E\{Y\} =\begin{bmatrix}
+\mu_{\bullet} \\
+\mu_{\bullet} \\
+\mu_{\bullet} \\
+\mu_{\bullet} \\
+\end{bmatrix}
+\qquad
+\sigma^2\{Y\} =\begin{bmatrix}
+\sigma_Y^2 &amp; \sigma_{\mu}^2 &amp; 0 &amp; 0 \\
+\sigma_{\mu}^2 &amp; \sigma_Y^2 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; \sigma_Y^2 &amp; \sigma_{\mu}^2 \\
+0 &amp; 0 &amp; \sigma_{\mu}^2 &amp; \sigma_Y^2 \\
+\end{bmatrix}
+\]</span></p>
+<p>The <strong>Intraclass Correlation Coefficient</strong> measures the proportion of the total variation in responses that is due to variation in group means.</p>
+<p><span class="math display">\[
+\rho_I = \frac{\mbox{COV}\left\{Y_{ij},Y_{ij&#39;}\right\}}{
+\sqrt{V\left\{Y_{ij}\right\}V\left\{Y_{ij&#39;}\right\}}}=
+\frac{\sigma_{\mu}^2}{\sigma_Y^2}
+\]</span></p>
+<div id="analysis-of-variance" class="section level3 hasAnchor" number="11.1.1">
+<h3><span class="header-section-number">11.1.1</span> Analysis of Variance<a href="random-and-mixed-effects-models.html#analysis-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this section, we set up the Analysis of Variance and derive the expected mean squares for <span class="math inline">\(MSTR\)</span> and <span class="math inline">\(MSE\)</span>. Note that the quantities are the same for the random effects model as for the fixed effects model, but the expectations differ for the two models.</p>
+<p><span class="math display">\[
+SSTR = n\sum_{i=1}^r\left(\overline{Y}_{i\bullet}-\overline{Y}_{\bullet\bullet}\right)^2 =
+n\sum_{i=1}^r\overline{Y}_{i\bullet}^2-nr\overline{Y}_{\bullet\bullet}^2
+\]</span></p>
+<p><span class="math display">\[
+SSE=\sum_{i=1}^r\sum_{j=1}^n\left(Y_{ij}-\overline{Y}_{i\bullet}\right)^2 =
+\sum_{i=1}^r\sum_{j=1}^n Y_{ij}^2 - n\sum_{i=1}^r\overline{Y}_{i\bullet}^2
+\]</span></p>
+<p><span class="math display">\[
+E\left\{Y_{ij}\right\} = E\left\{\overline{Y}_{i\bullet}\right\} =
+E\left\{\overline{Y}_{\bullet\bullet}\right\} = \mu_{\bullet}
+\]</span></p>
+<p><span class="math display">\[
+V\left\{Y_{ij}\right\}=\sigma_{\mu}^2+\sigma^2=\sigma_Y^2
+\]</span></p>
+<p><span class="math display">\[
+V\left\{\overline{Y}_{i\bullet}\right\}
+=\frac{1}{n^2}\left[\sum_{j=1}^nV\left\{Y_{ij}\right\} +
+2\sum_{j=1}^{n-1}\sum_{j&#39;=j
++1}^n\mbox{COV}\left\{Y_{ij},Y_{ij&#39;}\right\}\right] =
+\]</span>
+<span class="math display">\[
+=\frac{1}{n^2}\left[n\left(\sigma_{\mu}^2+\sigma^2\right) +
+2\frac{n(n-1)}{2}\sigma_{\mu}^2\right]=
+\frac{1}{n}\left[\sigma_{\mu}^2(1+n-1) + \sigma^2\right]=
+\frac{n\sigma_{\mu}^2+\sigma^2}{n}
+\]</span></p>
+<p>Note that the sample means for the various groups are independent, which is helpful in deriving the variance of the overall mean.</p>
+<p><span class="math display">\[
+V\left\{\overline{Y}_{\bullet\bullet}\right\} =
+V\left\{\frac{1}{r}\sum_{i=1}^r\overline{Y}_{i\bullet}\right\}
+=\frac{1}{r^2}r\frac{n\sigma_{\mu}^2+\sigma^2}{n}=
+\frac{n\sigma_{\mu}^2+\sigma^2}{rn}
+\]</span></p>
+<p>Now, we obtain the expected sums of squares and mean squares.</p>
+<p><span class="math display">\[
+E\left\{Y_{ij}^2\right\} = \sigma_{\mu}^2+\sigma^2 + \mu_{\bullet}^2
+\quad \Rightarrow \quad
+\sum_{i=1}^r\sum_{j=1}^n E\left\{Y_{ij}^2\right\} =
+rn\left(\sigma_{\mu}^2+\sigma^2 + \mu_{\bullet}^2\right)
+\]</span></p>
+<p><span class="math display">\[
+E\left\{\overline{Y}_{i\bullet}^2\right\} =\frac{n\sigma_{\mu}^2+\sigma^2}{n}+\mu_{\bullet}^2
+\quad \Rightarrow \quad
+n\sum_{i=1}^rE\left\{\overline{Y}_{i\bullet}^2\right\}
+=nr\sigma_{\mu}^2 + r\sigma^2 + nr\mu_{\bullet}^2
+\]</span>
+<span class="math display">\[
+E\left\{\overline{Y}_{\bullet\bullet}^2\right\} =
+\frac{n\sigma_{\mu}^2+\sigma^2}{rn} + \mu_{\bullet}^2
+\quad \Rightarrow \quad
+rnE\left\{\overline{Y}_{\bullet\bullet}^2\right\} = n\sigma_{\mu}^2+\sigma^2 +
+rn\mu_{\bullet}^2
+\]</span></p>
+<p><span class="math display">\[
+E\{SSTR\} = \left(nr\sigma_{\mu}^2 + r\sigma^2 + nr\mu_{\bullet}^2\right) -
+\left(n\sigma_{\mu}^2+\sigma^2 +
+rn\mu_{\bullet}^2\right) = n(r-1)\sigma_{\mu}^2 + (r-1)\sigma^2
+\]</span></p>
+<p><span class="math display">\[
+E\{SSE\} = \left(rn\left(\sigma_{\mu}^2+\sigma^2 + \mu_{\bullet}^2\right)\right) -
+\left(nr\sigma_{\mu}^2 + r\sigma^2 + nr\mu_{\bullet}^2\right) = r(n-1)\sigma^2
+\]</span>
+The expected mean squares are the expected sums of squares divided by the degrees of freedom with <span class="math inline">\(df_{TR}=r-1\)</span> and <span class="math inline">\(df_E=r(n-1)\)</span>.</p>
+<p><span class="math display">\[
+E\{MSTR\}=E\left\{\frac{SSTR}{df_{TR}}\right\} = \sigma^2 + n\sigma_{\mu}^2
+\qquad \qquad
+E\{MSE\}=E\left\{\frac{SSE}{df_E}\right\} = \sigma^2
+\]</span></p>
+<p>The <span class="math inline">\(F\)</span>-test is used to test whether the variance of the population of group means is 0.</p>
+<p><span class="math display">\[
+H_0:\sigma_{\mu}^2=0 \quad H_A:\sigma_{\mu}^2&gt;0 \qquad TS: F^*=\frac{MSTR}{MSE}
+\qquad RR:F^*\geq F_{1-\alpha;r-1,r(n-1)}
+\]</span></p>
+<p><strong>Example 10.1 - Alpha Acids in Varieties of Beer</strong></p>
+<p>A study was conducted to measure alpha acids in a sample of <span class="math inline">\(r=10\)</span> varieties of beer <span class="citation">(<a href="#ref-meilgaard_1960">Meilgaard 1960</a>)</span>. There were <span class="math inline">\(n=10\)</span> replicates per variety. The following R code obtains the ANOVA based on direct computations and a plot of the measurements is given in
+Figure <a href="random-and-mixed-effects-models.html#fig:ch1001">11.1</a>.</p>
+<div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="random-and-mixed-effects-models.html#cb354-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
+<span id="cb354-2"><a href="random-and-mixed-effects-models.html#cb354-2" tabindex="-1"></a><span class="fu">head</span>(hops,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   variety replicate alphaAcid
+## 1       1         1       708
+## 2       1         2       708
+## 3       1         3       728</code></pre>
+<div class="sourceCode" id="cb356"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb356-1"><a href="random-and-mixed-effects-models.html#cb356-1" tabindex="-1"></a><span class="fu">plot</span>(alphaAcid <span class="sc">~</span> <span class="fu">factor</span>(variety), <span class="at">data=</span>hops, <span class="at">col=</span><span class="st">&quot;orange&quot;</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch1001"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch1001-1.png" alt="Interaction plots for chef jacket study" width="80%" />
+<p class="caption">
+Figure 11.1: Interaction plots for chef jacket study
+</p>
+</div>
+<div class="sourceCode" id="cb357"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb357-1"><a href="random-and-mixed-effects-models.html#cb357-1" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(hops<span class="sc">$</span>alphaAcid)</span>
+<span id="cb357-2"><a href="random-and-mixed-effects-models.html#cb357-2" tabindex="-1"></a>ybar.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,mean))</span>
+<span id="cb357-3"><a href="random-and-mixed-effects-models.html#cb357-3" tabindex="-1"></a>var.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,var))</span>
+<span id="cb357-4"><a href="random-and-mixed-effects-models.html#cb357-4" tabindex="-1"></a>n.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,length))</span>
+<span id="cb357-5"><a href="random-and-mixed-effects-models.html#cb357-5" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">length</span>(ybar.trt)</span>
+<span id="cb357-6"><a href="random-and-mixed-effects-models.html#cb357-6" tabindex="-1"></a></span>
+<span id="cb357-7"><a href="random-and-mixed-effects-models.html#cb357-7" tabindex="-1"></a>sstr <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt<span class="sc">*</span>(ybar.trt<span class="sc">-</span>ybar)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb357-8"><a href="random-and-mixed-effects-models.html#cb357-8" tabindex="-1"></a>sse <span class="ot">&lt;-</span> <span class="fu">sum</span>((n.trt<span class="dv">-1</span>)<span class="sc">*</span>var.trt)</span>
+<span id="cb357-9"><a href="random-and-mixed-effects-models.html#cb357-9" tabindex="-1"></a>df.trt <span class="ot">&lt;-</span> r<span class="dv">-1</span></span>
+<span id="cb357-10"><a href="random-and-mixed-effects-models.html#cb357-10" tabindex="-1"></a>df.err <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt)<span class="sc">-</span>r</span>
+<span id="cb357-11"><a href="random-and-mixed-effects-models.html#cb357-11" tabindex="-1"></a>mse <span class="ot">&lt;-</span> sse<span class="sc">/</span>df.err</span>
+<span id="cb357-12"><a href="random-and-mixed-effects-models.html#cb357-12" tabindex="-1"></a>mstr <span class="ot">&lt;-</span> sstr<span class="sc">/</span>df.trt</span>
+<span id="cb357-13"><a href="random-and-mixed-effects-models.html#cb357-13" tabindex="-1"></a>f_star <span class="ot">&lt;-</span> mstr<span class="sc">/</span>mse</span>
+<span id="cb357-14"><a href="random-and-mixed-effects-models.html#cb357-14" tabindex="-1"></a>p_f_star <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(f_star,df.trt,df.err)</span>
+<span id="cb357-15"><a href="random-and-mixed-effects-models.html#cb357-15" tabindex="-1"></a></span>
+<span id="cb357-16"><a href="random-and-mixed-effects-models.html#cb357-16" tabindex="-1"></a>aov.out1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df.trt,sstr,mstr,f_star,<span class="fu">qf</span>(.<span class="dv">95</span>,df.trt,df.err),p_f_star)</span>
+<span id="cb357-17"><a href="random-and-mixed-effects-models.html#cb357-17" tabindex="-1"></a>aov.out2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df.err,sse,mse,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb357-18"><a href="random-and-mixed-effects-models.html#cb357-18" tabindex="-1"></a>aov.out3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df.trt<span class="sc">+</span>df.err,sstr<span class="sc">+</span>sse,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb357-19"><a href="random-and-mixed-effects-models.html#cb357-19" tabindex="-1"></a>aov.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(aov.out1, aov.out2,aov.out3)</span>
+<span id="cb357-20"><a href="random-and-mixed-effects-models.html#cb357-20" tabindex="-1"></a><span class="fu">colnames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;df&quot;</span>,<span class="st">&quot;SS&quot;</span>,<span class="st">&quot;MS&quot;</span>,<span class="st">&quot;F*&quot;</span>,<span class="st">&quot;F(.95)&quot;</span>,<span class="st">&quot;P(&gt;F*)&quot;</span>)</span>
+<span id="cb357-21"><a href="random-and-mixed-effects-models.html#cb357-21" tabindex="-1"></a><span class="fu">rownames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Variety&quot;</span>, <span class="st">&quot;Error&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb357-22"><a href="random-and-mixed-effects-models.html#cb357-22" tabindex="-1"></a><span class="fu">round</span>(aov.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##         df        SS          MS      F* F(.95) P(&gt;F*)
+## Variety  9 1463915.9 162657.3211 235.728 1.9856      0
+## Error   90   62101.9    690.0211      NA     NA     NA
+## Total   99 1526017.8          NA      NA     NA     NA</code></pre>
+<p>There is strong evidence that the population means (of all varieties) are not all equal, that is <span class="math inline">\(\sigma_{\mu}^2 &gt; 0\)</span>.</p>
+<p><span class="math display">\[\nabla \]</span></p>
+</div>
+<div id="estimating-the-population-mean-mu_bullet" class="section level3 hasAnchor" number="11.1.2">
+<h3><span class="header-section-number">11.1.2</span> Estimating the Population Mean <span class="math inline">\(\mu_{\bullet}\)</span><a href="random-and-mixed-effects-models.html#estimating-the-population-mean-mu_bullet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this section, we consider estimating the population mean response. The expectations
+of the individual measurements, group means, and overall mean are all <span class="math inline">\(\mu_{\bullet}\)</span>.
+However, the overall mean has the smallest variance. Note also that <span class="math inline">\(E\{MSTR\}=\sigma^2+n\sigma_{\mu}^2\)</span>.</p>
+<p><span class="math display">\[
+\hat{\mu}_{\bullet}=\overline{Y}_{\bullet\bullet}  \qquad
+V\left\{\overline{Y}_{\bullet\bullet}\right\}=
+\frac{n\sigma_{\mu}^2+\sigma^2}{rn} \qquad
+\hat{V}\left\{\overline{Y}_{\bullet\bullet}\right\} =
+\frac{MSTR}{rn}
+\qquad
+\hat{SE}\left\{\overline{Y}_{\bullet\bullet}\right\} =
+\sqrt{\frac{MSTR}{rn}}
+\]</span></p>
+<p><span class="math display">\[
+t=\frac{\overline{Y}_{\bullet\bullet}-\mu_{\bullet}}{\hat{SE}\left\{\overline{Y}_{\bullet\bullet}\right\}} \sim t_{r-1}  \quad \Rightarrow \quad
+(1-\alpha)100\% \mbox{ CI for } \mu_{\bullet} \equiv
+\overline{Y}_{\bullet\bullet} \pm t_{1-\alpha/2;r-1}\sqrt{\frac{MSTR}{rn}}
+\]</span></p>
+<p><strong>Example 10.2 - Alpha Acids in Varieties of Beer</strong></p>
+<p>The following R code obtains the point estimate of the overall mean and 95% Confidence Interval for <span class="math inline">\(\mu_{\bullet}\)</span> based on direct computations.</p>
+<div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="random-and-mixed-effects-models.html#cb359-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
+<span id="cb359-2"><a href="random-and-mixed-effects-models.html#cb359-2" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(hops<span class="sc">$</span>alphaAcid)</span>
+<span id="cb359-3"><a href="random-and-mixed-effects-models.html#cb359-3" tabindex="-1"></a>ybar.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,mean))</span>
+<span id="cb359-4"><a href="random-and-mixed-effects-models.html#cb359-4" tabindex="-1"></a>var.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,var))</span>
+<span id="cb359-5"><a href="random-and-mixed-effects-models.html#cb359-5" tabindex="-1"></a>n.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,length))</span>
+<span id="cb359-6"><a href="random-and-mixed-effects-models.html#cb359-6" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">length</span>(ybar.trt)</span>
+<span id="cb359-7"><a href="random-and-mixed-effects-models.html#cb359-7" tabindex="-1"></a></span>
+<span id="cb359-8"><a href="random-and-mixed-effects-models.html#cb359-8" tabindex="-1"></a>sstr <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt<span class="sc">*</span>(ybar.trt<span class="sc">-</span>ybar)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb359-9"><a href="random-and-mixed-effects-models.html#cb359-9" tabindex="-1"></a>sse <span class="ot">&lt;-</span> <span class="fu">sum</span>((n.trt<span class="dv">-1</span>)<span class="sc">*</span>var.trt)</span>
+<span id="cb359-10"><a href="random-and-mixed-effects-models.html#cb359-10" tabindex="-1"></a>df.trt <span class="ot">&lt;-</span> r<span class="dv">-1</span></span>
+<span id="cb359-11"><a href="random-and-mixed-effects-models.html#cb359-11" tabindex="-1"></a>df.err <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt)<span class="sc">-</span>r</span>
+<span id="cb359-12"><a href="random-and-mixed-effects-models.html#cb359-12" tabindex="-1"></a>mse <span class="ot">&lt;-</span> sse<span class="sc">/</span>df.err</span>
+<span id="cb359-13"><a href="random-and-mixed-effects-models.html#cb359-13" tabindex="-1"></a>mstr <span class="ot">&lt;-</span> sstr<span class="sc">/</span>df.trt</span>
+<span id="cb359-14"><a href="random-and-mixed-effects-models.html#cb359-14" tabindex="-1"></a></span>
+<span id="cb359-15"><a href="random-and-mixed-effects-models.html#cb359-15" tabindex="-1"></a>s.ybar <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(mstr<span class="sc">/</span><span class="fu">sum</span>(n.trt))</span>
+<span id="cb359-16"><a href="random-and-mixed-effects-models.html#cb359-16" tabindex="-1"></a>LB <span class="ot">&lt;-</span> ybar <span class="sc">-</span> <span class="fu">qt</span>(.<span class="dv">975</span>,df.trt)<span class="sc">*</span>s.ybar</span>
+<span id="cb359-17"><a href="random-and-mixed-effects-models.html#cb359-17" tabindex="-1"></a>UB <span class="ot">&lt;-</span> ybar <span class="sc">+</span> <span class="fu">qt</span>(.<span class="dv">975</span>,df.trt)<span class="sc">*</span>s.ybar</span>
+<span id="cb359-18"><a href="random-and-mixed-effects-models.html#cb359-18" tabindex="-1"></a>mu.ci.out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(ybar, s.ybar, df.trt, <span class="fu">qt</span>(.<span class="dv">975</span>,df.trt), LB, UB)</span>
+<span id="cb359-19"><a href="random-and-mixed-effects-models.html#cb359-19" tabindex="-1"></a><span class="fu">colnames</span>(mu.ci.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Estimate&quot;</span>,<span class="st">&quot;Std Err&quot;</span>,<span class="st">&quot;df&quot;</span>,<span class="st">&quot;t(.975)&quot;</span>,<span class="st">&quot;LB&quot;</span>, <span class="st">&quot;UB&quot;</span>)</span>
+<span id="cb359-20"><a href="random-and-mixed-effects-models.html#cb359-20" tabindex="-1"></a><span class="fu">rownames</span>(mu.ci.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Mean&quot;</span>)</span>
+<span id="cb359-21"><a href="random-and-mixed-effects-models.html#cb359-21" tabindex="-1"></a><span class="fu">round</span>(mu.ci.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##      Estimate Std Err df t(.975)       LB       UB
+## Mean   579.61 40.3308  9  2.2622 488.3754 670.8446</code></pre>
+<p>The point estimate is about 580, with a 95% Confidence Interval of 488 to 671. Even though there were <span class="math inline">\(rn=10(10)=100\)</span> observations, the between treatment mean square is very large, yielding a wide confidence interval.</p>
+<p><span class="math display">\[\nabla \]</span></p>
+</div>
+<div id="estimating-the-intraclass-correlation-coefficient" class="section level3 hasAnchor" number="11.1.3">
+<h3><span class="header-section-number">11.1.3</span> Estimating the Intraclass Correlation Coefficient<a href="random-and-mixed-effects-models.html#estimating-the-intraclass-correlation-coefficient" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The Intraclass Correlation Coefficient is <span class="math inline">\(\rho_I=\sigma_{\mu}^2/\sigma_Y^2\)</span>, the ratio of the between group variance to the total variance. To obtain a Confidence Interval for <span class="math inline">\(\rho_I\)</span>, we make use of the following distributional results and the fact that <span class="math inline">\(SSE\)</span> and <span class="math inline">\(SSTR\)</span> are independent.</p>
+<p><span class="math display">\[
+E\{MSE\}=\sigma^2 \qquad \frac{SSE}{\sigma^2}=\frac{r(n-1)MSE}{\sigma^2} \sim \chi_{r(n-1)}^2
+\]</span></p>
+<p><span class="math display">\[
+E\{MSTR\}=\sigma^2 + n\sigma_{\mu}^2 \qquad
+\frac{SSTR}{\sigma^2 + n\sigma_{\mu}^2}=
+\frac{(r-1)MSTR}{\sigma^2 + n\sigma_{\mu}^2} \sim \chi_{r-1}^2
+\]</span></p>
+<p><span class="math display">\[
+\frac{\left[\frac{\frac{SSTR}{\sigma^2 + n\sigma_{\mu}^2}}{r-1}\right]}  {
+\left[\frac{\frac{SSE}{\sigma^2}}{r(n-1)}\right]} =
+\frac{\left[\frac{MSTR}{\sigma^2 + n\sigma_{\mu}^2}\right]} {
+\left[\frac{MSE}{\sigma^2}\right] } = F^*\left(\frac{\sigma^2}{\sigma^2 + n\sigma_{\mu}^2}
+\right) \sim F_{r-1,r(n-1)}
+\]</span>
+<span class="math display">\[
+\quad \Rightarrow \quad
+P\left(F_{\alpha/2;r-1,r(n-1)} \leq F^*\left(\frac{\sigma^2}{\sigma^2 + n\sigma_{\mu}^2}
+\right) \leq F_{1-\alpha/2;r-1,r(n-1)}\right) = 1-\alpha
+\]</span></p>
+<p>The goal is to isolate <span class="math inline">\(\rho_I=\sigma_{\mu}^2/\sigma_Y^2\)</span> in the middle of the probability statement. Define <span class="math inline">\(L\)</span> and <span class="math inline">\(U\)</span> as follow.</p>
+<p><span class="math display">\[
+L= \frac{1}{n}\left[\frac{F^*}{F_{1-\alpha/2;r-1,r(n-1)}}-1\right]  \qquad \qquad
+U= \frac{1}{n}\left[\frac{F^*}{F_{\alpha/2;r-1,r(n-1)}}-1\right]
+\]</span>
+Then the <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Interval for <span class="math inline">\(\rho_I\)</span> is obtained as follows.</p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ Confidence Interval for }
+\rho_I=\frac{\sigma_{\mu}^2}{\sigma_{\mu}^2+\sigma^2}: \quad
+\left[L^*=\frac{L}{1+L},U^*=\frac{U}{1+U}\right]
+\]</span></p>
+<p><strong>Example 10.3 - Alpha Acids in Varieties of Beer</strong></p>
+<p>The following R code obtains the 95% Confidence Interval for <span class="math inline">\(\rho_I\)</span> based on direct computations.</p>
+<div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="random-and-mixed-effects-models.html#cb361-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
+<span id="cb361-2"><a href="random-and-mixed-effects-models.html#cb361-2" tabindex="-1"></a><span class="fu">head</span>(hops, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   variety replicate alphaAcid
+## 1       1         1       708
+## 2       1         2       708
+## 3       1         3       728</code></pre>
+<div class="sourceCode" id="cb363"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb363-1"><a href="random-and-mixed-effects-models.html#cb363-1" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(hops<span class="sc">$</span>alphaAcid)</span>
+<span id="cb363-2"><a href="random-and-mixed-effects-models.html#cb363-2" tabindex="-1"></a>ybar.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,mean))</span>
+<span id="cb363-3"><a href="random-and-mixed-effects-models.html#cb363-3" tabindex="-1"></a>var.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,var))</span>
+<span id="cb363-4"><a href="random-and-mixed-effects-models.html#cb363-4" tabindex="-1"></a>n.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,length))</span>
+<span id="cb363-5"><a href="random-and-mixed-effects-models.html#cb363-5" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">length</span>(ybar.trt)</span>
+<span id="cb363-6"><a href="random-and-mixed-effects-models.html#cb363-6" tabindex="-1"></a>n <span class="ot">&lt;-</span> n.trt[<span class="dv">1</span>]</span>
+<span id="cb363-7"><a href="random-and-mixed-effects-models.html#cb363-7" tabindex="-1"></a></span>
+<span id="cb363-8"><a href="random-and-mixed-effects-models.html#cb363-8" tabindex="-1"></a>sstr <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt<span class="sc">*</span>(ybar.trt<span class="sc">-</span>ybar)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb363-9"><a href="random-and-mixed-effects-models.html#cb363-9" tabindex="-1"></a>sse <span class="ot">&lt;-</span> <span class="fu">sum</span>((n.trt<span class="dv">-1</span>)<span class="sc">*</span>var.trt)</span>
+<span id="cb363-10"><a href="random-and-mixed-effects-models.html#cb363-10" tabindex="-1"></a>df.trt <span class="ot">&lt;-</span> r<span class="dv">-1</span></span>
+<span id="cb363-11"><a href="random-and-mixed-effects-models.html#cb363-11" tabindex="-1"></a>df.err <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt)<span class="sc">-</span>r</span>
+<span id="cb363-12"><a href="random-and-mixed-effects-models.html#cb363-12" tabindex="-1"></a>mse <span class="ot">&lt;-</span> sse<span class="sc">/</span>df.err</span>
+<span id="cb363-13"><a href="random-and-mixed-effects-models.html#cb363-13" tabindex="-1"></a>mstr <span class="ot">&lt;-</span> sstr<span class="sc">/</span>df.trt</span>
+<span id="cb363-14"><a href="random-and-mixed-effects-models.html#cb363-14" tabindex="-1"></a>f_star <span class="ot">&lt;-</span> mstr<span class="sc">/</span>mse</span>
+<span id="cb363-15"><a href="random-and-mixed-effects-models.html#cb363-15" tabindex="-1"></a>f<span class="fl">.025</span> <span class="ot">&lt;-</span> <span class="fu">qf</span>(.<span class="dv">025</span>,df.trt,df.err)</span>
+<span id="cb363-16"><a href="random-and-mixed-effects-models.html#cb363-16" tabindex="-1"></a>f<span class="fl">.975</span> <span class="ot">&lt;-</span> <span class="fu">qf</span>(.<span class="dv">975</span>,df.trt,df.err)</span>
+<span id="cb363-17"><a href="random-and-mixed-effects-models.html#cb363-17" tabindex="-1"></a></span>
+<span id="cb363-18"><a href="random-and-mixed-effects-models.html#cb363-18" tabindex="-1"></a>L <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">/</span>n)<span class="sc">*</span>((f_star<span class="sc">/</span>f<span class="fl">.975</span>) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb363-19"><a href="random-and-mixed-effects-models.html#cb363-19" tabindex="-1"></a>U <span class="ot">&lt;-</span> (<span class="dv">1</span><span class="sc">/</span>n)<span class="sc">*</span>((f_star<span class="sc">/</span>f<span class="fl">.025</span>) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb363-20"><a href="random-and-mixed-effects-models.html#cb363-20" tabindex="-1"></a></span>
+<span id="cb363-21"><a href="random-and-mixed-effects-models.html#cb363-21" tabindex="-1"></a>L_star <span class="ot">&lt;-</span> L<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>L)</span>
+<span id="cb363-22"><a href="random-and-mixed-effects-models.html#cb363-22" tabindex="-1"></a>U_star <span class="ot">&lt;-</span> U<span class="sc">/</span>(<span class="dv">1</span><span class="sc">+</span>U)</span>
+<span id="cb363-23"><a href="random-and-mixed-effects-models.html#cb363-23" tabindex="-1"></a></span>
+<span id="cb363-24"><a href="random-and-mixed-effects-models.html#cb363-24" tabindex="-1"></a>rho.ci.out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(f_star, f<span class="fl">.025</span>, f<span class="fl">.975</span>, L, U, L_star, U_star)</span>
+<span id="cb363-25"><a href="random-and-mixed-effects-models.html#cb363-25" tabindex="-1"></a><span class="fu">colnames</span>(rho.ci.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;F*&quot;</span>,<span class="st">&quot;F(.025)&quot;</span>,<span class="st">&quot;F(.975)&quot;</span>,<span class="st">&quot;L&quot;</span>, <span class="st">&quot;U&quot;</span>, <span class="st">&quot;LB&quot;</span>, <span class="st">&quot;UB&quot;</span>)</span>
+<span id="cb363-26"><a href="random-and-mixed-effects-models.html#cb363-26" tabindex="-1"></a><span class="fu">rownames</span>(rho.ci.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;rho_I&quot;</span>)</span>
+<span id="cb363-27"><a href="random-and-mixed-effects-models.html#cb363-27" tabindex="-1"></a><span class="fu">round</span>(rho.ci.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##            F* F(.025) F(.975)       L       U     LB     UB
+## rho_I 235.728  0.2932  2.2588 10.3361 80.3097 0.9118 0.9877</code></pre>
+<p><span class="math display">\[\nabla \]</span></p>
+</div>
+<div id="estimating-the-within-group-variance" class="section level3 hasAnchor" number="11.1.4">
+<h3><span class="header-section-number">11.1.4</span> Estimating the Within Group Variance<a href="random-and-mixed-effects-models.html#estimating-the-within-group-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The withing group variance, <span class="math inline">\(\sigma^2\)</span> can be estimated by the mean square error, <span class="math inline">\(MSE\)</span>, as it is an unbiased estimator. Further, a <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Interval can be obtained as <span class="math inline">\(SSE/\sigma^2\)</span> is distributed as Chi-square with <span class="math inline">\(r(n-1)\)</span> degrees of freedom.</p>
+<p><span class="math display">\[
+E\{MSE\}=\sigma^2 \qquad  \frac{SSE}{\sigma^2} =
+\frac{r(n-1)MSE}{\sigma^2}\sim \chi_{r(n-1)}^2
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad P\left(\chi_{\alpha/2;r(n-1)}^2 \leq \frac{SSE}{\sigma^2}
+\leq \chi_{1-\alpha/2;r(n-1)}^2\right)=1-\alpha
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad P\left(\frac{\chi_{\alpha/2;r(n-1)}^2}{SSE} \leq \frac{1}{\sigma^2}
+\leq \frac{\chi_{1-\alpha/2;r(n-1)}^2}{SSE}\right)=1-\alpha
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad P\left(\frac{SSE}{\chi_{1-\alpha/2;r(n-1)}^2} \leq \sigma^2
+\leq \frac{SSE}{\chi_{\alpha/2;r(n-1)}^2}\right)=
+P\left(\frac{r(n-1)MSE}{\chi_{1-\alpha/2;r(n-1)}^2} \leq \sigma^2
+\leq \frac{r(n-1)MSE}{\chi_{\alpha/2;r(n-1)}^2}\right)
+=1-\alpha
+\]</span></p>
+<p>The Confidence Interval is simply from <span class="math inline">\(SSE\)</span> divided by the upper critical value to <span class="math inline">\(SSE\)</span>
+divided by the lower critical value.</p>
+<p><strong>Example 10.4 - Alpha Acids in Varieties of Beer</strong></p>
+<p>The following R code obtains the 95% Confidence Interval for <span class="math inline">\(\sigma^2\)</span> based on direct computations.</p>
+<div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="random-and-mixed-effects-models.html#cb365-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
+<span id="cb365-2"><a href="random-and-mixed-effects-models.html#cb365-2" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(hops<span class="sc">$</span>alphaAcid)</span>
+<span id="cb365-3"><a href="random-and-mixed-effects-models.html#cb365-3" tabindex="-1"></a>ybar.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,mean))</span>
+<span id="cb365-4"><a href="random-and-mixed-effects-models.html#cb365-4" tabindex="-1"></a>var.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,var))</span>
+<span id="cb365-5"><a href="random-and-mixed-effects-models.html#cb365-5" tabindex="-1"></a>n.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,length))</span>
+<span id="cb365-6"><a href="random-and-mixed-effects-models.html#cb365-6" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">length</span>(ybar.trt)</span>
+<span id="cb365-7"><a href="random-and-mixed-effects-models.html#cb365-7" tabindex="-1"></a>n <span class="ot">&lt;-</span> n.trt[<span class="dv">1</span>]</span>
+<span id="cb365-8"><a href="random-and-mixed-effects-models.html#cb365-8" tabindex="-1"></a></span>
+<span id="cb365-9"><a href="random-and-mixed-effects-models.html#cb365-9" tabindex="-1"></a>sse <span class="ot">&lt;-</span> <span class="fu">sum</span>((n.trt<span class="dv">-1</span>)<span class="sc">*</span>var.trt)</span>
+<span id="cb365-10"><a href="random-and-mixed-effects-models.html#cb365-10" tabindex="-1"></a>df.err <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt)<span class="sc">-</span>r</span>
+<span id="cb365-11"><a href="random-and-mixed-effects-models.html#cb365-11" tabindex="-1"></a></span>
+<span id="cb365-12"><a href="random-and-mixed-effects-models.html#cb365-12" tabindex="-1"></a>X2<span class="fl">.025</span> <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(.<span class="dv">025</span>,df.err)</span>
+<span id="cb365-13"><a href="random-and-mixed-effects-models.html#cb365-13" tabindex="-1"></a>X2<span class="fl">.975</span> <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(.<span class="dv">975</span>,df.err)</span>
+<span id="cb365-14"><a href="random-and-mixed-effects-models.html#cb365-14" tabindex="-1"></a></span>
+<span id="cb365-15"><a href="random-and-mixed-effects-models.html#cb365-15" tabindex="-1"></a>sigma2.ci.out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(sse<span class="sc">/</span>df.err, X2<span class="fl">.025</span>, X2<span class="fl">.975</span>,  sse<span class="sc">/</span>X2<span class="fl">.975</span>, sse<span class="sc">/</span>X2<span class="fl">.025</span>)</span>
+<span id="cb365-16"><a href="random-and-mixed-effects-models.html#cb365-16" tabindex="-1"></a><span class="fu">colnames</span>(sigma2.ci.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;MSE&quot;</span>,<span class="st">&quot;X2(.025)&quot;</span>,<span class="st">&quot;X2(.975)&quot;</span>,<span class="st">&quot;LB&quot;</span>, <span class="st">&quot;UB&quot;</span>)</span>
+<span id="cb365-17"><a href="random-and-mixed-effects-models.html#cb365-17" tabindex="-1"></a><span class="fu">rownames</span>(sigma2.ci.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;sigma^2&quot;</span>)</span>
+<span id="cb365-18"><a href="random-and-mixed-effects-models.html#cb365-18" tabindex="-1"></a><span class="fu">round</span>(sigma2.ci.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##              MSE X2(.025) X2(.975)       LB      UB
+## sigma^2 690.0211  65.6466 118.1359 525.6819 946.003</code></pre>
+<p>The point estimate is 690, while the 95% Confidence Interval ranges from 525 to 946.
+In terms of the within group standard deviation, the 95% Confidence Interval ranges from 23 to 31.</p>
+<p><span class="math display">\[\nabla \]</span></p>
+</div>
+<div id="estimating-the-between-group-variance" class="section level3 hasAnchor" number="11.1.5">
+<h3><span class="header-section-number">11.1.5</span> Estimating the Between Group Variance<a href="random-and-mixed-effects-models.html#estimating-the-between-group-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Recall the expected mean squares derived previously.</p>
+<p><span class="math display">\[
+E\{MSTR\}=\sigma^2 + n\sigma_{\mu}^2 \qquad \qquad E\{MSE\}=\sigma^2
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad E\left\{\frac{MSTR-MSE}{n}\right\} =
+\left(\frac{1}{n}\right)E\{MSTR\} +\left(-\frac{1}{n}\right)E\{MSE\}
+=\sigma_{\mu}^2
+\]</span>
+This represents a linear combination of mean squares, each with a known degrees of freedom.
+<strong>Satterthwaite’s Approximation</strong> is based on obtaining an approximation to a chi-square distribution based on linear combinations of mean squares. The approximation is for the degrees of freedom for the (approximate) chi-square distribution. Note that this estimator can be negative, and is usually treated as if it is 0 in practice.</p>
+<p>Let <span class="math inline">\(MS_1,\ldots,MS_h\)</span> be <span class="math inline">\(h\)</span> mean squares, with degrees of freedom <span class="math inline">\(df_1,\ldots,df_h\)</span>,
+respectively. Further, let <span class="math inline">\(c_1,\ldots,c_h\)</span>, be fixed constants. Consider the following quantities.</p>
+<p><span class="math display">\[
+L=\sum_{i=1}^hc_iE\{MS_i\}   \qquad\qquad
+\hat{L} =\sum_{i=1}^hc_i MS_i \qquad\qquad
+\frac{\left(df\right)\hat{L}}{L}  \stackrel{\bullet}{\sim} \chi_{df}^2
+\]</span>
+This method matches the first two moments of the approximate chi-square distribution to solve for the approximate degrees of freedom. For the chi-square distribution with <span class="math inline">\(\nu\)</span> degrees of freedom, the mean is <span class="math inline">\(\nu\)</span> and the variance is <span class="math inline">\(2\nu\)</span>. Also, the mean squares are independent.</p>
+<p><span class="math display">\[
+E\left\{\hat{L}\right\}=L \quad \Rightarrow \quad E\left\{\frac{\left(df\right)\hat{L}}{L}\right\}=df
+\]</span></p>
+<p><span class="math display">\[
+\frac{\left(df_i\right)MS_i}{E\left\{MS_i\right\}} \sim \chi_{df_i}^2
+\quad \Rightarrow \quad
+E\left\{\frac{\left(df_i\right)MS_i}{E\left\{MS_i\right\}}\right\}=df_i
+\qquad
+V\left\{\frac{\left(df_i\right)MS_i}{E\left\{MS_i\right\}}\right\}=2df_i
+\]</span>
+<span class="math display">\[
+\quad \Rightarrow \quad
+V\left\{MS_i\right\}=\frac{2\left(df_i\right)\left(E\left\{MS_i\right\}\right)^2}{
+\left(df_i\right)^2}
+\quad \Rightarrow \quad
+V\left\{\hat{L}\right\}=2\sum_{i=1}^hc_i^2\frac{\left(E\left\{MS_i\right\}\right)^2}{df_i}
+\]</span>
+<span class="math display">\[
+V\left\{\frac{\left(df\right)\hat{L}}{L}\right\}=2df
+\quad \Rightarrow \quad
+V\left\{\hat{L}\right\} = \frac{2(df)L^2}{(df)^2}=\frac{2L^2}{df}
+\]</span></p>
+<p>Now, equating the two versions of <span class="math inline">\(V\left\{\hat{L}\right\}\)</span> and solving for <span class="math inline">\(df\)</span> gives the following result. The unknown expected mean squares in <span class="math inline">\(L\)</span> are replaced with the observed mean squares.</p>
+<p><span class="math display">\[
+\frac{2L^2}{df}=
+2\sum_{i=1}^hc_i^2\frac{\left(E\left\{MS_i\right\}\right)^2}{df_i}
+\quad \Rightarrow \quad
+df = \frac{\hat{L}^2}{\sum_{i=1}^hc_i^2\frac{\left(MS_i\right)^2}{df_i}}=
+\frac{\left(\sum_{i=1}^h c_iMS_i\right)^2}{\sum_{i=1}^hc_i^2\frac{\left(MS_i\right)^2}{df_i}}
+\]</span>
+The approximate <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Interval is computed as follows.</p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ Confidence Interval for } \sigma_{\mu}^2: \quad
+\left[\frac{(df)\hat{L}}{\chi_{1-\alpha/2;df}},\frac{(df)\hat{L}}{\chi_{\alpha/2;df}}\right]
+\]</span></p>
+<p><strong>Example 10.5 - Alpha Acids in Varieties of Beer</strong></p>
+<p>The following R code obtains the approximate 95% Confidence Interval for <span class="math inline">\(\sigma_{\mu}^2\)</span> based on direct computations. Note that <span class="math inline">\(c_1=1/n\)</span> and <span class="math inline">\(c_2=-1/n\)</span>.</p>
+<div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="random-and-mixed-effects-models.html#cb367-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
+<span id="cb367-2"><a href="random-and-mixed-effects-models.html#cb367-2" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(hops<span class="sc">$</span>alphaAcid)</span>
+<span id="cb367-3"><a href="random-and-mixed-effects-models.html#cb367-3" tabindex="-1"></a>ybar.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,mean))</span>
+<span id="cb367-4"><a href="random-and-mixed-effects-models.html#cb367-4" tabindex="-1"></a>var.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,var))</span>
+<span id="cb367-5"><a href="random-and-mixed-effects-models.html#cb367-5" tabindex="-1"></a>n.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(hops<span class="sc">$</span>alphaAcid,hops<span class="sc">$</span>variety,length))</span>
+<span id="cb367-6"><a href="random-and-mixed-effects-models.html#cb367-6" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">length</span>(ybar.trt)</span>
+<span id="cb367-7"><a href="random-and-mixed-effects-models.html#cb367-7" tabindex="-1"></a>n <span class="ot">&lt;-</span> n.trt[<span class="dv">1</span>]</span>
+<span id="cb367-8"><a href="random-and-mixed-effects-models.html#cb367-8" tabindex="-1"></a></span>
+<span id="cb367-9"><a href="random-and-mixed-effects-models.html#cb367-9" tabindex="-1"></a>sstr <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt<span class="sc">*</span>(ybar.trt<span class="sc">-</span>ybar)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb367-10"><a href="random-and-mixed-effects-models.html#cb367-10" tabindex="-1"></a>sse <span class="ot">&lt;-</span> <span class="fu">sum</span>((n.trt<span class="dv">-1</span>)<span class="sc">*</span>var.trt)</span>
+<span id="cb367-11"><a href="random-and-mixed-effects-models.html#cb367-11" tabindex="-1"></a>df.trt <span class="ot">&lt;-</span> r<span class="dv">-1</span></span>
+<span id="cb367-12"><a href="random-and-mixed-effects-models.html#cb367-12" tabindex="-1"></a>df.err <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt)<span class="sc">-</span>r</span>
+<span id="cb367-13"><a href="random-and-mixed-effects-models.html#cb367-13" tabindex="-1"></a>mse <span class="ot">&lt;-</span> sse<span class="sc">/</span>df.err</span>
+<span id="cb367-14"><a href="random-and-mixed-effects-models.html#cb367-14" tabindex="-1"></a>mstr <span class="ot">&lt;-</span> sstr<span class="sc">/</span>df.trt</span>
+<span id="cb367-15"><a href="random-and-mixed-effects-models.html#cb367-15" tabindex="-1"></a></span>
+<span id="cb367-16"><a href="random-and-mixed-effects-models.html#cb367-16" tabindex="-1"></a>L.hat <span class="ot">&lt;-</span> (mstr<span class="sc">-</span>mse) <span class="sc">/</span> n</span>
+<span id="cb367-17"><a href="random-and-mixed-effects-models.html#cb367-17" tabindex="-1"></a>df.L.hat <span class="ot">&lt;-</span> (L.hat<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> ((<span class="dv">1</span><span class="sc">/</span>n)<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>mstr<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df.trt <span class="sc">+</span> (<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span>n)<span class="sc">^</span><span class="dv">2</span><span class="sc">*</span>mse<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df.err)</span>
+<span id="cb367-18"><a href="random-and-mixed-effects-models.html#cb367-18" tabindex="-1"></a></span>
+<span id="cb367-19"><a href="random-and-mixed-effects-models.html#cb367-19" tabindex="-1"></a>X2<span class="fl">.025</span> <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(.<span class="dv">025</span>,df.L.hat)</span>
+<span id="cb367-20"><a href="random-and-mixed-effects-models.html#cb367-20" tabindex="-1"></a>X2<span class="fl">.975</span> <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(.<span class="dv">975</span>,df.L.hat)</span>
+<span id="cb367-21"><a href="random-and-mixed-effects-models.html#cb367-21" tabindex="-1"></a>sigma2.mu.ci.out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(L.hat, df.L.hat, X2<span class="fl">.025</span>, X2<span class="fl">.975</span>, </span>
+<span id="cb367-22"><a href="random-and-mixed-effects-models.html#cb367-22" tabindex="-1"></a>                           df.L.hat<span class="sc">*</span>L.hat<span class="sc">/</span>X2<span class="fl">.975</span>, df.L.hat<span class="sc">*</span>L.hat<span class="sc">/</span>X2<span class="fl">.025</span>)</span>
+<span id="cb367-23"><a href="random-and-mixed-effects-models.html#cb367-23" tabindex="-1"></a><span class="fu">colnames</span>(sigma2.mu.ci.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;s2_mu&quot;</span>,<span class="st">&quot;df&quot;</span>, <span class="st">&quot;X2(.025)&quot;</span>,<span class="st">&quot;X2(.975)&quot;</span>,<span class="st">&quot;LB&quot;</span>, <span class="st">&quot;UB&quot;</span>)</span>
+<span id="cb367-24"><a href="random-and-mixed-effects-models.html#cb367-24" tabindex="-1"></a><span class="fu">rownames</span>(sigma2.mu.ci.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;sigma2_mu&quot;</span>)</span>
+<span id="cb367-25"><a href="random-and-mixed-effects-models.html#cb367-25" tabindex="-1"></a><span class="fu">round</span>(sigma2.mu.ci.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##              s2_mu     df X2(.025) X2(.975)       LB       UB
+## sigma2_mu 16196.73 8.9238   2.6597  18.9104 7643.216 54342.17</code></pre>
+<p>The point estimate is 16197, and the approximate 95% Confidence Interval goes from 7643 to 54342. In terms of the between group standard deviation, the range is approximately from 87 to 233.</p>
+<p>We will use the <strong>lmerTest</strong> package and the <strong>lmer</strong> function to fit the model. With this function, we must include a “1” for the fixed mean,
+and we include “(1|variety.f)” to include random effects for varieties.</p>
+<div class="sourceCode" id="cb369"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb369-1"><a href="random-and-mixed-effects-models.html#cb369-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
+<span id="cb369-2"><a href="random-and-mixed-effects-models.html#cb369-2" tabindex="-1"></a>hops<span class="sc">$</span>variety.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(hops<span class="sc">$</span>variety)</span>
+<span id="cb369-3"><a href="random-and-mixed-effects-models.html#cb369-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb369-4"><a href="random-and-mixed-effects-models.html#cb369-4" tabindex="-1"></a></span>
+<span id="cb369-5"><a href="random-and-mixed-effects-models.html#cb369-5" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb369-6"><a href="random-and-mixed-effects-models.html#cb369-6" tabindex="-1"></a>hops.mod1 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(alphaAcid <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>variety.f), <span class="at">data=</span>hops)</span>
+<span id="cb369-7"><a href="random-and-mixed-effects-models.html#cb369-7" tabindex="-1"></a><span class="fu">summary</span>(hops.mod1)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: alphaAcid ~ 1 + (1 | variety.f)
+##    Data: hops
+## 
+## REML criterion at convergence: 981.9
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.63193 -0.46012  0.00626  0.56199  3.06408 
+## 
+## Random effects:
+##  Groups    Name        Variance Std.Dev.
+##  variety.f (Intercept) 16197    127.27  
+##  Residual                690     26.27  
+## Number of obs: 100, groups:  variety.f, 10
+## 
+## Fixed effects:
+##             Estimate Std. Error     df t value Pr(&gt;|t|)    
+## (Intercept)   579.61      40.33   9.00   14.37 1.64e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><span class="math display">\[ \nabla \]</span></p>
+</div>
+</div>
+<div id="two-way-random-effects-model" class="section level2 hasAnchor" number="11.2">
+<h2><span class="header-section-number">11.2</span> Two-Way Random Effects Model<a href="random-and-mixed-effects-models.html#two-way-random-effects-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Some studies include two (or more) random factors. In these cases we want to generalize across populations of units for the two factors and their interactions. In <strong>Measurement Systems Analysis</strong>, variation in parts and operators who measure the parts are studied. The experiments are often referred to as <strong>Gage Repeatability &amp; Reproducibility (R&amp;R)</strong> studies. Each of <span class="math inline">\(a\)</span> parts are measured by <span class="math inline">\(b\)</span> operators <span class="math inline">\(n\)</span> times in random order.
+The variation in part sizes, operator measurements, and interactions between parts and operators are of interest. Repeatability refers to the variation when the same part is measured by the same operator multiple times.</p>
+<p>The statistical model for the balanced case is given below.</p>
+<p><span class="math display">\[
+Y_{ijk} = \mu_{\bullet\bullet} + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk} \qquad i=1,\ldots,a; \quad j=1,\ldots,b; \quad k=1,\ldots,n
+\]</span></p>
+<p>It is assumed that
+<span class="math inline">\(\left\{\alpha_i\right\}\)</span>, <span class="math inline">\(\left\{\beta_j\right\}\)</span>,
+<span class="math inline">\(\left\{(\alpha\beta)_{ij}\right\}\)</span>, and <span class="math inline">\(\left\{\epsilon_{ijk}\right\}\)</span>
+are independent and normally distributed with means 0 and variances
+<span class="math inline">\(\sigma_{\alpha}^2\)</span>, <span class="math inline">\(\sigma_{\beta}^2\)</span>, <span class="math inline">\(\sigma_{\alpha\beta}^2\)</span>, and <span class="math inline">\(\sigma^2\)</span>, respectively. The mean, variance and covariance structure are given below.</p>
+<p><span class="math display">\[
+E\left\{Y_{ijk}\right\} = E\left\{\mu_{\bullet\bullet} + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk}\right\}
+= \mu_{\bullet\bullet} + 0 + 0 + 0 + 0 = \mu_{\bullet\bullet}
+\]</span>
+<span class="math display">\[
+V\left\{Y_{ijk}\right\} = V\left\{\mu_{\bullet\bullet} + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk}\right\} =
+\sigma_{\alpha}^2 + \sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 +  \sigma^2
+\]</span>
+<span class="math display">\[
+\mbox{COV}\left\{Y_{ijk},Y_{i&#39;j&#39;k&#39;}\right\}=
+\left\{ \begin{array}{r@{\quad:\quad}l}
+    \sigma_{\alpha}^2 + \sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 +  \sigma^2 &amp; i=i&#39;,j=j&#39;,k=k&#39; \\
+    \sigma_{\alpha}^2 + \sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 &amp; i=i&#39;, j=j&#39;,k\ne k&#39; \\
+    \sigma_{\alpha}^2 &amp; i=i&#39;,j\ne j&#39;, \forall k,k&#39;\\
+     \sigma_{\beta}^2&amp;  i\ne i&#39;, j= j&#39;,\forall k,k&#39; \\
+     0 &amp; i\ne i&#39;, j\ne j&#39;, \forall k,k&#39; \\
+    \end{array} \right.
+\]</span>
+The expected mean squares for each source of variation can be derived from this covariance structure. The results are given here.</p>
+<p><span class="math display">\[
+\mbox{Factor A:} \quad E\{MSA\} = \sigma^2 + n\sigma_{\alpha\beta}^2+ bn\sigma_{\alpha}^2
+\qquad
+\mbox{Factor B:} \quad E\{MSB\} = \sigma^2 + n\sigma_{\alpha\beta}^2+ an\sigma_{\beta}^2
+\]</span>
+<span class="math display">\[
+\mbox{AB Interaction:} \quad E\{MSAB\}=\sigma^2 + n\sigma_{\alpha\beta}^2
+\qquad
+\mbox{Error:} \quad E\{MSE\}=\sigma^2
+\]</span></p>
+<p>The tests for interaction and main effects are obtained from the expected mean squares. Note that the “error” terms for factors A and B are the AB interaction, unlike the fixed effects model, which uses <span class="math inline">\(MSE\)</span> for the error term.</p>
+<p><span class="math display">\[
+H_0^{AB}:\sigma_{\alpha\beta}^2 = 0 \qquad H_A^{AB}:\sigma_{\alpha\beta}^2 &gt; 0 \qquad
+TS:F_{AB}=\frac{MSAB}{MSE} \qquad RR:F_{AB}\geq F_{1-\alpha;(a-1)(b-1),ab(n-1)}
+\]</span>
+<span class="math display">\[
+H_0^{A}:\sigma_{\alpha}^2 = 0 \qquad H_A^{A}:\sigma_{\alpha}^2 &gt; 0 \qquad
+TS:F_{A}=\frac{MSA}{MSAB} \qquad RR:F_{A}\geq F_{1-\alpha;a-1,(a-1)(b-1)}
+\]</span>
+<span class="math display">\[
+H_0^{B}:\sigma_{\beta}^2 = 0 \qquad H_A^{B}:\sigma_{\beta}^2 &gt; 0 \qquad
+TS:F_{B}=\frac{MSB}{MSAB} \qquad RR:F_{B}\geq F_{1-\alpha;b-1,(a-1)(b-1)}
+\]</span></p>
+<p>Point estimates for the variance components are obtained from the expected mean squares. Some of these can be negative, and in practice are typically replaced by 0.</p>
+<p><span class="math display">\[
+s^2=MSE \qquad s_{\alpha\beta}^2=\frac{MSAB-MSE}{n}  \qquad
+s_{\alpha}^2=\frac{MSA-MSAB}{bn}  \qquad s_{\beta}^2=\frac{MSB-MSAB}{an}
+\]</span></p>
+<p>As these are all linear functions of mean squares, Satterthwaite’s approximation can be used to obtain approximate degrees’ of freedom and Confidence Intervals for <span class="math inline">\(\sigma_{\alpha\beta}^2\)</span>, <span class="math inline">\(\sigma_{\alpha}^2\)</span>, and <span class="math inline">\(\sigma_{\beta}^2\)</span>.</p>
+<p><span class="math display">\[
+df_{AB}=\frac{\left(\frac{1}{n}MSAB + \frac{-1}{n}MSE\right)^2} {
+\frac{\left(\frac{1}{n}MSAB\right)^2}{(a-1)(b-1)} +
+\frac{\left(\frac{-1}{n}MSE\right)^2}{ab(n-1)}
+}
+\]</span></p>
+<p><span class="math display">\[
+df_{A}=\frac{\left(\frac{1}{bn}MSA + \frac{-1}{bn}MSAB\right)^2} {
+\frac{\left(\frac{1}{bn}MSA\right)^2}{a-1} +
+\frac{\left(\frac{-1}{bn}MSAB\right)^2}{(a-1)(b-1)}
+}
+\qquad
+df_{B}=\frac{\left(\frac{1}{an}MSB + \frac{-1}{an}MSAB\right)^2} {
+\frac{\left(\frac{1}{an}MSB\right)^2}{b-1} +
+\frac{\left(\frac{-1}{an}MSAB\right)^2}{(a-1)(b-1)}
+}
+\]</span></p>
+<p><strong>Example 10.6 - Measurements of Skulls by Observers</strong></p>
+<p>An anthropological study was conducted to measure variation in frontal chord measurements of skulls by various observers <span class="citation">(<a href="#ref-hanihara_1999">Hanihara et al. 1999</a>)</span>. There were <span class="math inline">\(a=10\)</span> skulls, <span class="math inline">\(b=6\)</span> observers, and <span class="math inline">\(n=2\)</span> replicates per skull/observer. The R code for the analysis and output are included here.</p>
+<div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="random-and-mixed-effects-models.html#cb371-1" tabindex="-1"></a>sm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/skull_measure.csv&quot;</span>)</span>
+<span id="cb371-2"><a href="random-and-mixed-effects-models.html#cb371-2" tabindex="-1"></a><span class="fu">head</span>(sm, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   observer skull time chord
+## 1        1     1    1 100.9
+## 2        1     1    2 100.8
+## 3        1     2    1  91.1</code></pre>
+<div class="sourceCode" id="cb373"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb373-1"><a href="random-and-mixed-effects-models.html#cb373-1" tabindex="-1"></a><span class="fu">tail</span>(sm, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##     observer skull time chord
+## 118        6     9    2  91.8
+## 119        6    10    1  93.7
+## 120        6    10    2  93.8</code></pre>
+<div class="sourceCode" id="cb375"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb375-1"><a href="random-and-mixed-effects-models.html#cb375-1" tabindex="-1"></a>sm<span class="sc">$</span>skull.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(sm<span class="sc">$</span>skull)</span>
+<span id="cb375-2"><a href="random-and-mixed-effects-models.html#cb375-2" tabindex="-1"></a>sm<span class="sc">$</span>observer.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(sm<span class="sc">$</span>observer)</span>
+<span id="cb375-3"><a href="random-and-mixed-effects-models.html#cb375-3" tabindex="-1"></a></span>
+<span id="cb375-4"><a href="random-and-mixed-effects-models.html#cb375-4" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(chord<span class="sc">~</span> skull.f<span class="sc">*</span>observer.f, <span class="at">data=</span>sm)</span>
+<span id="cb375-5"><a href="random-and-mixed-effects-models.html#cb375-5" tabindex="-1"></a><span class="fu">anova</span>(mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: chord
+##                    Df  Sum Sq Mean Sq   F value    Pr(&gt;F)    
+## skull.f             9 1612.01 179.112 3074.8786 &lt; 2.2e-16 ***
+## observer.f          5    7.32   1.463   25.1207 1.449e-13 ***
+## skull.f:observer.f 45    5.26   0.117    2.0065  0.005956 ** 
+## Residuals          60    3.49   0.058                        
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb377"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb377-1"><a href="random-and-mixed-effects-models.html#cb377-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">max</span>(sm<span class="sc">$</span>skull); b <span class="ot">&lt;-</span> <span class="fu">max</span>(sm<span class="sc">$</span>observer); n <span class="ot">&lt;-</span> <span class="fu">max</span>(sm<span class="sc">$</span>time)</span>
+<span id="cb377-2"><a href="random-and-mixed-effects-models.html#cb377-2" tabindex="-1"></a>msa <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod1)[<span class="dv">1</span>,<span class="dv">3</span>];  df_a <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod1)[<span class="dv">1</span>,<span class="dv">1</span>]</span>
+<span id="cb377-3"><a href="random-and-mixed-effects-models.html#cb377-3" tabindex="-1"></a>msb <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod1)[<span class="dv">2</span>,<span class="dv">3</span>];  df_b <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod1)[<span class="dv">2</span>,<span class="dv">1</span>]</span>
+<span id="cb377-4"><a href="random-and-mixed-effects-models.html#cb377-4" tabindex="-1"></a>msab <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod1)[<span class="dv">3</span>,<span class="dv">3</span>];  df_ab <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod1)[<span class="dv">3</span>,<span class="dv">1</span>]</span>
+<span id="cb377-5"><a href="random-and-mixed-effects-models.html#cb377-5" tabindex="-1"></a>mse <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod1)[<span class="dv">4</span>,<span class="dv">3</span>];  df_e <span class="ot">&lt;-</span> <span class="fu">anova</span>(mod1)[<span class="dv">4</span>,<span class="dv">1</span>]</span>
+<span id="cb377-6"><a href="random-and-mixed-effects-models.html#cb377-6" tabindex="-1"></a></span>
+<span id="cb377-7"><a href="random-and-mixed-effects-models.html#cb377-7" tabindex="-1"></a>s2_ab <span class="ot">&lt;-</span> (msab<span class="sc">-</span>mse)<span class="sc">/</span>n</span>
+<span id="cb377-8"><a href="random-and-mixed-effects-models.html#cb377-8" tabindex="-1"></a>s2_a <span class="ot">&lt;-</span> (msa<span class="sc">-</span>msab)<span class="sc">/</span>(b<span class="sc">*</span>n)</span>
+<span id="cb377-9"><a href="random-and-mixed-effects-models.html#cb377-9" tabindex="-1"></a>s2_b <span class="ot">&lt;-</span> (msb<span class="sc">-</span>msab)<span class="sc">/</span>(a<span class="sc">*</span>n)</span>
+<span id="cb377-10"><a href="random-and-mixed-effects-models.html#cb377-10" tabindex="-1"></a>df_s2_ab <span class="ot">&lt;-</span> s2_ab<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> ((msab<span class="sc">/</span>n)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_ab <span class="sc">+</span> (<span class="sc">-</span>mse<span class="sc">/</span>n)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_e)</span>
+<span id="cb377-11"><a href="random-and-mixed-effects-models.html#cb377-11" tabindex="-1"></a>df_s2_a <span class="ot">&lt;-</span> s2_a<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> ((msa<span class="sc">/</span>(b<span class="sc">*</span>n))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_a <span class="sc">+</span> (<span class="sc">-</span>msab<span class="sc">/</span>(b<span class="sc">*</span>n))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_ab)</span>
+<span id="cb377-12"><a href="random-and-mixed-effects-models.html#cb377-12" tabindex="-1"></a>df_s2_b <span class="ot">&lt;-</span> s2_b<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> ((msb<span class="sc">/</span>(a<span class="sc">*</span>n))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_b <span class="sc">+</span> (<span class="sc">-</span>msab<span class="sc">/</span>(a<span class="sc">*</span>n))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_ab)</span>
+<span id="cb377-13"><a href="random-and-mixed-effects-models.html#cb377-13" tabindex="-1"></a></span>
+<span id="cb377-14"><a href="random-and-mixed-effects-models.html#cb377-14" tabindex="-1"></a>s2.out1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(msa, msa<span class="sc">/</span>msab, <span class="fu">qf</span>(.<span class="dv">95</span>,df_a,df_ab), <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(msa<span class="sc">/</span>msab,df_a,df_ab),</span>
+<span id="cb377-15"><a href="random-and-mixed-effects-models.html#cb377-15" tabindex="-1"></a>                 s2_a, df_s2_a, df_s2_a<span class="sc">*</span>s2_a<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">975</span>,df_s2_a),df_s2_a<span class="sc">*</span>s2_a<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">025</span>,df_s2_a))</span>
+<span id="cb377-16"><a href="random-and-mixed-effects-models.html#cb377-16" tabindex="-1"></a>s2.out2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(msb, msb<span class="sc">/</span>msab, <span class="fu">qf</span>(.<span class="dv">95</span>,df_b,df_ab), <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(msb<span class="sc">/</span>msab,df_b,df_ab),</span>
+<span id="cb377-17"><a href="random-and-mixed-effects-models.html#cb377-17" tabindex="-1"></a>                 s2_b, df_s2_b, df_s2_b<span class="sc">*</span>s2_b<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">975</span>,df_s2_b),df_s2_b<span class="sc">*</span>s2_b<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">025</span>,df_s2_b))</span>
+<span id="cb377-18"><a href="random-and-mixed-effects-models.html#cb377-18" tabindex="-1"></a>s2.out3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(msab, msab<span class="sc">/</span>mse, <span class="fu">qf</span>(.<span class="dv">95</span>,df_ab,df_e), <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(msab<span class="sc">/</span>mse,df_ab,df_e),</span>
+<span id="cb377-19"><a href="random-and-mixed-effects-models.html#cb377-19" tabindex="-1"></a>                 s2_ab, df_s2_ab, df_s2_ab<span class="sc">*</span>s2_ab<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">975</span>,df_s2_ab),df_s2_ab<span class="sc">*</span>s2_ab<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">025</span>,df_s2_ab))</span>
+<span id="cb377-20"><a href="random-and-mixed-effects-models.html#cb377-20" tabindex="-1"></a>s2.out4 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(mse, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, mse, df_e, df_e<span class="sc">*</span>mse<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">975</span>,df_e),</span>
+<span id="cb377-21"><a href="random-and-mixed-effects-models.html#cb377-21" tabindex="-1"></a>                 df_e<span class="sc">*</span>mse<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">025</span>,df_e))</span>
+<span id="cb377-22"><a href="random-and-mixed-effects-models.html#cb377-22" tabindex="-1"></a>s2.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(s2.out1,s2.out2,s2.out3,s2.out4)</span>
+<span id="cb377-23"><a href="random-and-mixed-effects-models.html#cb377-23" tabindex="-1"></a><span class="fu">colnames</span>(s2.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;MS&quot;</span>, <span class="st">&quot;F*&quot;</span>, <span class="st">&quot;F(.95)&quot;</span>, <span class="st">&quot;P(&gt;F*)&quot;</span>, <span class="st">&quot;s^2&quot;</span>, <span class="st">&quot;Satt df&quot;</span>, <span class="st">&quot;LB&quot;</span>, <span class="st">&quot;UB&quot;</span>)</span>
+<span id="cb377-24"><a href="random-and-mixed-effects-models.html#cb377-24" tabindex="-1"></a><span class="fu">rownames</span>(s2.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;sigma_a^2&quot;</span>, <span class="st">&quot;sigma_b^2&quot;</span>, <span class="st">&quot;sigma_ab^2&quot;</span>, <span class="st">&quot;sigma^2&quot;</span>)</span>
+<span id="cb377-25"><a href="random-and-mixed-effects-models.html#cb377-25" tabindex="-1"></a><span class="fu">round</span>(s2.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##                  MS        F* F(.95) P(&gt;F*)     s^2 Satt df     LB      UB
+## sigma_a^2  179.1117 1532.4942 2.0958  0.000 14.9162  8.9883 7.0543 49.7643
+## sigma_b^2    1.4633   12.5200 2.4221  0.000  0.0673  4.2302 0.0247  0.5102
+## sigma_ab^2   0.1169    2.0065 1.5749  0.006  0.0293  9.5444 0.0141  0.0934
+## sigma^2      0.0582        NA     NA     NA  0.0582 60.0000 0.0420  0.0863</code></pre>
+<div class="sourceCode" id="cb379"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb379-1"><a href="random-and-mixed-effects-models.html#cb379-1" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb379-2"><a href="random-and-mixed-effects-models.html#cb379-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb379-3"><a href="random-and-mixed-effects-models.html#cb379-3" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(chord <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span>  (<span class="dv">1</span><span class="sc">|</span>skull.f) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>observer.f) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>skull.f<span class="sc">:</span>observer.f), <span class="at">data=</span>sm)</span>
+<span id="cb379-4"><a href="random-and-mixed-effects-models.html#cb379-4" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: 
+## chord ~ 1 + (1 | skull.f) + (1 | observer.f) + (1 | skull.f:observer.f)
+##    Data: sm
+## 
+## REML criterion at convergence: 123.9
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.90775 -0.49619  0.01282  0.41430  2.21863 
+## 
+## Random effects:
+##  Groups             Name        Variance Std.Dev.
+##  skull.f:observer.f (Intercept)  0.02931 0.1712  
+##  skull.f            (Intercept) 14.91283 3.8617  
+##  observer.f         (Intercept)  0.06732 0.2595  
+##  Residual                        0.05825 0.2414  
+## Number of obs: 120, groups:  skull.f:observer.f, 60; skull.f, 10; observer.f, 6
+## 
+## Fixed effects:
+##             Estimate Std. Error     df t value Pr(&gt;|t|)    
+## (Intercept)   96.464      1.226  9.138   78.67 2.97e-14 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>The variance of the skulls is by far the largest (not surprising) while the variances among observers, interactions and error are much smaller.</p>
+<p>In the measurement systems analysis, the variances are broken into various components.</p>
+<ul>
+<li><strong>Repeatability</strong> - Variation within same part/operator (skull/observer): <span class="math inline">\(\sigma^2\)</span></li>
+<li><strong>Reproducibility</strong> - Variation across operators and part/operator interactions: <span class="math inline">\(\sigma_{\beta}^2+\sigma_{\alpha\beta}^2\)</span></li>
+<li><strong>Parts</strong> - Variation across parts: <span class="math inline">\(\sigma_{\alpha}^2\)</span></li>
+<li><strong>Gage</strong> - Repeatability + Reproducibility</li>
+<li><strong>Total</strong> - Parts + Gage</li>
+<li><strong>% R&amp;R</strong> - <span class="math inline">\(100*\sigma_{\mbox{Gage}}/\sigma_{\mbox{Total}}\)</span> in terms of standard deviations, not variances.</li>
+</ul>
+<p>For this example (based on the lmer results), we get the following estimates.</p>
+<p><span class="math display">\[
+s_{\mbox{Repeatability}}^2= s^2=0.05825 \qquad
+s_{\mbox{Reproducibility}}^2= s_{\beta}^2+s_{\alpha\beta}^2=0.06732+0.02931=0.09663
+\]</span>
+<span class="math display">\[
+s_{\mbox{Parts}}^2=14.92183  \qquad
+s_{\mbox{Gage}}^2=0.05825+0.09963=0.015488
+\]</span>
+<span class="math display">\[
+s_{\mbox{Total}}^2=14.92183+0.015488=15.07671 \qquad
+\% \mbox{ R&amp;R:} \quad
+100\sqrt{\frac{0.015488}{15.07671}}=3.21\%
+\]</span></p>
+<p>Only about 3.2% of the total variation (standard deviation) is due to measurement error.</p>
+<p><span class="math display">\[ \nabla \]</span></p>
+</div>
+<div id="two-way-mixed-effects-model" class="section level2 hasAnchor" number="11.3">
+<h2><span class="header-section-number">11.3</span> Two-Way Mixed Effects Model<a href="random-and-mixed-effects-models.html#two-way-mixed-effects-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Models can include both fixed and random effects. In this section, we describe the <strong>unrestricted</strong> two-way mixed model, with factor A fixed and factor B random.
+The <strong>restricted</strong> model has the two-factor interactions sum to 0 over the fixed factor. Statistical software packages typically fit the unrestricted model that allows for unbalanced data. The model is given below.</p>
+<p><span class="math display">\[
+Y_{ijk}= \mu_{\bullet\bullet} + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk}
+\qquad i=1,\ldots,a;\quad j=1,\ldots,b; \quad k=1,\ldots,n
+\]</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^a \alpha_i = 0 \qquad \beta_j\sim NID\left(0,\sigma_{\beta}^2\right) \qquad
+(\alpha\beta)_{ij} \sim NID\left(0,\sigma_{\alpha\beta}^2\right) \qquad
+\epsilon_{ijk} \sim NID\left(0,\sigma^2\right)
+\]</span></p>
+<p>The random effects <span class="math inline">\(\left\{\beta_j\right\}\)</span>,
+<span class="math inline">\(\left\{(\alpha\beta)_{ij}\right\}\)</span>, and error terms <span class="math inline">\(\left\{\epsilon_{ijk}\right\}\)</span> are assumed pairwise independent.</p>
+<p>The mean, covariance structure, expected mean squares and estimators for the unrestricted mixed model are given below.</p>
+<p><span class="math display">\[
+E\left\{Y_{ijk}\right\}=\mu_{\bullet\bullet}+ \alpha_i \qquad
+\mbox{COV}\left\{Y_{ijk},Y_{i&#39;j&#39;k&#39;}\right\} =
+\left\{ \begin{array}{r@{\quad:\quad}l}
+   \sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 +  \sigma^2 &amp; i=i&#39;,j=j&#39;,k=k&#39; \\
+   \sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 &amp; i=i&#39;, j=j&#39;,k\ne k&#39; \\
+     \sigma_{\beta}^2&amp;  i\ne i&#39;, j= j&#39;,\forall k,k&#39; \\
+     0 &amp; \forall i,i&#39;, j\ne j&#39;, \forall k,k&#39; \\
+    \end{array} \right.
+\]</span></p>
+<p><span class="math display">\[
+E\{MSA\} = \sigma^2 +n\sigma_{\alpha\beta}^2+\frac{bn\sum_{i=1}^a\alpha_i^2}{a-1} \qquad
+E\{MSB\} = \sigma^2 +n\sigma_{\alpha\beta}^2+ an\sigma_{\beta}^2
+\]</span>
+<span class="math display">\[
+E\{MSAB\}= \sigma^2 +n\sigma_{\alpha\beta}^2  \qquad E\{MSE\}=\sigma^2
+\]</span></p>
+<p><span class="math display">\[
+s^2=MSE \qquad s_{\alpha\beta}^2=\frac{MSAB-MSE}{n}
+\qquad s_{\beta}^2=\frac{MSB-MSAB}{an}
+\]</span>
+The variances and covariances of the means are developed below, which can be used
+to make inferences regarding the fixed effects in the model.</p>
+<p><span class="math display">\[
+V\left\{\overline{Y}_{ij\bullet}\right\} =
+V\left\{\frac{1}{n}\sum_{k=1}^nY_{ijk}\right\}=
+\frac{1}{n^2}\left[\sum_{k=1}^n V\left\{Y_{ijk}\right\} +
+2\sum_{k=1}^{n-1}\sum_{k&#39;=k+1}^n\mbox{COV}\left\{Y_{ijk},Y_{ijk&#39;}\right\}\right]
+=
+\]</span>
+<span class="math display">\[
+= \frac{1}{n^2}\left[n\left(\sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 +  \sigma^2\right)
++n(n-1)\left(\sigma_{\beta}^2 + \sigma_{\alpha\beta}^2\right)\right] =
+\frac{n\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{n}
+\]</span>
+<span class="math display">\[
+\mbox{COV}\left\{\overline{Y}_{ij\bullet},\overline{Y}_{i&#39;j&#39;\bullet}\right\}=0 \quad j\neq j&#39; \quad \forall i,i&#39;
+\]</span>
+<span class="math display">\[
+\mbox{COV}\left\{\overline{Y}_{ij\bullet},\overline{Y}_{i&#39;j\bullet}\right\}=
+\frac{1}{n^2} \mbox{COV}\left\{\sum_{k=1}^nY_{ijk},\sum_{k=1}^nY_{i&#39;jk}\right\}=
+\frac{1}{n^2}n^2\sigma_{\beta}^2
+\quad i\neq i&#39; \quad \forall j
+\]</span></p>
+<p><span class="math display">\[
+V\left\{\overline{Y}_{i\bullet\bullet}\right\} =
+V\left\{\frac{1}{b} \sum_{j=1}^b\overline{Y}_{ij\bullet}\right\} =
+\frac{1}{b^2}\left[\sum_{j=1}^b V\left\{\overline{Y}_{ij\bullet}\right\} +
+2\sum_{j=1}^{b-1}\sum_{j&#39;=j+1}^b
+\mbox{COV}\left\{\overline{Y}_{ij\bullet},\overline{Y}_{ij&#39;\bullet}\right\}\right] =
+\]</span></p>
+<p><span class="math display">\[
+= \frac{1}{b^2}\left[b\frac{n\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{n}
++b(b-1)(0)\right] = \frac{n\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{bn}
+\]</span>
+<span class="math display">\[
+\mbox{COV}\left\{\overline{Y}_{i\bullet\bullet},\overline{Y}_{i&#39;\bullet\bullet}\right\}=
+\frac{1}{b^2} \mbox{COV}\left\{\sum_{j=1}^b\overline{Y}_{ij\bullet},\sum_{j=1}^b
+\overline{Y}_{i&#39;j\bullet}\right\}=
+\]</span>
+<span class="math display">\[
+\frac{1}{b^2}\left[ b\mbox{COV}\left\{ \overline{Y}_{ij\bullet},
+\overline{Y}_{i&#39;j\bullet}\right\} +
+b(b-1)\mbox{COV}\left\{ \overline{Y}_{ij\bullet},
+\overline{Y}_{i&#39;j&#39;\bullet}\right\}\right] =
+\]</span></p>
+<p><span class="math display">\[
+=\frac{1}{b^2}\left[b\sigma_\beta^2 + b(b-1)(0)\right]=
+\frac{\sigma_{\beta}^2}{b}=\frac{n\sigma_{\beta}^2}{nb}
+\quad i\neq i&#39;
+\]</span></p>
+<p><span class="math display">\[
+V\left\{\overline{Y}_{\bullet j\bullet}\right\} =
+V\left\{\frac{1}{a} \sum_{i=1}^a\overline{Y}_{ij\bullet}\right\} =
+\frac{1}{a^2}\left[\sum_{i=1}^a V\left\{\overline{Y}_{ij\bullet}\right\} +
+2\sum_{i=1}^{a-1}\sum_{i&#39;=i+1}^a
+\mbox{COV}\left\{\overline{Y}_{ij\bullet},\overline{Y}_{i&#39;j\bullet}\right\}\right] =
+\]</span>
+<span class="math display">\[
+=\frac{1}{a^2}\left[a\frac{n\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{n} +
+a(a-1)\frac{n\sigma_{\beta}^2}{n}\right] =
+\frac{an\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{an}
+\]</span>
+<span class="math display">\[
+\mbox{COV}\left\{\overline{Y}_{\bullet j\bullet},\overline{Y}_{\bullet j&#39;\bullet}\right\}=
+\frac{1}{a^2} \mbox{COV}\left\{\sum_{i=1}^a\overline{Y}_{ij\bullet},\sum_{i=1}^a
+\overline{Y}_{ij&#39;\bullet}\right\}=
+\frac{1}{a^2}\left[ a^2(0)\right] = 0 \qquad j\neq j&#39;
+\]</span>
+<span class="math display">\[
+V\left\{\overline{Y}_{\bullet\bullet\bullet}\right\}=
+V\left\{\frac{1}{b}\sum_{j=1}^b\overline{Y}_{\bullet j\bullet}\right\}
+\frac{1}{b^2}\left[bV\left\{\overline{Y}_{\bullet j\bullet}\right\} +
+b(b-1)\mbox{COV}\left\{\overline{Y}_{\bullet j\bullet},
+\overline{Y}_{\bullet j&#39;\bullet}\right\}\right]=
+\]</span>
+<span class="math display">\[
+=\frac{1}{b^2}\left[b\frac{an\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{an} +
+b(b-1)(0)\right] =
+\frac{an\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{abn}
+\]</span>
+The numerator of the variance of the mean is the expected value of the mean square for factor B. This leads to the following results and a Confidence Interval for the overall population mean.</p>
+<p><span class="math display">\[
+V\left\{\overline{Y}_{\bullet\bullet\bullet}\right\}=
+\frac{an\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{abn} \qquad \qquad
+\hat{V}\left\{\overline{Y}_{\bullet\bullet\bullet}\right\}=\frac{MSB}{abn}
+\]</span>
+<span class="math display">\[
+(1-\alpha)100\% \mbox{ Confidence Interval for } \mu: \qquad
+\overline{Y}_{\bullet\bullet\bullet} \pm t_{1-\alpha/2;b-1}
+\sqrt{\frac{MSB}{n}}
+\]</span></p>
+<p>For any contrast, <span class="math inline">\(L=\sum_{i=1}^ac_i\alpha_i\)</span> where <span class="math inline">\(\sum_{i=1}^ac_i=0\)</span>, among the
+means of factor A, we obtain the following variance for its estimator.</p>
+<p><span class="math display">\[
+L=\sum_{i=1}c_i\left(\mu_{\bullet\bullet}+\alpha_i\right) \qquad \qquad
+\hat{L}=\sum_{i=1}c_i\overline{Y}_{i\bullet\bullet}
+\]</span>
+<span class="math display">\[
+V\left\{\hat{L} \right\}=
+\sum_{i=1}^ac_i^2V\left\{\overline{Y}_{i\bullet\bullet}\right\} +
+2\sum_{i=1}^{a-1}\sum_{i&#39;=i+1}^ac_ic_{i&#39;}
+\mbox{COV}\left\{\overline{Y}_{i\bullet\bullet},\overline{Y}_{i&#39;\bullet\bullet}\right\}=
+\]</span>
+<span class="math display">\[
+\sum_{i=1}^ac_i^2\left(\frac{n\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{bn}\right) +
+2\sum_{i=1}^{a-1}\sum_{i&#39;=i+1}^ac_ic_{i&#39;}\left(\frac{n\sigma_{\beta}^2}{bn}\right) =
+\]</span>
+<span class="math display">\[
+\sum_{i=1}^ac_i^2\left(\frac{n\sigma_{\alpha\beta}^2 + \sigma^2}{bn}\right)  +
+\sum_{i=1}^a\sum_{i&#39;=1}^ac_ic_{i&#39;}\left(\frac{n\sigma_{\beta}^2}{bn}\right) =
+\sum_{i=1}^ac_i^2\left(\frac{n\sigma_{\alpha\beta}^2 + \sigma^2}{bn}\right) +
+\left(\frac{n\sigma_{\beta}^2}{bn}\right)\sum_{i=1}^ac_i\sum_{i&#39;=1}^ac_{i&#39;}
+\]</span>
+Since, by definition, the contrast coefficients sum to zero, the last term is 0 and we obtain the following results.</p>
+<p><span class="math display">\[
+V\left\{\hat{L} \right\}=\sum_{i=1}^ac_i^2\left(\frac{n\sigma_{\alpha\beta}^2 + \sigma^2}{bn}\right)   \qquad  E\{MSAB\} = n\sigma_{\alpha\beta}^2 + \sigma^2  \qquad
+\hat{V}\left\{\hat{L} \right\}=\sum_{i=1}^ac_i^2\left(\frac{MSAB}{bn}\right)
+\]</span>
+These results can be used to test whether a contrast is equal to 0 and/or obtain a Confidence Interval for the contrast.</p>
+<p><span class="math display">\[
+H_0: L=0 \quad H_A: L \neq 0 \qquad  
+TS: t^*=\frac{\hat{L}}{\sqrt{\sum_{i=1}^ac_i^2\left(\frac{MSAB}{bn}\right)}}
+\qquad RR:|t^*| \geq t_{1-\alpha/2;(a-1)(b-1)}
+\]</span></p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ Confidence Interval for } L: \qquad
+\hat{L} \pm t_{1-\alpha/2;(a-1)(b-1)}
+\sqrt{\sum_{i=1}^ac_i^2\left(\frac{MSAB}{bn}\right)}
+\]</span></p>
+<p>In particular, when making pairwise comparisons among treatment means, we have
+<span class="math inline">\(\sum_{i=1}^ac_i^2=2\)</span> and we have the following results.</p>
+<p><span class="math display">\[
+V\left\{\overline{Y}_{i\bullet\bullet} - \overline{Y}_{i&#39;\bullet\bullet}\right\}=
+\frac{2\left(n\sigma_{\alpha\beta}^2 + \sigma^2\right)}{bn}  \qquad \qquad
+\hat{V}\left\{\overline{Y}_{i\bullet\bullet} - \overline{Y}_{i&#39;\bullet\bullet}\right\}=
+\frac{2MSAB}{bn}
+\]</span></p>
+<p>Tukey’s method can be used to compare all levels of factor A.</p>
+<p><span class="math display">\[
+HSD = q_{1-\alpha;a,(a-1)(b-1)}\sqrt{\frac{MSAB}{bn}}
+\]</span>
+<span class="math display">\[
+(1-\alpha)100\% \mbox{ Confidence Interval for } \alpha_i-\alpha_{i&#39;}: \quad
+\left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i&#39;\bullet\bullet}\right) \pm HSD
+\]</span></p>
+<p><strong>Example 10.7 - Breath Alcohol Concentration Measurement Comparison</strong></p>
+<p>A study compared <span class="math inline">\(a=6\)</span> (fixed) instruments among <span class="math inline">\(b=3\)</span> (random) subjects in measuring breath alcohol levels <span class="citation">(<a href="#ref-gullberg_2008">Gullberg 2008</a>)</span>. Each subject was measured by each machine <span class="math inline">\(n=10\)</span> times. Scores have been multiplied by 100 to avoid very small variances.</p>
+<p>R code for direct calculations and the <strong>lmer</strong> function are used for the analysis. The confidence level for the <strong>difflsmeans</strong> has been adjusted by the Bonferroni method to construct simultaneous 95% Confidence Intervals among the <span class="math inline">\(6(6-1)/2=15\)</span> pairs of instruments.</p>
+<p><span class="math display">\[
+\hat{SE}\left\{\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i&#39;\bullet\bullet}\right\}=
+\sqrt{\frac{2MSAB}{bn}}=\sqrt{\frac{2(0.3083)}{3(10)}}=0.1434
+\qquad t_{1-.05/(2(15));10} = 3.827
+\]</span>
+<span class="math display">\[
+95\% \mbox{ CI for } \alpha_i-\alpha_{i&#39;}: \quad
+\left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i&#39;\bullet\bullet}\right)
+\pm 3.827(0.1434)
+\]</span>
+<span class="math display">\[
+\quad \equiv \quad
+95\% \mbox{ CI for } \alpha_i-\alpha_{i&#39;}: \quad
+\left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i&#39;\bullet\bullet}\right)
+\pm 0.549
+\]</span>
+Note that the <span class="math inline">\(P\)</span>-values are not adjusted for the multiple tests.</p>
+<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb381-1"><a href="random-and-mixed-effects-models.html#cb381-1" tabindex="-1"></a>ba1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/breathalyzer.csv&quot;</span>)</span>
+<span id="cb381-2"><a href="random-and-mixed-effects-models.html#cb381-2" tabindex="-1"></a><span class="fu">head</span>(ba1,<span class="dv">3</span>); <span class="fu">tail</span>(ba1,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   instrument subject repNum breathAlc
+## 1          1       1      1    0.0938
+## 2          1       1      2    0.0946
+## 3          1       1      3    0.0944</code></pre>
+<pre><code>##     instrument subject repNum breathAlc
+## 178          6       2      8    0.0597
+## 179          6       2      9    0.0599
+## 180          6       2     10    0.0590</code></pre>
+<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb384-1"><a href="random-and-mixed-effects-models.html#cb384-1" tabindex="-1"></a><span class="do">## Create a new data frame that orders first by instrument then subject within instrument</span></span>
+<span id="cb384-2"><a href="random-and-mixed-effects-models.html#cb384-2" tabindex="-1"></a>ba <span class="ot">&lt;-</span> ba1[<span class="fu">order</span>(ba1<span class="sc">$</span>instrument, ba1<span class="sc">$</span>subject),]</span>
+<span id="cb384-3"><a href="random-and-mixed-effects-models.html#cb384-3" tabindex="-1"></a><span class="fu">head</span>(ba,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   instrument subject repNum breathAlc
+## 1          1       1      1    0.0938
+## 2          1       1      2    0.0946
+## 3          1       1      3    0.0944</code></pre>
+<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb386-1"><a href="random-and-mixed-effects-models.html#cb386-1" tabindex="-1"></a><span class="fu">tail</span>(ba,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##     instrument subject repNum breathAlc
+## 168          6       3      8    0.0703
+## 169          6       3      9    0.0697
+## 170          6       3     10    0.0745</code></pre>
+<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb388-1"><a href="random-and-mixed-effects-models.html#cb388-1" tabindex="-1"></a>ba<span class="sc">$</span>instrument.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(ba<span class="sc">$</span>instrument)</span>
+<span id="cb388-2"><a href="random-and-mixed-effects-models.html#cb388-2" tabindex="-1"></a>ba<span class="sc">$</span>subject.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(ba<span class="sc">$</span>subject)</span>
+<span id="cb388-3"><a href="random-and-mixed-effects-models.html#cb388-3" tabindex="-1"></a></span>
+<span id="cb388-4"><a href="random-and-mixed-effects-models.html#cb388-4" tabindex="-1"></a>Y <span class="ot">&lt;-</span> <span class="dv">100</span><span class="sc">*</span>ba<span class="sc">$</span>breathAlc</span>
+<span id="cb388-5"><a href="random-and-mixed-effects-models.html#cb388-5" tabindex="-1"></a>instMean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(Y, ba<span class="sc">$</span>instrument, mean))</span>
+<span id="cb388-6"><a href="random-and-mixed-effects-models.html#cb388-6" tabindex="-1"></a>subjMean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(Y, ba<span class="sc">$</span>subject, mean))</span>
+<span id="cb388-7"><a href="random-and-mixed-effects-models.html#cb388-7" tabindex="-1"></a>inSuMean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(Y, <span class="fu">list</span>(ba<span class="sc">$</span>subject,ba<span class="sc">$</span>instrument), mean))</span>
+<span id="cb388-8"><a href="random-and-mixed-effects-models.html#cb388-8" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(instMean)</span>
+<span id="cb388-9"><a href="random-and-mixed-effects-models.html#cb388-9" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">length</span>(subjMean)</span>
+<span id="cb388-10"><a href="random-and-mixed-effects-models.html#cb388-10" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">length</span>(ba<span class="sc">$</span>breathAlc)<span class="sc">/</span>(a<span class="sc">*</span>b)</span>
+<span id="cb388-11"><a href="random-and-mixed-effects-models.html#cb388-11" tabindex="-1"></a></span>
+<span id="cb388-12"><a href="random-and-mixed-effects-models.html#cb388-12" tabindex="-1"></a>Ybar_i.. <span class="ot">&lt;-</span> <span class="fu">rep</span>(instMean, <span class="at">each=</span>b<span class="sc">*</span>n)</span>
+<span id="cb388-13"><a href="random-and-mixed-effects-models.html#cb388-13" tabindex="-1"></a>Ybar_.j. <span class="ot">&lt;-</span> <span class="fu">rep</span>(subjMean, <span class="at">each=</span>n, <span class="at">times=</span>a)</span>
+<span id="cb388-14"><a href="random-and-mixed-effects-models.html#cb388-14" tabindex="-1"></a>Ybar_ij. <span class="ot">&lt;-</span> <span class="fu">rep</span>(inSuMean, <span class="at">each=</span>n)</span>
+<span id="cb388-15"><a href="random-and-mixed-effects-models.html#cb388-15" tabindex="-1"></a>Ybar_... <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="fu">mean</span>(Y), a<span class="sc">*</span>b<span class="sc">*</span>n)</span>
+<span id="cb388-16"><a href="random-and-mixed-effects-models.html#cb388-16" tabindex="-1"></a><span class="do">## cbind(Y,Ybar_i..,Ybar_.j.,Ybar_ij., Ybar_...)</span></span>
+<span id="cb388-17"><a href="random-and-mixed-effects-models.html#cb388-17" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_i..<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_A <span class="ot">&lt;-</span> a<span class="dv">-1</span>; MSA <span class="ot">&lt;-</span> SSA<span class="sc">/</span>df_A</span>
+<span id="cb388-18"><a href="random-and-mixed-effects-models.html#cb388-18" tabindex="-1"></a>SSB <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_.j.<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_B <span class="ot">&lt;-</span> b<span class="dv">-1</span>; MSB <span class="ot">&lt;-</span> SSB<span class="sc">/</span>df_B</span>
+<span id="cb388-19"><a href="random-and-mixed-effects-models.html#cb388-19" tabindex="-1"></a>SSAB <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_ij.<span class="sc">-</span>Ybar_i..<span class="sc">-</span>Ybar_.j.<span class="sc">+</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_AB <span class="ot">&lt;-</span> (a<span class="dv">-1</span>)<span class="sc">*</span>(b<span class="dv">-1</span>)</span>
+<span id="cb388-20"><a href="random-and-mixed-effects-models.html#cb388-20" tabindex="-1"></a>MSAB <span class="ot">&lt;-</span> SSAB<span class="sc">/</span>df_AB</span>
+<span id="cb388-21"><a href="random-and-mixed-effects-models.html#cb388-21" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> <span class="fu">sum</span>((Y<span class="sc">-</span>Ybar_ij.)<span class="sc">^</span><span class="dv">2</span>);  df_E <span class="ot">&lt;-</span> a<span class="sc">*</span>b<span class="sc">*</span>(n<span class="dv">-1</span>); MSE <span class="ot">&lt;-</span> SSE<span class="sc">/</span>df_E</span>
+<span id="cb388-22"><a href="random-and-mixed-effects-models.html#cb388-22" tabindex="-1"></a>SSTO <span class="ot">&lt;-</span> <span class="fu">sum</span>((Y<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_TO <span class="ot">&lt;-</span> a<span class="sc">*</span>b<span class="sc">*</span>n<span class="dv">-1</span></span>
+<span id="cb388-23"><a href="random-and-mixed-effects-models.html#cb388-23" tabindex="-1"></a></span>
+<span id="cb388-24"><a href="random-and-mixed-effects-models.html#cb388-24" tabindex="-1"></a>aov.out1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_A, SSA, MSA, MSA<span class="sc">/</span>MSAB, <span class="fu">qf</span>(.<span class="dv">95</span>,df_A,df_AB),</span>
+<span id="cb388-25"><a href="random-and-mixed-effects-models.html#cb388-25" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSA<span class="sc">/</span>MSAB,df_A,df_AB))</span>
+<span id="cb388-26"><a href="random-and-mixed-effects-models.html#cb388-26" tabindex="-1"></a>aov.out2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_B, SSB, MSB, MSB<span class="sc">/</span>MSAB, <span class="fu">qf</span>(.<span class="dv">95</span>,df_B,df_AB),</span>
+<span id="cb388-27"><a href="random-and-mixed-effects-models.html#cb388-27" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSB<span class="sc">/</span>MSAB,df_B,df_AB))</span>
+<span id="cb388-28"><a href="random-and-mixed-effects-models.html#cb388-28" tabindex="-1"></a>aov.out3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_AB, SSAB, MSAB, MSAB<span class="sc">/</span>MSE, <span class="fu">qf</span>(.<span class="dv">95</span>,df_AB,df_E),</span>
+<span id="cb388-29"><a href="random-and-mixed-effects-models.html#cb388-29" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSAB<span class="sc">/</span>MSE,df_AB,df_E))</span>
+<span id="cb388-30"><a href="random-and-mixed-effects-models.html#cb388-30" tabindex="-1"></a>aov.out4 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_E, SSE, MSE,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb388-31"><a href="random-and-mixed-effects-models.html#cb388-31" tabindex="-1"></a>aov.out5 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_TO,SSTO,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>,<span class="cn">NA</span>)</span>
+<span id="cb388-32"><a href="random-and-mixed-effects-models.html#cb388-32" tabindex="-1"></a>aov.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(aov.out1,aov.out2,aov.out3,aov.out4, aov.out5)</span>
+<span id="cb388-33"><a href="random-and-mixed-effects-models.html#cb388-33" tabindex="-1"></a><span class="fu">colnames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;df&quot;</span>,<span class="st">&quot;SS&quot;</span>,<span class="st">&quot;MS&quot;</span>,<span class="st">&quot;F*&quot;</span>,<span class="st">&quot;F(.95)&quot;</span>, <span class="st">&quot;P(&gt;F*)&quot;</span>)</span>
+<span id="cb388-34"><a href="random-and-mixed-effects-models.html#cb388-34" tabindex="-1"></a><span class="fu">rownames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Instrument&quot;</span>, <span class="st">&quot;Subject&quot;</span>, <span class="st">&quot;InstxSubj&quot;</span>, <span class="st">&quot;Error&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb388-35"><a href="random-and-mixed-effects-models.html#cb388-35" tabindex="-1"></a><span class="fu">round</span>(aov.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##             df       SS       MS       F* F(.95) P(&gt;F*)
+## Instrument   5  19.0059   3.8012  12.3290 3.3258  5e-04
+## Subject      2 219.0440 109.5220 355.2307 4.1028  0e+00
+## InstxSubj   10   3.0831   0.3083   5.5595 1.8896  0e+00
+## Error      162   8.9840   0.0555       NA     NA     NA
+## Total      179 250.1171       NA       NA     NA     NA</code></pre>
+<div class="sourceCode" id="cb390"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb390-1"><a href="random-and-mixed-effects-models.html#cb390-1" tabindex="-1"></a>s2 <span class="ot">&lt;-</span> MSE</span>
+<span id="cb390-2"><a href="random-and-mixed-effects-models.html#cb390-2" tabindex="-1"></a>s2_AB <span class="ot">&lt;-</span> (MSAB<span class="sc">-</span>MSE)<span class="sc">/</span>n</span>
+<span id="cb390-3"><a href="random-and-mixed-effects-models.html#cb390-3" tabindex="-1"></a>s2_B <span class="ot">&lt;-</span> (MSB<span class="sc">-</span>MSAB)<span class="sc">/</span>(a<span class="sc">*</span>n)</span>
+<span id="cb390-4"><a href="random-and-mixed-effects-models.html#cb390-4" tabindex="-1"></a>df_s2_AB <span class="ot">&lt;-</span> s2_AB<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> ((MSAB<span class="sc">/</span>n)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_AB <span class="sc">+</span> (<span class="sc">-</span>MSE<span class="sc">/</span>n)<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_E)</span>
+<span id="cb390-5"><a href="random-and-mixed-effects-models.html#cb390-5" tabindex="-1"></a>df_s2_B <span class="ot">&lt;-</span> s2_B<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> ((MSB<span class="sc">/</span>(a<span class="sc">*</span>n))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_B <span class="sc">+</span> (<span class="sc">-</span>MSAB<span class="sc">/</span>(a<span class="sc">*</span>n))<span class="sc">^</span><span class="dv">2</span><span class="sc">/</span>df_AB)</span>
+<span id="cb390-6"><a href="random-and-mixed-effects-models.html#cb390-6" tabindex="-1"></a></span>
+<span id="cb390-7"><a href="random-and-mixed-effects-models.html#cb390-7" tabindex="-1"></a>s2.out1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(s2_B, df_s2_B, df_s2_B<span class="sc">*</span>s2_B<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">975</span>,df_s2_B), </span>
+<span id="cb390-8"><a href="random-and-mixed-effects-models.html#cb390-8" tabindex="-1"></a>                 df_s2_B<span class="sc">*</span>s2_B<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">025</span>,df_s2_B))</span>
+<span id="cb390-9"><a href="random-and-mixed-effects-models.html#cb390-9" tabindex="-1"></a>s2.out2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(s2_AB, df_s2_AB, df_s2_AB<span class="sc">*</span>s2_AB<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">975</span>,df_s2_AB), </span>
+<span id="cb390-10"><a href="random-and-mixed-effects-models.html#cb390-10" tabindex="-1"></a>                 df_s2_AB<span class="sc">*</span>s2_AB<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">025</span>,df_s2_AB))</span>
+<span id="cb390-11"><a href="random-and-mixed-effects-models.html#cb390-11" tabindex="-1"></a>s2.out3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(s2, df_E, df_E<span class="sc">*</span>s2<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">975</span>,df_E), </span>
+<span id="cb390-12"><a href="random-and-mixed-effects-models.html#cb390-12" tabindex="-1"></a>                 df_E<span class="sc">*</span>s2<span class="sc">/</span><span class="fu">qchisq</span>(.<span class="dv">025</span>,df_E))</span>
+<span id="cb390-13"><a href="random-and-mixed-effects-models.html#cb390-13" tabindex="-1"></a>s2.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(s2.out1,s2.out2,s2.out3)</span>
+<span id="cb390-14"><a href="random-and-mixed-effects-models.html#cb390-14" tabindex="-1"></a><span class="fu">colnames</span>(s2.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;s^2&quot;</span>, <span class="st">&quot;Satt df&quot;</span>, <span class="st">&quot;LB&quot;</span>, <span class="st">&quot;UB&quot;</span>)</span>
+<span id="cb390-15"><a href="random-and-mixed-effects-models.html#cb390-15" tabindex="-1"></a><span class="fu">rownames</span>(s2.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Subject&quot;</span>, <span class="st">&quot;InstxSubj&quot;</span>, <span class="st">&quot;Error&quot;</span>)</span>
+<span id="cb390-16"><a href="random-and-mixed-effects-models.html#cb390-16" tabindex="-1"></a><span class="fu">round</span>(s2.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##              s^2  Satt df     LB      UB
+## Subject   1.8202   1.9888 0.4922 73.1909
+## InstxSubj 0.0253   6.7127 0.0109  0.1091
+## Error     0.0555 162.0000 0.0451  0.0698</code></pre>
+<div class="sourceCode" id="cb392"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb392-1"><a href="random-and-mixed-effects-models.html#cb392-1" tabindex="-1"></a>HSD <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(.<span class="dv">95</span>,a,df_AB) <span class="sc">*</span> <span class="fu">sqrt</span>(MSAB<span class="sc">/</span>(b<span class="sc">*</span>n))</span>
+<span id="cb392-2"><a href="random-and-mixed-effects-models.html#cb392-2" tabindex="-1"></a>HSD.out <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">8</span><span class="sc">*</span>a<span class="sc">*</span>(a<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">8</span>)</span>
+<span id="cb392-3"><a href="random-and-mixed-effects-models.html#cb392-3" tabindex="-1"></a>row.count <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb392-4"><a href="random-and-mixed-effects-models.html#cb392-4" tabindex="-1"></a><span class="cf">for</span> (i1 <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>a) {</span>
+<span id="cb392-5"><a href="random-and-mixed-effects-models.html#cb392-5" tabindex="-1"></a>  <span class="cf">for</span> (i2 <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(i1<span class="dv">-1</span>)) {</span>
+<span id="cb392-6"><a href="random-and-mixed-effects-models.html#cb392-6" tabindex="-1"></a>    row.count <span class="ot">&lt;-</span> row.count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb392-7"><a href="random-and-mixed-effects-models.html#cb392-7" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">1</span>] <span class="ot">&lt;-</span> i1</span>
+<span id="cb392-8"><a href="random-and-mixed-effects-models.html#cb392-8" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">2</span>] <span class="ot">&lt;-</span> i2</span>
+<span id="cb392-9"><a href="random-and-mixed-effects-models.html#cb392-9" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">3</span>] <span class="ot">&lt;-</span> instMean[i1]</span>
+<span id="cb392-10"><a href="random-and-mixed-effects-models.html#cb392-10" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">4</span>] <span class="ot">&lt;-</span> instMean[i2]</span>
+<span id="cb392-11"><a href="random-and-mixed-effects-models.html#cb392-11" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">5</span>] <span class="ot">&lt;-</span> instMean[i1] <span class="sc">-</span> instMean[i2]</span>
+<span id="cb392-12"><a href="random-and-mixed-effects-models.html#cb392-12" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">6</span>] <span class="ot">&lt;-</span> (instMean[i1] <span class="sc">-</span> instMean[i2]) <span class="sc">-</span> HSD</span>
+<span id="cb392-13"><a href="random-and-mixed-effects-models.html#cb392-13" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">7</span>] <span class="ot">&lt;-</span> (instMean[i1] <span class="sc">-</span> instMean[i2]) <span class="sc">+</span> HSD</span>
+<span id="cb392-14"><a href="random-and-mixed-effects-models.html#cb392-14" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">8</span>] <span class="ot">&lt;-</span> </span>
+<span id="cb392-15"><a href="random-and-mixed-effects-models.html#cb392-15" tabindex="-1"></a>      <span class="dv">1</span><span class="sc">-</span><span class="fu">ptukey</span>(<span class="fu">abs</span>(instMean[i1] <span class="sc">-</span> instMean[i2])<span class="sc">/</span><span class="fu">sqrt</span>(MSAB<span class="sc">/</span>(b<span class="sc">*</span>n)),a,df_AB)</span>
+<span id="cb392-16"><a href="random-and-mixed-effects-models.html#cb392-16" tabindex="-1"></a>  }</span>
+<span id="cb392-17"><a href="random-and-mixed-effects-models.html#cb392-17" tabindex="-1"></a>}</span>
+<span id="cb392-18"><a href="random-and-mixed-effects-models.html#cb392-18" tabindex="-1"></a></span>
+<span id="cb392-19"><a href="random-and-mixed-effects-models.html#cb392-19" tabindex="-1"></a><span class="fu">colnames</span>(HSD.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;i&quot;</span>, <span class="st">&quot;i&#39;&quot;</span>, <span class="st">&quot;Ybar_i&quot;</span>, <span class="st">&quot;Ybar_i&#39;&quot;</span>, <span class="st">&quot;Diff&quot;</span>, <span class="st">&quot;LB&quot;</span>, <span class="st">&quot;UB&quot;</span>, <span class="st">&quot;p adj&quot;</span>)</span>
+<span id="cb392-20"><a href="random-and-mixed-effects-models.html#cb392-20" tabindex="-1"></a><span class="fu">round</span>(HSD.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##       i i&#39; Ybar_i Ybar_i&#39;    Diff      LB      UB  p adj
+##  [1,] 2  1 7.3547  7.8340 -0.4793 -0.9773  0.0186 0.0609
+##  [2,] 3  1 7.6247  7.8340 -0.2093 -0.7073  0.2886 0.6941
+##  [3,] 3  2 7.6247  7.3547  0.2700 -0.2280  0.7680 0.4621
+##  [4,] 4  1 6.8353  7.8340 -0.9987 -1.4966 -0.5007 0.0004
+##  [5,] 4  2 6.8353  7.3547 -0.5193 -1.0173 -0.0214 0.0399
+##  [6,] 4  3 6.8353  7.6247 -0.7893 -1.2873 -0.2914 0.0026
+##  [7,] 5  1 7.5943  7.8340 -0.2397 -0.7376  0.2583 0.5760
+##  [8,] 5  2 7.5943  7.3547  0.2397 -0.2583  0.7376 0.5760
+##  [9,] 5  3 7.5943  7.6247 -0.0303 -0.5283  0.4676 0.9999
+## [10,] 5  4 7.5943  6.8353  0.7590  0.2610  1.2570 0.0034
+## [11,] 6  1 7.2090  7.8340 -0.6250 -1.1230 -0.1270 0.0131
+## [12,] 6  2 7.2090  7.3547 -0.1457 -0.6436  0.3523 0.9023
+## [13,] 6  3 7.2090  7.6247 -0.4157 -0.9136  0.0823 0.1188
+## [14,] 6  4 7.2090  6.8353  0.3737 -0.1243  0.8716 0.1818
+## [15,] 6  5 7.2090  7.5943 -0.3853 -0.8833  0.1126 0.1618</code></pre>
+<div class="sourceCode" id="cb394"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb394-1"><a href="random-and-mixed-effects-models.html#cb394-1" tabindex="-1"></a><span class="do">## The error terms are incorrect for instrument and subject using the aov command</span></span>
+<span id="cb394-2"><a href="random-and-mixed-effects-models.html#cb394-2" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="dv">100</span><span class="sc">*</span>breathAlc <span class="sc">~</span> <span class="fu">factor</span>(instrument)<span class="sc">*</span><span class="fu">factor</span>(subject), <span class="at">data=</span>ba)</span>
+<span id="cb394-3"><a href="random-and-mixed-effects-models.html#cb394-3" tabindex="-1"></a><span class="fu">anova</span>(mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: 100 * breathAlc
+##                                     Df  Sum Sq Mean Sq   F value    Pr(&gt;F)    
+## factor(instrument)                   5  19.006   3.801   68.5430 &lt; 2.2e-16 ***
+## factor(subject)                      2 219.044 109.522 1974.9028 &lt; 2.2e-16 ***
+## factor(instrument):factor(subject)  10   3.083   0.308    5.5595 4.177e-07 ***
+## Residuals                          162   8.984   0.055                        
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb396"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb396-1"><a href="random-and-mixed-effects-models.html#cb396-1" tabindex="-1"></a><span class="do">## Fit unrestricted mixed model </span></span>
+<span id="cb396-2"><a href="random-and-mixed-effects-models.html#cb396-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb396-3"><a href="random-and-mixed-effects-models.html#cb396-3" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(<span class="dv">100</span><span class="sc">*</span>breathAlc <span class="sc">~</span> instrument.f <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subject.f) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>instrument.f<span class="sc">:</span>subject.f), <span class="at">data=</span>ba)</span>
+<span id="cb396-4"><a href="random-and-mixed-effects-models.html#cb396-4" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: 
+## 100 * breathAlc ~ instrument.f + (1 | subject.f) + (1 | instrument.f:subject.f)
+##    Data: ba
+## 
+## REML criterion at convergence: 46.9
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -2.7063 -0.5975  0.0655  0.5337  3.5359 
+## 
+## Random effects:
+##  Groups                 Name        Variance Std.Dev.
+##  instrument.f:subject.f (Intercept) 0.02529  0.1590  
+##  subject.f              (Intercept) 1.82025  1.3492  
+##  Residual                           0.05546  0.2355  
+## Number of obs: 180, groups:  instrument.f:subject.f, 18; subject.f, 3
+## 
+## Fixed effects:
+##               Estimate Std. Error       df t value Pr(&gt;|t|)    
+## (Intercept)    7.40867    0.78004  1.99996   9.498 0.010905 *  
+## instrument.f1  0.42533    0.09254  9.99985   4.596 0.000986 ***
+## instrument.f2 -0.05400    0.09254  9.99985  -0.584 0.572476    
+## instrument.f3  0.21600    0.09254  9.99985   2.334 0.041762 *  
+## instrument.f4 -0.57333    0.09254  9.99985  -6.195 0.000102 ***
+## instrument.f5  0.18567    0.09254  9.99985   2.006 0.072627 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) inst.1 inst.2 inst.3 inst.4
+## instrmnt.f1  0.000                            
+## instrmnt.f2  0.000 -0.200                     
+## instrmnt.f3  0.000 -0.200 -0.200              
+## instrmnt.f4  0.000 -0.200 -0.200 -0.200       
+## instrmnt.f5  0.000 -0.200 -0.200 -0.200 -0.200</code></pre>
+<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb398-1"><a href="random-and-mixed-effects-models.html#cb398-1" tabindex="-1"></a><span class="fu">anova</span>(mod2)</span></code></pre></div>
+<pre><code>## Type III Analysis of Variance Table with Satterthwaite&#39;s method
+##              Sum Sq Mean Sq NumDF  DenDF F value    Pr(&gt;F)    
+## instrument.f 3.4186 0.68372     5 9.9999  12.329 0.0005164 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb400"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb400-1"><a href="random-and-mixed-effects-models.html#cb400-1" tabindex="-1"></a><span class="fu">difflsmeans</span>(mod2, <span class="at">level=</span><span class="dv">1</span><span class="fl">-.05</span><span class="sc">/</span>(a<span class="sc">*</span>(a<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>)) <span class="do">## Bonferroni adjustment for CI&#39;s (not P-values)</span></span></code></pre></div>
+<pre><code>## Least Squares Means table:
+## 
+##                                Estimate Std. Error df t value     lower
+## instrument.f1 - instrument.f2  0.479333   0.143368 10  3.3434 -0.069387
+## instrument.f1 - instrument.f3  0.209333   0.143368 10  1.4601 -0.339387
+## instrument.f1 - instrument.f4  0.998667   0.143368 10  6.9658  0.449947
+## instrument.f1 - instrument.f5  0.239667   0.143368 10  1.6717 -0.309053
+## instrument.f1 - instrument.f6  0.625000   0.143368 10  4.3594  0.076280
+## instrument.f2 - instrument.f3 -0.270000   0.143368 10 -1.8833 -0.818720
+## instrument.f2 - instrument.f4  0.519333   0.143368 10  3.6224 -0.029387
+## instrument.f2 - instrument.f5 -0.239667   0.143368 10 -1.6717 -0.788387
+## instrument.f2 - instrument.f6  0.145667   0.143368 10  1.0160 -0.403053
+## instrument.f3 - instrument.f4  0.789333   0.143368 10  5.5056  0.240613
+## instrument.f3 - instrument.f5  0.030333   0.143368 10  0.2116 -0.518387
+## instrument.f3 - instrument.f6  0.415667   0.143368 10  2.8993 -0.133053
+## instrument.f4 - instrument.f5 -0.759000   0.143368 10 -5.2941 -1.307720
+## instrument.f4 - instrument.f6 -0.373667   0.143368 10 -2.6063 -0.922387
+## instrument.f5 - instrument.f6  0.385333   0.143368 10  2.6877 -0.163387
+##                                   upper  Pr(&gt;|t|)    
+## instrument.f1 - instrument.f2  1.028053 0.0074481 ** 
+## instrument.f1 - instrument.f3  0.758053 0.1749512    
+## instrument.f1 - instrument.f4  1.547387 3.873e-05 ***
+## instrument.f1 - instrument.f5  0.788387 0.1255364    
+## instrument.f1 - instrument.f6  1.173720 0.0014225 ** 
+## instrument.f2 - instrument.f3  0.278720 0.0890443 .  
+## instrument.f2 - instrument.f4  1.068053 0.0046713 ** 
+## instrument.f2 - instrument.f5  0.309053 0.1255364    
+## instrument.f2 - instrument.f6  0.694387 0.3335656    
+## instrument.f3 - instrument.f4  1.338053 0.0002597 ***
+## instrument.f3 - instrument.f5  0.579053 0.8366871    
+## instrument.f3 - instrument.f6  0.964387 0.0158528 *  
+## instrument.f4 - instrument.f5 -0.210280 0.0003505 ***
+## instrument.f4 - instrument.f6  0.175053 0.0262048 *  
+## instrument.f5 - instrument.f6  0.934053 0.0227889 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##   Confidence level: 100%
+##   Degrees of freedom method: Satterthwaite</code></pre>
+<p><span class="math display">\[ \nabla \]</span></p>
+</div>
+<div id="three-way-mixed-effects-models" class="section level2 hasAnchor" number="11.4">
+<h2><span class="header-section-number">11.4</span> Three-Way Mixed Effects Models<a href="random-and-mixed-effects-models.html#three-way-mixed-effects-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, the Three-Way mixed model with two fixed factors and a single random factor (typically subjects) is described. In many cases, there is a single replicate per combination of factors <span class="math inline">\((n=1)\)</span> and this can be thought of as an extension of a Randomized Block/Repeated Measures Design. Here is the case when <span class="math inline">\(n=1\)</span>, factors A and B are fixed, and factor C is random (Subject).</p>
+<p><span class="math display">\[
+SSA = bc\sum_{i=1}^a\left(\overline{Y}_{i\bullet\bullet}-
+\overline{Y}_{\bullet\bullet\bullet}\right)^2
+\qquad df_A=a-1  
+\]</span>
+<span class="math display">\[
+E\{MSA\}=\sigma^2 + \sigma_{\alpha\beta\gamma}^2+
+b\sigma_{\alpha\gamma}^2+\frac{bc\sum_{i=1}^a\alpha_i^2}{a-1}
+=E\{MSAC\}+\frac{bc\sum_{i=1}^a\alpha_i^2}{a-1}
+\]</span>
+<span class="math display">\[
+SSB = ac\sum_{j=1}^b\left(\overline{Y}_{\bullet j\bullet}-
+\overline{Y}_{\bullet\bullet\bullet}\right)^2
+\qquad df_B=b-1  
+\]</span>
+<span class="math display">\[
+E\{MSB\}=\sigma^2 + \sigma_{\alpha\beta\gamma}^2+
+a\sigma_{\beta\gamma}^2+\frac{ac\sum_{j=1}^b\beta_j^2}{b-1}
+= E\{MSBC\}+\frac{ac\sum_{j=1}^b\beta_j^2}{b-1}
+\]</span>
+<span class="math display">\[
+SSAB=c\sum_{i=1}^a \sum_{j=1}^b \left(
+\overline{Y}_{ij\bullet}-\overline{Y}_{i\bullet\bullet}-
+\overline{Y}_{\bullet j \bullet} +
+\overline{Y}_{\bullet\bullet\bullet} \right)^2
+\qquad df_{AB}=(a-1)(b-1)
+\]</span>
+<span class="math display">\[
+E\{MSAB\}=\sigma^2 + \sigma_{\alpha\beta\gamma}^2 +
+\frac{c\sum_{i=1}^a\sum_{j=1}^b(\alpha\beta)_{ij}^2}{(a-1)(b-1)}
+=E\{MSABC\}+
+\frac{c\sum_{i=1}^a\sum_{j=1}^b(\alpha\beta)_{ij}^2}{(a-1)(b-1)}
+\]</span></p>
+<p>The error terms for the fixed main effects and their 2-way interaction are the interactions between each term and the random factor C.</p>
+<p>Tukey’s HSD or the Bonferroni method can be used to compare the levels of factors A and B, or the <span class="math inline">\(ab\)</span> treatment means if the interaction is important.</p>
+<p><strong>Example 10.8 - Navigational Techniques for Web Maps</strong></p>
+<p>A study was conducted to measure effects of two factors on subjects’ skill on reading web maps <span class="citation">(<a href="#ref-wu_2011">Wu, Lin, and You 2011</a>)</span>. The factors included are given below.</p>
+<ul>
+<li><strong>Navigational Technique</strong> - Combined Panning Buttons (CPB, (<span class="math inline">\(i=1\)</span>)),
+Distributed Panning Buttons (DPB, (<span class="math inline">\(i=2\)</span>)), Enhanced Navigaor with Continuous Control (ENCC, (<span class="math inline">\(i=3\)</span>)), and Grab &amp; Drag (GD, (<span class="math inline">\(i=4\)</span>))</li>
+<li><strong>Input Method</strong> - Touch Screen (DT, (<span class="math inline">\(j=1\)</span>)), Mouse (M, (<span class="math inline">\(j=2\)</span>))</li>
+<li><strong>Subject</strong> - 36 subjects who each performed once on the 8 combinations of Input Method and Navigational Technique</li>
+</ul>
+<p>One response was task completion time (seconds).
+We will analyze the data directly and with the <strong>lmer</strong> function below.</p>
+<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb402-1"><a href="random-and-mixed-effects-models.html#cb402-1" tabindex="-1"></a>ntm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/navtechmap1.csv&quot;</span>)</span>
+<span id="cb402-2"><a href="random-and-mixed-effects-models.html#cb402-2" tabindex="-1"></a><span class="fu">head</span>(ntm, <span class="dv">3</span>); <span class="fu">tail</span>(ntm, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   navTech inputMeth subject taskTime
+## 1       1         1       1   163.30
+## 2       1         1       2   214.95
+## 3       1         1       3   179.73</code></pre>
+<pre><code>##     navTech inputMeth subject taskTime
+## 286       4         2      34   105.90
+## 287       4         2      35    73.22
+## 288       4         2      36    78.10</code></pre>
+<div class="sourceCode" id="cb405"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb405-1"><a href="random-and-mixed-effects-models.html#cb405-1" tabindex="-1"></a>ntm<span class="sc">$</span>inputMet.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(ntm<span class="sc">$</span>inputMeth, <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;DT&quot;</span>,<span class="st">&quot;M&quot;</span>))</span>
+<span id="cb405-2"><a href="random-and-mixed-effects-models.html#cb405-2" tabindex="-1"></a>ntm<span class="sc">$</span>navTech.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(ntm<span class="sc">$</span>navTech, <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, </span>
+<span id="cb405-3"><a href="random-and-mixed-effects-models.html#cb405-3" tabindex="-1"></a>                        <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;CPB&quot;</span>,<span class="st">&quot;DPB&quot;</span>,<span class="st">&quot;ENCC&quot;</span>,<span class="st">&quot;GD&quot;</span>))</span>
+<span id="cb405-4"><a href="random-and-mixed-effects-models.html#cb405-4" tabindex="-1"></a>ntm<span class="sc">$</span>subject.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(ntm<span class="sc">$</span>subject)</span>
+<span id="cb405-5"><a href="random-and-mixed-effects-models.html#cb405-5" tabindex="-1"></a>allmean <span class="ot">&lt;-</span> <span class="fu">mean</span>(ntm<span class="sc">$</span>taskTime)</span>
+<span id="cb405-6"><a href="random-and-mixed-effects-models.html#cb405-6" tabindex="-1"></a>A_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(ntm<span class="sc">$</span>taskTime, ntm<span class="sc">$</span>navTech.f, mean))</span>
+<span id="cb405-7"><a href="random-and-mixed-effects-models.html#cb405-7" tabindex="-1"></a>B_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(ntm<span class="sc">$</span>taskTime, ntm<span class="sc">$</span>inputMet.f, mean))</span>
+<span id="cb405-8"><a href="random-and-mixed-effects-models.html#cb405-8" tabindex="-1"></a>C_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(ntm<span class="sc">$</span>taskTime, ntm<span class="sc">$</span>subject.f, mean))</span>
+<span id="cb405-9"><a href="random-and-mixed-effects-models.html#cb405-9" tabindex="-1"></a>AB_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(ntm<span class="sc">$</span>taskTime, <span class="fu">list</span>(ntm<span class="sc">$</span>inputMet.f,ntm<span class="sc">$</span>navTech.f), mean))</span>
+<span id="cb405-10"><a href="random-and-mixed-effects-models.html#cb405-10" tabindex="-1"></a>AC_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(ntm<span class="sc">$</span>taskTime, <span class="fu">list</span>(ntm<span class="sc">$</span>subject.f,ntm<span class="sc">$</span>navTech.f), mean))</span>
+<span id="cb405-11"><a href="random-and-mixed-effects-models.html#cb405-11" tabindex="-1"></a>BC_mean <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(ntm<span class="sc">$</span>taskTime, <span class="fu">list</span>(ntm<span class="sc">$</span>subject.f,ntm<span class="sc">$</span>inputMet.f), mean))</span>
+<span id="cb405-12"><a href="random-and-mixed-effects-models.html#cb405-12" tabindex="-1"></a>ABC_mean <span class="ot">&lt;-</span> ntm<span class="sc">$</span>taskTime</span>
+<span id="cb405-13"><a href="random-and-mixed-effects-models.html#cb405-13" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(A_mean); b <span class="ot">&lt;-</span> <span class="fu">length</span>(B_mean); c <span class="ot">&lt;-</span> <span class="fu">length</span>(C_mean)</span>
+<span id="cb405-14"><a href="random-and-mixed-effects-models.html#cb405-14" tabindex="-1"></a></span>
+<span id="cb405-15"><a href="random-and-mixed-effects-models.html#cb405-15" tabindex="-1"></a>Ybar_... <span class="ot">&lt;-</span> <span class="fu">rep</span>(allmean,a<span class="sc">*</span>b<span class="sc">*</span>c)</span>
+<span id="cb405-16"><a href="random-and-mixed-effects-models.html#cb405-16" tabindex="-1"></a>Ybar_i.. <span class="ot">&lt;-</span> <span class="fu">rep</span>(A_mean, <span class="at">each=</span>b<span class="sc">*</span>c)</span>
+<span id="cb405-17"><a href="random-and-mixed-effects-models.html#cb405-17" tabindex="-1"></a>Ybar_.j. <span class="ot">&lt;-</span> <span class="fu">rep</span>(B_mean, <span class="at">each=</span>c, <span class="at">times=</span>a)</span>
+<span id="cb405-18"><a href="random-and-mixed-effects-models.html#cb405-18" tabindex="-1"></a>Ybar_..k <span class="ot">&lt;-</span> <span class="fu">rep</span>(C_mean, <span class="at">times=</span>a<span class="sc">*</span>b)</span>
+<span id="cb405-19"><a href="random-and-mixed-effects-models.html#cb405-19" tabindex="-1"></a>Ybar_ij. <span class="ot">&lt;-</span> <span class="fu">rep</span>(AB_mean, <span class="at">each=</span>c)</span>
+<span id="cb405-20"><a href="random-and-mixed-effects-models.html#cb405-20" tabindex="-1"></a>Ybar_i.k <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(AC_mean[<span class="dv">1</span><span class="sc">:</span>c], <span class="at">times=</span>b),</span>
+<span id="cb405-21"><a href="random-and-mixed-effects-models.html#cb405-21" tabindex="-1"></a>              <span class="fu">rep</span>(AC_mean[(c<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>c)], <span class="at">times=</span>b),</span>
+<span id="cb405-22"><a href="random-and-mixed-effects-models.html#cb405-22" tabindex="-1"></a>              <span class="fu">rep</span>(AC_mean[(<span class="dv">2</span><span class="sc">*</span>c<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(<span class="dv">3</span><span class="sc">*</span>c)], <span class="at">times=</span>b),</span>
+<span id="cb405-23"><a href="random-and-mixed-effects-models.html#cb405-23" tabindex="-1"></a>              <span class="fu">rep</span>(AC_mean[(<span class="dv">3</span><span class="sc">*</span>c<span class="sc">+</span><span class="dv">1</span>)<span class="sc">:</span>(<span class="dv">4</span><span class="sc">*</span>c)], <span class="at">times=</span>b))</span>
+<span id="cb405-24"><a href="random-and-mixed-effects-models.html#cb405-24" tabindex="-1"></a>Ybar_.jk <span class="ot">&lt;-</span> <span class="fu">rep</span>(BC_mean, <span class="at">times=</span>a)</span>
+<span id="cb405-25"><a href="random-and-mixed-effects-models.html#cb405-25" tabindex="-1"></a>Ybar_ijk <span class="ot">&lt;-</span> ABC_mean</span>
+<span id="cb405-26"><a href="random-and-mixed-effects-models.html#cb405-26" tabindex="-1"></a></span>
+<span id="cb405-27"><a href="random-and-mixed-effects-models.html#cb405-27" tabindex="-1"></a>SSA <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_i..<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_A <span class="ot">&lt;-</span> a<span class="dv">-1</span>; MSA <span class="ot">&lt;-</span> SSA<span class="sc">/</span>df_A</span>
+<span id="cb405-28"><a href="random-and-mixed-effects-models.html#cb405-28" tabindex="-1"></a>SSB <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_.j.<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_B <span class="ot">&lt;-</span> b<span class="dv">-1</span>; MSB <span class="ot">&lt;-</span> SSB<span class="sc">/</span>df_B</span>
+<span id="cb405-29"><a href="random-and-mixed-effects-models.html#cb405-29" tabindex="-1"></a>SSC <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_..k<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>); df_C <span class="ot">&lt;-</span> c<span class="dv">-1</span>; MSC <span class="ot">&lt;-</span> SSC<span class="sc">/</span>df_C</span>
+<span id="cb405-30"><a href="random-and-mixed-effects-models.html#cb405-30" tabindex="-1"></a>SSAB <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_ij.<span class="sc">-</span>Ybar_i..<span class="sc">-</span>Ybar_.j.<span class="sc">+</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb405-31"><a href="random-and-mixed-effects-models.html#cb405-31" tabindex="-1"></a>df_AB <span class="ot">&lt;-</span> (a<span class="dv">-1</span>)<span class="sc">*</span>(b<span class="dv">-1</span>); MSAB <span class="ot">&lt;-</span> SSAB<span class="sc">/</span>df_AB</span>
+<span id="cb405-32"><a href="random-and-mixed-effects-models.html#cb405-32" tabindex="-1"></a>SSAC <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_i.k<span class="sc">-</span>Ybar_i..<span class="sc">-</span>Ybar_..k<span class="sc">+</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb405-33"><a href="random-and-mixed-effects-models.html#cb405-33" tabindex="-1"></a>df_AC <span class="ot">&lt;-</span> (a<span class="dv">-1</span>)<span class="sc">*</span>(c<span class="dv">-1</span>); MSAC <span class="ot">&lt;-</span> SSAC<span class="sc">/</span>df_AC</span>
+<span id="cb405-34"><a href="random-and-mixed-effects-models.html#cb405-34" tabindex="-1"></a>SSBC <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_.jk<span class="sc">-</span>Ybar_.j.<span class="sc">-</span>Ybar_..k<span class="sc">+</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb405-35"><a href="random-and-mixed-effects-models.html#cb405-35" tabindex="-1"></a>df_BC <span class="ot">&lt;-</span> (b<span class="dv">-1</span>)<span class="sc">*</span>(c<span class="dv">-1</span>); MSBC <span class="ot">&lt;-</span> SSBC<span class="sc">/</span>df_BC</span>
+<span id="cb405-36"><a href="random-and-mixed-effects-models.html#cb405-36" tabindex="-1"></a>SSABC <span class="ot">&lt;-</span> <span class="fu">sum</span>((Ybar_ijk<span class="sc">-</span>Ybar_ij.<span class="sc">-</span>Ybar_i.k<span class="sc">-</span>Ybar_.jk<span class="sc">+</span>Ybar_i..<span class="sc">+</span>Ybar_.j.<span class="sc">+</span>Ybar_..k<span class="sc">-</span>Ybar_...)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb405-37"><a href="random-and-mixed-effects-models.html#cb405-37" tabindex="-1"></a>df_ABC <span class="ot">&lt;-</span> (a<span class="dv">-1</span>)<span class="sc">*</span>(b<span class="dv">-1</span>)<span class="sc">*</span>(c<span class="dv">-1</span>); MSABC <span class="ot">&lt;-</span> SSABC<span class="sc">/</span>df_ABC</span>
+<span id="cb405-38"><a href="random-and-mixed-effects-models.html#cb405-38" tabindex="-1"></a></span>
+<span id="cb405-39"><a href="random-and-mixed-effects-models.html#cb405-39" tabindex="-1"></a>aov.out1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_A, SSA, MSA, df_AC, MSAC,MSA<span class="sc">/</span>MSAC, <span class="fu">qf</span>(.<span class="dv">95</span>,df_A,df_AC),</span>
+<span id="cb405-40"><a href="random-and-mixed-effects-models.html#cb405-40" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSA<span class="sc">/</span>MSAC,df_A,df_AC))</span>
+<span id="cb405-41"><a href="random-and-mixed-effects-models.html#cb405-41" tabindex="-1"></a>aov.out2 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_B, SSB, MSB, df_BC, MSBC, MSB<span class="sc">/</span>MSBC, <span class="fu">qf</span>(.<span class="dv">95</span>,df_B,df_BC),</span>
+<span id="cb405-42"><a href="random-and-mixed-effects-models.html#cb405-42" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSB<span class="sc">/</span>MSBC,df_B,df_BC))</span>
+<span id="cb405-43"><a href="random-and-mixed-effects-models.html#cb405-43" tabindex="-1"></a>aov.out3 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(df_AB, SSAB, MSAB, df_ABC, MSABC, MSAB<span class="sc">/</span>MSABC, <span class="fu">qf</span>(.<span class="dv">95</span>,df_AB,df_ABC),</span>
+<span id="cb405-44"><a href="random-and-mixed-effects-models.html#cb405-44" tabindex="-1"></a>                  <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(MSAB<span class="sc">/</span>MSABC,df_AB,df_ABC))</span>
+<span id="cb405-45"><a href="random-and-mixed-effects-models.html#cb405-45" tabindex="-1"></a>aov.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(aov.out1,aov.out2,aov.out3)</span>
+<span id="cb405-46"><a href="random-and-mixed-effects-models.html#cb405-46" tabindex="-1"></a><span class="fu">colnames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;SS&quot;</span>, <span class="st">&quot;MS&quot;</span>, <span class="st">&quot;Err df&quot;</span>, <span class="st">&quot;Err MS&quot;</span>, <span class="st">&quot;F*&quot;</span>,</span>
+<span id="cb405-47"><a href="random-and-mixed-effects-models.html#cb405-47" tabindex="-1"></a>                       <span class="st">&quot;F(.95)&quot;</span>, <span class="st">&quot;P(&gt;F*)&quot;</span>)</span>
+<span id="cb405-48"><a href="random-and-mixed-effects-models.html#cb405-48" tabindex="-1"></a><span class="fu">rownames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Navigation&quot;</span>,<span class="st">&quot;Input&quot;</span>,<span class="st">&quot;Inp/Nav&quot;</span>)</span>
+<span id="cb405-49"><a href="random-and-mixed-effects-models.html#cb405-49" tabindex="-1"></a><span class="fu">round</span>(aov.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##            df       SS        MS Err df    Err MS      F* F(.95) P(&gt;F*)
+## Navigation  3 66995.51 22331.838    105 1417.1179 15.7586 2.6911  0e+00
+## Input       1 30635.76 30635.757     35 1960.1337 15.6294 4.1213  4e-04
+## Inp/Nav     3 18710.29  6236.762    105  926.4971  6.7316 2.6911  3e-04</code></pre>
+<div class="sourceCode" id="cb407"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb407-1"><a href="random-and-mixed-effects-models.html#cb407-1" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(taskTime <span class="sc">~</span> navTech.f <span class="sc">+</span> inputMet.f <span class="sc">+</span> subject.f <span class="sc">+</span></span>
+<span id="cb407-2"><a href="random-and-mixed-effects-models.html#cb407-2" tabindex="-1"></a>              navTech.f<span class="sc">:</span>inputMet.f <span class="sc">+</span> navTech.f<span class="sc">:</span>subject.f <span class="sc">+</span></span>
+<span id="cb407-3"><a href="random-and-mixed-effects-models.html#cb407-3" tabindex="-1"></a>              inputMet.f<span class="sc">:</span>subject.f, <span class="at">data=</span>ntm)</span>
+<span id="cb407-4"><a href="random-and-mixed-effects-models.html#cb407-4" tabindex="-1"></a><span class="fu">anova</span>(mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: taskTime
+##                       Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## navTech.f              3  66996 22331.8 24.1035 6.033e-12 ***
+## inputMet.f             1  30636 30635.8 33.0662 8.840e-08 ***
+## subject.f             35  84008  2400.2  2.5906 0.0001025 ***
+## navTech.f:inputMet.f   3  18710  6236.8  6.7316 0.0003376 ***
+## navTech.f:subject.f  105 148797  1417.1  1.5295 0.0152294 *  
+## inputMet.f:subject.f  35  68605  1960.1  2.1156 0.0018646 ** 
+## Residuals            105  97282   926.5                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>In this case the main effects and the interaction are all very significant, so we will use Tukey’s HSD and the Bonferroni minimum significant difference method to compare the 8 treatments (8(8-1)/2=28 comparisons). These will use <span class="math inline">\(MSABC\)</span> as the “error term” with <span class="math inline">\(df=(4-1)(2-1)(36-1)=105\)</span>.</p>
+<p><span class="math display">\[
+\mbox{Tukey:} \quad HSD = q_{.95,8,105}\sqrt{\frac{MSABC}{c}}
+=4.374\sqrt{\frac{926.4971}{36}}=22.19
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Bonferroni:} \quad MSD=t_{1-.05/(2(28));105}\sqrt{\frac{2MSABC}{c}}
+=3.206\sqrt{\frac{2(926.4971)}{36}}=23.00
+\]</span></p>
+<div class="sourceCode" id="cb409"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb409-1"><a href="random-and-mixed-effects-models.html#cb409-1" tabindex="-1"></a>ntm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/navtechmap1.csv&quot;</span>)</span>
+<span id="cb409-2"><a href="random-and-mixed-effects-models.html#cb409-2" tabindex="-1"></a>ntm<span class="sc">$</span>inputMet.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(ntm<span class="sc">$</span>inputMeth, <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;DT&quot;</span>,<span class="st">&quot;M&quot;</span>))</span>
+<span id="cb409-3"><a href="random-and-mixed-effects-models.html#cb409-3" tabindex="-1"></a>ntm<span class="sc">$</span>navTech.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(ntm<span class="sc">$</span>navTech, <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, </span>
+<span id="cb409-4"><a href="random-and-mixed-effects-models.html#cb409-4" tabindex="-1"></a>                        <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;CPB&quot;</span>,<span class="st">&quot;DPB&quot;</span>,<span class="st">&quot;ENCC&quot;</span>,<span class="st">&quot;GD&quot;</span>))</span>
+<span id="cb409-5"><a href="random-and-mixed-effects-models.html#cb409-5" tabindex="-1"></a>ntm<span class="sc">$</span>subject.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(ntm<span class="sc">$</span>subject)</span>
+<span id="cb409-6"><a href="random-and-mixed-effects-models.html#cb409-6" tabindex="-1"></a></span>
+<span id="cb409-7"><a href="random-and-mixed-effects-models.html#cb409-7" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>,<span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb409-8"><a href="random-and-mixed-effects-models.html#cb409-8" tabindex="-1"></a>mod2 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(taskTime <span class="sc">~</span> navTech.f <span class="sc">*</span> inputMet.f <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subject.f) <span class="sc">+</span></span>
+<span id="cb409-9"><a href="random-and-mixed-effects-models.html#cb409-9" tabindex="-1"></a>               (<span class="dv">1</span><span class="sc">|</span>navTech.f<span class="sc">:</span>subject.f) <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>inputMet.f<span class="sc">:</span>subject.f),    <span class="at">data=</span>ntm)</span></code></pre></div>
+<pre><code>## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb411"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb411-1"><a href="random-and-mixed-effects-models.html#cb411-1" tabindex="-1"></a><span class="fu">summary</span>(mod2)</span></code></pre></div>
+<pre><code>## Linear mixed model fit by REML. t-tests use Satterthwaite&#39;s method [
+## lmerModLmerTest]
+## Formula: 
+## taskTime ~ navTech.f * inputMet.f + (1 | subject.f) + (1 | navTech.f:subject.f) +  
+##     (1 | inputMet.f:subject.f)
+##    Data: ntm
+## 
+## REML criterion at convergence: 2851.3
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -2.14082 -0.60108  0.01166  0.59746  2.75578 
+## 
+## Random effects:
+##  Groups               Name        Variance Std.Dev.
+##  navTech.f:subject.f  (Intercept) 243.0    15.59   
+##  inputMet.f:subject.f (Intercept) 253.6    15.92   
+##  subject.f            (Intercept)   0.0     0.00   
+##  Residual                         927.9    30.46   
+## Number of obs: 288, groups:  
+## navTech.f:subject.f, 144; inputMet.f:subject.f, 72; subject.f, 36
+## 
+## Fixed effects:
+##                        Estimate Std. Error      df t value Pr(&gt;|t|)    
+## (Intercept)             147.964      2.904  78.527  50.957  &lt; 2e-16 ***
+## navTech.f1               15.511      3.838 112.449   4.042 9.75e-05 ***
+## navTech.f2               14.616      3.838 112.449   3.809 0.000228 ***
+## navTech.f3              -18.413      3.838 112.449  -4.798 4.96e-06 ***
+## inputMet.f1              10.314      2.597  54.542   3.972 0.000211 ***
+## navTech.f1:inputMet.f1    9.371      3.109 107.587   3.014 0.003214 ** 
+## navTech.f2:inputMet.f1    5.476      3.109 107.587   1.762 0.080985 .  
+## navTech.f3:inputMet.f1  -11.414      3.109 107.587  -3.671 0.000378 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Correlation of Fixed Effects:
+##             (Intr) nvTc.1 nvTc.2 nvTc.3 inpM.1 nT.1:M nT.2:M
+## navTech.f1   0.000                                          
+## navTech.f2   0.000 -0.333                                   
+## navTech.f3   0.000 -0.333 -0.333                            
+## inputMet.f1  0.000  0.000  0.000  0.000                     
+## nvTch.1:M.1  0.000  0.000  0.000  0.000  0.000              
+## nvTch.2:M.1  0.000  0.000  0.000  0.000  0.000 -0.333       
+## nvTch.3:M.1  0.000  0.000  0.000  0.000  0.000 -0.333 -0.333
+## optimizer (nloptwrap) convergence code: 0 (OK)
+## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
+<div class="sourceCode" id="cb413"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb413-1"><a href="random-and-mixed-effects-models.html#cb413-1" tabindex="-1"></a><span class="fu">anova</span>(mod2)</span></code></pre></div>
+<pre><code>## Type III Analysis of Variance Table with Satterthwaite&#39;s method
+##                      Sum Sq Mean Sq NumDF   DenDF F value    Pr(&gt;F)    
+## navTech.f             43964 14654.6     3 112.449 15.7940 1.228e-08 ***
+## inputMet.f            14636 14635.9     1  54.542 15.7738 0.0002109 ***
+## navTech.f:inputMet.f  18710  6236.8     3 107.587  6.7216 0.0003360 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><span class="math display">\[ \nabla \]</span></p>
+
+<pre><code>## 
+## Attaching package: &#39;nlme&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:lme4&#39;:
+## 
+##     lmList</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     collapse</code></pre>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-gullberg_2008" class="csl-entry">
+Gullberg, R. G. 2008. <span>“Employing Components-of-Variance to Evaluate Forensic Breath Test Instruments.”</span> <em>Science and Justice</em> 48: 2–7.
+</div>
+<div id="ref-hanihara_1999" class="csl-entry">
+Hanihara, T., Y. Dodo, O. Kondo, T. Nara, N. Doi, and N. Sensui. 1999. <span>“Intra- and Inter-Observer Errors in Facial Flatness Measurements.”</span> <em>Anthropological Science</em> 107 (1): 25–39.
+</div>
+<div id="ref-meilgaard_1960" class="csl-entry">
+Meilgaard, M. 1960. <span>“Hop Analysis, Cohumulone Factor and the Bitterness of Beer: Review and Critical Evaluation.”</span> <em>Journal of the Institute of Brewing</em> 66 (1): 35–50.
+</div>
+<div id="ref-wu_2011" class="csl-entry">
+Wu, F-G., H. Lin, and M. You. 2011. <span>“The Enhanced Navigator for the Touch Screen: A Comparative Study on Navigational Techniques of Web Maps.”</span> <em>Displays</em> 32: 284–95.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="block-designs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="nested-designs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "link": "https://github.com/LarryWinner/STA4211-Notes1.git/edit/main/%s",
+  "text": "Edit"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

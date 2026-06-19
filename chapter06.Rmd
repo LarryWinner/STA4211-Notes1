@@ -1,0 +1,129 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r echo=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(effectsize)
+library(agricolae)
+library(car)
+library(PMCMRplus)
+library(additivityTests)
+```
+
+# Two-Factor Designs with 1 Observation per Treatment
+
+In some cases, there is only a single observation within each combination of factor levels. This causes a problem when considering models with interaction effects. The error degrees of freedom are $df_E=ab(n-1)=ab(1-1)=0$ and the error sum of squares is $SSE=0$. Several methods have been developed for testing for interaction under particular restrictions. In this chapter, we describe **Tukey's One Degree of Freedom for Non-Additivity Test** (ODOFNA). 
+For this test, the form of the interaction and the resulting test are given below.
+
+$$
+\left(\alpha\beta\right)_{ij} = D\alpha_i\beta_j \qquad \qquad H_0:D=0 \quad H_A:D\ne 0
+$$
+
+Intuitively, the test involves estimating $\mu$, as well as $\alpha_i$ and $\beta_j$ from the marginal means for factors A and B. Then $D$ is estimated by fitting a regression through the origin relating $Y^*$ ($Y$ minus the sum of the mean and the main effects) to $X^*$ where $X^*$ is the product of the estimates of $\alpha_i$, and $\beta_j$. 
+
+$$
+\hat{\mu}=\overline{Y}_{\bullet\bullet}\qquad
+\hat{\alpha}_i = \overline{Y}_{i\bullet} - \overline{Y}_{\bullet\bullet}\qquad
+\hat{\beta}_j = \overline{Y}_{\bullet j} - \overline{Y}_{\bullet\bullet} \qquad
+Y_{ij}^*=Y_{ij}-\hat{\mu}-\hat{\alpha}_i-\hat{\beta}_j \qquad
+ X_{ij}^*=\hat{\alpha}_i\hat{\beta}_j
+$$
+
+For regression through the origin, we obtain the estimate and test whether $D=0$ as follows,
+where the model with $D$ is the complete model.
+
+$$
+\hat{D}=\frac{\sum_{i=1}^a\sum_{j=1}^bX_{ij}^*Y_{ij}^*}{\sum_{i=1}^a\sum_{j=1}^bX_{ij}^{*2}}
+\qquad  \hat{Y}_{ij}(C)=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_i + \hat{\beta}_j +
+\hat{D}\hat{\alpha}_i\hat{\beta}_j \qquad i=1,\ldots,a; \quad j=1,\ldots,b
+$$
+$$
+SSE(C)=\sum_{i=1}^a\sum_{j=1}^b\left(Y_{ij}-\hat{Y}_{ij}(C)\right)^2  \qquad
+df_E(C)=ab-1-(a-1)-(b-1)-1=ab-a-b
+$$
+Under the reduced model, $D=0$, and we obtain the following fitted values and error sum of squares and degrees of freedom.
+
+$$
+\hat{Y}_{ij}(R)=\hat{\mu} + \hat{\alpha}_i + \hat{\beta}_j
+\qquad SSE(R)=\sum_{i=1}^a\sum_{j=1}^b\left(Y_{ij}-\hat{Y}_{ij}(R)\right)^2
+$$
+$$ df_E(R)=ab-1-(a-1)-(b-1)=ab-a-b+1=(a-1)(b-1)
+$$
+
+Then Tukey's ODOFNA test is a special case of the general linear test with $H_0:D=0$ vs $H_A:D \ne 0$.
+
+$$
+\mbox{Test Statistic:} \quad
+F^*=\frac{\left[\frac{SSE(R)-SSE(C)}{df_E(R)-df_E(C)}\right]}
+         {\left[\frac{SSE(C)}{df_E(C)}\right]}
+\qquad
+\mbox{Rejection Region:} \quad F^*\ge F_{1-\alpha;1,ab-a-b}
+$$
+
+**Example 6.1 - Economic Indices for 8 Sources Over 18 Years**
+
+A study considered U.S. economic indices for $a=8$ business news sources over a $b=18$ year period [@smith_1969]. The sources were: DJIA, Poors, NYSE, GNP, CPI, Forbes, Business Week, and Money Magazine. The years were 1948-1965. There was one index per source per year.
+The following R code runs calculations directly, then structures the data in matrix form
+and uses the **tukey.test** function in the **additivityTests** package. Note that we order the data frame first by source, then by year within source, as **tapply** output is sorted by the alphanumeric levels of the grouping variable(s).
+
+```{r ch.06.01}
+biz1 <- read.csv("data/jb42.csv")
+head(biz1,2)
+
+## Create a new data frame that orders first by source then year within source
+biz <- biz1[order(biz1$source, biz1$year),]
+head(biz,2)
+tail(biz,2)
+
+all.mean <- mean(biz$index)
+source.mean <- as.vector(tapply(biz$index, biz$source, mean))
+year.mean <- as.vector(tapply(biz$index, biz$year, mean))
+a <- length(source.mean)
+b <- length(year.mean)
+
+biz$mu <- rep(all.mean, a*b)
+biz$alpha <- rep(source.mean-all.mean, each=b)
+biz$beta <- rep(year.mean-all.mean, times=a)
+
+biz$Ystar <- biz$index - biz$mu - biz$alpha - biz$beta
+biz$Xstar <- biz$alpha * biz$beta
+
+(Dhat <- sum(biz$Xstar*biz$Ystar) / sum(biz$Xstar^2))
+
+biz$Yhat.C <- biz$mu + biz$alpha + biz$beta + Dhat*biz$Xstar
+biz$Yhat.R <- biz$mu + biz$alpha + biz$beta
+
+SSE.C <- sum((biz$index-biz$Yhat.C)^2)
+SSE.R <- sum((biz$index-biz$Yhat.R)^2)
+df_E.C <- a*b - a - b
+df_E.R <- a*b - a - b + 1
+
+Fstar <- ((SSE.R-SSE.C)/(df_E.R-df_E.C)) / (SSE.C/df_E.C)
+
+odofna.out <- cbind(df_E.R, df_E.C, SSE.R, SSE.C, Fstar, qf(.95,1,df_E.C),
+                    1-pf(Fstar,1,df_E.C))
+colnames(odofna.out) <- c("df(R)", "df(C)", "SSE(R)", "SSE(C)", "F*", "F(.95)", "P(>F*)")
+rownames(odofna.out) <- c("ODOFNA")
+round(odofna.out, 4)
+
+plot(biz$Ystar ~ biz$Xstar, pch=16, 
+     xlab=expression(paste("X' = ", hat(alpha)*hat(beta))), 
+     ylab=expression(paste("Y' = ", Y-hat(mu)-hat(alpha)-hat(beta))))
+abline(lm(Ystar ~ Xstar - 1,data=biz), col="blue3", lwd=1.5)
+
+### biz is sorted by index, then year (stacked COLUMNS from spreadsheet)
+(Y.mat <- matrix(biz$index,byrow=F,ncol=8))
+tukey.test(Y.mat)
+```
+There is strong evidence of an interaction between source and year, of this form.
+
+$$
+(\alpha\beta)_{ij} = D\alpha_i\beta_j \quad \mbox{ with } \hat{D}=23.65
+$$
+
+$$ \nabla  $$

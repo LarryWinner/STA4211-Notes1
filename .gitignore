@@ -3,3 +3,6 @@
 .Rproj.user
 *.Rproj
 _bookdown_files/
+.httr-oauth
+.DS_Store
+.quarto

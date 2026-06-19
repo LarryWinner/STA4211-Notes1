@@ -1,9 +1,41 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAME HERE"
-date: "`r Sys.Date()`"
+title: "Design and Analysis of Experiments"
+author: "Larry Winner"
+date: '`r Sys.Date()`'
+output:
+  pdf_document: default
+  html_document: 
+    df_print: paged
+geometry: left=2cm,right=2cm,top=2cm,bottom=2cm
+documentclass: book
+bibliography:
+- book1.bib
+- packages.bib
+description: This is a course on Experimental Design and Analysis.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
 site: bookdown::bookdown_site
 ---
 
-# Down the rabbit-hole
+# Preface {-}
 
+These notes are for STA 4211 at the University of Florida. All examples are based on published articles, though most data has been generated to match summary statistics.
+
+Some commonly used notation used throughout the course notes with respect to random variables and estimators is as follows.
+
+$$E\left\{\bullet\right\} - \mbox{ Expected Value or Expectation} $$
+
+$$V\left\{\bullet\right\} - \mbox{ Variance} $$   
+$$SE\left\{\bullet\right\} - \mbox{ Standard Error (square root of Variance)} $$
+$$\mbox{COV}\left\{\bullet,\bullet\right\} - \mbox{ Covariance}$$
+$$\hat{V}\left\{\bullet\right\} - \mbox{ Estimated Variance} $$
+$$\hat{SE}\left\{\bullet\right\} - \mbox{ Estimated Standard Error} $$
+$$\hat{\mbox{COV}}\left\{\bullet, \bullet\right\} - \mbox{ Estimated Covariance}$$
+
+For **quantiles** of distributions used for constructing Confidence Intervals
+or setting up rejection regions for tests, the probability will be the 
+**lower tail** probability. Some common examples are given here.
+
+$$
+z_{.025}=-1.96 \qquad  z_{.975}=1.96 \qquad \chi_{.95;1}^2=3.84\qquad \chi_{.95;2}^2=5.99
+$$

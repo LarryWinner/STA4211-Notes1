@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 13 Analysis of Covariance (ANCOVA) | Design and Analysis of Experiments</title>
+  <meta name="description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 13 Analysis of Covariance (ANCOVA) | Design and Analysis of Experiments" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 Analysis of Covariance (ANCOVA) | Design and Analysis of Experiments" />
+  
+  <meta name="twitter:description" content="This is a course on Experimental Design and Analysis." />
+  
+
+<meta name="author" content="Larry Winner" />
+
+
+<meta name="date" content="2026-06-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="nested-designs.html"/>
+<link rel="next" href="response-surface-and-mixture-designs.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STA 4211 Course Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html"><i class="fa fa-check"></i><b>1</b> Comparing Two Treatments or Populations</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#linear-functions-of-random-variables"><i class="fa fa-check"></i><b>1.1</b> Linear Functions of Random Variables</a></li>
+<li class="chapter" data-level="1.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#students-t-distribution-for-making-inference-on-population-means"><i class="fa fa-check"></i><b>1.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution for Making Inference on Population Means</a></li>
+<li class="chapter" data-level="1.3" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference"><i class="fa fa-check"></i><b>1.3</b> Inference for the Population Mean Difference</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples"><i class="fa fa-check"></i><b>1.3.1</b> Inference for the Population Mean Difference for Paired Samples</a></li>
+<li class="chapter" data-level="1.3.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-independent-samples"><i class="fa fa-check"></i><b>1.3.2</b> Inference for the Population Mean Difference for Independent Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-variance-ratios"><i class="fa fa-check"></i><b>1.4</b> Inference for the Population Variance Ratios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inferences-for-variance-ratios-for-independent-samples"><i class="fa fa-check"></i><b>1.4.1</b> Inferences for Variance Ratios for Independent Samples</a></li>
+<li class="chapter" data-level="1.4.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#test-for-equal-variances-with-paired-samples"><i class="fa fa-check"></i><b>1.4.2</b> Test for Equal Variances with Paired Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#examples"><i class="fa fa-check"></i><b>1.5</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#terminology"><i class="fa fa-check"></i><b>2.1</b> Terminology</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#basics-of-controlled-experiments"><i class="fa fa-check"></i><b>2.2</b> Basics of Controlled Experiments</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#completely-randomized-design-crd"><i class="fa fa-check"></i><b>2.3</b> Completely Randomized Design (CRD)</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#randomized-complete-block-design-rcbd-or-rbd"><i class="fa fa-check"></i><b>2.4</b> Randomized Complete Block Design (RCBD or RBD)</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#overview-of-some-standard-experimental-designs"><i class="fa fa-check"></i><b>2.5</b> Overview of Some Standard Experimental Designs</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#overview-of-observational-study-designs"><i class="fa fa-check"></i><b>2.6</b> Overview of Observational Study Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-factor-studies.html"><a href="single-factor-studies.html"><i class="fa fa-check"></i><b>3</b> Single Factor Studies</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#models-with-r2-factor-levels"><i class="fa fa-check"></i><b>3.1</b> Models with <span class="math inline">\(r=2\)</span> Factor Levels</a></li>
+<li class="chapter" data-level="3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#three-model-formulations"><i class="fa fa-check"></i><b>3.2</b> Three Model Formulations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#cell-means-model"><i class="fa fa-check"></i><b>3.2.1</b> Cell Means Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#treatment-effects-model"><i class="fa fa-check"></i><b>3.2.2</b> Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#reference-group-model"><i class="fa fa-check"></i><b>3.2.3</b> Reference Group Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance-and-f-test"><i class="fa fa-check"></i><b>3.3</b> The Analysis of Variance and <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#general-linear-test-approach"><i class="fa fa-check"></i><b>3.3.1</b> General Linear Test Approach</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#power-calculations"><i class="fa fa-check"></i><b>3.3.2</b> Power Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#technical-details"><i class="fa fa-check"></i><b>3.4</b> Technical Details</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-for-the-cell-means-model-regression-approach"><i class="fa fa-check"></i><b>3.4.1</b> Least Squares Estimation for the Cell Means Model (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#scalar-estimation-for-the-cell-means-model"><i class="fa fa-check"></i><b>3.4.2</b> Scalar Estimation for the Cell Means Model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#estimation-for-the-treatment-effects-model"><i class="fa fa-check"></i><b>3.4.3</b> Estimation for the Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.4.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-regression-approach"><i class="fa fa-check"></i><b>3.4.4</b> Least Squares Estimation (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance"><i class="fa fa-check"></i><b>3.4.5</b> The Analysis of Variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html"><i class="fa fa-check"></i><b>4</b> Analysis of Treatment Means</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#individual-treatment-means"><i class="fa fa-check"></i><b>4.1</b> Individual Treatment Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#comparing-two-treatment-means"><i class="fa fa-check"></i><b>4.2</b> Comparing Two Treatment Means</a></li>
+<li class="chapter" data-level="4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#contrasts-among-treatment-means"><i class="fa fa-check"></i><b>4.3</b> Contrasts Among Treatment Means</a></li>
+<li class="chapter" data-level="4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#simultaneous-comparisons"><i class="fa fa-check"></i><b>4.4</b> Simultaneous Comparisons</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#tukeys-honest-significant-difference-hsd"><i class="fa fa-check"></i><b>4.4.1</b> Tukey’s Honest Significant Difference (HSD)</a></li>
+<li class="chapter" data-level="4.4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#scheffes-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.2</b> Scheffe’s Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#bonferroni-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.3</b> Bonferroni Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#multiple-range-methods"><i class="fa fa-check"></i><b>4.4.4</b> Multiple Range Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html"><i class="fa fa-check"></i><b>5</b> Alternative Tests for Treatment Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#randomizationpermutation-tests"><i class="fa fa-check"></i><b>5.1</b> Randomization/Permutation Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#tests-for-equal-error-variances"><i class="fa fa-check"></i><b>5.2</b> Tests for Equal Error Variances</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#hartleys-test"><i class="fa fa-check"></i><b>5.2.1</b> Hartley’s Test</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#levenes-test"><i class="fa fa-check"></i><b>5.2.2</b> Levene’s Test</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#bartletts-test"><i class="fa fa-check"></i><b>5.2.3</b> Bartlett’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#remedial-measures"><i class="fa fa-check"></i><b>5.3</b> Remedial Measures</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#weighted-least-squares-and-welchs-test"><i class="fa fa-check"></i><b>5.3.1</b> Weighted Least Squares and Welch’s Test</a></li>
+<li class="chapter" data-level="5.3.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#post-hoc-comparisons-with-unequal-variances"><i class="fa fa-check"></i><b>5.3.2</b> Post-hoc Comparisons with Unequal Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#nonparametric-test-for-non-normal-data"><i class="fa fa-check"></i><b>5.4</b> Nonparametric Test for Non-normal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html"><i class="fa fa-check"></i><b>6</b> Balanced Two Factor Designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#two-factor-analysis-of-variance"><i class="fa fa-check"></i><b>6.2</b> Two Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#cell-means-and-factor-effects-models"><i class="fa fa-check"></i><b>6.2.1</b> Cell Means and Factor Effects Models</a></li>
+<li class="chapter" data-level="6.2.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#least-squaresmaximum-likelihood-estimators"><i class="fa fa-check"></i><b>6.2.2</b> Least Squares/Maximum Likelihood Estimators</a></li>
+<li class="chapter" data-level="6.2.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#sums-of-squares-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>6.2.3</b> Sums of Squares and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#factor-effect-contrasts"><i class="fa fa-check"></i><b>6.3</b> Factor Effect Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-there-is-no-interaction"><i class="fa fa-check"></i><b>6.3.1</b> Contrasts when there is No Interaction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-interaction-is-present"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts when Interaction is Present</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="two-factor-designs-with-1-observation-per-treatment.html"><a href="two-factor-designs-with-1-observation-per-treatment.html"><i class="fa fa-check"></i><b>7</b> Two-Factor Designs with 1 Observation per Treatment</a></li>
+<li class="chapter" data-level="8" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html"><i class="fa fa-check"></i><b>8</b> Unbalanced Two-Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#statistical-model-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>8.1</b> Statistical Model and the Analysis of Variance</a></li>
+<li class="chapter" data-level="8.2" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#least-squares-estimators-and-contrastslinear-functions-among-means"><i class="fa fa-check"></i><b>8.2</b> Least Squares Estimators and Contrasts/Linear Functions Among Means</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="higher-order-models.html"><a href="higher-order-models.html"><i class="fa fa-check"></i><b>9</b> Higher Order Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="higher-order-models.html"><a href="higher-order-models.html#three-factor-models---mean-structure"><i class="fa fa-check"></i><b>9.1</b> Three Factor Models - Mean Structure</a></li>
+<li class="chapter" data-level="9.2" data-path="higher-order-models.html"><a href="higher-order-models.html#statistical-model-and-the-analysis-of-variance-1"><i class="fa fa-check"></i><b>9.2</b> Statistical Model and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="block-designs.html"><a href="block-designs.html"><i class="fa fa-check"></i><b>10</b> Block Designs</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="block-designs.html"><a href="block-designs.html#randomized-block-and-repeated-measures-designs"><i class="fa fa-check"></i><b>10.1</b> Randomized Block and Repeated Measures Designs</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="block-designs.html"><a href="block-designs.html#model-structure-and-estimators"><i class="fa fa-check"></i><b>10.1.1</b> Model Structure and Estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="block-designs.html"><a href="block-designs.html#analysis-of-variance-and-the-f-test"><i class="fa fa-check"></i><b>10.2</b> Analysis of Variance and the <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="block-designs.html"><a href="block-designs.html#checking-model-assumptions"><i class="fa fa-check"></i><b>10.2.1</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="10.2.2" data-path="block-designs.html"><a href="block-designs.html#relative-efficiency-and-within-subject-variance-covariance-matrix"><i class="fa fa-check"></i><b>10.2.2</b> Relative Efficiency and Within-Subject Variance-Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="block-designs.html"><a href="block-designs.html#latin-square-designs"><i class="fa fa-check"></i><b>10.3</b> Latin Square Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html"><i class="fa fa-check"></i><b>11</b> Random and Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#way-random-effects-model"><i class="fa fa-check"></i><b>11.1</b> 1-Way Random Effects Model</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>11.1.1</b> Analysis of Variance</a></li>
+<li class="chapter" data-level="11.1.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-population-mean-mu_bullet"><i class="fa fa-check"></i><b>11.1.2</b> Estimating the Population Mean <span class="math inline">\(\mu_{\bullet}\)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>11.1.3</b> Estimating the Intraclass Correlation Coefficient</a></li>
+<li class="chapter" data-level="11.1.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-within-group-variance"><i class="fa fa-check"></i><b>11.1.4</b> Estimating the Within Group Variance</a></li>
+<li class="chapter" data-level="11.1.5" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-between-group-variance"><i class="fa fa-check"></i><b>11.1.5</b> Estimating the Between Group Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-random-effects-model"><i class="fa fa-check"></i><b>11.2</b> Two-Way Random Effects Model</a></li>
+<li class="chapter" data-level="11.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-mixed-effects-model"><i class="fa fa-check"></i><b>11.3</b> Two-Way Mixed Effects Model</a></li>
+<li class="chapter" data-level="11.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#three-way-mixed-effects-models"><i class="fa fa-check"></i><b>11.4</b> Three-Way Mixed Effects Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>12</b> Nested Designs</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="nested-designs.html"><a href="nested-designs.html#estimators-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>12.1</b> Estimators and the Analysis of Variance</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-designs.html"><a href="nested-designs.html#tests-contrasts-and-pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Tests, Contrasts, and Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="nested-designs.html"><a href="nested-designs.html#repeated-measures-design"><i class="fa fa-check"></i><b>12.3</b> Repeated Measures Design</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="nested-designs.html"><a href="nested-designs.html#model-structure"><i class="fa fa-check"></i><b>12.3.1</b> Model Structure</a></li>
+<li class="chapter" data-level="12.3.2" data-path="nested-designs.html"><a href="nested-designs.html#analysis-of-variance-and-f-tests"><i class="fa fa-check"></i><b>12.3.2</b> Analysis of Variance and <span class="math inline">\(F\)</span>-tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="nested-designs.html"><a href="nested-designs.html#treatment-comparisons"><i class="fa fa-check"></i><b>12.3.3</b> Treatment Comparisons</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html"><i class="fa fa-check"></i><b>13</b> Analysis of Covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#additive-model"><i class="fa fa-check"></i><b>13.1</b> Additive Model</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#adjusted-means"><i class="fa fa-check"></i><b>13.1.1</b> Adjusted means</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#interaction-model"><i class="fa fa-check"></i><b>13.2</b> Interaction Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html"><i class="fa fa-check"></i><b>14</b> Response Surface and Mixture Designs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
+<li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="analysis-of-covariance-ancova" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">Chapter 13</span> Analysis of Covariance (ANCOVA)<a href="analysis-of-covariance-ancova.html#analysis-of-covariance-ancova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In various cases, researchers are interested in comparing treatments after adjusting for a numeric predictor that is associated with an experimental unit. That is often, but not necessarily, a baseline pre-treatment score on the unit. The goal is to determine whether treatment effects are present after controlling for the covariate.</p>
+<p>When the Analysis of Covariance was first developed, the computations used were very complicated. Now, it’s just as simple as fitting a regression with one or more predictors and dummy variables for the treatment conditions. Models can have one or more factors. We will consider the case with one treatment factor and one covariate.</p>
+<div id="additive-model" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">13.1</span> Additive Model<a href="analysis-of-covariance-ancova.html#additive-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In the additive model, the slope relating the covariate to the response is assumed to be the same for each treatment. As with the 1-Way ANOVA model, we will use <span class="math inline">\(r\)</span> as the number of treatments with <span class="math inline">\(n_i\)</span> replicates for treatment <span class="math inline">\(i\)</span>.
+We will use centered <span class="math inline">\(X\)</span> values for the covariate for ease of interpretation when describing adjusted means. We will also include <span class="math inline">\(r-1\)</span> indicators for treatments <span class="math inline">\(1,\ldots,r-1\)</span> assuming again that treatment effects sum to 0.</p>
+<p><span class="math display">\[
+Y_{ij}= \mu_{\bullet} + \tau_1 I_{ij1} + \cdots +
+\tau_{r-1}I_{ij,r-1} +
+\gamma \left(X_{ij}-\overline{X}_{\bullet\bullet}\right) +\epsilon_{ijk}
+\]</span></p>
+<p><span class="math display">\[
+\epsilon_{ijk} \sim NID\left(0,\sigma^2\right) \qquad
+\sum_{i=1}^r\tau_i=0 \quad \Rightarrow \quad \tau_r=-\sum_{i=1}^{r-1}\tau_i
+\]</span>
+<span class="math display">\[
+I_{ij1} =
+\left\{ \begin{array}{r@{\quad:\quad}l}
+    1 &amp; i=1 \\
+    0 &amp; i=2,\ldots,r-1 \\
+    -1 &amp; i=r\\
+    \end{array} \right.
+  \qquad \cdots
+   \qquad
+I_{ij,r-1} =
+\left\{ \begin{array}{r@{\quad:\quad}l}
+    1 &amp; i=r-1 \\
+    0 &amp; i=1,\ldots,r-2 \\
+    -1 &amp; i=r\\
+     \end{array} \right.
+\]</span></p>
+<p>To test for treatment effects, controlling for the covariate, we test
+<span class="math inline">\(H_0:\tau_1=\cdots = \tau_r=0\)</span>.
+This is easily conducted as a general linear test, where the full model contains the <span class="math inline">\(r-1\)</span> treatment indicator variables and the centered covariate.
+The reduced model contains only the centered covariate. The test is as follows.</p>
+<p><span class="math display">\[
+TS: F^*=\frac{\left[\frac{SSE(R)-SSE(C)}{df_R-df_C}\right]}{
+\left[\frac{SSE(C)}{df_C}\right]
+}
+\qquad RR:F^*
+\geq F_{1-\alpha;df_R-df_F,df_F}
+\]</span>
+Note that for the current case, <span class="math inline">\(df_R=n_T-2\)</span> and <span class="math inline">\(df_F=n_T-2-(r-1)=n_T-4\)</span>.</p>
+<p><strong>Example 12.1 - Comparison of Skin Softeners</strong></p>
+<p>A study compared two treatments and a control <span class="math inline">\((r=3)\)</span> for skin softening
+<span class="citation">(<a href="#ref-maor_1997">Ma’Or, Yehuda, and Voss 1997</a>)</span>. The active treatments were as follows, and the covariate was the pre-treatment softness score for the subjects. There were 20 subjects per treatment, so <span class="math inline">\(n_T=3(20)=60\)</span>. The response is skin roughness (lower scores are better).</p>
+<ul>
+<li>Treatment 1 - Gel Formulation</li>
+<li>Treatment 2 - Gel Formulation + 1% Dead Sea Concentrate</li>
+<li>Treatment 3 - Placebo</li>
+</ul>
+<p>The R code and output are given below.</p>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb498-1"><a href="analysis-of-covariance-ancova.html#cb498-1" tabindex="-1"></a>dsm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/deadseaminerals.csv&quot;</span>)</span>
+<span id="cb498-2"><a href="analysis-of-covariance-ancova.html#cb498-2" tabindex="-1"></a><span class="fu">head</span>(dsm,<span class="dv">3</span>); <span class="fu">tail</span>(dsm,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##   trt_Grp  pre_x post_y gel gelDS
+## 1       1 121.10  76.30   1     0
+## 2       1 375.40 265.10   1     0
+## 3       1 138.05  82.92   1     0</code></pre>
+<pre><code>##    trt_Grp  pre_x post_y gel gelDS
+## 58       3 138.39 132.16   0     0
+## 59       3 138.59 107.22   0     0
+## 60       3 134.89 125.20   0     0</code></pre>
+<div class="sourceCode" id="cb501"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb501-1"><a href="analysis-of-covariance-ancova.html#cb501-1" tabindex="-1"></a>dsm<span class="sc">$</span>I1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dsm<span class="sc">$</span>trt_Grp<span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fu">ifelse</span>(dsm<span class="sc">$</span>trt_Grp<span class="sc">==</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb501-2"><a href="analysis-of-covariance-ancova.html#cb501-2" tabindex="-1"></a>dsm<span class="sc">$</span>I2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dsm<span class="sc">$</span>trt_Grp<span class="sc">==</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="fu">ifelse</span>(dsm<span class="sc">$</span>trt_Grp<span class="sc">==</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb501-3"><a href="analysis-of-covariance-ancova.html#cb501-3" tabindex="-1"></a>dsm<span class="sc">$</span>Xc <span class="ot">&lt;-</span> dsm<span class="sc">$</span>pre_x <span class="sc">-</span> <span class="fu">mean</span>(dsm<span class="sc">$</span>pre_x)</span>
+<span id="cb501-4"><a href="analysis-of-covariance-ancova.html#cb501-4" tabindex="-1"></a></span>
+<span id="cb501-5"><a href="analysis-of-covariance-ancova.html#cb501-5" tabindex="-1"></a>dsm.mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(post_y <span class="sc">~</span> I1 <span class="sc">+</span> I2 <span class="sc">+</span> Xc, <span class="at">data=</span>dsm)</span>
+<span id="cb501-6"><a href="analysis-of-covariance-ancova.html#cb501-6" tabindex="-1"></a><span class="fu">summary</span>(dsm.mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = post_y ~ I1 + I2 + Xc, data = dsm)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -31.13 -10.35  -3.93  12.29  35.34 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 137.53667    2.08924  65.831  &lt; 2e-16 ***
+## I1           -2.66382    2.95473  -0.902    0.371    
+## I2          -26.91735    2.95595  -9.106 1.22e-12 ***
+## Xc            0.70732    0.03257  21.716  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 16.18 on 56 degrees of freedom
+## Multiple R-squared:  0.9121, Adjusted R-squared:  0.9073 
+## F-statistic: 193.6 on 3 and 56 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb503"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb503-1"><a href="analysis-of-covariance-ancova.html#cb503-1" tabindex="-1"></a><span class="fu">anova</span>(dsm.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: post_y
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## I1         1   9853    9853  37.622 9.205e-08 ***
+## I2         1  18744   18744  71.572 1.361e-11 ***
+## Xc         1 123501  123501 471.566 &lt; 2.2e-16 ***
+## Residuals 56  14666     262                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb505"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb505-1"><a href="analysis-of-covariance-ancova.html#cb505-1" tabindex="-1"></a>dsm.mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(post_y <span class="sc">~</span> Xc, <span class="at">data=</span>dsm)</span>
+<span id="cb505-2"><a href="analysis-of-covariance-ancova.html#cb505-2" tabindex="-1"></a><span class="fu">summary</span>(dsm.mod2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = post_y ~ Xc, data = dsm)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -50.220 -19.668  -4.885  21.923  63.420 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 137.53667    3.66612   37.52   &lt;2e-16 ***
+## Xc            0.69686    0.05713   12.20   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 28.4 on 58 degrees of freedom
+## Multiple R-squared:  0.7195, Adjusted R-squared:  0.7147 
+## F-statistic: 148.8 on 1 and 58 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb507-1"><a href="analysis-of-covariance-ancova.html#cb507-1" tabindex="-1"></a><span class="fu">anova</span>(dsm.mod2)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: post_y
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Xc         1 119991  119991  148.79 &lt; 2.2e-16 ***
+## Residuals 58  46773     806                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb509-1"><a href="analysis-of-covariance-ancova.html#cb509-1" tabindex="-1"></a><span class="fu">anova</span>(dsm.mod2, dsm.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: post_y ~ Xc
+## Model 2: post_y ~ I1 + I2 + Xc
+##   Res.Df   RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1     58 46773                                  
+## 2     56 14666  2     32107 61.297 7.888e-15 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb511"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb511-1"><a href="analysis-of-covariance-ancova.html#cb511-1" tabindex="-1"></a><span class="fu">summary</span>(dsm<span class="sc">$</span>Xc)</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -150.41  -48.35  -19.85    0.00   42.88  188.51</code></pre>
+<div class="sourceCode" id="cb513"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb513-1"><a href="analysis-of-covariance-ancova.html#cb513-1" tabindex="-1"></a>Xc.grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">200</span>,<span class="dv">200</span>,<span class="fl">0.1</span>)</span>
+<span id="cb513-2"><a href="analysis-of-covariance-ancova.html#cb513-2" tabindex="-1"></a><span class="fu">plot</span>(dsm<span class="sc">$</span>post_y <span class="sc">~</span> dsm<span class="sc">$</span>Xc, <span class="at">pch=</span><span class="dv">16</span>, <span class="at">col=</span>dsm<span class="sc">$</span>trt_Grp, <span class="at">cex=</span><span class="fl">0.6</span>,</span>
+<span id="cb513-3"><a href="analysis-of-covariance-ancova.html#cb513-3" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;Pre-Treatment Score&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;Post-Treatment Score&quot;</span>,</span>
+<span id="cb513-4"><a href="analysis-of-covariance-ancova.html#cb513-4" tabindex="-1"></a>     <span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">200</span>,<span class="dv">200</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">320</span>), <span class="at">main=</span><span class="st">&quot;Skin Roughness&quot;</span>)</span>
+<span id="cb513-5"><a href="analysis-of-covariance-ancova.html#cb513-5" tabindex="-1"></a><span class="fu">lines</span>(Xc.grid, </span>
+<span id="cb513-6"><a href="analysis-of-covariance-ancova.html#cb513-6" tabindex="-1"></a>      dsm.mod1<span class="sc">$</span>coef[<span class="dv">1</span>]<span class="sc">+</span>dsm.mod1<span class="sc">$</span>coef[<span class="dv">2</span>]<span class="sc">+</span>Xc.grid<span class="sc">*</span>dsm.mod1<span class="sc">$</span>coef[<span class="dv">4</span>],</span>
+<span id="cb513-7"><a href="analysis-of-covariance-ancova.html#cb513-7" tabindex="-1"></a>      <span class="at">col=</span><span class="dv">1</span>)</span>
+<span id="cb513-8"><a href="analysis-of-covariance-ancova.html#cb513-8" tabindex="-1"></a><span class="fu">lines</span>(Xc.grid, </span>
+<span id="cb513-9"><a href="analysis-of-covariance-ancova.html#cb513-9" tabindex="-1"></a>      dsm.mod1<span class="sc">$</span>coef[<span class="dv">1</span>]<span class="sc">+</span>dsm.mod1<span class="sc">$</span>coef[<span class="dv">3</span>]<span class="sc">+</span>Xc.grid<span class="sc">*</span>dsm.mod1<span class="sc">$</span>coef[<span class="dv">4</span>],</span>
+<span id="cb513-10"><a href="analysis-of-covariance-ancova.html#cb513-10" tabindex="-1"></a>      <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb513-11"><a href="analysis-of-covariance-ancova.html#cb513-11" tabindex="-1"></a><span class="fu">lines</span>(Xc.grid, </span>
+<span id="cb513-12"><a href="analysis-of-covariance-ancova.html#cb513-12" tabindex="-1"></a>      dsm.mod1<span class="sc">$</span>coef[<span class="dv">1</span>]<span class="sc">-</span>dsm.mod1<span class="sc">$</span>coef[<span class="dv">2</span>]<span class="sc">-</span>dsm.mod1<span class="sc">$</span>coef[<span class="dv">3</span>]<span class="sc">+</span>Xc.grid<span class="sc">*</span>dsm.mod1<span class="sc">$</span>coef[<span class="dv">4</span>],</span>
+<span id="cb513-13"><a href="analysis-of-covariance-ancova.html#cb513-13" tabindex="-1"></a>      <span class="at">col=</span><span class="dv">3</span>)</span>
+<span id="cb513-14"><a href="analysis-of-covariance-ancova.html#cb513-14" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Gel&quot;</span>, <span class="st">&quot;Gel+DeadSea&quot;</span>,<span class="st">&quot;Placebo&quot;</span>), <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">lty=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch1201"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch1201-1.png" alt="Analysis of Covariance for skin softener study - Additive Model" width="80%" />
+<p class="caption">
+Figure 13.1: Analysis of Covariance for skin softener study - Additive Model
+</p>
+</div>
+<p>The <span class="math inline">\(F^*\)</span>-statistic is 61.297 with 2 and 56 degrees of freedom and <span class="math inline">\(P&lt;.0001\)</span>. There is strong evidence of differences among the treatments, controlling for baseline score.</p>
+<p><span class="math display">\[\nabla \]</span></p>
+<div id="adjusted-means" class="section level3 hasAnchor" number="13.1.1">
+<h3><span class="header-section-number">13.1.1</span> Adjusted means<a href="analysis-of-covariance-ancova.html#adjusted-means" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Where the lines cross at the centered X level of 0 are the <strong>adjusted means</strong>. That is, they are the predicted scores for the treatments at the “average” value of the uncentered covariate. Based on this additive model,
+we obtain the following adjusted means.</p>
+<p><span class="math display">\[
+i=1,\ldots , r-1:\quad   \hat{\mu}_i = \hat{\mu}_{\bullet} +\hat{\tau}_i \qquad
+\hat{\mu}_r=\hat{\mu}_{\bullet} -\sum_{i=1}^{r-1}\hat{\tau}_i
+\]</span></p>
+<p>The goal is to typically compare the adjusted means, as would be done for the 1-Way ANOVA. The standard errors depend on the variance-covariance matrix of the regression coefficients, which is obtained with the <strong>vcov</strong>
+function from the regression model fit. The variance-covariance matrix for this example
+is given below.</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+\hat{V}\left\{\hat{\mu}_{\bullet}\right\} &amp;
+\hat{\mbox{COV}}\left\{\hat{\mu}_{\bullet},\hat{\tau}_1\right\} &amp;
+\hat{\mbox{COV}}\left\{\hat{\mu}_{\bullet},\hat{\tau}_2\right\} &amp;
+\hat{\mbox{COV}}\left\{\hat{\mu}_{\bullet},\hat{\gamma}\right\} \\
+\hat{\mbox{COV}}\left\{\hat{\mu}_{\bullet},\hat{\tau}_1\right\} &amp;
+\hat{V}\left\{\hat{\tau}_1\right\} &amp;
+\hat{\mbox{COV}}\left\{\hat{\tau}_1,\hat{\tau}_2\right\} &amp;
+\hat{\mbox{COV}}\left\{\hat{\tau}_1,\hat{\gamma}\right\} \\
+\hat{\mbox{COV}}\left\{\hat{\mu}_{\bullet},\hat{\tau}_2\right\} &amp;
+\hat{\mbox{COV}}\left\{\hat{\tau}_1,\hat{\tau}_2\right\} &amp;
+\hat{V}\left\{\hat{\tau}_2\right\} &amp;
+\hat{\mbox{COV}}\left\{\hat{\tau}_2,\hat{\gamma}\right\} \\
+\hat{\mbox{COV}}\left\{\hat{\mu}_{\bullet},\hat{\gamma}\right\} &amp;
+\hat{\mbox{COV}}\left\{\hat{\tau}_1,\hat{\gamma}\right\} &amp;
+\hat{\mbox{COV}}\left\{\hat{\tau}_2,\hat{\gamma}\right\} &amp;
+\hat{V}\left\{\hat{\gamma}\right\}
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+i,i&#39; &lt; r  \quad
+\hat{SE}\left\{\hat{\tau}_i-\hat{\tau}_{i&#39;}\right\} =
+\sqrt{\hat{V}\left\{\hat{\tau}_i\right\}+\hat{V}\left\{\hat{\tau}_{i&#39;}\right\}
+-2\hat{\mbox{COV}}\left\{\hat{\tau}_i,\hat{\tau}_{i&#39;}\right\}}
+\]</span></p>
+<p>When comparing the first <span class="math inline">\(r-1\)</span> treatments with the <span class="math inline">\(r^{th}\)</span>, we use the following result.</p>
+<p><span class="math display">\[
+\hat{\tau}_i-\hat{\tau}_r=\hat{\tau}_i-\left(-\sum_{i=1}^{r-1}\hat{\tau}_i\right)=
+2\hat{\tau}_i + \sum_{\stackrel{i&#39;=1}{i&#39;\ne i}}^{r-1}\hat{\tau}_{i&#39;}
+\]</span></p>
+<p>Then the (messy) standard errors for these differences are as follow.</p>
+<p><span class="math display">\[
+\hat{SE}\left\{\hat{\tau}_i-\hat{\tau}_r\right\} =
+\sqrt{4\hat{V}\left\{\hat{\tau}_i\right\} +
+\sum_{\stackrel{i&#39;=1}{i&#39;\ne i}}^{r-1}\hat{V}\left\{\hat{\tau}_{i&#39;}\right\}
++4\sum_{\stackrel{i&#39;=1}{i&#39;\ne i}}^{r-1}\hat{\mbox{COV}}\left\{\hat{\tau}_i,\hat{\tau}_{i&#39;}\right\}
++2\sum_{\stackrel{i&#39;=1}{i&#39;\ne i}}^{r-2}\sum_{\stackrel{i&#39;&#39;=i&#39;+1}{i&#39;&#39;\ne i}}^{r-1}
+\hat{\mbox{COV}}\left\{\hat{\tau}_{i&#39;},\hat{\tau}_{i&#39;&#39;}\right\}
+}
+\]</span>
+Here, we consider a few cases to observe these variance calculations.
+When <span class="math inline">\(r=2\)</span>, we have the following simple case.</p>
+<p><span class="math display">\[
+\hat{\tau}_2 = -\hat{\tau}_1 \quad \Rightarrow \quad
+\hat{\tau}_1-\hat{\tau}_2=
+2\hat{\tau}_1
+\quad \Rightarrow \quad
+\hat{V}\left\{\hat{\tau}_1-\hat{\tau}_2\right\}
+=4\hat{V}\left\{\hat{\tau}_1\right\}
+\]</span>
+When <span class="math inline">\(r=3\)</span>, as in the skin softener study, we have the following results.</p>
+<p><span class="math display">\[
+\hat{\tau}_3 = -\hat{\tau}_1-\hat{\tau}_2 \quad \Rightarrow \quad
+\hat{\tau}_1-\hat{\tau}_3 = \hat{\tau}_1-\left[\hat{\tau}_1-\hat{\tau}_2\right]=
+2\hat{\tau}_1+\hat{\tau}_2
+\]</span>
+<span class="math display">\[\quad \Rightarrow \quad
+\hat{V}\left\{\hat{\tau}_1-\hat{\tau}_3\right\}=
+4\hat{V}\left\{\hat{\tau}_1\right\}+\hat{V}\left\{\hat{\tau}_2\right\}+
+4\hat{\mbox{COV}}\left\{\hat{\tau}_1,\hat{\tau}_2\right\}
+\]</span>
+Finally, when <span class="math inline">\(r=4\)</span>, have the following results.
+<span class="math display">\[
+\hat{\tau}_1-\hat{\tau}_4 =
+\hat{\tau}_1-\left[\hat{\tau}_1-\hat{\tau}_2-\hat{\tau}_3\right]=
+2\hat{\tau}_1+\hat{\tau}_2+\hat{\tau}_3 \quad \Rightarrow \quad  
+\]</span>
+<span class="math display">\[
+\hat{V}\left\{\hat{\tau}_1-\hat{\tau}_4\right\}=
+4\hat{V}\left\{\hat{\tau}_1\right\}+\hat{V}\left\{\hat{\tau}_2\right\}+
+\hat{V}\left\{\hat{\tau}_3\right\}+
+4\hat{\mbox{COV}}\left\{\hat{\tau}_1,\hat{\tau}_2\right\}+
+4\hat{\mbox{COV}}\left\{\hat{\tau}_1,\hat{\tau}_3\right\}+
+2\hat{\mbox{COV}}\left\{\hat{\tau}_2,\hat{\tau}_3\right\}
+\]</span></p>
+<p><strong>Example 12.2 - Comparison of Skin Softeners</strong></p>
+<p>We obtain the adjusted means and their differences along with multiple comparisons with the following R code.</p>
+<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="analysis-of-covariance-ancova.html#cb514-1" tabindex="-1"></a>dsm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/deadseaminerals.csv&quot;</span>)</span>
+<span id="cb514-2"><a href="analysis-of-covariance-ancova.html#cb514-2" tabindex="-1"></a><span class="fu">head</span>(dsm,<span class="dv">2</span>); <span class="fu">tail</span>(dsm,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   trt_Grp pre_x post_y gel gelDS
+## 1       1 121.1   76.3   1     0
+## 2       1 375.4  265.1   1     0</code></pre>
+<pre><code>##    trt_Grp  pre_x post_y gel gelDS
+## 59       3 138.59 107.22   0     0
+## 60       3 134.89 125.20   0     0</code></pre>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb517-1"><a href="analysis-of-covariance-ancova.html#cb517-1" tabindex="-1"></a>dsm<span class="sc">$</span>I1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dsm<span class="sc">$</span>trt_Grp<span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fu">ifelse</span>(dsm<span class="sc">$</span>trt_Grp<span class="sc">==</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb517-2"><a href="analysis-of-covariance-ancova.html#cb517-2" tabindex="-1"></a>dsm<span class="sc">$</span>I2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(dsm<span class="sc">$</span>trt_Grp<span class="sc">==</span><span class="dv">2</span>,<span class="dv">1</span>,<span class="fu">ifelse</span>(dsm<span class="sc">$</span>trt_Grp<span class="sc">==</span><span class="dv">3</span>,<span class="sc">-</span><span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb517-3"><a href="analysis-of-covariance-ancova.html#cb517-3" tabindex="-1"></a>dsm<span class="sc">$</span>Xc <span class="ot">&lt;-</span> dsm<span class="sc">$</span>pre_x <span class="sc">-</span> <span class="fu">mean</span>(dsm<span class="sc">$</span>pre_x)</span>
+<span id="cb517-4"><a href="analysis-of-covariance-ancova.html#cb517-4" tabindex="-1"></a></span>
+<span id="cb517-5"><a href="analysis-of-covariance-ancova.html#cb517-5" tabindex="-1"></a>dsm.mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(post_y <span class="sc">~</span> I1 <span class="sc">+</span> I2 <span class="sc">+</span> Xc, <span class="at">data=</span>dsm)</span>
+<span id="cb517-6"><a href="analysis-of-covariance-ancova.html#cb517-6" tabindex="-1"></a><span class="fu">summary</span>(dsm.mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = post_y ~ I1 + I2 + Xc, data = dsm)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -31.13 -10.35  -3.93  12.29  35.34 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 137.53667    2.08924  65.831  &lt; 2e-16 ***
+## I1           -2.66382    2.95473  -0.902    0.371    
+## I2          -26.91735    2.95595  -9.106 1.22e-12 ***
+## Xc            0.70732    0.03257  21.716  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 16.18 on 56 degrees of freedom
+## Multiple R-squared:  0.9121, Adjusted R-squared:  0.9073 
+## F-statistic: 193.6 on 3 and 56 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb519-1"><a href="analysis-of-covariance-ancova.html#cb519-1" tabindex="-1"></a><span class="fu">anova</span>(dsm.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: post_y
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## I1         1   9853    9853  37.622 9.205e-08 ***
+## I2         1  18744   18744  71.572 1.361e-11 ***
+## Xc         1 123501  123501 471.566 &lt; 2.2e-16 ***
+## Residuals 56  14666     262                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb521-1"><a href="analysis-of-covariance-ancova.html#cb521-1" tabindex="-1"></a>vcov1 <span class="ot">&lt;-</span> <span class="fu">vcov</span>(dsm.mod1)</span>
+<span id="cb521-2"><a href="analysis-of-covariance-ancova.html#cb521-2" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">unique</span>(dsm<span class="sc">$</span>trt_Grp))</span>
+<span id="cb521-3"><a href="analysis-of-covariance-ancova.html#cb521-3" tabindex="-1"></a></span>
+<span id="cb521-4"><a href="analysis-of-covariance-ancova.html#cb521-4" tabindex="-1"></a>adjmean <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,r)</span>
+<span id="cb521-5"><a href="analysis-of-covariance-ancova.html#cb521-5" tabindex="-1"></a><span class="cf">for</span> (i1 <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(r<span class="dv">-1</span>)) adjmean[i1] <span class="ot">&lt;-</span> dsm.mod1<span class="sc">$</span>coef[<span class="dv">1</span>] <span class="sc">+</span> dsm.mod1<span class="sc">$</span>coef[i1<span class="sc">+</span><span class="dv">1</span>]</span>
+<span id="cb521-6"><a href="analysis-of-covariance-ancova.html#cb521-6" tabindex="-1"></a>adjmean[r] <span class="ot">&lt;-</span> dsm.mod1<span class="sc">$</span>coef[<span class="dv">1</span>]<span class="sc">-</span><span class="fu">sum</span>(dsm.mod1<span class="sc">$</span>coef[<span class="dv">2</span><span class="sc">:</span>r])</span>
+<span id="cb521-7"><a href="analysis-of-covariance-ancova.html#cb521-7" tabindex="-1"></a>adjmean</span></code></pre></div>
+<pre><code>## [1] 134.8728 110.6193 167.1178</code></pre>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb523-1"><a href="analysis-of-covariance-ancova.html#cb523-1" tabindex="-1"></a>se.diff <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">0</span>,r<span class="sc">*</span>(r<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>)</span>
+<span id="cb523-2"><a href="analysis-of-covariance-ancova.html#cb523-2" tabindex="-1"></a>se.diff[<span class="dv">1</span>] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(vcov1[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>vcov1[<span class="dv">3</span>,<span class="dv">3</span>]<span class="sc">-</span><span class="dv">2</span><span class="sc">*</span>vcov1[<span class="dv">2</span>,<span class="dv">3</span>])</span>
+<span id="cb523-3"><a href="analysis-of-covariance-ancova.html#cb523-3" tabindex="-1"></a>se.diff[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">4</span><span class="sc">*</span>vcov1[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span>vcov1[<span class="dv">3</span>,<span class="dv">3</span>]<span class="sc">+</span><span class="dv">4</span><span class="sc">*</span>vcov1[<span class="dv">2</span>,<span class="dv">3</span>])</span>
+<span id="cb523-4"><a href="analysis-of-covariance-ancova.html#cb523-4" tabindex="-1"></a>se.diff[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="dv">4</span><span class="sc">*</span>vcov1[<span class="dv">3</span>,<span class="dv">3</span>]<span class="sc">+</span>vcov1[<span class="dv">2</span>,<span class="dv">2</span>]<span class="sc">+</span><span class="dv">4</span><span class="sc">*</span>vcov1[<span class="dv">2</span>,<span class="dv">3</span>])</span>
+<span id="cb523-5"><a href="analysis-of-covariance-ancova.html#cb523-5" tabindex="-1"></a></span>
+<span id="cb523-6"><a href="analysis-of-covariance-ancova.html#cb523-6" tabindex="-1"></a>HSD.q <span class="ot">&lt;-</span> <span class="fu">qtukey</span>(.<span class="dv">95</span>,r,<span class="fu">df.residual</span>(dsm.mod1)) </span>
+<span id="cb523-7"><a href="analysis-of-covariance-ancova.html#cb523-7" tabindex="-1"></a>HSD.out <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rep</span>(<span class="dv">0</span>,<span class="dv">10</span><span class="sc">*</span>r<span class="sc">*</span>(r<span class="dv">-1</span>)<span class="sc">/</span><span class="dv">2</span>), <span class="at">ncol=</span><span class="dv">10</span>)</span>
+<span id="cb523-8"><a href="analysis-of-covariance-ancova.html#cb523-8" tabindex="-1"></a>row.count <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb523-9"><a href="analysis-of-covariance-ancova.html#cb523-9" tabindex="-1"></a><span class="cf">for</span> (i1 <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>r) {</span>
+<span id="cb523-10"><a href="analysis-of-covariance-ancova.html#cb523-10" tabindex="-1"></a>  <span class="cf">for</span> (i2 <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(i1<span class="dv">-1</span>)) {</span>
+<span id="cb523-11"><a href="analysis-of-covariance-ancova.html#cb523-11" tabindex="-1"></a>    row.count <span class="ot">&lt;-</span> row.count <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb523-12"><a href="analysis-of-covariance-ancova.html#cb523-12" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">1</span>] <span class="ot">&lt;-</span> i1</span>
+<span id="cb523-13"><a href="analysis-of-covariance-ancova.html#cb523-13" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">2</span>] <span class="ot">&lt;-</span> i2</span>
+<span id="cb523-14"><a href="analysis-of-covariance-ancova.html#cb523-14" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">3</span>] <span class="ot">&lt;-</span> adjmean[i1]</span>
+<span id="cb523-15"><a href="analysis-of-covariance-ancova.html#cb523-15" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">4</span>] <span class="ot">&lt;-</span> adjmean[i2]</span>
+<span id="cb523-16"><a href="analysis-of-covariance-ancova.html#cb523-16" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">5</span>] <span class="ot">&lt;-</span> adjmean[i1] <span class="sc">-</span> adjmean[i2]</span>
+<span id="cb523-17"><a href="analysis-of-covariance-ancova.html#cb523-17" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">6</span>] <span class="ot">&lt;-</span> se.diff[row.count]</span>
+<span id="cb523-18"><a href="analysis-of-covariance-ancova.html#cb523-18" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">7</span>] <span class="ot">&lt;-</span> HSD.q<span class="sc">*</span>se.diff[row.count]</span>
+<span id="cb523-19"><a href="analysis-of-covariance-ancova.html#cb523-19" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">8</span>] <span class="ot">&lt;-</span> </span>
+<span id="cb523-20"><a href="analysis-of-covariance-ancova.html#cb523-20" tabindex="-1"></a>      (adjmean[i1] <span class="sc">-</span> adjmean[i2]) <span class="sc">-</span> HSD.q<span class="sc">*</span>se.diff[row.count]</span>
+<span id="cb523-21"><a href="analysis-of-covariance-ancova.html#cb523-21" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">9</span>] <span class="ot">&lt;-</span> </span>
+<span id="cb523-22"><a href="analysis-of-covariance-ancova.html#cb523-22" tabindex="-1"></a>      (adjmean[i1] <span class="sc">-</span> adjmean[i2]) <span class="sc">+</span> HSD.q<span class="sc">*</span>se.diff[row.count]</span>
+<span id="cb523-23"><a href="analysis-of-covariance-ancova.html#cb523-23" tabindex="-1"></a>    HSD.out[row.count,<span class="dv">10</span>] <span class="ot">&lt;-</span> </span>
+<span id="cb523-24"><a href="analysis-of-covariance-ancova.html#cb523-24" tabindex="-1"></a>      <span class="dv">1</span><span class="sc">-</span><span class="fu">ptukey</span>(<span class="fu">sqrt</span>(<span class="dv">2</span>)<span class="sc">*</span><span class="fu">abs</span>(adjmean[i1] <span class="sc">-</span> adjmean[i2])<span class="sc">/</span>se.diff[row.count],</span>
+<span id="cb523-25"><a href="analysis-of-covariance-ancova.html#cb523-25" tabindex="-1"></a>               r,<span class="fu">df.residual</span>(dsm.mod1))</span>
+<span id="cb523-26"><a href="analysis-of-covariance-ancova.html#cb523-26" tabindex="-1"></a>  }</span>
+<span id="cb523-27"><a href="analysis-of-covariance-ancova.html#cb523-27" tabindex="-1"></a>}</span>
+<span id="cb523-28"><a href="analysis-of-covariance-ancova.html#cb523-28" tabindex="-1"></a></span>
+<span id="cb523-29"><a href="analysis-of-covariance-ancova.html#cb523-29" tabindex="-1"></a><span class="fu">colnames</span>(HSD.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;i&quot;</span>, <span class="st">&quot;i&#39;&quot;</span>, <span class="st">&quot;AdjMn_i&quot;</span>, <span class="st">&quot;AdjMn_i&#39;&quot;</span>, <span class="st">&quot;Diff&quot;</span>, <span class="st">&quot;Std Err&quot;</span>, </span>
+<span id="cb523-30"><a href="analysis-of-covariance-ancova.html#cb523-30" tabindex="-1"></a>                      <span class="st">&quot;HSD&quot;</span>, <span class="st">&quot;LB&quot;</span>, <span class="st">&quot;UB&quot;</span>, <span class="st">&quot;p adj&quot;</span>)</span>
+<span id="cb523-31"><a href="analysis-of-covariance-ancova.html#cb523-31" tabindex="-1"></a><span class="fu">round</span>(HSD.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##      i i&#39;  AdjMn_i AdjMn_i&#39;     Diff Std Err     HSD       LB      UB p adj
+## [1,] 2  1 110.6193 134.8728 -24.2535  5.1188 17.4286 -41.6821 -6.8250     0
+## [2,] 3  1 167.1178 134.8728  32.2450  5.1177 17.4248  14.8202 49.6698     0
+## [3,] 3  2 167.1178 110.6193  56.4985  5.1198 17.4320  39.0665 73.9306     0</code></pre>
+<p>All three pairs of treatments are significantly different.
+Treatment 2 (Gel+DeadSea) has significantly lower roughness scores than the other treatments and Gel has significantly lower scores than Placebo.</p>
+<p>Here we use the factor variable for treatment and the <strong>emmeans</strong> package to obtain
+and compare the adjusted means.</p>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb525-1"><a href="analysis-of-covariance-ancova.html#cb525-1" tabindex="-1"></a>dsm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/deadseaminerals.csv&quot;</span>)</span>
+<span id="cb525-2"><a href="analysis-of-covariance-ancova.html#cb525-2" tabindex="-1"></a><span class="fu">head</span>(dsm,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   trt_Grp pre_x post_y gel gelDS
+## 1       1 121.1   76.3   1     0
+## 2       1 375.4  265.1   1     0</code></pre>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb527-1"><a href="analysis-of-covariance-ancova.html#cb527-1" tabindex="-1"></a>dsm<span class="sc">$</span>trt_Grp.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(dsm<span class="sc">$</span>trt_Grp, <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,<span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;gel&quot;</span>,<span class="st">&quot;gelDS&quot;</span>, <span class="st">&quot;control&quot;</span>))</span>
+<span id="cb527-2"><a href="analysis-of-covariance-ancova.html#cb527-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb527-3"><a href="analysis-of-covariance-ancova.html#cb527-3" tabindex="-1"></a>dsm.mod.add <span class="ot">&lt;-</span> <span class="fu">aov</span>(post_y <span class="sc">~</span> pre_x <span class="sc">+</span> trt_Grp.f, <span class="at">data=</span>dsm)</span>
+<span id="cb527-4"><a href="analysis-of-covariance-ancova.html#cb527-4" tabindex="-1"></a><span class="fu">summary.lm</span>(dsm.mod.add)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = post_y ~ pre_x + trt_Grp.f, data = dsm)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -31.13 -10.35  -3.93  12.29  35.34 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   5.34449    6.43598   0.830    0.410    
+## pre_x         0.70732    0.03257  21.716  &lt; 2e-16 ***
+## trt_Grp.f1   -2.66382    2.95473  -0.902    0.371    
+## trt_Grp.f2  -26.91735    2.95595  -9.106 1.22e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 16.18 on 56 degrees of freedom
+## Multiple R-squared:  0.9121, Adjusted R-squared:  0.9073 
+## F-statistic: 193.6 on 3 and 56 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb529-1"><a href="analysis-of-covariance-ancova.html#cb529-1" tabindex="-1"></a><span class="fu">anova</span>(dsm.mod.add)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: post_y
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## pre_x      1 119991  119991 458.166 &lt; 2.2e-16 ***
+## trt_Grp.f  2  32107   16053  61.297 7.888e-15 ***
+## Residuals 56  14666     262                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb531-1"><a href="analysis-of-covariance-ancova.html#cb531-1" tabindex="-1"></a>dsm.emm1 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(dsm.mod.add, <span class="sc">~</span> trt_Grp.f)</span>
+<span id="cb531-2"><a href="analysis-of-covariance-ancova.html#cb531-2" tabindex="-1"></a>dsm.emm1</span></code></pre></div>
+<pre><code>##  trt_Grp.f emmean   SE df lower.CL upper.CL
+##  gel          135 3.62 56      128      142
+##  gelDS        111 3.62 56      103      118
+##  control      167 3.62 56      160      174
+## 
+## Confidence level used: 0.95</code></pre>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb533-1"><a href="analysis-of-covariance-ancova.html#cb533-1" tabindex="-1"></a><span class="fu">contrast</span>(dsm.emm1, <span class="at">method=</span><span class="st">&quot;pairwise&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;tukey&quot;</span>)</span></code></pre></div>
+<pre><code>##  contrast        estimate   SE df t.ratio p.value
+##  gel - gelDS         24.3 5.12 56   4.738 &lt;0.0001
+##  gel - control      -32.2 5.12 56  -6.301 &lt;0.0001
+##  gelDS - control    -56.5 5.12 56 -11.035 &lt;0.0001
+## 
+## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+<p><span class="math display">\[\nabla  \]</span></p>
+</div>
+</div>
+<div id="interaction-model" class="section level2 hasAnchor" number="13.2">
+<h2><span class="header-section-number">13.2</span> Interaction Model<a href="analysis-of-covariance-ancova.html#interaction-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>When the slope relating the response to the covariate differs among treatments, the model contains interactions. This can be tested by including cross-product terms for the treatment indicator variables and the centered covariate. Then the full model containing these extra terms can be compared with the additive (reduced) model.
+The interaction model is given below.</p>
+<p><span class="math display">\[
+Y_{ij}= \mu_{\bullet} + \sum_{k=1}^{r-1}\tau_k I_{ijk}  +
+\gamma \left(X_{ij}-\overline{X}_{\bullet\bullet}\right) +
+\sum_{k=1}^{r-1}\beta_kI_{ijk}\left(X_{ij}-\overline{X}_{\bullet\bullet}\right) +
+\epsilon_{ijk}
+\]</span></p>
+<p>Comparing adjusted means is more difficult when there is an interaction, as the difference among treatment means differs at different <span class="math inline">\(X\)</span> levels (unlike the additive model). A method was developed by Johnson and Neyman to find regions of <span class="math inline">\(X\)</span> values where two treatments are significantly different and where they are not. We will not pursue that method here, but will run the general linear test for interactions.</p>
+<p><strong>Example 12.3 - Comparison of Skin Softeners</strong></p>
+<p>We obtain the adjusted means and their differences along with multiple comparisons with the following R code.</p>
+<pre><code>##   trt_Grp pre_x post_y gel gelDS
+## 1       1 121.1   76.3   1     0
+## 2       1 375.4  265.1   1     0</code></pre>
+<pre><code>##    trt_Grp  pre_x post_y gel gelDS
+## 59       3 138.59 107.22   0     0
+## 60       3 134.89 125.20   0     0</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = post_y ~ I1 + I2 + Xc, data = dsm)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -31.13 -10.35  -3.93  12.29  35.34 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 137.53667    2.08924  65.831  &lt; 2e-16 ***
+## I1           -2.66382    2.95473  -0.902    0.371    
+## I2          -26.91735    2.95595  -9.106 1.22e-12 ***
+## Xc            0.70732    0.03257  21.716  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 16.18 on 56 degrees of freedom
+## Multiple R-squared:  0.9121, Adjusted R-squared:  0.9073 
+## F-statistic: 193.6 on 3 and 56 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: post_y
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## I1         1   9853    9853  37.622 9.205e-08 ***
+## I2         1  18744   18744  71.572 1.361e-11 ***
+## Xc         1 123501  123501 471.566 &lt; 2.2e-16 ***
+## Residuals 56  14666     262                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = post_y ~ I1 + I2 + Xc + I(I1 * Xc) + I(I2 * Xc), 
+##     data = dsm)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -28.385  -7.771   0.046   7.394  35.485 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 137.83352    1.64131  83.978  &lt; 2e-16 ***
+## I1           -2.99032    2.32058  -1.289   0.2030    
+## I2          -26.78674    2.32170 -11.538 3.41e-16 ***
+## Xc            0.72542    0.02632  27.564  &lt; 2e-16 ***
+## I(I1 * Xc)   -0.05744    0.03431  -1.674   0.0999 .  
+## I(I2 * Xc)   -0.17549    0.03784  -4.638 2.28e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 12.71 on 54 degrees of freedom
+## Multiple R-squared:  0.9477, Adjusted R-squared:  0.9429 
+## F-statistic: 195.8 on 5 and 54 DF,  p-value: &lt; 2.2e-16</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: post_y
+##            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## I1          1   9853    9853  61.026 1.985e-10 ***
+## I2          1  18744   18744 116.096 4.560e-15 ***
+## Xc          1 123501  123501 764.925 &lt; 2.2e-16 ***
+## I(I1 * Xc)  1   2475    2475  15.330 0.0002553 ***
+## I(I2 * Xc)  1   3472    3472  21.507 2.279e-05 ***
+## Residuals  54   8719     161                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: post_y ~ I1 + I2 + Xc
+## Model 2: post_y ~ I1 + I2 + Xc + I(I1 * Xc) + I(I2 * Xc)
+##   Res.Df     RSS Df Sum of Sq      F    Pr(&gt;F)    
+## 1     56 14666.1                                  
+## 2     54  8718.5  2    5947.5 18.419 7.971e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch1204"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch1204-1.png" alt="Analysis of Covariance for skin softener study - Interaction Model" width="80%" />
+<p class="caption">
+Figure 13.2: Analysis of Covariance for skin softener study - Interaction Model
+</p>
+</div>
+<p>The interaction is significant <span class="math inline">\((F^*=18.42, P&lt;.0001)\)</span>. Based on the plot, there appears to be larger treatment differences among patients with higher
+baseline skin roughness.</p>
+<p><span class="math display">\[\nabla \]</span></p>
+
+<pre><code>## Warning: package &#39;rsm&#39; was built under R version 4.5.3</code></pre>
+<pre><code>## Warning: package &#39;mixexp&#39; was built under R version 4.5.3</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: grid</code></pre>
+<pre><code>## Loading required package: daewr</code></pre>
+<pre><code>## Warning: package &#39;daewr&#39; was built under R version 4.5.3</code></pre>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-maor_1997" class="csl-entry">
+Ma’Or, Z., S. Yehuda, and W. Voss. 1997. <span>“Skin Smoothing Effects of Dead Sea Minerals: Comparative Profilometric Evaluation of Skin Surface.”</span> <em>International Journal of Cosmetic Science</em> 19: 105–10.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="nested-designs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="response-surface-and-mixture-designs.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "link": "https://github.com/LarryWinner/STA4211-Notes1.git/edit/main/%s",
+  "text": "Edit"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 Unbalanced Two-Factor Analysis of Variance | Design and Analysis of Experiments</title>
+  <meta name="description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 Unbalanced Two-Factor Analysis of Variance | Design and Analysis of Experiments" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 Unbalanced Two-Factor Analysis of Variance | Design and Analysis of Experiments" />
+  
+  <meta name="twitter:description" content="This is a course on Experimental Design and Analysis." />
+  
+
+<meta name="author" content="Larry Winner" />
+
+
+<meta name="date" content="2026-06-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="two-factor-designs-with-1-observation-per-treatment.html"/>
+<link rel="next" href="higher-order-models.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STA 4211 Course Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html"><i class="fa fa-check"></i><b>1</b> Comparing Two Treatments or Populations</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#linear-functions-of-random-variables"><i class="fa fa-check"></i><b>1.1</b> Linear Functions of Random Variables</a></li>
+<li class="chapter" data-level="1.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#students-t-distribution-for-making-inference-on-population-means"><i class="fa fa-check"></i><b>1.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution for Making Inference on Population Means</a></li>
+<li class="chapter" data-level="1.3" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference"><i class="fa fa-check"></i><b>1.3</b> Inference for the Population Mean Difference</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples"><i class="fa fa-check"></i><b>1.3.1</b> Inference for the Population Mean Difference for Paired Samples</a></li>
+<li class="chapter" data-level="1.3.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-independent-samples"><i class="fa fa-check"></i><b>1.3.2</b> Inference for the Population Mean Difference for Independent Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-variance-ratios"><i class="fa fa-check"></i><b>1.4</b> Inference for the Population Variance Ratios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inferences-for-variance-ratios-for-independent-samples"><i class="fa fa-check"></i><b>1.4.1</b> Inferences for Variance Ratios for Independent Samples</a></li>
+<li class="chapter" data-level="1.4.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#test-for-equal-variances-with-paired-samples"><i class="fa fa-check"></i><b>1.4.2</b> Test for Equal Variances with Paired Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#examples"><i class="fa fa-check"></i><b>1.5</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#terminology"><i class="fa fa-check"></i><b>2.1</b> Terminology</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#basics-of-controlled-experiments"><i class="fa fa-check"></i><b>2.2</b> Basics of Controlled Experiments</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#completely-randomized-design-crd"><i class="fa fa-check"></i><b>2.3</b> Completely Randomized Design (CRD)</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#randomized-complete-block-design-rcbd-or-rbd"><i class="fa fa-check"></i><b>2.4</b> Randomized Complete Block Design (RCBD or RBD)</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#overview-of-some-standard-experimental-designs"><i class="fa fa-check"></i><b>2.5</b> Overview of Some Standard Experimental Designs</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#overview-of-observational-study-designs"><i class="fa fa-check"></i><b>2.6</b> Overview of Observational Study Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-factor-studies.html"><a href="single-factor-studies.html"><i class="fa fa-check"></i><b>3</b> Single Factor Studies</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#models-with-r2-factor-levels"><i class="fa fa-check"></i><b>3.1</b> Models with <span class="math inline">\(r=2\)</span> Factor Levels</a></li>
+<li class="chapter" data-level="3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#three-model-formulations"><i class="fa fa-check"></i><b>3.2</b> Three Model Formulations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#cell-means-model"><i class="fa fa-check"></i><b>3.2.1</b> Cell Means Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#treatment-effects-model"><i class="fa fa-check"></i><b>3.2.2</b> Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#reference-group-model"><i class="fa fa-check"></i><b>3.2.3</b> Reference Group Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance-and-f-test"><i class="fa fa-check"></i><b>3.3</b> The Analysis of Variance and <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#general-linear-test-approach"><i class="fa fa-check"></i><b>3.3.1</b> General Linear Test Approach</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#power-calculations"><i class="fa fa-check"></i><b>3.3.2</b> Power Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#technical-details"><i class="fa fa-check"></i><b>3.4</b> Technical Details</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-for-the-cell-means-model-regression-approach"><i class="fa fa-check"></i><b>3.4.1</b> Least Squares Estimation for the Cell Means Model (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#scalar-estimation-for-the-cell-means-model"><i class="fa fa-check"></i><b>3.4.2</b> Scalar Estimation for the Cell Means Model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#estimation-for-the-treatment-effects-model"><i class="fa fa-check"></i><b>3.4.3</b> Estimation for the Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.4.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-regression-approach"><i class="fa fa-check"></i><b>3.4.4</b> Least Squares Estimation (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance"><i class="fa fa-check"></i><b>3.4.5</b> The Analysis of Variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html"><i class="fa fa-check"></i><b>4</b> Analysis of Treatment Means</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#individual-treatment-means"><i class="fa fa-check"></i><b>4.1</b> Individual Treatment Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#comparing-two-treatment-means"><i class="fa fa-check"></i><b>4.2</b> Comparing Two Treatment Means</a></li>
+<li class="chapter" data-level="4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#contrasts-among-treatment-means"><i class="fa fa-check"></i><b>4.3</b> Contrasts Among Treatment Means</a></li>
+<li class="chapter" data-level="4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#simultaneous-comparisons"><i class="fa fa-check"></i><b>4.4</b> Simultaneous Comparisons</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#tukeys-honest-significant-difference-hsd"><i class="fa fa-check"></i><b>4.4.1</b> Tukey’s Honest Significant Difference (HSD)</a></li>
+<li class="chapter" data-level="4.4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#scheffes-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.2</b> Scheffe’s Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#bonferroni-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.3</b> Bonferroni Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#multiple-range-methods"><i class="fa fa-check"></i><b>4.4.4</b> Multiple Range Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html"><i class="fa fa-check"></i><b>5</b> Alternative Tests for Treatment Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#randomizationpermutation-tests"><i class="fa fa-check"></i><b>5.1</b> Randomization/Permutation Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#tests-for-equal-error-variances"><i class="fa fa-check"></i><b>5.2</b> Tests for Equal Error Variances</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#hartleys-test"><i class="fa fa-check"></i><b>5.2.1</b> Hartley’s Test</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#levenes-test"><i class="fa fa-check"></i><b>5.2.2</b> Levene’s Test</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#bartletts-test"><i class="fa fa-check"></i><b>5.2.3</b> Bartlett’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#remedial-measures"><i class="fa fa-check"></i><b>5.3</b> Remedial Measures</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#weighted-least-squares-and-welchs-test"><i class="fa fa-check"></i><b>5.3.1</b> Weighted Least Squares and Welch’s Test</a></li>
+<li class="chapter" data-level="5.3.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#post-hoc-comparisons-with-unequal-variances"><i class="fa fa-check"></i><b>5.3.2</b> Post-hoc Comparisons with Unequal Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#nonparametric-test-for-non-normal-data"><i class="fa fa-check"></i><b>5.4</b> Nonparametric Test for Non-normal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html"><i class="fa fa-check"></i><b>6</b> Balanced Two Factor Designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#two-factor-analysis-of-variance"><i class="fa fa-check"></i><b>6.2</b> Two Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#cell-means-and-factor-effects-models"><i class="fa fa-check"></i><b>6.2.1</b> Cell Means and Factor Effects Models</a></li>
+<li class="chapter" data-level="6.2.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#least-squaresmaximum-likelihood-estimators"><i class="fa fa-check"></i><b>6.2.2</b> Least Squares/Maximum Likelihood Estimators</a></li>
+<li class="chapter" data-level="6.2.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#sums-of-squares-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>6.2.3</b> Sums of Squares and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#factor-effect-contrasts"><i class="fa fa-check"></i><b>6.3</b> Factor Effect Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-there-is-no-interaction"><i class="fa fa-check"></i><b>6.3.1</b> Contrasts when there is No Interaction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-interaction-is-present"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts when Interaction is Present</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="two-factor-designs-with-1-observation-per-treatment.html"><a href="two-factor-designs-with-1-observation-per-treatment.html"><i class="fa fa-check"></i><b>7</b> Two-Factor Designs with 1 Observation per Treatment</a></li>
+<li class="chapter" data-level="8" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html"><i class="fa fa-check"></i><b>8</b> Unbalanced Two-Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#statistical-model-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>8.1</b> Statistical Model and the Analysis of Variance</a></li>
+<li class="chapter" data-level="8.2" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#least-squares-estimators-and-contrastslinear-functions-among-means"><i class="fa fa-check"></i><b>8.2</b> Least Squares Estimators and Contrasts/Linear Functions Among Means</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="higher-order-models.html"><a href="higher-order-models.html"><i class="fa fa-check"></i><b>9</b> Higher Order Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="higher-order-models.html"><a href="higher-order-models.html#three-factor-models---mean-structure"><i class="fa fa-check"></i><b>9.1</b> Three Factor Models - Mean Structure</a></li>
+<li class="chapter" data-level="9.2" data-path="higher-order-models.html"><a href="higher-order-models.html#statistical-model-and-the-analysis-of-variance-1"><i class="fa fa-check"></i><b>9.2</b> Statistical Model and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="block-designs.html"><a href="block-designs.html"><i class="fa fa-check"></i><b>10</b> Block Designs</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="block-designs.html"><a href="block-designs.html#randomized-block-and-repeated-measures-designs"><i class="fa fa-check"></i><b>10.1</b> Randomized Block and Repeated Measures Designs</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="block-designs.html"><a href="block-designs.html#model-structure-and-estimators"><i class="fa fa-check"></i><b>10.1.1</b> Model Structure and Estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="block-designs.html"><a href="block-designs.html#analysis-of-variance-and-the-f-test"><i class="fa fa-check"></i><b>10.2</b> Analysis of Variance and the <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="block-designs.html"><a href="block-designs.html#checking-model-assumptions"><i class="fa fa-check"></i><b>10.2.1</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="10.2.2" data-path="block-designs.html"><a href="block-designs.html#relative-efficiency-and-within-subject-variance-covariance-matrix"><i class="fa fa-check"></i><b>10.2.2</b> Relative Efficiency and Within-Subject Variance-Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="block-designs.html"><a href="block-designs.html#latin-square-designs"><i class="fa fa-check"></i><b>10.3</b> Latin Square Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html"><i class="fa fa-check"></i><b>11</b> Random and Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#way-random-effects-model"><i class="fa fa-check"></i><b>11.1</b> 1-Way Random Effects Model</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>11.1.1</b> Analysis of Variance</a></li>
+<li class="chapter" data-level="11.1.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-population-mean-mu_bullet"><i class="fa fa-check"></i><b>11.1.2</b> Estimating the Population Mean <span class="math inline">\(\mu_{\bullet}\)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>11.1.3</b> Estimating the Intraclass Correlation Coefficient</a></li>
+<li class="chapter" data-level="11.1.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-within-group-variance"><i class="fa fa-check"></i><b>11.1.4</b> Estimating the Within Group Variance</a></li>
+<li class="chapter" data-level="11.1.5" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-between-group-variance"><i class="fa fa-check"></i><b>11.1.5</b> Estimating the Between Group Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-random-effects-model"><i class="fa fa-check"></i><b>11.2</b> Two-Way Random Effects Model</a></li>
+<li class="chapter" data-level="11.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-mixed-effects-model"><i class="fa fa-check"></i><b>11.3</b> Two-Way Mixed Effects Model</a></li>
+<li class="chapter" data-level="11.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#three-way-mixed-effects-models"><i class="fa fa-check"></i><b>11.4</b> Three-Way Mixed Effects Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>12</b> Nested Designs</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="nested-designs.html"><a href="nested-designs.html#estimators-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>12.1</b> Estimators and the Analysis of Variance</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-designs.html"><a href="nested-designs.html#tests-contrasts-and-pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Tests, Contrasts, and Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="nested-designs.html"><a href="nested-designs.html#repeated-measures-design"><i class="fa fa-check"></i><b>12.3</b> Repeated Measures Design</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="nested-designs.html"><a href="nested-designs.html#model-structure"><i class="fa fa-check"></i><b>12.3.1</b> Model Structure</a></li>
+<li class="chapter" data-level="12.3.2" data-path="nested-designs.html"><a href="nested-designs.html#analysis-of-variance-and-f-tests"><i class="fa fa-check"></i><b>12.3.2</b> Analysis of Variance and <span class="math inline">\(F\)</span>-tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="nested-designs.html"><a href="nested-designs.html#treatment-comparisons"><i class="fa fa-check"></i><b>12.3.3</b> Treatment Comparisons</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html"><i class="fa fa-check"></i><b>13</b> Analysis of Covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#additive-model"><i class="fa fa-check"></i><b>13.1</b> Additive Model</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#adjusted-means"><i class="fa fa-check"></i><b>13.1.1</b> Adjusted means</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#interaction-model"><i class="fa fa-check"></i><b>13.2</b> Interaction Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html"><i class="fa fa-check"></i><b>14</b> Response Surface and Mixture Designs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
+<li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="unbalanced-two-factor-analysis-of-variance" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> Unbalanced Two-Factor Analysis of Variance<a href="unbalanced-two-factor-analysis-of-variance.html#unbalanced-two-factor-analysis-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>When sample sizes are not all equal, the sums of squares cannot be obtained simply among the cell, marginal, and overall means. Even in well planned controlled experiments, observations may not be used due to malfunction or subjects dropping out. In observational studies, it may not be feasible to get equal number of units from the various sub-populations.</p>
+<p>The model can be fit based on regression models in scalar and matrix form. In this chapter, we describe the process based on the treatment effects model. The balanced case can be formed in this manner as well.</p>
+<div id="statistical-model-and-the-analysis-of-variance" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Statistical Model and the Analysis of Variance<a href="unbalanced-two-factor-analysis-of-variance.html#statistical-model-and-the-analysis-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><span class="math display">\[
+Y_{ijk}=\mu_{\bullet\bullet}+\alpha_i+\beta_j+(\alpha\beta)_{ij}+\epsilon_{ijk}\qquad
+i=1,\ldots,a; \quad j=1,\ldots,b; \quad k=1,\ldots,n_{ij}\]</span>
+<span class="math display">\[\epsilon_{ijk} \sim NID\left(0,\sigma^2\right)
+\]</span></p>
+<p><span class="math display">\[
+n_{i\bullet} = \sum_{j=1}^b n_{ij}  \quad
+n_{\bullet j} = \sum_{i=1}^a n_{ij}  \quad
+n_T=\sum_{i=1}^a\sum_{j=1}^b n_{ij}  \qquad
+Y_{ij\bullet}=\sum_{k=1}^{n_{ij}}Y_{ijk} \quad
+\overline{Y}_{ij\bullet} = \frac{Y_{ij\bullet}}{n_{ij}}
+\]</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^a\alpha_i = \sum_{j=1}^b\beta_j = \sum_{i=1}^a(\alpha\beta)_{ij}
+= \sum_{j=1}^b(\alpha\beta)_{ij} = 0
+\]</span>
+<span class="math display">\[
+\alpha_a=-\sum_{i=1}^{a-1}\alpha_i \qquad\qquad
+\beta_b = -\sum_{j=1}^{b-1}\beta_j
+\]</span>
+<span class="math display">\[
+(\alpha\beta)_{aj}=-\sum_{i=1}^{a-1}(\alpha\beta)_{ij} \quad j=1,\ldots,b
+\qquad
+(\alpha\beta)_{ib}=-\sum_{j=1}^{b-1}(\alpha\beta)_{ij} \quad i=1,\ldots,a
+\]</span></p>
+<p>To fit this model, construct <span class="math inline">\(a-1\)</span> <span class="math inline">\(X\)</span> variables for the factor A effects, <span class="math inline">\(b-1\)</span> <span class="math inline">\(X\)</span> variables for the factor B effects, and then obtain the <span class="math inline">\((a-1)(b-1)\)</span> cross-products of these variables for the interaction effects.</p>
+<p><span class="math display">\[
+X_{ijk1}^A=\left\{ \begin{array}{r@{\quad:\quad}l}
+    1 &amp; i=1 \\ 0 &amp; i=2,\ldots,a-1\\ -1 &amp; i=a
+    \end{array}  \right.
+    \qquad \cdots \qquad
+X_{ijk,a-1}^A=\left\{ \begin{array}{r@{\quad:\quad}l}
+    1 &amp; i=a-1 \\ 0 &amp; i=1,\ldots,a-2\\ -1 &amp; i=a
+    \end{array}  \right.    
+\]</span></p>
+<p><span class="math display">\[
+X_{ijk1}^B=\left\{ \begin{array}{r@{\quad:\quad}l}
+    1 &amp; j=1 \\ 0 &amp; j=2,\ldots,b-1\\ -1 &amp; j=b
+    \end{array}  \right.
+    \qquad \cdots \qquad
+X_{ijk,b-1}^B=\left\{ \begin{array}{r@{\quad:\quad}l}
+    1 &amp; j=b-1 \\ 0 &amp; j=1,\ldots,b-2\\ -1 &amp; j=b
+    \end{array}  \right.    
+\]</span>
+<span class="math display">\[
+Y_{ijk}=\mu_{\bullet\bullet} + \alpha_1X_{ijk1}^A + \cdots +\alpha_{a-1}X_{ijk,a-1}^A +
+\beta_1X_{ijk1}^B + \cdots + \beta_{b-1}X_{ijk,b-1}^B +
+\]</span>
+<span class="math display">\[
++ (\alpha\beta)_{11}X_{ijk1}^AX_{ijk1}^B + \cdots +
+(\alpha\beta)_{a-1,b-1}X_{ijk,a-1}^AX_{ijk,b-1}^B + \epsilon_{ijk}
+\]</span></p>
+<p>The testing strategy is done as it was in the balanced case. Fit various models and compare them using the general linear test procedure.</p>
+<ul>
+<li><strong>Model 1</strong> - Include main effects for factors A and B as well as interaction effects.</li>
+<li><strong>Model 2</strong> - Include main effects for factors A and B, but no interaction effects</li>
+<li><strong>Model 3</strong> - Include main effects for factor B and interaction effects, but no factor A effects</li>
+<li><strong>Model 4</strong> - Include main effects for factor A and interaction effects, but no factor B effects</li>
+</ul>
+<p>To test for interaction effects, controlling for main effects for factors A and B, we compare Model 1 (Complete) and Model 2 (Reduced).</p>
+<p>To test for factor A effects, controlling for factor B effects and interaction effects, we compare Model 1 (Complete) and Model 3 (Reduced).</p>
+<p>To test for factor B effects, controlling for factor A effects and interaction effects, we compare Model 1 (Complete) and Model 4 (Reduced).</p>
+<p>When the test for interaction is “very non-significant” (high <span class="math inline">\(P\)</span>-value), often tests for factor A and B effects use Model 2 as the Complete Model.</p>
+<p><strong>Example 7.1 - Age at Peak for Famous Writers</strong></p>
+<p>A study considered the age at career peak for famous writers <span class="citation">(<a href="#ref-simonson_2007">Simonson 2007</a>)</span>.
+The factors were <strong>Style</strong> (Factor A: Conceptualists <span class="math inline">\((i=1)\)</span>, Experimentalists <span class="math inline">\((i=2)\)</span>) and Writer <strong>Type</strong> (Factor B:Poets <span class="math inline">\((j=1)\)</span>, Novelists <span class="math inline">\((j=2)\)</span>). Thus, there are <span class="math inline">\(a=b=2\)</span> levels for the factors, there will only be <span class="math inline">\(a-1=1\)</span> <span class="math inline">\(X\)</span> variable for factor A and <span class="math inline">\(b-1=1\)</span> <span class="math inline">\(X\)</span> variable for factor B, and <span class="math inline">\((a-1)(b-1)=1\)</span> cross-product term for the AB interaction. The numbers of writers for the <span class="math inline">\(ab=4\)</span> conditions are <span class="math inline">\(n_{11}=n_{12}=5,n_{21}=6,n_{22}=7\)</span>.
+The data and the generated X variables are given in Table <a href="unbalanced-two-factor-analysis-of-variance.html#tab:ch0701">8.1</a>.
+The regression model is fit directly, then with the <strong>aov</strong> function. Note that in
+the original dataset the levels were 0 and 1 for style and type, not 1 and 2.</p>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb222-1" tabindex="-1"></a>ap1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/creativelifecycles1.csv&quot;</span>)</span>
+<span id="cb222-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb222-2" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(ap1, <span class="at">caption =</span> <span class="st">&#39;Author Age at Peak Data&#39;</span>)</span></code></pre></div>
+<table>
+<caption><span id="tab:ch0701">Table 8.1: </span>Author Age at Peak Data</caption>
+<thead>
+<tr class="header">
+<th align="left">author</th>
+<th align="right">Type</th>
+<th align="right">Style</th>
+<th align="right">ageDth</th>
+<th align="right">cageDth</th>
+<th align="right">agePeak</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Eliot</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">77</td>
+<td align="right">8.57</td>
+<td align="right">23</td>
+</tr>
+<tr class="even">
+<td align="left">Cummings</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">68</td>
+<td align="right">-0.43</td>
+<td align="right">26</td>
+</tr>
+<tr class="odd">
+<td align="left">Plath</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">31</td>
+<td align="right">-37.43</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="left">Pound</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">87</td>
+<td align="right">18.57</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="left">Wilber</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">86</td>
+<td align="right">17.57</td>
+<td align="right">34</td>
+</tr>
+<tr class="even">
+<td align="left">Williams</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">80</td>
+<td align="right">11.57</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td align="left">Bishop</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">68</td>
+<td align="right">-0.43</td>
+<td align="right">29</td>
+</tr>
+<tr class="even">
+<td align="left">Moore</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">85</td>
+<td align="right">16.57</td>
+<td align="right">32</td>
+</tr>
+<tr class="odd">
+<td align="left">Lowell</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">60</td>
+<td align="right">-8.43</td>
+<td align="right">41</td>
+</tr>
+<tr class="even">
+<td align="left">Stevens</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">76</td>
+<td align="right">7.57</td>
+<td align="right">42</td>
+</tr>
+<tr class="odd">
+<td align="left">Frost</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">89</td>
+<td align="right">20.57</td>
+<td align="right">48</td>
+</tr>
+<tr class="even">
+<td align="left">Fitzgerald</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">44</td>
+<td align="right">-24.43</td>
+<td align="right">29</td>
+</tr>
+<tr class="odd">
+<td align="left">Hemingway</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">62</td>
+<td align="right">-6.43</td>
+<td align="right">30</td>
+</tr>
+<tr class="even">
+<td align="left">Melville</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">72</td>
+<td align="right">3.57</td>
+<td align="right">32</td>
+</tr>
+<tr class="odd">
+<td align="left">Lawrence</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">45</td>
+<td align="right">-23.43</td>
+<td align="right">35</td>
+</tr>
+<tr class="even">
+<td align="left">Joyce</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">59</td>
+<td align="right">-9.43</td>
+<td align="right">40</td>
+</tr>
+<tr class="odd">
+<td align="left">James</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">73</td>
+<td align="right">4.57</td>
+<td align="right">38</td>
+</tr>
+<tr class="even">
+<td align="left">Faulkner</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">65</td>
+<td align="right">-3.43</td>
+<td align="right">39</td>
+</tr>
+<tr class="odd">
+<td align="left">Dickens</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">58</td>
+<td align="right">-10.43</td>
+<td align="right">41</td>
+</tr>
+<tr class="even">
+<td align="left">Woolf</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">59</td>
+<td align="right">-9.43</td>
+<td align="right">45</td>
+</tr>
+<tr class="odd">
+<td align="left">Conrad</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">67</td>
+<td align="right">-1.43</td>
+<td align="right">47</td>
+</tr>
+<tr class="even">
+<td align="left">Twain</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">75</td>
+<td align="right">6.57</td>
+<td align="right">50</td>
+</tr>
+<tr class="odd">
+<td align="left">Hardy</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">88</td>
+<td align="right">19.57</td>
+<td align="right">51</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb223-1" tabindex="-1"></a>ap1<span class="sc">$</span>w.style <span class="ot">&lt;-</span> <span class="fu">factor</span>(ap1<span class="sc">$</span>Style, <span class="at">levels=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;E&quot;</span>))</span>
+<span id="cb223-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb223-2" tabindex="-1"></a>ap1<span class="sc">$</span>w.type <span class="ot">&lt;-</span> <span class="fu">factor</span>(ap1<span class="sc">$</span>Type, <span class="at">levels=</span><span class="dv">0</span><span class="sc">:</span><span class="dv">1</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;P&quot;</span>, <span class="st">&quot;N&quot;</span>))</span>
+<span id="cb223-3"><a href="unbalanced-two-factor-analysis-of-variance.html#cb223-3" tabindex="-1"></a></span>
+<span id="cb223-4"><a href="unbalanced-two-factor-analysis-of-variance.html#cb223-4" tabindex="-1"></a>ap1<span class="sc">$</span>X1A <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ap1<span class="sc">$</span>Style<span class="sc">==</span><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb223-5"><a href="unbalanced-two-factor-analysis-of-variance.html#cb223-5" tabindex="-1"></a>ap1<span class="sc">$</span>X1B <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(ap1<span class="sc">$</span>Type<span class="sc">==</span><span class="dv">0</span>,<span class="dv">1</span>,<span class="sc">-</span><span class="dv">1</span>)</span>
+<span id="cb223-6"><a href="unbalanced-two-factor-analysis-of-variance.html#cb223-6" tabindex="-1"></a>ap1<span class="sc">$</span>X1AX1B <span class="ot">&lt;-</span> ap1<span class="sc">$</span>X1A<span class="sc">*</span>ap1<span class="sc">$</span>X1B</span>
+<span id="cb223-7"><a href="unbalanced-two-factor-analysis-of-variance.html#cb223-7" tabindex="-1"></a><span class="do">## Regression Model </span></span>
+<span id="cb223-8"><a href="unbalanced-two-factor-analysis-of-variance.html#cb223-8" tabindex="-1"></a></span>
+<span id="cb223-9"><a href="unbalanced-two-factor-analysis-of-variance.html#cb223-9" tabindex="-1"></a>ap.reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(agePeak <span class="sc">~</span> X1A <span class="sc">+</span> X1B <span class="sc">+</span> X1AX1B, <span class="at">data=</span>ap1)</span>
+<span id="cb223-10"><a href="unbalanced-two-factor-analysis-of-variance.html#cb223-10" tabindex="-1"></a><span class="fu">summary</span>(ap.reg1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = agePeak ~ X1A + X1B + X1AX1B, data = ap1)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -9.667 -3.814  1.333  2.952  9.333 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  36.2238     1.1402  31.769  &lt; 2e-16 ***
+## X1A          -5.3238     1.1402  -4.669 0.000167 ***
+## X1B          -2.5905     1.1402  -2.272 0.034902 *  
+## X1AX1B        0.2905     1.1402   0.255 0.801652    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.415 on 19 degrees of freedom
+## Multiple R-squared:  0.5978, Adjusted R-squared:  0.5343 
+## F-statistic: 9.413 on 3 and 19 DF,  p-value: 0.0005033</code></pre>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb225-1" tabindex="-1"></a><span class="fu">anova</span>(ap.reg1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: agePeak
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## X1A        1 667.75  667.75 22.7758 0.0001324 ***
+## X1B        1 158.26  158.26  5.3979 0.0314109 *  
+## X1AX1B     1   1.90    1.90  0.0649 0.8016516    
+## Residuals 19 557.05   29.32                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb227-1" tabindex="-1"></a><span class="fu">drop1</span>(ap.reg1, <span class="at">test=</span><span class="st">&quot;F&quot;</span>)</span></code></pre></div>
+<pre><code>## Single term deletions
+## 
+## Model:
+## agePeak ~ X1A + X1B + X1AX1B
+##        Df Sum of Sq     RSS    AIC F value    Pr(&gt;F)    
+## &lt;none&gt;               557.05 81.305                      
+## X1A     1    639.14 1196.19 96.882 21.8001 0.0001672 ***
+## X1B     1    151.33  708.37 84.832  5.1615 0.0349023 *  
+## X1AX1B  1      1.90  558.95 79.383  0.0649 0.8016516    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb229-1" tabindex="-1"></a><span class="do">## ANOVA model (Treatment effects)</span></span>
+<span id="cb229-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb229-2" tabindex="-1"></a></span>
+<span id="cb229-3"><a href="unbalanced-two-factor-analysis-of-variance.html#cb229-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb229-4"><a href="unbalanced-two-factor-analysis-of-variance.html#cb229-4" tabindex="-1"></a>ap.aov1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(agePeak <span class="sc">~</span> w.style<span class="sc">*</span>w.type, <span class="at">data=</span>ap1)</span>
+<span id="cb229-5"><a href="unbalanced-two-factor-analysis-of-variance.html#cb229-5" tabindex="-1"></a><span class="fu">summary.lm</span>(ap.aov1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = agePeak ~ w.style * w.type, data = ap1)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -9.667 -3.814  1.333  2.952  9.333 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       36.2238     1.1402  31.769  &lt; 2e-16 ***
+## w.style1          -5.3238     1.1402  -4.669 0.000167 ***
+## w.type1           -2.5905     1.1402  -2.272 0.034902 *  
+## w.style1:w.type1   0.2905     1.1402   0.255 0.801652    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.415 on 19 degrees of freedom
+## Multiple R-squared:  0.5978, Adjusted R-squared:  0.5343 
+## F-statistic: 9.413 on 3 and 19 DF,  p-value: 0.0005033</code></pre>
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb231-1" tabindex="-1"></a><span class="fu">anova</span>(ap.aov1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: agePeak
+##                Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## w.style         1 667.75  667.75 22.7758 0.0001324 ***
+## w.type          1 158.26  158.26  5.3979 0.0314109 *  
+## w.style:w.type  1   1.90    1.90  0.0649 0.8016516    
+## Residuals      19 557.05   29.32                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb233-1" tabindex="-1"></a><span class="fu">drop1</span>(ap.aov1, .<span class="sc">~</span>., <span class="at">test=</span><span class="st">&quot;F&quot;</span>)</span></code></pre></div>
+<pre><code>## Single term deletions
+## 
+## Model:
+## agePeak ~ w.style * w.type
+##                Df Sum of Sq     RSS    AIC F value    Pr(&gt;F)    
+## &lt;none&gt;                       557.05 81.305                      
+## w.style         1    639.14 1196.19 96.882 21.8001 0.0001672 ***
+## w.type          1    151.33  708.37 84.832  5.1615 0.0349023 *  
+## w.style:w.type  1      1.90  558.95 79.383  0.0649 0.8016516    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>We see from the regression coefficients (that control for all other factors) that there is no evidence of an interaction, but there is evidence of main effects for Style and Writer Type. Formal tests are given below. Given that each test has 1 degree of freedom, we use <span class="math inline">\(t\)</span>-tests.</p>
+<p><span class="math display">\[
+H_0^{AB}: (\alpha\beta)_{11}=(\alpha\beta)_{12}=(\alpha\beta)_{21}=(\alpha\beta)_{22}=0
+\qquad
+t_{AB}^*=\frac{0.2905}{1.1402}=0.255
+\qquad P_{AB}=.8017
+\]</span>
+<span class="math display">\[
+H_0^A:\alpha_1=\alpha_2=0 \qquad
+t_A^*=\frac{-5.3238}{1.1402}=-4.669 \qquad P_A=.0002
+\]</span>
+<span class="math display">\[
+H_0^B: \beta_1=\beta_2=0 \qquad
+t_B^*=\frac{-2.5905}{1.1402}=-2.272   \qquad P_B=.0349
+\]</span>
+As there is strong evidence of main effects and no suggestion of an interaction, we will fit Model 2 for making comparisons, and not fit Models 3 or 4.</p>
+<pre><code>## 
+## Call:
+## lm(formula = agePeak ~ X1A + X1B, data = ap1)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -9.940 -4.027  1.060  2.933  9.060 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   36.234      1.113  32.566  &lt; 2e-16 ***
+## X1A           -5.334      1.113  -4.794 0.000111 ***
+## X1B           -2.628      1.104  -2.380 0.027397 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.287 on 20 degrees of freedom
+## Multiple R-squared:  0.5964, Adjusted R-squared:  0.5561 
+## F-statistic: 14.78 on 2 and 20 DF,  p-value: 0.0001146</code></pre>
+<pre><code>## 
+## Call:
+## aov(formula = agePeak ~ factor(Style) + factor(Type), data = ap1)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -9.940 -4.027  1.060  2.933  9.060 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)      36.234      1.113  32.566  &lt; 2e-16 ***
+## factor(Style)1   -5.334      1.113  -4.794 0.000111 ***
+## factor(Type)1    -2.628      1.104  -2.380 0.027397 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.287 on 20 degrees of freedom
+## Multiple R-squared:  0.5964, Adjusted R-squared:  0.5561 
+## F-statistic: 14.78 on 2 and 20 DF,  p-value: 0.0001146</code></pre>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: agePeak
+##               Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## factor(Style)  1 667.75  667.75 23.8930 8.894e-05 ***
+## factor(Type)   1 158.26  158.26  5.6627    0.0274 *  
+## Residuals     20 558.95   27.95                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>Based on the additive model (Model 2), we obtain the following estimates and predicted ages at peak.</p>
+<p><span class="math display">\[
+\hat{\mu}_{\bullet\bullet}=36.234 \qquad \hat{\alpha}_1=-5.334 \quad
+\hat{\alpha}_2=5.334 \qquad \hat{\beta}_1=-2.628 \quad
+\hat{\beta}_2=2.628
+\]</span>
+<span class="math display">\[
+\mbox{Conceptualists/Poets:} \quad
+\hat{Y}_{11}=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_1+\hat{\beta}_1=
+36.234-5.334-2.628=28.272
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Conceptualists/Novelists:} \quad
+\hat{Y}_{12}=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_1+\hat{\beta}_2=
+36.234-5.334+2.628=33.528
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Experimantalists/Poets:} \quad
+\hat{Y}_{21}=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_2+\hat{\beta}_1=
+36.234+5.334-2.628=38.940
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Experimantalists/Novelists:} \quad
+\hat{Y}_{21}=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_2+\hat{\beta}_2=
+36.234+5.334+2.628=44.196
+\]</span></p>
+<p>Experimentalists take longer on average to reach their peak than conceptualists, and novelists take longer than poets.</p>
+<p><span class="math display">\[\nabla \]</span></p>
+<p>A second example with more levels of factor B is included here.</p>
+<p><strong>Example 7.2 - Makiwara Punching Boards</strong></p>
+<p>An experiment was conducted to compare four wood types of and two board types, of karate boards <span class="citation">(<a href="#ref-smith_2010">P. K. Smith, Niiler, and McCullough 2010</a>)</span>. The wood types were: cherry <span class="math inline">\((i=1)\)</span>, ash <span class="math inline">\((i=2)\)</span>, fir <span class="math inline">\((i=3)\)</span>, and oak <span class="math inline">\((i=4)\)</span>. The board types were stacked <span class="math inline">\((j=1)\)</span> and tapered <span class="math inline">\((j=2)\)</span>. Apparently due to breakage, there were unequal numbers of replicates among the <span class="math inline">\(ab=2(4)=8\)</span> treatments. We use the <strong>aov</strong> function in R with the treatment effects form to fit Models 1 (Interaction) and 2 (Additive) to test whether there is an interaction between wood and board types. The response <span class="math inline">\(Y\)</span> is the deflection (millimeters) for the Makiwara board, with a total of <span class="math inline">\(n_T=336\)</span> measurements.</p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb238-1" tabindex="-1"></a>mb1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/karate_board.csv&quot;</span>)</span>
+<span id="cb238-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb238-2" tabindex="-1"></a><span class="fu">head</span>(mb1,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   Trt Wood Bdtype repnum Deflect X1A X2A X3A X1B X1AX1B X2AX1B X3AX1B
+## 1   1    1      1      1  144.27   1   0   0   1      1      0      0
+## 2   1    1      1      2  125.89   1   0   0   1      1      0      0</code></pre>
+<div class="sourceCode" id="cb240"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb240-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb240-1" tabindex="-1"></a><span class="fu">tail</span>(mb1,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##     Trt Wood Bdtype repnum Deflect X1A X2A X3A X1B X1AX1B X2AX1B X3AX1B
+## 335   8    4      2     44   73.32  -1  -1  -1  -1      1      1      1
+## 336   8    4      2     45   44.86  -1  -1  -1  -1      1      1      1</code></pre>
+<div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb242-1" tabindex="-1"></a>mb1<span class="sc">$</span>Wood.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(mb1<span class="sc">$</span>Wood, <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;cherry&quot;</span>, <span class="st">&quot;ash&quot;</span>, <span class="st">&quot;fir&quot;</span>, <span class="st">&quot;oak&quot;</span>))</span>
+<span id="cb242-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb242-2" tabindex="-1"></a>mb1<span class="sc">$</span>Bdtype.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(mb1<span class="sc">$</span>Bdtype, <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;stacked&quot;</span>, <span class="st">&quot;tapered&quot;</span>))</span>
+<span id="cb242-3"><a href="unbalanced-two-factor-analysis-of-variance.html#cb242-3" tabindex="-1"></a></span>
+<span id="cb242-4"><a href="unbalanced-two-factor-analysis-of-variance.html#cb242-4" tabindex="-1"></a><span class="fu">tapply</span>(mb1<span class="sc">$</span>Deflect, <span class="fu">list</span>(mb1<span class="sc">$</span>Wood.f, mb1<span class="sc">$</span>Bdtype.f), mean)</span></code></pre></div>
+<pre><code>##          stacked  tapered
+## cherry 117.99976 77.99978
+## ash    106.00056 75.99933
+## fir     94.00059 55.00000
+## oak     89.99956 50.00067</code></pre>
+<div class="sourceCode" id="cb244"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb244-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb244-1" tabindex="-1"></a><span class="fu">tapply</span>(mb1<span class="sc">$</span>Deflect, <span class="fu">list</span>(mb1<span class="sc">$</span>Wood.f, mb1<span class="sc">$</span>Bdtype.f), length)</span></code></pre></div>
+<pre><code>##        stacked tapered
+## cherry      41      45
+## ash         36      45
+## fir         34      45
+## oak         45      45</code></pre>
+<div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb246-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb246-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb246-2" tabindex="-1"></a></span>
+<span id="cb246-3"><a href="unbalanced-two-factor-analysis-of-variance.html#cb246-3" tabindex="-1"></a>mb.mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Deflect <span class="sc">~</span> Wood.f<span class="sc">*</span>Bdtype.f, <span class="at">data=</span>mb1)</span>
+<span id="cb246-4"><a href="unbalanced-two-factor-analysis-of-variance.html#cb246-4" tabindex="-1"></a><span class="fu">summary.lm</span>(mb.mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = Deflect ~ Wood.f * Bdtype.f, data = mb1)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -97.59 -35.81  -7.23  25.69 281.13 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        83.3750     3.0838  27.036  &lt; 2e-16 ***
+## Wood.f1            14.6247     5.2834   2.768  0.00596 ** 
+## Wood.f2             7.6249     5.4085   1.410  0.15954    
+## Wood.f3            -8.8747     5.4678  -1.623  0.10553    
+## Bdtype.f1          18.6251     3.0838   6.040 4.19e-09 ***
+## Wood.f1:Bdtype.f1   1.3749     5.2834   0.260  0.79485    
+## Wood.f2:Bdtype.f1  -3.6245     5.4085  -0.670  0.50324    
+## Wood.f3:Bdtype.f1   0.8752     5.4678   0.160  0.87293    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 56.2 on 328 degrees of freedom
+## Multiple R-squared:  0.1359, Adjusted R-squared:  0.1174 
+## F-statistic: 7.366 on 7 and 328 DF,  p-value: 3.18e-08</code></pre>
+<div class="sourceCode" id="cb248"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb248-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb248-1" tabindex="-1"></a><span class="fu">anova</span>(mb.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Deflect
+##                  Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Wood.f            3   45089   15030  4.7582  0.002913 ** 
+## Bdtype.f          1  116342  116342 36.8329 3.552e-09 ***
+## Wood.f:Bdtype.f   3    1441     480  0.1521  0.928296    
+## Residuals       328 1036035    3159                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb250-1" tabindex="-1"></a><span class="fu">drop1</span>(mb.mod1, .<span class="sc">~</span>., <span class="at">test=</span><span class="st">&quot;F&quot;</span>)</span></code></pre></div>
+<pre><code>## Single term deletions
+## 
+## Model:
+## Deflect ~ Wood.f * Bdtype.f
+##                 Df Sum of Sq     RSS    AIC F value    Pr(&gt;F)    
+## &lt;none&gt;                       1036035 2715.4                      
+## Wood.f           3     45205 1081239 2723.7  4.7705  0.002866 ** 
+## Bdtype.f         1    115217 1151251 2748.8 36.4766 4.187e-09 ***
+## Wood.f:Bdtype.f  3      1441 1037476 2709.8  0.1521  0.928296    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb252-1" tabindex="-1"></a>mb.mod2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Deflect <span class="sc">~</span> Wood.f<span class="sc">+</span>Bdtype.f, <span class="at">data=</span>mb1)</span>
+<span id="cb252-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb252-2" tabindex="-1"></a><span class="fu">summary.lm</span>(mb.mod2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## aov(formula = Deflect ~ Wood.f + Bdtype.f, data = mb1)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -96.212 -35.819  -7.721  26.743 282.446 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   83.434      3.067  27.206  &lt; 2e-16 ***
+## Wood.f1       14.505      5.252   2.762  0.00607 ** 
+## Wood.f2        7.976      5.358   1.488  0.13760    
+## Wood.f3       -9.047      5.407  -1.673  0.09520 .  
+## Bdtype.f1     18.684      3.067   6.092 3.09e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 55.99 on 331 degrees of freedom
+## Multiple R-squared:  0.1346, Adjusted R-squared:  0.1242 
+## F-statistic: 12.88 on 4 and 331 DF,  p-value: 9.386e-10</code></pre>
+<div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb254-1" tabindex="-1"></a><span class="fu">anova</span>(mb.mod2)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Deflect
+##            Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## Wood.f      3   45089   15030  4.7951  0.002769 ** 
+## Bdtype.f    1  116342  116342 37.1181 3.088e-09 ***
+## Residuals 331 1037476    3134                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb256-1" tabindex="-1"></a><span class="fu">drop1</span>(mb.mod2, .<span class="sc">~</span>., <span class="at">test=</span><span class="st">&quot;F&quot;</span>)</span></code></pre></div>
+<pre><code>## Single term deletions
+## 
+## Model:
+## Deflect ~ Wood.f + Bdtype.f
+##          Df Sum of Sq     RSS    AIC F value    Pr(&gt;F)    
+## &lt;none&gt;                1037476 2709.8                      
+## Wood.f    3     45948 1083424 2718.4  4.8864  0.002448 ** 
+## Bdtype.f  1    116342 1153818 2743.5 37.1181 3.088e-09 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>When comparing the mean deflection differences (stacked-tapered) within the 4 wood types, based on the <strong>tapply</strong> function, we observe: 40 (cherry), 30 (ash), 39 (fir), and 41 (oak). While these differences are not exactly the same, they are very consistent. To test for interaction, we directly use the ANOVA table from Model 1.</p>
+<p><span class="math display">\[
+H_0: (\alpha\beta)_{11}= \cdots = (\alpha\beta)_{42}=0 \qquad
+H_A:\mbox{ Not all } (\alpha\beta)_{ij}= 0
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad F_{AB}^*=\frac{MSAB}{MSE}=\frac{481}{3159}=0.1524
+\qquad
+\mbox{Rejection Region:}\quad F_{AB}^*\ge F_{.95;3,328}=2.632
+\]</span></p>
+<p>The <span class="math inline">\(P\)</span>-value is large, <span class="math inline">\(P_{AB}=.9281\)</span>, giving no evidence of any interaction effects.</p>
+<p>Based on this, we test for main effects for Board and Wood Effects, based on Model 2, the additive model. The (rounded) partial Mean Squares for Model 2 are <span class="math inline">\(MSA=45948/3=15316\)</span> for wood type and <span class="math inline">\(MSB=116342/1\)</span> for board type, obtained from the <strong>drop1</strong> function.</p>
+<p>For Wood effects, <span class="math inline">\(H_0^A:\alpha_1=\cdots = \alpha_4=0\)</span>, we obtain the following test.</p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad F_{A}^*=\frac{MSA}{MSE}=\frac{15316}{3134}=4.89
+\qquad
+\mbox{Rejection Region:}\quad F_{A}^*\ge F_{.95;3,331}=2.632
+\]</span>
+For Board effects, <span class="math inline">\(H_0^B:\beta_1=\beta_2=0\)</span>, we obtain the following test.</p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad F_{B}^*=\frac{MSB}{MSE}=\frac{116342}{3134}=37.12
+\qquad
+\mbox{Rejection Region:}\quad F_{B}^*\ge F_{.95;1,331}=3.870
+\]</span></p>
+<p>Both results are significant, with <span class="math inline">\(P_A=.0024\)</span> and <span class="math inline">\(P_B&lt;.0001\)</span>.</p>
+<p><span class="math display">\[\nabla\]</span></p>
+</div>
+<div id="least-squares-estimators-and-contrastslinear-functions-among-means" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Least Squares Estimators and Contrasts/Linear Functions Among Means<a href="unbalanced-two-factor-analysis-of-variance.html#least-squares-estimators-and-contrastslinear-functions-among-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, the formulas for least squares estimators and estimated standard errors for means and linear functions are given.
+For treatment (cell) means, we have the following results.</p>
+<p><span class="math display">\[
+\mbox{Parameter:} \quad \mu_{ij} \qquad
+\mbox{Estimator:} \quad \hat{\mu}_{ij} = \frac{\sum_{k=1}^{n_{ij}}Y_{ijk}}{n_{ij}}=
+\overline{Y}_{ij\bullet}
+\]</span>
+<span class="math display">\[
+\mbox{Estimated Standard Error:} \quad \hat{SE}\left\{\hat{\mu}_{ij}\right\}=\sqrt{\frac{MSE}{n_{ij}}}
+\]</span>
+For factor A level means, we have the following results.
+<span class="math display">\[
+\mbox{Parameter:} \quad \mu_{i\bullet} = \frac{\sum_{j=1}^b\mu_{ij}}{b} \qquad
+\mbox{Estimator:} \quad \hat{\mu}_{i\bullet} =
+\frac{\sum_{j=1}^b\overline{Y}_{ij\bullet}}{b}
+\]</span>
+<span class="math display">\[
+\mbox{Estimated Standard Error:} \quad \hat{SE}\left\{\hat{\mu}_{i\bullet}\right\}=
+\sqrt{\frac{MSE}{b^2}\sum_{j=1}^b\frac{1}{n_{ij}}}
+\]</span>
+For factor B level means, we have the following results.
+<span class="math display">\[
+\mbox{Parameter:} \quad \mu_{\bullet j} = \frac{\sum_{i=1}^a\mu_{ij}}{a} \qquad
+\mbox{Estimator:} \quad \hat{\mu}_{\bullet j} =
+\frac{\sum_{i=1}^a\overline{Y}_{ij\bullet}}{a}
+\]</span>
+<span class="math display">\[
+\mbox{Estimated Standard Error:} \quad \hat{SE}\left\{\hat{\mu}_{\bullet j}\right\}=
+\sqrt{\frac{MSE}{a^2}\sum_{i=1}^a\frac{1}{n_{ij}}}
+\]</span></p>
+<p>For contrasts or linear functions among factor A and B levels, we have the following parameters, estimators, and estimated standard errors.</p>
+<p><span class="math display">\[
+L_A = \sum_{i=1}^a c_i\mu_{i\bullet} \qquad
+\hat{L}_A = \sum_{i=1}^a c_i\hat{\mu}_{i\bullet} \qquad
+\hat{SE}\left\{\hat{L}_A\right\} = \sqrt{\frac{MSE}{b^2}\sum_{i=1}^ac_i^2\sum_{j=1}^b\frac{1}{n_{ij}}}
+\]</span></p>
+<p><span class="math display">\[
+L_B = \sum_{j=1}^b c_j\mu_{\bullet j} \qquad
+\hat{L}_B = \sum_{j=1}^b c_j\hat{\mu}_{\bullet j} \qquad
+\hat{SE}\left\{\hat{L}_B\right\} = \sqrt{\frac{MSE}{a^2}\sum_{j=1}^bc_j^2\sum_{i=1}^a\frac{1}{n_{ij}}}
+\]</span>
+Finally, the results are given for contrasts and linear functions among treatment (cell) means.</p>
+<p><span class="math display">\[
+L_{AB} = \sum_{i=1}^a \sum_{j=1}^b c_{ij}\mu_{ij} \qquad
+\hat{L}_{AB} = \sum_{i=1}^a\sum_{j=1}^b c_{ij}\hat{\mu}_{ij} \qquad
+\hat{SE}\left\{\hat{L}_{AB}\right\} = \sqrt{MSE\sum_{i=1}^a\sum_{j=1}^b\frac{c_{ij}^2}{n_{ij}}}
+\]</span></p>
+<p>The standard error multipliers for contrasts/linear functions based on the
+Scheffe (all comparisons), Bonferroni (<span class="math inline">\(g\)</span> pre-planned comparisons), and
+Tukey (all pairwise comparisons) methods are given here.</p>
+<p>For single comparisons, use <span class="math inline">\(t_{1-\alpha/2;n_T-ab}\)</span>.</p>
+<p>For comparisons among treatment (cell) means, use the following multipliers.</p>
+<p><span class="math display">\[
+\mbox{Scheffe:} \quad S=\sqrt{(ab-1)F_{1-\alpha;ab-1,n_T-ab}}
+\]</span>
+<span class="math display">\[
+\mbox{Bonferroni:} \quad B=t_{1-\alpha/(2g); n_T-ab}
+\]</span>
+<span class="math display">\[
+\mbox{Tukey:} \quad T=\frac{1}{\sqrt{2}}q_{1-\alpha;ab,n_T-ab}
+\]</span></p>
+<p>Standard error multipliers for contrasts and linear functions among levels of factors A and B are given here.</p>
+<p><span class="math display">\[
+\mbox{Scheffe:} \qquad \mbox{A:} \quad S_A=\sqrt{(a-1)F_{1-\alpha;a-1,n_T-ab}} \qquad
+\quad \mbox{B:} \quad S_B=\sqrt{(b-1)F_{1-\alpha;b-1,n_T-ab}}
+\]</span>
+<span class="math display">\[
+\mbox{Bonferroni (Factors A and B):} \quad B=t_{1-\alpha/(2g); n_T-ab}
+\]</span>
+<span class="math display">\[
+\mbox{Tukey:} \qquad \mbox{A:} \quad T_A=\frac{1}{\sqrt{2}}q_{1-\alpha;a,n_T-ab} \qquad
+\mbox{B:} \quad T_B=\frac{1}{\sqrt{2}}q_{1-\alpha;b,n_T-ab}
+\]</span>
+Be warned that the <strong>TukeyHSD</strong> function in R does not use the least squares means when
+making pairwise comparisons among means. For the first factor given in the <strong>aov</strong> object,
+it computes differences among the <strong>marginal</strong> means. For each level of factor A,
+the effect <span class="math inline">\(a_i\)</span> is obtained. Then, the <span class="math inline">\(a_i\)</span> are subtracted from the original data,
+for observations “adjusted” for factor A. Then the marginal means for the adjusted data
+are obtained for each level of factor B.</p>
+<p><span class="math display">\[
+\overline{Y}_{i\bullet\bullet}=\frac{\sum_{j=1}^b\sum_{k=1}^nY_{ijk}}{n_{i\bullet}}
+\qquad a_i=\overline{Y}_{i\bullet\bullet}-\overline{Y}_{\bullet\bullet\bullet}
+\qquad Y_{ijk}^*=Y_{ijk}-a_i  \qquad
+\overline{Y}_{\bullet j\bullet}^*=\frac{\sum_{i=1}^a\sum_{k=1}^nY_{ijk}^*}{n_{\bullet} j}
+\]</span></p>
+<p>The <strong>emmeans</strong> package makes use of the
+least squares (estimated marginal) means, and the formulas given in this section.
+For the interaction comparisons among cell means, the results are the same.</p>
+<p><strong>Example 7.3 - Age at Peak for Famous Writers</strong></p>
+<p>Although the interaction was not significant for the Age at Peak of the writers, we will use the Tukey method to compare all pairs of Style/Type means. The Mean Square Error for the interaction model was <span class="math inline">\(MSE=29.32\)</span> with degrees of freedom <span class="math inline">\(n_T-ab=23-2(2)=19\)</span>.</p>
+<p><span class="math display">\[
+\overline{y}_{11\bullet} = 28.60 \qquad n_{11}=5 \qquad
+\hat{SE}\left\{\overline{Y}_{11\bullet}\right\}=\sqrt{\frac{MSE}{n_{11}}}=\sqrt{\frac{29.32}{5}}=2.42
+\]</span>
+<span class="math display">\[
+\overline{y}_{12\bullet} = 33.20 \qquad n_{12}=5 \qquad
+\hat{SE}\left\{\overline{Y}_{12\bullet}\right\}=\sqrt{\frac{MSE}{n_{12}}}=\sqrt{\frac{29.32}{5}}=2.42
+\]</span>
+<span class="math display">\[
+\overline{y}_{21\bullet} = 38.67 \qquad n_{21}=6 \qquad
+\hat{SE}\left\{\overline{Y}_{21\bullet}\right\}=\sqrt{\frac{MSE}{n_{21}}}=\sqrt{\frac{29.32}{6}}=2.21
+\]</span>
+<span class="math display">\[
+\overline{y}_{22\bullet} = 44.43 \qquad n_{22}=7 \qquad
+\hat{SE}\left\{\overline{Y}_{22\bullet}\right\}=\sqrt{\frac{MSE}{n_{22}}}=\sqrt{\frac{29.32}{7}}=2.05
+\]</span>
+<span class="math display">\[
+T = \frac{1}{\sqrt{2}}q_{.95;4,19}=\frac{1}{\sqrt{2}}(3.977)=2.812
+\qquad
+\hat{SE}\left\{\overline{Y}_{ij\bullet}-\overline{Y}_{i&#39;j&#39;\bullet}\right\}=
+\sqrt{MSE\left(\frac{1}{n_{ij}}+\frac{1}{n_{i&#39;j&#39;}}\right)}
+\]</span>
+<span class="math display">\[
+\overline{y}_{11\bullet}-\overline{y}_{12\bullet} = 28.60-33.20=-4.60 \qquad
+\hat{SE}\left\{\overline{Y}_{11\bullet}-\overline{Y}_{12\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{5}+\frac{1}{5}\right)}=3.43
+\]</span>
+<span class="math display">\[
+\overline{y}_{11\bullet}-\overline{y}_{21\bullet} = 28.60-38.67=-10.07 \qquad
+\hat{SE}\left\{\overline{Y}_{11\bullet}-\overline{Y}_{21\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{5}+\frac{1}{6}\right)}=3.28
+\]</span>
+<span class="math display">\[
+\overline{y}_{11\bullet}-\overline{y}_{22\bullet} = 28.60-44.43=-15.83 \qquad
+\hat{SE}\left\{\overline{Y}_{11\bullet}-\overline{Y}_{22\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{5}+\frac{1}{7}\right)}=3.17
+\]</span>
+<span class="math display">\[
+\overline{y}_{12\bullet}-\overline{y}_{21\bullet} = 33.20-38.67=-5.47 \qquad
+\hat{SE}\left\{\overline{Y}_{12\bullet}-\overline{Y}_{21\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{5}+\frac{1}{6}\right)}=3.28
+\]</span>
+<span class="math display">\[
+\overline{y}_{12\bullet}-\overline{y}_{22\bullet} = 33.20-44.43=-11.23 \qquad
+\hat{SE}\left\{\overline{Y}_{12\bullet}-\overline{Y}_{22\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{5}+\frac{1}{7}\right)}=3.17
+\]</span>
+<span class="math display">\[
+\overline{y}_{21\bullet}-\overline{y}_{22\bullet} = 38.67-44.43=-5.76 \qquad
+\hat{SE}\left\{\overline{Y}_{21\bullet}-\overline{Y}_{22\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{6}+\frac{1}{7}\right)}=3.01
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Conc/Poet-Conc/Novel:} \quad  HSD=2.812(3.43)=9.65 \qquad
+\overline{y}_{11\bullet}-\overline{y}_{12\bullet} =-4.60
+\]</span>
+<span class="math display">\[
+\mbox{Conc/Poet-Exp/Poet:} \quad  HSD=2.812(3.28)=9.22 \qquad
+\overline{y}_{11\bullet}-\overline{y}_{21\bullet} = 28.60-38.67=-10.07
+\]</span>
+<span class="math display">\[
+\mbox{Conc/Poet-Exp/Novel:} \quad  HSD=2.812(3.17)=8.92 \qquad
+\overline{y}_{11\bullet}-\overline{y}_{22\bullet} =-15.83
+\]</span>
+<span class="math display">\[
+\mbox{Conc/Nov-Exp/Poet:} \quad  HSD=2.812(3.28)=9.22 \qquad
+\overline{y}_{12\bullet}-\overline{y}_{21\bullet} = -5.47
+\]</span>
+<span class="math display">\[
+\mbox{Conc/Nov-Exp/Nov:} \quad  HSD=2.812(3.17)=8.92 \qquad
+\overline{y}_{12\bullet}-\overline{y}_{22\bullet} = -11.23
+\]</span>
+<span class="math display">\[
+\mbox{Exp/Poet-Exp/Nov:} \quad  HSD=2.812(3.01)=8.47 \qquad
+\overline{y}_{21\bullet}-\overline{y}_{22\bullet} = -5.76
+\]</span></p>
+<p>The groups that are significantly different, based on Tukey’s HSD are as follow.</p>
+<ul>
+<li>Conceptualist/Poet is significantly lower than Experimentalist/Poet</li>
+<li>Conceptualist/Poet is significantly lower than Experimentalist/Novelist</li>
+<li>Conceptualist/Novelist is significantly lower than Experimentalist/Novelist</li>
+</ul>
+<p>We now obtain the comparisons of Styles (Conceptualist-Experimentalist) and Types (Poet-Novelist) based on Model 1 (even though the interaction is not significant).
+Very similar results would be obtained from Model 2 (with adjustments to MSE and error degrees of freedom).</p>
+<p><span class="math display">\[
+\hat{\mu}_{1\bullet}=\frac{\overline{Y}_{11\bullet}+\overline{Y}_{12\bullet}}{2}=
+\frac{28.6000+33.2000}{2}=30.9000  \]</span>
+<span class="math display">\[\hat{\mu}_{2\bullet}=\frac{\overline{Y}_{21\bullet}+\overline{Y}_{22\bullet}}{2}=
+\frac{38.6667+44.4286}{2}=41.5477
+\]</span>
+<span class="math display">\[
+\hat{SE}\left\{\hat{\mu}_{1\bullet}-\hat{\mu}_{2\bullet}\right\}=
+\sqrt{\frac{MSE}{2^2}\left(
+\frac{1}{n_{11}}+\frac{1}{n_{12}}+\frac{1}{n_{21}}+\frac{1}{n_{22}}\right)}=
+\sqrt{\frac{29.32}{4}\left(
+\frac{1}{5}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7}\right)}=2.281
+\]</span>
+<span class="math display">\[
+95\% \mbox{CI for } \mu_{1\bullet}-\mu_{2\bullet}: \quad
+(30.900-41.548) \pm 2.093(2.281)\equiv -10.648\pm 4.774\equiv (-15.422,-5.874)
+\]</span>
+Note that in this rare case where <span class="math inline">\(a=b=2\)</span>, the standard error of <span class="math inline">\(\hat{\mu}_{\bullet 1}-\hat{\mu}_{\bullet 2}\)</span> is the same as that of <span class="math inline">\(\hat{\mu}_{1\bullet}-\hat{\mu}_{2\bullet}\)</span>, we have the following results.</p>
+<p><span class="math display">\[
+\hat{\mu}_{\bullet 1}=\frac{\overline{Y}_{11\bullet}+\overline{Y}_{21\bullet}}{2}=
+\frac{28.6000+38.6667}{2}=33.6334  \]</span>
+<span class="math display">\[\hat{\mu}_{\bullet 2}=\frac{\overline{Y}_{12\bullet}+\overline{Y}_{22\bullet}}{2}=
+\frac{33.2000+44.4286}{2}=38.8143
+\]</span></p>
+<p><span class="math display">\[
+95\% \mbox{CI for } \mu_{\bullet}-\mu_{\bullet}: \quad (33.633-38.814)\pm
+2.093(2.281)\equiv -5.181\pm 4.774\equiv (-9.955,-0.407)
+\]</span></p>
+<p>The following R program runs Tukey’s HSD on the marginal means for factors A and B,
+and on the cell means as well. Note, however, that the <strong>TukeyHSD</strong> function in R
+is not based on the least squares (aka estimated marginal) means. We also obtain
+the least squares means, standard errors and pairwise comparisons described in this section with the
+<strong>emmeans</strong> package.</p>
+<div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb258-1" tabindex="-1"></a><span class="do">## Continuation of ch0701, ch0702</span></span>
+<span id="cb258-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb258-2" tabindex="-1"></a></span>
+<span id="cb258-3"><a href="unbalanced-two-factor-analysis-of-variance.html#cb258-3" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>, <span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb258-4"><a href="unbalanced-two-factor-analysis-of-variance.html#cb258-4" tabindex="-1"></a>ap.aov1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(agePeak <span class="sc">~</span> w.style<span class="sc">*</span>w.type, <span class="at">data=</span>ap1)</span>
+<span id="cb258-5"><a href="unbalanced-two-factor-analysis-of-variance.html#cb258-5" tabindex="-1"></a><span class="fu">TukeyHSD</span>(ap.aov1)</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = agePeak ~ w.style * w.type, data = ap1)
+## 
+## $w.style
+##         diff      lwr      upr     p adj
+## E-C 10.86923 6.102333 15.63613 0.0001324
+## 
+## $w.type
+##         diff       lwr      upr     p adj
+## N-P 5.247378 0.5167309 9.978024 0.0315205
+## 
+## $`w.style:w.type`
+##              diff         lwr       upr     p adj
+## E:P-C:P 10.066667   0.8473951 19.285938 0.0293965
+## C:N-C:P  4.600000  -5.0292152 14.229215 0.5481270
+## E:N-C:P 15.828571   6.9136505 24.743492 0.0004327
+## C:N-E:P -5.466667 -14.6859383  3.752605 0.3672669
+## E:N-E:P  5.761905  -2.7085734 14.232383 0.2559999
+## E:N-C:N 11.228571   2.3136505 20.143492 0.0107243</code></pre>
+<div class="sourceCode" id="cb260"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb260-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb260-1" tabindex="-1"></a>ap.emm1 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ap.aov1, <span class="sc">~</span> w.style)</span></code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb262-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb262-1" tabindex="-1"></a><span class="fu">emmeans</span>(ap.emm1, <span class="sc">~</span> w.style)</span></code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<pre><code>##  w.style emmean   SE df lower.CL upper.CL
+##  C         30.9 1.71 19     27.3     34.5
+##  E         41.5 1.51 19     38.4     44.7
+## 
+## Results are averaged over the levels of: w.type 
+## Confidence level used: 0.95</code></pre>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb265-1" tabindex="-1"></a><span class="fu">contrast</span>(ap.emm1, <span class="at">method=</span><span class="st">&quot;pairwise&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;tukey&quot;</span>)</span></code></pre></div>
+<pre><code>##  contrast estimate   SE df t.ratio p.value
+##  C - E       -10.6 2.28 19  -4.669  0.0002
+## 
+## Results are averaged over the levels of: w.type</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb267-1" tabindex="-1"></a>ap.emm2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ap.aov1,  <span class="sc">~</span> w.type)</span></code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb269-1" tabindex="-1"></a><span class="fu">emmeans</span>(ap.emm2, <span class="sc">~</span> w.type)</span></code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<pre><code>##  w.type emmean   SE df lower.CL upper.CL
+##  P        33.6 1.64 19     30.2     37.1
+##  N        38.8 1.59 19     35.5     42.1
+## 
+## Results are averaged over the levels of: w.style 
+## Confidence level used: 0.95</code></pre>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb272-1" tabindex="-1"></a><span class="fu">contrast</span>(ap.emm2, <span class="at">method=</span><span class="st">&quot;pairwise&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;tukey&quot;</span>)</span></code></pre></div>
+<pre><code>##  contrast estimate   SE df t.ratio p.value
+##  P - N       -5.18 2.28 19  -2.272  0.0349
+## 
+## Results are averaged over the levels of: w.style</code></pre>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb274-1" tabindex="-1"></a>ap.emm3 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(ap.aov1, <span class="sc">~</span> w.style<span class="sc">:</span>w.type)</span>
+<span id="cb274-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb274-2" tabindex="-1"></a><span class="fu">emmeans</span>(ap.emm3, <span class="sc">~</span> w.style<span class="sc">:</span>w.type)</span></code></pre></div>
+<pre><code>##  w.style w.type emmean   SE df lower.CL upper.CL
+##  C       P        28.6 2.42 19     23.5     33.7
+##  E       P        38.7 2.21 19     34.0     43.3
+##  C       N        33.2 2.42 19     28.1     38.3
+##  E       N        44.4 2.05 19     40.1     48.7
+## 
+## Confidence level used: 0.95</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb276-1" tabindex="-1"></a><span class="fu">contrast</span>(ap.emm3, <span class="at">method=</span><span class="st">&quot;pairwise&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;tukey&quot;</span>)</span></code></pre></div>
+<pre><code>##  contrast  estimate   SE df t.ratio p.value
+##  C P - E P   -10.07 3.28 19  -3.070  0.0294
+##  C P - C N    -4.60 3.42 19  -1.343  0.5481
+##  C P - E N   -15.83 3.17 19  -4.992  0.0004
+##  E P - C N     5.47 3.28 19   1.667  0.3673
+##  E P - E N    -5.76 3.01 19  -1.913  0.2560
+##  C N - E N   -11.23 3.17 19  -3.542  0.0107
+## 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb278-1" tabindex="-1"></a><span class="fu">emmip</span>(ap.emm3, w.style <span class="sc">~</span> w.type)</span></code></pre></div>
+<p><img src="bookdownproj_STA4211Notes1_files/figure-html/ch0704-1.png" width="672" /></p>
+<p><span class="math display">\[\nabla\]</span></p>
+<p><strong>Example 7.4 - Makiwara Punching Boards</strong></p>
+<p>For the Karate board experiment, we will conduct tests among levels of factors A and B, respectively. The Mean Square Error was <span class="math inline">\(MSE=3159\)</span> with degrees of freedom <span class="math inline">\(n_T-ab=336-2(4)=328\)</span> for Model 1 (with interaction).</p>
+<p>For comparing the Board Types (Stacked-Tapered), we obtain the following cell means from
+the <strong>tapply</strong> function previously.</p>
+<p><span class="math display">\[
+\overline{y}_{11\bullet}=118 \quad \overline{y}_{12\bullet}=106 \quad
+\overline{y}_{13\bullet}=94 \quad \overline{y}_{14\bullet}=90 \quad \Rightarrow \quad
+\hat{\mu}_{1\bullet}=\frac{118+106+94+90}{4}=102
+\]</span>
+<span class="math display">\[
+\overline{y}_{21\bullet}=78 \quad \overline{y}_{22\bullet}=76 \quad
+\overline{y}_{23\bullet}=55 \quad \overline{y}_{24\bullet}=50 \quad \Rightarrow \quad
+\hat{\mu}_{2\bullet}=\frac{78+76+55+50}{4}=64.75
+\]</span></p>
+<p>The standard errors are computed here, where the sample sizes for each cell are given first.</p>
+<p><span class="math display">\[
+n_{11}=41 \quad n_{12}=36 \quad n_{13}=34 \quad n_{14}=n_{21}=n_{22}=n_{23}=n_{24}=45
+\]</span>
+<span class="math display">\[
+\hat{SE}\left\{\hat{\mu}_{1\bullet}\right\}=
+\sqrt{\frac{3159}{4^2}\left(\frac{1}{41}+\frac{1}{36}+\frac{1}{34}+\frac{1}{45}\right)}
+=4.53
+\]</span>
+<span class="math display">\[
+\hat{SE}\left\{\hat{\mu}_{2\bullet}\right\}=
+\sqrt{\frac{3159}{4^2}\left(\frac{1}{45}+\frac{1}{45}+\frac{1}{45}+\frac{1}{45}\right)}
+=4.19
+\]</span>
+The standard error of the difference <span class="math inline">\(\hat{\mu}_{1\bullet}-\hat{\mu}_{2\bullet}\)</span> is the square root of the sum of their variances, as these are independent samples. Also, we obtain the critical <span class="math inline">\(t\)</span>-value, and the 95% Confidence Interval for <span class="math inline">\(\mu_{1\bullet}-\mu_{2\bullet}\)</span>.</p>
+<p><span class="math display">\[
+\hat{SE}\left\{\hat{\mu}_{1\bullet}-\hat{\mu}_{2\bullet}\right\} = \sqrt{(4.53)^2+(4.19)^2}=6.17
+\qquad
+t_{.975;328}=1.967
+\]</span>
+<span class="math display">\[
+95\% \mbox{ Confidence Interval:} \quad (102-64.75) \pm 1.967(6.17) \quad \equiv \quad
+37.25 \pm 12.14 \quad \equiv \quad (25.11,49.39)
+\]</span>
+Thus, the mean deflection is higher for the stacked board than the tapered on average (likely by somewhere between 25-50 millimeters).
+We could also compare all pairs of Wood Types. The computations are similar, but there are 4(3)/2 = 6 possible pairs. We will use the <strong>TukeyHSD</strong> function along with the <strong>aov</strong> object in R below.</p>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb279-1" tabindex="-1"></a>mb1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/karate_board.csv&quot;</span>)</span>
+<span id="cb279-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb279-2" tabindex="-1"></a><span class="fu">head</span>(mb1,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   Trt Wood Bdtype repnum Deflect X1A X2A X3A X1B X1AX1B X2AX1B X3AX1B
+## 1   1    1      1      1  144.27   1   0   0   1      1      0      0
+## 2   1    1      1      2  125.89   1   0   0   1      1      0      0</code></pre>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb281-1" tabindex="-1"></a><span class="fu">tail</span>(mb1,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##     Trt Wood Bdtype repnum Deflect X1A X2A X3A X1B X1AX1B X2AX1B X3AX1B
+## 335   8    4      2     44   73.32  -1  -1  -1  -1      1      1      1
+## 336   8    4      2     45   44.86  -1  -1  -1  -1      1      1      1</code></pre>
+<div class="sourceCode" id="cb283"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb283-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb283-1" tabindex="-1"></a>mb1<span class="sc">$</span>Wood.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(mb1<span class="sc">$</span>Wood, <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;cherry&quot;</span>, <span class="st">&quot;ash&quot;</span>, <span class="st">&quot;fir&quot;</span>, <span class="st">&quot;oak&quot;</span>))</span>
+<span id="cb283-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb283-2" tabindex="-1"></a>mb1<span class="sc">$</span>Bdtype.f <span class="ot">&lt;-</span> <span class="fu">factor</span>(mb1<span class="sc">$</span>Bdtype, <span class="at">levels=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels=</span><span class="fu">c</span>(<span class="st">&quot;stacked&quot;</span>, <span class="st">&quot;tapered&quot;</span>))</span>
+<span id="cb283-3"><a href="unbalanced-two-factor-analysis-of-variance.html#cb283-3" tabindex="-1"></a></span>
+<span id="cb283-4"><a href="unbalanced-two-factor-analysis-of-variance.html#cb283-4" tabindex="-1"></a><span class="fu">tapply</span>(mb1<span class="sc">$</span>Deflect, <span class="fu">list</span>(mb1<span class="sc">$</span>Wood.f, mb1<span class="sc">$</span>Bdtype.f), mean)</span></code></pre></div>
+<pre><code>##          stacked  tapered
+## cherry 117.99976 77.99978
+## ash    106.00056 75.99933
+## fir     94.00059 55.00000
+## oak     89.99956 50.00067</code></pre>
+<div class="sourceCode" id="cb285"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb285-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb285-1" tabindex="-1"></a>mb.mod1 <span class="ot">&lt;-</span> <span class="fu">aov</span>(Deflect <span class="sc">~</span> Wood.f <span class="sc">*</span> Bdtype.f , <span class="at">data=</span>mb1)</span>
+<span id="cb285-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb285-2" tabindex="-1"></a></span>
+<span id="cb285-3"><a href="unbalanced-two-factor-analysis-of-variance.html#cb285-3" tabindex="-1"></a>mb.emm1 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mb.mod1, <span class="sc">~</span> Wood.f)</span></code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<div class="sourceCode" id="cb287"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb287-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb287-1" tabindex="-1"></a><span class="fu">emmeans</span>(mb.emm1, <span class="sc">~</span> Wood.f)</span></code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<pre><code>##  Wood.f emmean   SE  df lower.CL upper.CL
+##  cherry   98.0 6.07 328     86.1    109.9
+##  ash      91.0 6.28 328     78.6    103.4
+##  fir      74.5 6.39 328     61.9     87.1
+##  oak      70.0 5.92 328     58.3     81.7
+## 
+## Results are averaged over the levels of: Bdtype.f 
+## Confidence level used: 0.95</code></pre>
+<div class="sourceCode" id="cb290"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb290-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb290-1" tabindex="-1"></a><span class="fu">contrast</span>(mb.emm1, <span class="at">method=</span><span class="st">&quot;pairwise&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;tukey&quot;</span>)</span></code></pre></div>
+<pre><code>##  contrast     estimate   SE  df t.ratio p.value
+##  cherry - ash      7.0 8.73 328   0.801  0.8537
+##  cherry - fir     23.5 8.81 328   2.668  0.0398
+##  cherry - oak     28.0 8.48 328   3.302  0.0058
+##  ash - fir        16.5 8.96 328   1.842  0.2557
+##  ash - oak        21.0 8.64 328   2.432  0.0732
+##  fir - oak         4.5 8.71 328   0.517  0.9551
+## 
+## Results are averaged over the levels of: Bdtype.f 
+## P value adjustment: tukey method for comparing a family of 4 estimates</code></pre>
+<div class="sourceCode" id="cb292"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb292-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb292-1" tabindex="-1"></a>mb.emm2 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mb.mod1, <span class="sc">~</span> Bdtype.f)</span></code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb294-1" tabindex="-1"></a><span class="fu">emmeans</span>(mb.emm2, <span class="sc">~</span> Bdtype.f)</span></code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<pre><code>##  Bdtype.f emmean   SE  df lower.CL upper.CL
+##  stacked   102.0 4.53 328     93.1      111
+##  tapered    64.7 4.19 328     56.5       73
+## 
+## Results are averaged over the levels of: Wood.f 
+## Confidence level used: 0.95</code></pre>
+<div class="sourceCode" id="cb297"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb297-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb297-1" tabindex="-1"></a><span class="fu">contrast</span>(mb.emm2, <span class="at">method=</span><span class="st">&quot;pairwise&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;tukey&quot;</span>)</span></code></pre></div>
+<pre><code>##  contrast          estimate   SE  df t.ratio p.value
+##  stacked - tapered     37.3 6.17 328   6.040 &lt;0.0001
+## 
+## Results are averaged over the levels of: Wood.f</code></pre>
+<div class="sourceCode" id="cb299"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb299-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb299-1" tabindex="-1"></a>mb.emm3 <span class="ot">&lt;-</span> <span class="fu">emmeans</span>(mb.mod1, <span class="sc">~</span> Wood.f<span class="sc">:</span>Bdtype.f)</span>
+<span id="cb299-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb299-2" tabindex="-1"></a><span class="fu">emmeans</span>(mb.emm3, <span class="sc">~</span> Bdtype.f)</span></code></pre></div>
+<pre><code>## NOTE: Results may be misleading due to involvement in interactions</code></pre>
+<pre><code>##  Bdtype.f emmean   SE  df lower.CL upper.CL
+##  stacked   102.0 4.53 328     93.1      111
+##  tapered    64.7 4.19 328     56.5       73
+## 
+## Results are averaged over the levels of: Wood.f 
+## Confidence level used: 0.95</code></pre>
+<div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb302-1" tabindex="-1"></a><span class="fu">contrast</span>(mb.emm3, <span class="at">method=</span><span class="st">&quot;pairwise&quot;</span>, <span class="at">adjust=</span><span class="st">&quot;tukey&quot;</span>)</span></code></pre></div>
+<pre><code>##  contrast                        estimate   SE  df t.ratio p.value
+##  cherry stacked - ash stacked          12 12.8 328   0.935  0.9825
+##  cherry stacked - fir stacked          24 13.0 328   1.841  0.5925
+##  cherry stacked - oak stacked          28 12.1 328   2.308  0.2926
+##  cherry stacked - cherry tapered       40 12.1 328   3.297  0.0239
+##  cherry stacked - ash tapered          42 12.1 328   3.461  0.0140
+##  cherry stacked - fir tapered          63 12.1 328   5.192 &lt;0.0001
+##  cherry stacked - oak tapered          68 12.1 328   5.604 &lt;0.0001
+##  ash stacked - fir stacked             12 13.4 328   0.893  0.9866
+##  ash stacked - oak stacked             16 12.6 328   1.273  0.9082
+##  ash stacked - cherry tapered          28 12.6 328   2.228  0.3377
+##  ash stacked - ash tapered             30 12.6 328   2.387  0.2511
+##  ash stacked - fir tapered             51 12.6 328   4.058  0.0016
+##  ash stacked - oak tapered             56 12.6 328   4.456  0.0003
+##  fir stacked - oak stacked              4 12.8 328   0.313  1.0000
+##  fir stacked - cherry tapered          16 12.8 328   1.253  0.9151
+##  fir stacked - ash tapered             18 12.8 328   1.410  0.8525
+##  fir stacked - fir tapered             39 12.8 328   3.054  0.0495
+##  fir stacked - oak tapered             44 12.8 328   3.445  0.0147
+##  oak stacked - cherry tapered          12 11.8 328   1.013  0.9723
+##  oak stacked - ash tapered             14 11.8 328   1.182  0.9367
+##  oak stacked - fir tapered             35 11.8 328   2.954  0.0656
+##  oak stacked - oak tapered             40 11.8 328   3.376  0.0185
+##  cherry tapered - ash tapered           2 11.8 328   0.169  1.0000
+##  cherry tapered - fir tapered          23 11.8 328   1.941  0.5236
+##  cherry tapered - oak tapered          28 11.8 328   2.363  0.2632
+##  ash tapered - fir tapered             21 11.8 328   1.772  0.6393
+##  ash tapered - oak tapered             26 11.8 328   2.194  0.3579
+##  fir tapered - oak tapered              5 11.8 328   0.422  0.9999
+## 
+## P value adjustment: tukey method for comparing a family of 8 estimates</code></pre>
+<div class="sourceCode" id="cb304"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb304-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb304-1" tabindex="-1"></a><span class="fu">emmip</span>(mb.emm3, Wood.f <span class="sc">~</span> Bdtype.f)</span></code></pre></div>
+<p><img src="bookdownproj_STA4211Notes1_files/figure-html/ch0705-1.png" width="672" />
+In terms of the Wood Types, fir has significantly lower deflection than cherry,
+and oak has significantly lower deflection than cherry.</p>
+<p><span class="math display">\[\nabla\]</span></p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-simonson_2007" class="csl-entry">
+Simonson, D. K. 2007. <span>“Creative Life Cycles in Literature: Poets Vs Novelists or Conceptualists Versus Experimentalists?”</span> <em>Psychology of Aesthetics, Creativity, and the Arts</em> 1 (3): 133–39.
+</div>
+<div id="ref-smith_2010" class="csl-entry">
+Smith, P. K., T. Niiler, and P. W. McCullough. 2010. <span>“Evaluating Makiwara Punching Board Performance.”</span> <em>Journal of Asian Martial Arts</em> 19 (2): 34–45.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="two-factor-designs-with-1-observation-per-treatment.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="higher-order-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "link": "https://github.com/LarryWinner/STA4211-Notes1.git/edit/main/%s",
+  "text": "Edit"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

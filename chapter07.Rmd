@@ -1,0 +1,602 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r echo=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(effectsize)
+library(agricolae)
+library(car)
+library(PMCMRplus)
+library(additivityTests)
+library(emmeans)
+library(ggplot2)
+```
+
+# Unbalanced Two-Factor Analysis of Variance
+
+When sample sizes are not all equal, the sums of squares cannot be obtained simply among the cell, marginal, and overall means. Even in well planned controlled experiments, observations may not be used due to malfunction or subjects dropping out. In observational studies, it may not be feasible to get equal number of units from the various sub-populations.
+
+The model can be fit based on regression models in scalar and matrix form. In this chapter, we describe the process based on the treatment effects model. The balanced case can be formed in this manner as well.
+
+## Statistical Model and the Analysis of Variance
+
+$$
+Y_{ijk}=\mu_{\bullet\bullet}+\alpha_i+\beta_j+(\alpha\beta)_{ij}+\epsilon_{ijk}\qquad
+i=1,\ldots,a; \quad j=1,\ldots,b; \quad k=1,\ldots,n_{ij}$$
+$$\epsilon_{ijk} \sim NID\left(0,\sigma^2\right) 
+$$
+
+
+$$
+n_{i\bullet} = \sum_{j=1}^b n_{ij}  \quad
+n_{\bullet j} = \sum_{i=1}^a n_{ij}  \quad
+n_T=\sum_{i=1}^a\sum_{j=1}^b n_{ij}  \qquad
+Y_{ij\bullet}=\sum_{k=1}^{n_{ij}}Y_{ijk} \quad
+\overline{Y}_{ij\bullet} = \frac{Y_{ij\bullet}}{n_{ij}}
+$$
+
+$$
+\sum_{i=1}^a\alpha_i = \sum_{j=1}^b\beta_j = \sum_{i=1}^a(\alpha\beta)_{ij}
+= \sum_{j=1}^b(\alpha\beta)_{ij} = 0
+$$
+$$
+\alpha_a=-\sum_{i=1}^{a-1}\alpha_i \qquad\qquad
+\beta_b = -\sum_{j=1}^{b-1}\beta_j 
+$$
+$$
+(\alpha\beta)_{aj}=-\sum_{i=1}^{a-1}(\alpha\beta)_{ij} \quad j=1,\ldots,b
+\qquad 
+(\alpha\beta)_{ib}=-\sum_{j=1}^{b-1}(\alpha\beta)_{ij} \quad i=1,\ldots,a
+$$
+
+To fit this model, construct $a-1$ $X$ variables for the factor A effects, $b-1$ $X$ variables for the factor B effects, and then obtain the $(a-1)(b-1)$ cross-products of these variables for the interaction effects.
+
+$$
+X_{ijk1}^A=\left\{ \begin{array}{r@{\quad:\quad}l} 
+    1 & i=1 \\ 0 & i=2,\ldots,a-1\\ -1 & i=a 
+    \end{array}  \right.
+    \qquad \cdots \qquad
+X_{ijk,a-1}^A=\left\{ \begin{array}{r@{\quad:\quad}l} 
+    1 & i=a-1 \\ 0 & i=1,\ldots,a-2\\ -1 & i=a 
+    \end{array}  \right.    
+$$
+
+$$
+X_{ijk1}^B=\left\{ \begin{array}{r@{\quad:\quad}l} 
+    1 & j=1 \\ 0 & j=2,\ldots,b-1\\ -1 & j=b 
+    \end{array}  \right.
+    \qquad \cdots \qquad
+X_{ijk,b-1}^B=\left\{ \begin{array}{r@{\quad:\quad}l} 
+    1 & j=b-1 \\ 0 & j=1,\ldots,b-2\\ -1 & j=b 
+    \end{array}  \right.    
+$$
+$$
+Y_{ijk}=\mu_{\bullet\bullet} + \alpha_1X_{ijk1}^A + \cdots +\alpha_{a-1}X_{ijk,a-1}^A +
+\beta_1X_{ijk1}^B + \cdots + \beta_{b-1}X_{ijk,b-1}^B + 
+$$
+$$
++ (\alpha\beta)_{11}X_{ijk1}^AX_{ijk1}^B + \cdots +
+(\alpha\beta)_{a-1,b-1}X_{ijk,a-1}^AX_{ijk,b-1}^B + \epsilon_{ijk}
+$$
+
+The testing strategy is done as it was in the balanced case. Fit various models and compare them using the general linear test procedure.
+
+- **Model 1** - Include main effects for factors A and B as well as interaction effects.
+- **Model 2** - Include main effects for factors A and B, but no interaction effects
+- **Model 3** - Include main effects for factor B and interaction effects, but no factor A effects
+- **Model 4** - Include main effects for factor A and interaction effects, but no factor B effects
+
+To test for interaction effects, controlling for main effects for factors A and B, we compare Model 1 (Complete) and Model 2 (Reduced).
+
+To test for factor A effects, controlling for factor B effects and interaction effects, we compare Model 1 (Complete) and Model 3 (Reduced).
+
+To test for factor B effects, controlling for factor A effects and interaction effects, we compare Model 1 (Complete) and Model 4 (Reduced).
+
+When the test for interaction is "very non-significant" (high $P$-value), often tests for factor A and B effects use Model 2 as the Complete Model.
+
+**Example 7.1 - Age at Peak for Famous Writers**
+
+A study considered the age at career peak for famous writers [@simonson_2007].
+The factors were **Style** (Factor A: Conceptualists $(i=1)$, Experimentalists $(i=2)$) and Writer **Type** (Factor B:Poets $(j=1)$, Novelists $(j=2)$). Thus, there are $a=b=2$ levels for the factors, there will only be $a-1=1$ $X$ variable for factor A and $b-1=1$ $X$ variable for factor B, and $(a-1)(b-1)=1$ cross-product term for the AB interaction. The numbers of writers for the $ab=4$ conditions are $n_{11}=n_{12}=5,n_{21}=6,n_{22}=7$.
+The data and the generated X variables are given in Table \@ref(tab:ch0701).
+The regression model is fit directly, then with the **aov** function. Note that in
+the original dataset the levels were 0 and 1 for style and type, not 1 and 2.
+
+```{r ch0701}
+ap1 <- read.csv("data/creativelifecycles1.csv")
+knitr::kable(ap1, caption = 'Author Age at Peak Data')
+
+ap1$w.style <- factor(ap1$Style, levels=0:1, labels=c("C", "E"))
+ap1$w.type <- factor(ap1$Type, levels=0:1, labels=c("P", "N"))
+
+ap1$X1A <- ifelse(ap1$Style==0,1,-1)
+ap1$X1B <- ifelse(ap1$Type==0,1,-1)
+ap1$X1AX1B <- ap1$X1A*ap1$X1B
+## Regression Model 
+
+ap.reg1 <- lm(agePeak ~ X1A + X1B + X1AX1B, data=ap1)
+summary(ap.reg1)
+anova(ap.reg1)
+drop1(ap.reg1, test="F")
+
+## ANOVA model (Treatment effects)
+
+options(contrasts=c("contr.sum", "contr.poly"))
+ap.aov1 <- aov(agePeak ~ w.style*w.type, data=ap1)
+summary.lm(ap.aov1)
+anova(ap.aov1)
+drop1(ap.aov1, .~., test="F")
+
+```
+
+We see from the regression coefficients (that control for all other factors) that there is no evidence of an interaction, but there is evidence of main effects for Style and Writer Type. Formal tests are given below. Given that each test has 1 degree of freedom, we use $t$-tests.
+
+$$
+H_0^{AB}: (\alpha\beta)_{11}=(\alpha\beta)_{12}=(\alpha\beta)_{21}=(\alpha\beta)_{22}=0
+\qquad
+t_{AB}^*=\frac{0.2905}{1.1402}=0.255
+\qquad P_{AB}=.8017
+$$
+$$
+H_0^A:\alpha_1=\alpha_2=0 \qquad
+t_A^*=\frac{-5.3238}{1.1402}=-4.669 \qquad P_A=.0002
+$$
+$$
+H_0^B: \beta_1=\beta_2=0 \qquad
+t_B^*=\frac{-2.5905}{1.1402}=-2.272   \qquad P_B=.0349
+$$
+As there is strong evidence of main effects and no suggestion of an interaction, we will fit Model 2 for making comparisons, and not fit Models 3 or 4.
+
+```{r ch0702, echo=FALSE}
+ap.reg2 <- lm(agePeak ~ X1A + X1B, data=ap1)
+summary(ap.reg2)
+
+ap.aov2 <- aov(agePeak ~ factor(Style) + factor(Type), data=ap1)
+summary.lm(ap.aov2)
+anova(ap.aov2)
+```
+Based on the additive model (Model 2), we obtain the following estimates and predicted ages at peak.
+
+$$
+\hat{\mu}_{\bullet\bullet}=36.234 \qquad \hat{\alpha}_1=-5.334 \quad
+\hat{\alpha}_2=5.334 \qquad \hat{\beta}_1=-2.628 \quad
+\hat{\beta}_2=2.628
+$$
+$$
+\mbox{Conceptualists/Poets:} \quad 
+\hat{Y}_{11}=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_1+\hat{\beta}_1=
+36.234-5.334-2.628=28.272
+$$
+
+$$
+\mbox{Conceptualists/Novelists:} \quad 
+\hat{Y}_{12}=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_1+\hat{\beta}_2=
+36.234-5.334+2.628=33.528
+$$
+
+$$
+\mbox{Experimantalists/Poets:} \quad 
+\hat{Y}_{21}=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_2+\hat{\beta}_1=
+36.234+5.334-2.628=38.940
+$$
+
+$$
+\mbox{Experimantalists/Novelists:} \quad 
+\hat{Y}_{21}=\hat{\mu}_{\bullet\bullet}+\hat{\alpha}_2+\hat{\beta}_2=
+36.234+5.334+2.628=44.196
+$$
+
+Experimentalists take longer on average to reach their peak than conceptualists, and novelists take longer than poets.
+
+$$\nabla $$
+
+A second example with more levels of factor B is included here.
+
+**Example 7.2 - Makiwara Punching Boards**
+
+An experiment was conducted to compare four wood types of and two board types, of karate boards [@smith_2010]. The wood types were: cherry $(i=1)$, ash $(i=2)$, fir $(i=3)$, and oak $(i=4)$. The board types were stacked $(j=1)$ and tapered $(j=2)$.  Apparently due to breakage, there were unequal numbers of replicates among the $ab=2(4)=8$ treatments. We use the **aov** function in R with the treatment effects form to fit Models 1 (Interaction) and 2 (Additive) to test whether there is an interaction between wood and board types. The response $Y$ is the deflection (millimeters) for the Makiwara board, with a total of $n_T=336$ measurements.
+
+
+```{r ch0703}
+mb1 <- read.csv("data/karate_board.csv")
+head(mb1,2)
+tail(mb1,2)
+
+mb1$Wood.f <- factor(mb1$Wood, levels=1:4, labels=c("cherry", "ash", "fir", "oak"))
+mb1$Bdtype.f <- factor(mb1$Bdtype, levels=1:2, labels=c("stacked", "tapered"))
+
+tapply(mb1$Deflect, list(mb1$Wood.f, mb1$Bdtype.f), mean)
+tapply(mb1$Deflect, list(mb1$Wood.f, mb1$Bdtype.f), length)
+options(contrasts=c("contr.sum", "contr.poly"))
+
+mb.mod1 <- aov(Deflect ~ Wood.f*Bdtype.f, data=mb1)
+summary.lm(mb.mod1)
+anova(mb.mod1)
+drop1(mb.mod1, .~., test="F")
+
+mb.mod2 <- aov(Deflect ~ Wood.f+Bdtype.f, data=mb1)
+summary.lm(mb.mod2)
+anova(mb.mod2)
+drop1(mb.mod2, .~., test="F")
+```
+
+When comparing the mean deflection differences (stacked-tapered) within the 4 wood types, based on the **tapply** function, we observe: 40 (cherry), 30 (ash), 39 (fir), and 41 (oak). While these differences are not exactly the same, they are very consistent. To test for interaction, we directly use the ANOVA table from Model 1.
+
+$$
+H_0: (\alpha\beta)_{11}= \cdots = (\alpha\beta)_{42}=0 \qquad
+H_A:\mbox{ Not all } (\alpha\beta)_{ij}= 0
+$$
+
+$$
+\mbox{Test Statistic:} \quad F_{AB}^*=\frac{MSAB}{MSE}=\frac{481}{3159}=0.1524
+\qquad
+\mbox{Rejection Region:}\quad F_{AB}^*\ge F_{.95;3,328}=2.632
+$$
+
+The $P$-value is large, $P_{AB}=.9281$, giving no evidence of any interaction effects.
+
+Based on this, we test for main effects for Board and Wood Effects, based on Model 2, the additive model. The (rounded) partial Mean Squares for Model 2 are $MSA=45948/3=15316$ for wood type and $MSB=116342/1$ for board type, obtained from the **drop1** function.
+
+
+For Wood effects, $H_0^A:\alpha_1=\cdots = \alpha_4=0$, we obtain the following test.
+
+$$
+\mbox{Test Statistic:} \quad F_{A}^*=\frac{MSA}{MSE}=\frac{15316}{3134}=4.89
+\qquad
+\mbox{Rejection Region:}\quad F_{A}^*\ge F_{.95;3,331}=2.632
+$$
+For Board effects, $H_0^B:\beta_1=\beta_2=0$, we obtain the following test.
+
+$$
+\mbox{Test Statistic:} \quad F_{B}^*=\frac{MSB}{MSE}=\frac{116342}{3134}=37.12
+\qquad
+\mbox{Rejection Region:}\quad F_{B}^*\ge F_{.95;1,331}=3.870
+$$
+
+
+Both results are significant, with $P_A=.0024$ and $P_B<.0001$.
+
+$$\nabla$$
+
+## Least Squares Estimators and Contrasts/Linear Functions Among Means
+
+In this section, the formulas for least squares estimators and estimated standard errors for means and linear functions are given.
+For treatment (cell) means, we have the following results.
+
+$$ 
+\mbox{Parameter:} \quad \mu_{ij} \qquad 
+\mbox{Estimator:} \quad \hat{\mu}_{ij} = \frac{\sum_{k=1}^{n_{ij}}Y_{ijk}}{n_{ij}}=
+\overline{Y}_{ij\bullet}
+$$
+$$
+\mbox{Estimated Standard Error:} \quad \hat{SE}\left\{\hat{\mu}_{ij}\right\}=\sqrt{\frac{MSE}{n_{ij}}}
+$$
+For factor A level means, we have the following results.
+$$ 
+\mbox{Parameter:} \quad \mu_{i\bullet} = \frac{\sum_{j=1}^b\mu_{ij}}{b} \qquad 
+\mbox{Estimator:} \quad \hat{\mu}_{i\bullet} = 
+\frac{\sum_{j=1}^b\overline{Y}_{ij\bullet}}{b} 
+$$
+$$
+\mbox{Estimated Standard Error:} \quad \hat{SE}\left\{\hat{\mu}_{i\bullet}\right\}=
+\sqrt{\frac{MSE}{b^2}\sum_{j=1}^b\frac{1}{n_{ij}}}
+$$
+For factor B level means, we have the following results.
+$$ 
+\mbox{Parameter:} \quad \mu_{\bullet j} = \frac{\sum_{i=1}^a\mu_{ij}}{a} \qquad 
+\mbox{Estimator:} \quad \hat{\mu}_{\bullet j} = 
+\frac{\sum_{i=1}^a\overline{Y}_{ij\bullet}}{a} 
+$$
+$$
+\mbox{Estimated Standard Error:} \quad \hat{SE}\left\{\hat{\mu}_{\bullet j}\right\}=
+\sqrt{\frac{MSE}{a^2}\sum_{i=1}^a\frac{1}{n_{ij}}}
+$$
+
+For contrasts or linear functions among factor A and B levels, we have the following parameters, estimators, and estimated standard errors.
+
+$$
+L_A = \sum_{i=1}^a c_i\mu_{i\bullet} \qquad
+\hat{L}_A = \sum_{i=1}^a c_i\hat{\mu}_{i\bullet} \qquad
+\hat{SE}\left\{\hat{L}_A\right\} = \sqrt{\frac{MSE}{b^2}\sum_{i=1}^ac_i^2\sum_{j=1}^b\frac{1}{n_{ij}}}
+$$
+
+$$
+L_B = \sum_{j=1}^b c_j\mu_{\bullet j} \qquad
+\hat{L}_B = \sum_{j=1}^b c_j\hat{\mu}_{\bullet j} \qquad
+\hat{SE}\left\{\hat{L}_B\right\} = \sqrt{\frac{MSE}{a^2}\sum_{j=1}^bc_j^2\sum_{i=1}^a\frac{1}{n_{ij}}}
+$$
+Finally, the results are given for contrasts and linear functions among treatment (cell) means.
+
+$$
+L_{AB} = \sum_{i=1}^a \sum_{j=1}^b c_{ij}\mu_{ij} \qquad
+\hat{L}_{AB} = \sum_{i=1}^a\sum_{j=1}^b c_{ij}\hat{\mu}_{ij} \qquad
+\hat{SE}\left\{\hat{L}_{AB}\right\} = \sqrt{MSE\sum_{i=1}^a\sum_{j=1}^b\frac{c_{ij}^2}{n_{ij}}}
+$$
+
+The standard error multipliers for contrasts/linear functions based on the 
+Scheffe (all comparisons), Bonferroni ($g$ pre-planned comparisons), and 
+Tukey (all pairwise comparisons) methods are given here.
+
+For single comparisons, use $t_{1-\alpha/2;n_T-ab}$.
+
+For comparisons among treatment (cell) means, use the following multipliers.
+ 
+$$
+\mbox{Scheffe:} \quad S=\sqrt{(ab-1)F_{1-\alpha;ab-1,n_T-ab}}
+$$
+$$
+\mbox{Bonferroni:} \quad B=t_{1-\alpha/(2g); n_T-ab}
+$$
+$$
+\mbox{Tukey:} \quad T=\frac{1}{\sqrt{2}}q_{1-\alpha;ab,n_T-ab}
+$$
+
+Standard error multipliers for contrasts and linear functions among levels of factors A and B are given here.
+
+$$
+\mbox{Scheffe:} \qquad \mbox{A:} \quad S_A=\sqrt{(a-1)F_{1-\alpha;a-1,n_T-ab}} \qquad
+\quad \mbox{B:} \quad S_B=\sqrt{(b-1)F_{1-\alpha;b-1,n_T-ab}}
+$$
+$$
+\mbox{Bonferroni (Factors A and B):} \quad B=t_{1-\alpha/(2g); n_T-ab}
+$$
+$$
+\mbox{Tukey:} \qquad \mbox{A:} \quad T_A=\frac{1}{\sqrt{2}}q_{1-\alpha;a,n_T-ab} \qquad
+\mbox{B:} \quad T_B=\frac{1}{\sqrt{2}}q_{1-\alpha;b,n_T-ab}
+$$
+Be warned that the **TukeyHSD** function in R does not use the least squares means when
+making pairwise comparisons among means. For the first factor given in the **aov** object,
+it computes differences among the **marginal** means. For each level of factor A,
+the effect $a_i$ is obtained. Then, the $a_i$ are subtracted from the original data,
+for observations "adjusted" for factor A. Then the marginal means for the adjusted data 
+are obtained for each level of factor B. 
+
+$$
+\overline{Y}_{i\bullet\bullet}=\frac{\sum_{j=1}^b\sum_{k=1}^nY_{ijk}}{n_{i\bullet}}
+\qquad a_i=\overline{Y}_{i\bullet\bullet}-\overline{Y}_{\bullet\bullet\bullet}
+\qquad Y_{ijk}^*=Y_{ijk}-a_i  \qquad 
+\overline{Y}_{\bullet j\bullet}^*=\frac{\sum_{i=1}^a\sum_{k=1}^nY_{ijk}^*}{n_{\bullet} j}
+$$
+
+The **emmeans** package makes use of the
+least squares (estimated marginal) means, and the formulas given in this section.
+For the interaction comparisons among cell means, the results are the same.
+
+
+**Example 7.3 - Age at Peak for Famous Writers**
+
+Although the interaction was not significant for the Age at Peak of the writers, we will use the Tukey method to compare all pairs of Style/Type means. The Mean Square Error for the interaction model was $MSE=29.32$ with degrees of freedom $n_T-ab=23-2(2)=19$.
+
+$$
+\overline{y}_{11\bullet} = 28.60 \qquad n_{11}=5 \qquad 
+\hat{SE}\left\{\overline{Y}_{11\bullet}\right\}=\sqrt{\frac{MSE}{n_{11}}}=\sqrt{\frac{29.32}{5}}=2.42
+$$
+$$
+\overline{y}_{12\bullet} = 33.20 \qquad n_{12}=5 \qquad 
+\hat{SE}\left\{\overline{Y}_{12\bullet}\right\}=\sqrt{\frac{MSE}{n_{12}}}=\sqrt{\frac{29.32}{5}}=2.42
+$$
+$$
+\overline{y}_{21\bullet} = 38.67 \qquad n_{21}=6 \qquad 
+\hat{SE}\left\{\overline{Y}_{21\bullet}\right\}=\sqrt{\frac{MSE}{n_{21}}}=\sqrt{\frac{29.32}{6}}=2.21
+$$
+$$
+\overline{y}_{22\bullet} = 44.43 \qquad n_{22}=7 \qquad 
+\hat{SE}\left\{\overline{Y}_{22\bullet}\right\}=\sqrt{\frac{MSE}{n_{22}}}=\sqrt{\frac{29.32}{7}}=2.05
+$$
+$$
+T = \frac{1}{\sqrt{2}}q_{.95;4,19}=\frac{1}{\sqrt{2}}(3.977)=2.812 
+\qquad
+\hat{SE}\left\{\overline{Y}_{ij\bullet}-\overline{Y}_{i'j'\bullet}\right\}=
+\sqrt{MSE\left(\frac{1}{n_{ij}}+\frac{1}{n_{i'j'}}\right)}
+$$
+$$
+\overline{y}_{11\bullet}-\overline{y}_{12\bullet} = 28.60-33.20=-4.60 \qquad
+\hat{SE}\left\{\overline{Y}_{11\bullet}-\overline{Y}_{12\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{5}+\frac{1}{5}\right)}=3.43 
+$$
+$$
+\overline{y}_{11\bullet}-\overline{y}_{21\bullet} = 28.60-38.67=-10.07 \qquad
+\hat{SE}\left\{\overline{Y}_{11\bullet}-\overline{Y}_{21\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{5}+\frac{1}{6}\right)}=3.28 
+$$
+$$
+\overline{y}_{11\bullet}-\overline{y}_{22\bullet} = 28.60-44.43=-15.83 \qquad
+\hat{SE}\left\{\overline{Y}_{11\bullet}-\overline{Y}_{22\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{5}+\frac{1}{7}\right)}=3.17 
+$$
+$$
+\overline{y}_{12\bullet}-\overline{y}_{21\bullet} = 33.20-38.67=-5.47 \qquad
+\hat{SE}\left\{\overline{Y}_{12\bullet}-\overline{Y}_{21\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{5}+\frac{1}{6}\right)}=3.28 
+$$
+$$
+\overline{y}_{12\bullet}-\overline{y}_{22\bullet} = 33.20-44.43=-11.23 \qquad
+\hat{SE}\left\{\overline{Y}_{12\bullet}-\overline{Y}_{22\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{5}+\frac{1}{7}\right)}=3.17 
+$$
+$$
+\overline{y}_{21\bullet}-\overline{y}_{22\bullet} = 38.67-44.43=-5.76 \qquad
+\hat{SE}\left\{\overline{Y}_{21\bullet}-\overline{Y}_{22\bullet}\right\} =
+\sqrt{29.32\left(\frac{1}{6}+\frac{1}{7}\right)}=3.01 
+$$
+
+$$
+\mbox{Conc/Poet-Conc/Novel:} \quad  HSD=2.812(3.43)=9.65 \qquad 
+\overline{y}_{11\bullet}-\overline{y}_{12\bullet} =-4.60
+$$
+$$
+\mbox{Conc/Poet-Exp/Poet:} \quad  HSD=2.812(3.28)=9.22 \qquad 
+\overline{y}_{11\bullet}-\overline{y}_{21\bullet} = 28.60-38.67=-10.07
+$$
+$$
+\mbox{Conc/Poet-Exp/Novel:} \quad  HSD=2.812(3.17)=8.92 \qquad 
+\overline{y}_{11\bullet}-\overline{y}_{22\bullet} =-15.83
+$$
+$$
+\mbox{Conc/Nov-Exp/Poet:} \quad  HSD=2.812(3.28)=9.22 \qquad 
+\overline{y}_{12\bullet}-\overline{y}_{21\bullet} = -5.47
+$$
+$$
+\mbox{Conc/Nov-Exp/Nov:} \quad  HSD=2.812(3.17)=8.92 \qquad 
+\overline{y}_{12\bullet}-\overline{y}_{22\bullet} = -11.23
+$$
+$$
+\mbox{Exp/Poet-Exp/Nov:} \quad  HSD=2.812(3.01)=8.47 \qquad 
+\overline{y}_{21\bullet}-\overline{y}_{22\bullet} = -5.76
+$$
+
+The groups that are significantly different, based on Tukey's HSD are as follow.
+
+- Conceptualist/Poet is significantly lower than Experimentalist/Poet
+- Conceptualist/Poet is significantly lower than Experimentalist/Novelist
+- Conceptualist/Novelist is significantly lower than Experimentalist/Novelist
+
+We now obtain the comparisons of Styles (Conceptualist-Experimentalist) and Types (Poet-Novelist) based on Model 1 (even though the interaction is not significant).
+Very similar results would be obtained from Model 2 (with adjustments to MSE and error degrees of freedom).
+
+$$
+\hat{\mu}_{1\bullet}=\frac{\overline{Y}_{11\bullet}+\overline{Y}_{12\bullet}}{2}=
+\frac{28.6000+33.2000}{2}=30.9000  $$
+$$\hat{\mu}_{2\bullet}=\frac{\overline{Y}_{21\bullet}+\overline{Y}_{22\bullet}}{2}=
+\frac{38.6667+44.4286}{2}=41.5477
+$$
+$$
+\hat{SE}\left\{\hat{\mu}_{1\bullet}-\hat{\mu}_{2\bullet}\right\}=
+\sqrt{\frac{MSE}{2^2}\left(
+\frac{1}{n_{11}}+\frac{1}{n_{12}}+\frac{1}{n_{21}}+\frac{1}{n_{22}}\right)}=
+\sqrt{\frac{29.32}{4}\left(
+\frac{1}{5}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7}\right)}=2.281
+$$
+$$
+95\% \mbox{CI for } \mu_{1\bullet}-\mu_{2\bullet}: \quad
+(30.900-41.548) \pm 2.093(2.281)\equiv -10.648\pm 4.774\equiv (-15.422,-5.874)
+$$
+Note that in this rare case where $a=b=2$, the standard error of $\hat{\mu}_{\bullet 1}-\hat{\mu}_{\bullet 2}$ is the same as that of $\hat{\mu}_{1\bullet}-\hat{\mu}_{2\bullet}$, we have the following results.
+
+$$
+\hat{\mu}_{\bullet 1}=\frac{\overline{Y}_{11\bullet}+\overline{Y}_{21\bullet}}{2}=
+\frac{28.6000+38.6667}{2}=33.6334  $$ 
+$$\hat{\mu}_{\bullet 2}=\frac{\overline{Y}_{12\bullet}+\overline{Y}_{22\bullet}}{2}=
+\frac{33.2000+44.4286}{2}=38.8143
+$$
+
+$$
+95\% \mbox{CI for } \mu_{\bullet}-\mu_{\bullet}: \quad (33.633-38.814)\pm
+2.093(2.281)\equiv -5.181\pm 4.774\equiv (-9.955,-0.407)
+$$
+
+The following R program runs Tukey's HSD on the marginal means for factors A and B,
+and on the cell means as well. Note, however, that the **TukeyHSD** function in R 
+is not based on the least squares (aka estimated marginal) means. We also obtain
+the least squares means, standard errors and pairwise comparisons described in this section with the
+**emmeans** package.
+
+```{r ch0704}
+## Continuation of ch0701, ch0702
+
+options(contrasts=c("contr.sum", "contr.poly"))
+ap.aov1 <- aov(agePeak ~ w.style*w.type, data=ap1)
+TukeyHSD(ap.aov1)
+
+ap.emm1 <- emmeans(ap.aov1, ~ w.style)
+emmeans(ap.emm1, ~ w.style)
+contrast(ap.emm1, method="pairwise", adjust="tukey")
+
+ap.emm2 <- emmeans(ap.aov1,  ~ w.type)
+emmeans(ap.emm2, ~ w.type)
+contrast(ap.emm2, method="pairwise", adjust="tukey")
+
+ap.emm3 <- emmeans(ap.aov1, ~ w.style:w.type)
+emmeans(ap.emm3, ~ w.style:w.type)
+contrast(ap.emm3, method="pairwise", adjust="tukey")
+
+emmip(ap.emm3, w.style ~ w.type)
+
+```
+
+$$\nabla$$
+
+**Example 7.4 - Makiwara Punching Boards**
+
+For the Karate board experiment, we will conduct tests among levels of factors A and B, respectively. The Mean Square Error was $MSE=3159$ with degrees of freedom $n_T-ab=336-2(4)=328$ for Model 1 (with interaction).
+
+For comparing the Board Types (Stacked-Tapered), we obtain the following cell means from
+the **tapply** function previously.
+
+$$
+\overline{y}_{11\bullet}=118 \quad \overline{y}_{12\bullet}=106 \quad
+\overline{y}_{13\bullet}=94 \quad \overline{y}_{14\bullet}=90 \quad \Rightarrow \quad
+\hat{\mu}_{1\bullet}=\frac{118+106+94+90}{4}=102
+$$
+$$
+\overline{y}_{21\bullet}=78 \quad \overline{y}_{22\bullet}=76 \quad
+\overline{y}_{23\bullet}=55 \quad \overline{y}_{24\bullet}=50 \quad \Rightarrow \quad
+\hat{\mu}_{2\bullet}=\frac{78+76+55+50}{4}=64.75
+$$
+
+The standard errors are computed here, where the sample sizes for each cell are given first.
+
+$$
+n_{11}=41 \quad n_{12}=36 \quad n_{13}=34 \quad n_{14}=n_{21}=n_{22}=n_{23}=n_{24}=45
+$$
+$$
+\hat{SE}\left\{\hat{\mu}_{1\bullet}\right\}=
+\sqrt{\frac{3159}{4^2}\left(\frac{1}{41}+\frac{1}{36}+\frac{1}{34}+\frac{1}{45}\right)}
+=4.53
+$$
+$$
+\hat{SE}\left\{\hat{\mu}_{2\bullet}\right\}=
+\sqrt{\frac{3159}{4^2}\left(\frac{1}{45}+\frac{1}{45}+\frac{1}{45}+\frac{1}{45}\right)}
+=4.19
+$$
+The standard error of the difference $\hat{\mu}_{1\bullet}-\hat{\mu}_{2\bullet}$ is the square root of the sum of their variances, as these are independent samples. Also, we obtain the critical $t$-value, and the 95% Confidence Interval for $\mu_{1\bullet}-\mu_{2\bullet}$.
+
+$$
+\hat{SE}\left\{\hat{\mu}_{1\bullet}-\hat{\mu}_{2\bullet}\right\} = \sqrt{(4.53)^2+(4.19)^2}=6.17
+\qquad
+t_{.975;328}=1.967
+$$
+$$
+95\% \mbox{ Confidence Interval:} \quad (102-64.75) \pm 1.967(6.17) \quad \equiv \quad
+37.25 \pm 12.14 \quad \equiv \quad (25.11,49.39)
+$$
+Thus, the mean deflection is higher for the stacked board than the tapered on average (likely by somewhere between 25-50 millimeters).
+We could also compare all pairs of Wood Types. The computations are similar, but there are 4(3)/2 = 6 possible pairs. We will use the **TukeyHSD** function along with the **aov** object in R below.
+
+
+```{r ch0705}
+mb1 <- read.csv("data/karate_board.csv")
+head(mb1,2)
+tail(mb1,2)
+
+mb1$Wood.f <- factor(mb1$Wood, levels=1:4, labels=c("cherry", "ash", "fir", "oak"))
+mb1$Bdtype.f <- factor(mb1$Bdtype, levels=1:2, labels=c("stacked", "tapered"))
+
+tapply(mb1$Deflect, list(mb1$Wood.f, mb1$Bdtype.f), mean)
+
+mb.mod1 <- aov(Deflect ~ Wood.f * Bdtype.f , data=mb1)
+
+mb.emm1 <- emmeans(mb.mod1, ~ Wood.f)
+emmeans(mb.emm1, ~ Wood.f)
+contrast(mb.emm1, method="pairwise", adjust="tukey")
+
+mb.emm2 <- emmeans(mb.mod1, ~ Bdtype.f)
+emmeans(mb.emm2, ~ Bdtype.f)
+contrast(mb.emm2, method="pairwise", adjust="tukey")
+
+mb.emm3 <- emmeans(mb.mod1, ~ Wood.f:Bdtype.f)
+emmeans(mb.emm3, ~ Bdtype.f)
+contrast(mb.emm3, method="pairwise", adjust="tukey")
+
+emmip(mb.emm3, Wood.f ~ Bdtype.f)
+
+```
+In terms of the Wood Types, fir has significantly lower deflection than cherry,
+and oak has significantly lower deflection than cherry.
+
+$$\nabla$$

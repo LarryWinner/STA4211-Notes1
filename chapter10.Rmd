@@ -1,0 +1,1182 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+
+
+```{r echo=FALSE}
+library(tidyverse)
+library(kableExtra)
+library(effectsize)
+library(agricolae)
+library(car)
+library(PMCMRplus)
+library(additivityTests)
+library(lmerTest)
+```
+
+# Random and Mixed Effects Models
+
+In some situations, experiments include random treatment factors. In these cases, the treatment/group levels observed in the study represent a sample from a larger population of such levels. Interest is in the overall mean response, as well as in variation in responses across and within treatments/groups.
+
+In this chapter, we consider **1-Way Random Effects**, **2-Way Random Effects**, **2-Way Mixed Effects**, and **3-Way Mixed Effects** Models. 
+
+## 1-Way Random Effects Model
+
+This model has a single factor, with levels that represent a sample from a population of such levels. The goal is to make inferences regarding the overall mean and variances between groups and within groups. The statistical model for the balanced case is given below.
+
+$$
+Y_{ij} = \mu_i + \epsilon_{ij} \qquad i=1,\ldots,r;\quad j=1,\ldots,n
+$$
+$$
+\mu_i \sim N\left(\mu_{\bullet},\sigma_{\mu}^2\right) \mbox{ independent }
+\qquad
+\epsilon_{ij} \sim N\left(0,\sigma^2\right) \mbox{ independent }
+\qquad \{\mu_i\},\{\epsilon_{ij}\} \mbox{ independent }
+$$
+Alternatively, we could formulate the model as follows.
+$$
+Y_{ij} = \mu_{\bullet} + \tau_i + \epsilon_{ij} \qquad i=1,\ldots,r;\quad j=1,\ldots,n
+$$
+$$
+\tau_i \sim N\left(0,\sigma_{\tau}^2\right) \mbox{ independent }
+\qquad
+\epsilon_{ij} \sim N\left(0,\sigma^2\right) \mbox{ independent }
+\qquad \{\tau_i\},\{\epsilon_{ij}\} \mbox{ independent }
+$$
+For the original model, $\mu_{\bullet}$ is the overall population mean response, $\sigma_{\mu}^2$ is the between group variance, and $\sigma^2$ is the within group variance. The experiment is conducted as follows.
+
+- Sample $r$ groups from a population of groups.
+- Sample $n$ units from within each group.
+- Observe the $n_T=rn$ responses.
+
+The mean and variance-covariance structure of the observations are given below.
+
+$$
+E\left\{Y_{ij}\right\}=E\left\{\mu_i+\epsilon_{ij}\right\}=\mu_{\bullet}+0=\mu_{\bullet}
+$$
+
+$$
+V\left\{Y_{ij}\right\}=V\left\{\mu_i+\epsilon_{ij}\right\}=
+V\left\{\mu_i\right\} + V\left\{\epsilon_{ij}\right\}
++2\mbox{COV}\left\{\mu_i,\epsilon_{ij}\right\}=$$
+$$=\sigma_{\mu}^2+\sigma^2+2(0)
+=\sigma_{\mu}^2+\sigma^2=\sigma_Y^2
+$$
+For two measurements within the same group $(j \ne j')$, we have the following covariance, which differs from the fixed effects case (where the observations are independent).
+$$
+\mbox{COV}\left\{Y_{ij},Y_{ij'}\right\} = 
+\mbox{COV}\left\{\mu_i+\epsilon_{ij},\mu_i+\epsilon_{ij'}\right\} =$$
+
+$$
+\mbox{COV}\left\{\mu_i,\mu_i\right\} +
+\mbox{COV}\left\{\mu_i,\epsilon_{ij'}\right\} +
+\mbox{COV}\left\{\epsilon_{ij},\mu_i\right\} +
+\mbox{COV}\left\{\epsilon_{ij},\epsilon_{ij'}\right\} = \sigma_{\mu}^2+0+0+0=\sigma_{\mu}^2
+$$
+$$
+\mbox{COV}\left\{Y_{ij},Y_{i'j'}\right\} =0 \quad i \neq i' \quad \forall j,j'
+$$
+
+For the case, with $r=n=2$, the mean and variance-covariance structure for $Y$ are given in the following matrix forms.
+
+$$
+Y=\begin{bmatrix}
+Y_{11} \\ Y_{12} \\ Y_{21} \\ Y_{22} \\
+\end{bmatrix} 
+\qquad 
+E\{Y\} =\begin{bmatrix}
+\mu_{\bullet} \\
+\mu_{\bullet} \\
+\mu_{\bullet} \\
+\mu_{\bullet} \\
+\end{bmatrix}
+\qquad
+\sigma^2\{Y\} =\begin{bmatrix}
+\sigma_Y^2 & \sigma_{\mu}^2 & 0 & 0 \\
+\sigma_{\mu}^2 & \sigma_Y^2 & 0 & 0 \\
+0 & 0 & \sigma_Y^2 & \sigma_{\mu}^2 \\
+0 & 0 & \sigma_{\mu}^2 & \sigma_Y^2 \\
+\end{bmatrix}
+$$
+
+The **Intraclass Correlation Coefficient** measures the proportion of the total variation in responses that is due to variation in group means.
+
+$$
+\rho_I = \frac{\mbox{COV}\left\{Y_{ij},Y_{ij'}\right\}}{
+ \sqrt{V\left\{Y_{ij}\right\}V\left\{Y_{ij'}\right\}}}=
+ \frac{\sigma_{\mu}^2}{\sigma_Y^2}
+$$
+
+### Analysis of Variance
+
+In this section, we set up the Analysis of Variance and derive the expected mean squares for $MSTR$ and $MSE$. Note that the quantities are the same for the random effects model as for the fixed effects model, but the expectations differ for the two models.
+
+$$
+SSTR = n\sum_{i=1}^r\left(\overline{Y}_{i\bullet}-\overline{Y}_{\bullet\bullet}\right)^2 =
+n\sum_{i=1}^r\overline{Y}_{i\bullet}^2-nr\overline{Y}_{\bullet\bullet}^2
+$$
+
+$$
+SSE=\sum_{i=1}^r\sum_{j=1}^n\left(Y_{ij}-\overline{Y}_{i\bullet}\right)^2 =
+\sum_{i=1}^r\sum_{j=1}^n Y_{ij}^2 - n\sum_{i=1}^r\overline{Y}_{i\bullet}^2
+$$
+
+$$
+E\left\{Y_{ij}\right\} = E\left\{\overline{Y}_{i\bullet}\right\} =
+E\left\{\overline{Y}_{\bullet\bullet}\right\} = \mu_{\bullet}
+$$
+
+$$
+V\left\{Y_{ij}\right\}=\sigma_{\mu}^2+\sigma^2=\sigma_Y^2
+$$
+
+$$
+V\left\{\overline{Y}_{i\bullet}\right\}
+=\frac{1}{n^2}\left[\sum_{j=1}^nV\left\{Y_{ij}\right\} + 
+2\sum_{j=1}^{n-1}\sum_{j'=j
++1}^n\mbox{COV}\left\{Y_{ij},Y_{ij'}\right\}\right] =
+$$
+$$
+=\frac{1}{n^2}\left[n\left(\sigma_{\mu}^2+\sigma^2\right) +
+2\frac{n(n-1)}{2}\sigma_{\mu}^2\right]=
+\frac{1}{n}\left[\sigma_{\mu}^2(1+n-1) + \sigma^2\right]=
+\frac{n\sigma_{\mu}^2+\sigma^2}{n}
+$$
+
+Note that the sample means for the various groups are independent, which is helpful in deriving the variance of the overall mean.
+
+$$
+V\left\{\overline{Y}_{\bullet\bullet}\right\} = 
+V\left\{\frac{1}{r}\sum_{i=1}^r\overline{Y}_{i\bullet}\right\}
+=\frac{1}{r^2}r\frac{n\sigma_{\mu}^2+\sigma^2}{n}=
+\frac{n\sigma_{\mu}^2+\sigma^2}{rn}
+$$
+
+Now, we obtain the expected sums of squares and mean squares.
+
+$$
+E\left\{Y_{ij}^2\right\} = \sigma_{\mu}^2+\sigma^2 + \mu_{\bullet}^2 
+\quad \Rightarrow \quad
+\sum_{i=1}^r\sum_{j=1}^n E\left\{Y_{ij}^2\right\} =
+rn\left(\sigma_{\mu}^2+\sigma^2 + \mu_{\bullet}^2\right)
+$$
+
+$$
+E\left\{\overline{Y}_{i\bullet}^2\right\} =\frac{n\sigma_{\mu}^2+\sigma^2}{n}+\mu_{\bullet}^2
+\quad \Rightarrow \quad
+n\sum_{i=1}^rE\left\{\overline{Y}_{i\bullet}^2\right\}
+=nr\sigma_{\mu}^2 + r\sigma^2 + nr\mu_{\bullet}^2
+$$
+$$
+E\left\{\overline{Y}_{\bullet\bullet}^2\right\} =
+\frac{n\sigma_{\mu}^2+\sigma^2}{rn} + \mu_{\bullet}^2
+\quad \Rightarrow \quad
+rnE\left\{\overline{Y}_{\bullet\bullet}^2\right\} = n\sigma_{\mu}^2+\sigma^2 +
+rn\mu_{\bullet}^2
+$$
+
+$$
+E\{SSTR\} = \left(nr\sigma_{\mu}^2 + r\sigma^2 + nr\mu_{\bullet}^2\right) -
+\left(n\sigma_{\mu}^2+\sigma^2 +
+rn\mu_{\bullet}^2\right) = n(r-1)\sigma_{\mu}^2 + (r-1)\sigma^2
+$$
+
+$$
+E\{SSE\} = \left(rn\left(\sigma_{\mu}^2+\sigma^2 + \mu_{\bullet}^2\right)\right) -
+\left(nr\sigma_{\mu}^2 + r\sigma^2 + nr\mu_{\bullet}^2\right) = r(n-1)\sigma^2
+$$
+The expected mean squares are the expected sums of squares divided by the degrees of freedom with $df_{TR}=r-1$ and $df_E=r(n-1)$.
+
+
+$$
+E\{MSTR\}=E\left\{\frac{SSTR}{df_{TR}}\right\} = \sigma^2 + n\sigma_{\mu}^2 
+\qquad \qquad
+E\{MSE\}=E\left\{\frac{SSE}{df_E}\right\} = \sigma^2
+$$
+
+The $F$-test is used to test whether the variance of the population of group means is 0.
+
+$$
+H_0:\sigma_{\mu}^2=0 \quad H_A:\sigma_{\mu}^2>0 \qquad TS: F^*=\frac{MSTR}{MSE}
+\qquad RR:F^*\geq F_{1-\alpha;r-1,r(n-1)}
+$$
+
+**Example 10.1 - Alpha Acids in Varieties of Beer**
+
+A study was conducted to measure alpha acids in a sample of $r=10$ varieties of beer [@meilgaard_1960]. There were $n=10$ replicates per variety. The following R code obtains the ANOVA based on direct computations and a plot of the measurements is given in
+Figure \@ref(fig:ch1001). 
+
+```{r ch1001, fig.cap='Interaction plots for chef jacket study', out.width='80%', fig.asp=.75, fig.align='center'}
+hops <- read.csv("data/hop_alphaacid.csv")
+head(hops,3)
+plot(alphaAcid ~ factor(variety), data=hops, col="orange")
+ybar <- mean(hops$alphaAcid)
+ybar.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,mean))
+var.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,var))
+n.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,length))
+r <- length(ybar.trt)
+
+sstr <- sum(n.trt*(ybar.trt-ybar)^2)
+sse <- sum((n.trt-1)*var.trt)
+df.trt <- r-1
+df.err <- sum(n.trt)-r
+mse <- sse/df.err
+mstr <- sstr/df.trt
+f_star <- mstr/mse
+p_f_star <- 1-pf(f_star,df.trt,df.err)
+
+aov.out1 <- cbind(df.trt,sstr,mstr,f_star,qf(.95,df.trt,df.err),p_f_star)
+aov.out2 <- cbind(df.err,sse,mse,NA,NA,NA)
+aov.out3 <- cbind(df.trt+df.err,sstr+sse,NA,NA,NA,NA)
+aov.out <- rbind(aov.out1, aov.out2,aov.out3)
+colnames(aov.out) <- c("df","SS","MS","F*","F(.95)","P(>F*)")
+rownames(aov.out) <- c("Variety", "Error", "Total")
+round(aov.out,4)
+```
+There is strong evidence that the population means (of all varieties) are not all equal, that is $\sigma_{\mu}^2 > 0$.
+
+$$\nabla $$
+
+### Estimating the Population Mean $\mu_{\bullet}$
+
+In this section, we consider estimating the population mean response. The expectations
+of the individual measurements, group means, and overall mean are all $\mu_{\bullet}$.
+However, the overall mean has the smallest variance. Note also that $E\{MSTR\}=\sigma^2+n\sigma_{\mu}^2$.
+
+$$
+\hat{\mu}_{\bullet}=\overline{Y}_{\bullet\bullet}  \qquad
+V\left\{\overline{Y}_{\bullet\bullet}\right\}=
+\frac{n\sigma_{\mu}^2+\sigma^2}{rn} \qquad
+\hat{V}\left\{\overline{Y}_{\bullet\bullet}\right\} =
+\frac{MSTR}{rn}
+\qquad
+\hat{SE}\left\{\overline{Y}_{\bullet\bullet}\right\} =
+\sqrt{\frac{MSTR}{rn}}
+$$
+
+$$
+t=\frac{\overline{Y}_{\bullet\bullet}-\mu_{\bullet}}{\hat{SE}\left\{\overline{Y}_{\bullet\bullet}\right\}} \sim t_{r-1}  \quad \Rightarrow \quad
+(1-\alpha)100\% \mbox{ CI for } \mu_{\bullet} \equiv
+\overline{Y}_{\bullet\bullet} \pm t_{1-\alpha/2;r-1}\sqrt{\frac{MSTR}{rn}}
+$$
+
+**Example 10.2 - Alpha Acids in Varieties of Beer**
+
+The following R code obtains the point estimate of the overall mean and 95% Confidence Interval for $\mu_{\bullet}$ based on direct computations.
+
+```{r ch1002}
+hops <- read.csv("data/hop_alphaacid.csv")
+ybar <- mean(hops$alphaAcid)
+ybar.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,mean))
+var.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,var))
+n.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,length))
+r <- length(ybar.trt)
+
+sstr <- sum(n.trt*(ybar.trt-ybar)^2)
+sse <- sum((n.trt-1)*var.trt)
+df.trt <- r-1
+df.err <- sum(n.trt)-r
+mse <- sse/df.err
+mstr <- sstr/df.trt
+
+s.ybar <- sqrt(mstr/sum(n.trt))
+LB <- ybar - qt(.975,df.trt)*s.ybar
+UB <- ybar + qt(.975,df.trt)*s.ybar
+mu.ci.out <- cbind(ybar, s.ybar, df.trt, qt(.975,df.trt), LB, UB)
+colnames(mu.ci.out) <- c("Estimate","Std Err","df","t(.975)","LB", "UB")
+rownames(mu.ci.out) <- c("Mean")
+round(mu.ci.out,4)
+```
+
+The point estimate is about 580, with a 95% Confidence Interval of 488 to 671. Even though there were $rn=10(10)=100$ observations, the between treatment mean square is very large, yielding a wide confidence interval.
+
+$$\nabla $$
+
+### Estimating the Intraclass Correlation Coefficient
+
+The Intraclass Correlation Coefficient is $\rho_I=\sigma_{\mu}^2/\sigma_Y^2$, the ratio of the between group variance to the total variance. To obtain a Confidence Interval for $\rho_I$, we make use of the following distributional results and the fact that $SSE$ and $SSTR$ are independent.
+
+$$
+E\{MSE\}=\sigma^2 \qquad \frac{SSE}{\sigma^2}=\frac{r(n-1)MSE}{\sigma^2} \sim \chi_{r(n-1)}^2
+$$
+
+$$
+E\{MSTR\}=\sigma^2 + n\sigma_{\mu}^2 \qquad
+\frac{SSTR}{\sigma^2 + n\sigma_{\mu}^2}=
+\frac{(r-1)MSTR}{\sigma^2 + n\sigma_{\mu}^2} \sim \chi_{r-1}^2
+$$
+
+$$
+\frac{\left[\frac{\frac{SSTR}{\sigma^2 + n\sigma_{\mu}^2}}{r-1}\right]}  {
+\left[\frac{\frac{SSE}{\sigma^2}}{r(n-1)}\right]} =
+\frac{\left[\frac{MSTR}{\sigma^2 + n\sigma_{\mu}^2}\right]} {
+\left[\frac{MSE}{\sigma^2}\right] } = F^*\left(\frac{\sigma^2}{\sigma^2 + n\sigma_{\mu}^2}
+\right) \sim F_{r-1,r(n-1)}
+$$
+$$
+\quad \Rightarrow \quad
+P\left(F_{\alpha/2;r-1,r(n-1)} \leq F^*\left(\frac{\sigma^2}{\sigma^2 + n\sigma_{\mu}^2}
+\right) \leq F_{1-\alpha/2;r-1,r(n-1)}\right) = 1-\alpha
+$$
+
+The goal is to isolate $\rho_I=\sigma_{\mu}^2/\sigma_Y^2$ in the middle of the probability statement. Define $L$ and $U$ as follow.
+
+$$
+L= \frac{1}{n}\left[\frac{F^*}{F_{1-\alpha/2;r-1,r(n-1)}}-1\right]  \qquad \qquad
+U= \frac{1}{n}\left[\frac{F^*}{F_{\alpha/2;r-1,r(n-1)}}-1\right]
+$$
+Then the $(1-\alpha)100\%$ Confidence Interval for $\rho_I$ is obtained as follows.
+
+$$
+(1-\alpha)100\% \mbox{ Confidence Interval for }
+\rho_I=\frac{\sigma_{\mu}^2}{\sigma_{\mu}^2+\sigma^2}: \quad
+\left[L^*=\frac{L}{1+L},U^*=\frac{U}{1+U}\right]
+$$
+
+**Example 10.3 - Alpha Acids in Varieties of Beer**
+
+The following R code obtains the 95% Confidence Interval for $\rho_I$ based on direct computations.
+
+```{r ch1003}
+hops <- read.csv("data/hop_alphaacid.csv")
+head(hops, 3)
+ybar <- mean(hops$alphaAcid)
+ybar.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,mean))
+var.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,var))
+n.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,length))
+r <- length(ybar.trt)
+n <- n.trt[1]
+
+sstr <- sum(n.trt*(ybar.trt-ybar)^2)
+sse <- sum((n.trt-1)*var.trt)
+df.trt <- r-1
+df.err <- sum(n.trt)-r
+mse <- sse/df.err
+mstr <- sstr/df.trt
+f_star <- mstr/mse
+f.025 <- qf(.025,df.trt,df.err)
+f.975 <- qf(.975,df.trt,df.err)
+
+L <- (1/n)*((f_star/f.975) - 1)
+U <- (1/n)*((f_star/f.025) - 1)
+
+L_star <- L/(1+L)
+U_star <- U/(1+U)
+
+rho.ci.out <- cbind(f_star, f.025, f.975, L, U, L_star, U_star)
+colnames(rho.ci.out) <- c("F*","F(.025)","F(.975)","L", "U", "LB", "UB")
+rownames(rho.ci.out) <- c("rho_I")
+round(rho.ci.out,4)
+```
+
+$$\nabla $$
+
+### Estimating the Within Group Variance
+
+The withing group variance, $\sigma^2$ can be estimated by the mean square error, $MSE$, as it is an unbiased estimator. Further, a $(1-\alpha)100\%$ Confidence Interval can be obtained as $SSE/\sigma^2$ is distributed as Chi-square with $r(n-1)$ degrees of freedom.
+
+$$
+E\{MSE\}=\sigma^2 \qquad  \frac{SSE}{\sigma^2} =
+\frac{r(n-1)MSE}{\sigma^2}\sim \chi_{r(n-1)}^2
+$$
+
+$$
+\quad \Rightarrow \quad P\left(\chi_{\alpha/2;r(n-1)}^2 \leq \frac{SSE}{\sigma^2}
+\leq \chi_{1-\alpha/2;r(n-1)}^2\right)=1-\alpha
+$$
+
+$$
+\quad \Rightarrow \quad P\left(\frac{\chi_{\alpha/2;r(n-1)}^2}{SSE} \leq \frac{1}{\sigma^2}
+\leq \frac{\chi_{1-\alpha/2;r(n-1)}^2}{SSE}\right)=1-\alpha
+$$
+
+$$
+\quad \Rightarrow \quad P\left(\frac{SSE}{\chi_{1-\alpha/2;r(n-1)}^2} \leq \sigma^2
+\leq \frac{SSE}{\chi_{\alpha/2;r(n-1)}^2}\right)=
+P\left(\frac{r(n-1)MSE}{\chi_{1-\alpha/2;r(n-1)}^2} \leq \sigma^2
+\leq \frac{r(n-1)MSE}{\chi_{\alpha/2;r(n-1)}^2}\right)
+=1-\alpha
+$$
+
+The Confidence Interval is simply from $SSE$ divided by the upper critical value to $SSE$
+divided by the lower critical value.
+
+**Example 10.4 - Alpha Acids in Varieties of Beer**
+
+The following R code obtains the 95% Confidence Interval for $\sigma^2$ based on direct computations.
+
+```{r ch1004}
+hops <- read.csv("data/hop_alphaacid.csv")
+ybar <- mean(hops$alphaAcid)
+ybar.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,mean))
+var.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,var))
+n.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,length))
+r <- length(ybar.trt)
+n <- n.trt[1]
+
+sse <- sum((n.trt-1)*var.trt)
+df.err <- sum(n.trt)-r
+
+X2.025 <- qchisq(.025,df.err)
+X2.975 <- qchisq(.975,df.err)
+
+sigma2.ci.out <- cbind(sse/df.err, X2.025, X2.975,  sse/X2.975, sse/X2.025)
+colnames(sigma2.ci.out) <- c("MSE","X2(.025)","X2(.975)","LB", "UB")
+rownames(sigma2.ci.out) <- c("sigma^2")
+round(sigma2.ci.out,4)
+```
+The point estimate is 690, while the 95% Confidence Interval ranges from 525 to 946.
+In terms of the within group standard deviation, the 95% Confidence Interval ranges from 23 to 31.
+
+$$\nabla $$
+
+### Estimating the Between Group Variance
+
+Recall the expected mean squares derived previously.
+
+$$
+E\{MSTR\}=\sigma^2 + n\sigma_{\mu}^2 \qquad \qquad E\{MSE\}=\sigma^2
+$$
+
+$$
+\quad \Rightarrow \quad E\left\{\frac{MSTR-MSE}{n}\right\} = 
+\left(\frac{1}{n}\right)E\{MSTR\} +\left(-\frac{1}{n}\right)E\{MSE\}
+=\sigma_{\mu}^2
+$$
+This represents a linear combination of mean squares, each with a known degrees of freedom.
+**Satterthwaite's Approximation** is based on obtaining an approximation to a chi-square distribution based on linear combinations of mean squares. The approximation is for the degrees of freedom for the (approximate) chi-square distribution. Note that this estimator can be negative, and is usually treated as if it is 0 in practice.
+
+Let $MS_1,\ldots,MS_h$ be $h$ mean squares, with degrees of freedom $df_1,\ldots,df_h$,
+respectively. Further, let $c_1,\ldots,c_h$, be fixed constants. Consider the following quantities.
+
+$$
+L=\sum_{i=1}^hc_iE\{MS_i\}   \qquad\qquad
+\hat{L} =\sum_{i=1}^hc_i MS_i \qquad\qquad
+\frac{\left(df\right)\hat{L}}{L}  \stackrel{\bullet}{\sim} \chi_{df}^2
+$$
+This method matches the first two moments of the approximate chi-square distribution to solve for the approximate degrees of freedom. For the chi-square distribution with $\nu$ degrees of freedom, the mean is $\nu$ and the variance is $2\nu$. Also, the mean squares are independent.
+
+$$
+E\left\{\hat{L}\right\}=L \quad \Rightarrow \quad E\left\{\frac{\left(df\right)\hat{L}}{L}\right\}=df
+$$
+
+$$
+\frac{\left(df_i\right)MS_i}{E\left\{MS_i\right\}} \sim \chi_{df_i}^2
+\quad \Rightarrow \quad 
+E\left\{\frac{\left(df_i\right)MS_i}{E\left\{MS_i\right\}}\right\}=df_i
+\qquad
+V\left\{\frac{\left(df_i\right)MS_i}{E\left\{MS_i\right\}}\right\}=2df_i
+$$
+$$
+\quad \Rightarrow \quad
+V\left\{MS_i\right\}=\frac{2\left(df_i\right)\left(E\left\{MS_i\right\}\right)^2}{
+\left(df_i\right)^2}
+\quad \Rightarrow \quad
+V\left\{\hat{L}\right\}=2\sum_{i=1}^hc_i^2\frac{\left(E\left\{MS_i\right\}\right)^2}{df_i}
+$$
+$$
+V\left\{\frac{\left(df\right)\hat{L}}{L}\right\}=2df
+\quad \Rightarrow \quad
+V\left\{\hat{L}\right\} = \frac{2(df)L^2}{(df)^2}=\frac{2L^2}{df}
+$$
+
+Now, equating the two versions of $V\left\{\hat{L}\right\}$ and solving for $df$ gives the following result. The unknown expected mean squares in $L$ are replaced with the observed mean squares.
+
+$$
+\frac{2L^2}{df}=
+2\sum_{i=1}^hc_i^2\frac{\left(E\left\{MS_i\right\}\right)^2}{df_i}
+\quad \Rightarrow \quad
+df = \frac{\hat{L}^2}{\sum_{i=1}^hc_i^2\frac{\left(MS_i\right)^2}{df_i}}=
+\frac{\left(\sum_{i=1}^h c_iMS_i\right)^2}{\sum_{i=1}^hc_i^2\frac{\left(MS_i\right)^2}{df_i}}
+$$
+The approximate $(1-\alpha)100\%$ Confidence Interval is computed as follows.
+
+$$
+(1-\alpha)100\% \mbox{ Confidence Interval for } \sigma_{\mu}^2: \quad
+\left[\frac{(df)\hat{L}}{\chi_{1-\alpha/2;df}},\frac{(df)\hat{L}}{\chi_{\alpha/2;df}}\right]
+$$
+
+**Example 10.5 - Alpha Acids in Varieties of Beer**
+
+The following R code obtains the approximate 95% Confidence Interval for $\sigma_{\mu}^2$ based on direct computations. Note that $c_1=1/n$ and $c_2=-1/n$.
+
+```{r ch1006}
+hops <- read.csv("data/hop_alphaacid.csv")
+ybar <- mean(hops$alphaAcid)
+ybar.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,mean))
+var.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,var))
+n.trt <- as.vector(tapply(hops$alphaAcid,hops$variety,length))
+r <- length(ybar.trt)
+n <- n.trt[1]
+
+sstr <- sum(n.trt*(ybar.trt-ybar)^2)
+sse <- sum((n.trt-1)*var.trt)
+df.trt <- r-1
+df.err <- sum(n.trt)-r
+mse <- sse/df.err
+mstr <- sstr/df.trt
+
+L.hat <- (mstr-mse) / n
+df.L.hat <- (L.hat^2) / ((1/n)^2*mstr^2/df.trt + (-1/n)^2*mse^2/df.err)
+
+X2.025 <- qchisq(.025,df.L.hat)
+X2.975 <- qchisq(.975,df.L.hat)
+sigma2.mu.ci.out <- cbind(L.hat, df.L.hat, X2.025, X2.975, 
+                           df.L.hat*L.hat/X2.975, df.L.hat*L.hat/X2.025)
+colnames(sigma2.mu.ci.out) <- c("s2_mu","df", "X2(.025)","X2(.975)","LB", "UB")
+rownames(sigma2.mu.ci.out) <- c("sigma2_mu")
+round(sigma2.mu.ci.out,4)
+```
+The point estimate is 16197, and the approximate 95% Confidence Interval goes from 7643 to 54342. In terms of the between group standard deviation, the range is approximately from 87 to 233. 
+
+We will use the **lmerTest** package and the **lmer** function to fit the model. With this function, we must include a "1" for the fixed mean,
+and we include "(1|variety.f)" to include random effects for varieties.
+
+```{r ch1007}
+hops <- read.csv("data/hop_alphaacid.csv")
+hops$variety.f <- factor(hops$variety)
+options(contrasts=c("contr.sum", "contr.poly"))
+
+library(lmerTest)
+hops.mod1 <- lmer(alphaAcid ~ 1 + (1|variety.f), data=hops)
+summary(hops.mod1)
+```
+$$ \nabla $$
+
+## Two-Way Random Effects Model
+
+Some studies include two (or more) random factors. In these cases we want to generalize across populations of units for the two factors and their interactions. In **Measurement Systems Analysis**, variation in parts and operators who measure the parts are studied. The experiments are often referred to as **Gage Repeatability & Reproducibility (R&R)** studies. Each of $a$ parts are measured by $b$ operators $n$ times in random order.
+The variation in part sizes, operator measurements, and interactions between parts and operators are of interest. Repeatability refers to the variation when the same part is measured by the same operator multiple times.
+
+The statistical model for the balanced case is given below.
+
+$$
+Y_{ijk} = \mu_{\bullet\bullet} + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk} \qquad i=1,\ldots,a; \quad j=1,\ldots,b; \quad k=1,\ldots,n
+$$
+
+It is assumed that 
+$\left\{\alpha_i\right\}$, $\left\{\beta_j\right\}$, 
+$\left\{(\alpha\beta)_{ij}\right\}$, and $\left\{\epsilon_{ijk}\right\}$
+are independent and normally distributed with means 0 and variances
+$\sigma_{\alpha}^2$, $\sigma_{\beta}^2$, $\sigma_{\alpha\beta}^2$, and $\sigma^2$, respectively. The mean, variance and covariance structure are given below.
+
+$$
+E\left\{Y_{ijk}\right\} = E\left\{\mu_{\bullet\bullet} + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk}\right\}
+= \mu_{\bullet\bullet} + 0 + 0 + 0 + 0 = \mu_{\bullet\bullet}
+$$
+$$
+V\left\{Y_{ijk}\right\} = V\left\{\mu_{\bullet\bullet} + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk}\right\} =
+\sigma_{\alpha}^2 + \sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 +  \sigma^2
+$$
+$$
+\mbox{COV}\left\{Y_{ijk},Y_{i'j'k'}\right\}=
+\left\{ \begin{array}{r@{\quad:\quad}l}
+    \sigma_{\alpha}^2 + \sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 +  \sigma^2 & i=i',j=j',k=k' \\
+    \sigma_{\alpha}^2 + \sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 & i=i', j=j',k\ne k' \\
+    \sigma_{\alpha}^2 & i=i',j\ne j', \forall k,k'\\
+     \sigma_{\beta}^2&  i\ne i', j= j',\forall k,k' \\
+     0 & i\ne i', j\ne j', \forall k,k' \\
+    \end{array} \right.
+$$
+The expected mean squares for each source of variation can be derived from this covariance structure. The results are given here.
+
+$$
+\mbox{Factor A:} \quad E\{MSA\} = \sigma^2 + n\sigma_{\alpha\beta}^2+ bn\sigma_{\alpha}^2 
+\qquad 
+\mbox{Factor B:} \quad E\{MSB\} = \sigma^2 + n\sigma_{\alpha\beta}^2+ an\sigma_{\beta}^2 
+$$
+$$
+\mbox{AB Interaction:} \quad E\{MSAB\}=\sigma^2 + n\sigma_{\alpha\beta}^2
+\qquad
+\mbox{Error:} \quad E\{MSE\}=\sigma^2
+$$
+
+The tests for interaction and main effects are obtained from the expected mean squares. Note that the "error" terms for factors A and B are the AB interaction, unlike the fixed effects model, which uses $MSE$ for the error term.
+
+$$
+H_0^{AB}:\sigma_{\alpha\beta}^2 = 0 \qquad H_A^{AB}:\sigma_{\alpha\beta}^2 > 0 \qquad
+TS:F_{AB}=\frac{MSAB}{MSE} \qquad RR:F_{AB}\geq F_{1-\alpha;(a-1)(b-1),ab(n-1)}
+$$
+$$
+H_0^{A}:\sigma_{\alpha}^2 = 0 \qquad H_A^{A}:\sigma_{\alpha}^2 > 0 \qquad
+TS:F_{A}=\frac{MSA}{MSAB} \qquad RR:F_{A}\geq F_{1-\alpha;a-1,(a-1)(b-1)}
+$$
+$$
+H_0^{B}:\sigma_{\beta}^2 = 0 \qquad H_A^{B}:\sigma_{\beta}^2 > 0 \qquad
+TS:F_{B}=\frac{MSB}{MSAB} \qquad RR:F_{B}\geq F_{1-\alpha;b-1,(a-1)(b-1)}
+$$
+
+Point estimates for the variance components are obtained from the expected mean squares. Some of these can be negative, and in practice are typically replaced by 0.
+
+$$
+s^2=MSE \qquad s_{\alpha\beta}^2=\frac{MSAB-MSE}{n}  \qquad
+s_{\alpha}^2=\frac{MSA-MSAB}{bn}  \qquad s_{\beta}^2=\frac{MSB-MSAB}{an}
+$$
+
+As these are all linear functions of mean squares, Satterthwaite's approximation can be used to obtain approximate degrees' of freedom and Confidence Intervals for $\sigma_{\alpha\beta}^2$, $\sigma_{\alpha}^2$, and $\sigma_{\beta}^2$.
+
+$$
+df_{AB}=\frac{\left(\frac{1}{n}MSAB + \frac{-1}{n}MSE\right)^2} {
+\frac{\left(\frac{1}{n}MSAB\right)^2}{(a-1)(b-1)} + 
+\frac{\left(\frac{-1}{n}MSE\right)^2}{ab(n-1)}
+}
+$$
+
+$$
+df_{A}=\frac{\left(\frac{1}{bn}MSA + \frac{-1}{bn}MSAB\right)^2} {
+\frac{\left(\frac{1}{bn}MSA\right)^2}{a-1} + 
+\frac{\left(\frac{-1}{bn}MSAB\right)^2}{(a-1)(b-1)}
+}
+\qquad
+df_{B}=\frac{\left(\frac{1}{an}MSB + \frac{-1}{an}MSAB\right)^2} {
+\frac{\left(\frac{1}{an}MSB\right)^2}{b-1} + 
+\frac{\left(\frac{-1}{an}MSAB\right)^2}{(a-1)(b-1)}
+}
+$$
+
+**Example 10.6 - Measurements of Skulls by Observers**
+
+An anthropological study was conducted to measure variation in frontal chord measurements of skulls by various observers [@hanihara_1999]. There were $a=10$ skulls, $b=6$ observers, and $n=2$ replicates per skull/observer. The R code for the analysis and output are included here.
+
+```{r ch1008}
+sm <- read.csv("data/skull_measure.csv")
+head(sm, 3)
+tail(sm, 3)
+sm$skull.f <- factor(sm$skull)
+sm$observer.f <- factor(sm$observer)
+
+mod1 <- aov(chord~ skull.f*observer.f, data=sm)
+anova(mod1)
+
+a <- max(sm$skull); b <- max(sm$observer); n <- max(sm$time)
+msa <- anova(mod1)[1,3];  df_a <- anova(mod1)[1,1]
+msb <- anova(mod1)[2,3];  df_b <- anova(mod1)[2,1]
+msab <- anova(mod1)[3,3];  df_ab <- anova(mod1)[3,1]
+mse <- anova(mod1)[4,3];  df_e <- anova(mod1)[4,1]
+
+s2_ab <- (msab-mse)/n
+s2_a <- (msa-msab)/(b*n)
+s2_b <- (msb-msab)/(a*n)
+df_s2_ab <- s2_ab^2 / ((msab/n)^2/df_ab + (-mse/n)^2/df_e)
+df_s2_a <- s2_a^2 / ((msa/(b*n))^2/df_a + (-msab/(b*n))^2/df_ab)
+df_s2_b <- s2_b^2 / ((msb/(a*n))^2/df_b + (-msab/(a*n))^2/df_ab)
+
+s2.out1 <- cbind(msa, msa/msab, qf(.95,df_a,df_ab), 1-pf(msa/msab,df_a,df_ab),
+                 s2_a, df_s2_a, df_s2_a*s2_a/qchisq(.975,df_s2_a),df_s2_a*s2_a/qchisq(.025,df_s2_a))
+s2.out2 <- cbind(msb, msb/msab, qf(.95,df_b,df_ab), 1-pf(msb/msab,df_b,df_ab),
+                 s2_b, df_s2_b, df_s2_b*s2_b/qchisq(.975,df_s2_b),df_s2_b*s2_b/qchisq(.025,df_s2_b))
+s2.out3 <- cbind(msab, msab/mse, qf(.95,df_ab,df_e), 1-pf(msab/mse,df_ab,df_e),
+                 s2_ab, df_s2_ab, df_s2_ab*s2_ab/qchisq(.975,df_s2_ab),df_s2_ab*s2_ab/qchisq(.025,df_s2_ab))
+s2.out4 <- cbind(mse, NA, NA, NA, mse, df_e, df_e*mse/qchisq(.975,df_e),
+                 df_e*mse/qchisq(.025,df_e))
+s2.out <- rbind(s2.out1,s2.out2,s2.out3,s2.out4)
+colnames(s2.out) <- c("MS", "F*", "F(.95)", "P(>F*)", "s^2", "Satt df", "LB", "UB")
+rownames(s2.out) <- c("sigma_a^2", "sigma_b^2", "sigma_ab^2", "sigma^2")
+round(s2.out,4)
+
+library(lmerTest)
+options(contrasts=c("contr.sum", "contr.poly"))
+mod2 <- lmer(chord ~ 1 +  (1|skull.f) + (1|observer.f) + (1|skull.f:observer.f), data=sm)
+summary(mod2)
+```
+The variance of the skulls is by far the largest (not surprising) while the variances among observers, interactions and error are much smaller.
+
+In the measurement systems analysis, the variances are broken into various components.
+
+- **Repeatability** - Variation within same part/operator (skull/observer): $\sigma^2$
+- **Reproducibility** - Variation across operators and part/operator interactions: $\sigma_{\beta}^2+\sigma_{\alpha\beta}^2$
+- **Parts** - Variation across parts: $\sigma_{\alpha}^2$
+- **Gage** - Repeatability + Reproducibility
+- **Total** - Parts + Gage
+- **% R&R** - $100*\sigma_{\mbox{Gage}}/\sigma_{\mbox{Total}}$ in terms of standard deviations, not variances.
+
+For this example (based on the lmer results), we get the following estimates.
+
+$$
+s_{\mbox{Repeatability}}^2= s^2=0.05825 \qquad 
+s_{\mbox{Reproducibility}}^2= s_{\beta}^2+s_{\alpha\beta}^2=0.06732+0.02931=0.09663
+$$
+$$
+s_{\mbox{Parts}}^2=14.92183  \qquad
+s_{\mbox{Gage}}^2=0.05825+0.09963=0.015488
+$$
+$$
+s_{\mbox{Total}}^2=14.92183+0.015488=15.07671 \qquad
+ \% \mbox{ R&R:} \quad
+100\sqrt{\frac{0.015488}{15.07671}}=3.21\%
+$$
+
+Only about 3.2% of the total variation (standard deviation) is due to measurement error.
+
+$$ \nabla $$
+
+## Two-Way Mixed Effects Model
+
+Models can include both fixed and random effects. In this section, we describe the **unrestricted** two-way mixed model, with factor A fixed and factor B random.
+The **restricted** model has the two-factor interactions sum to 0 over the fixed factor. Statistical software packages typically fit the unrestricted model that allows for unbalanced data. The model is given below.
+
+$$
+Y_{ijk}= \mu_{\bullet\bullet} + \alpha_i + \beta_j + (\alpha\beta)_{ij} + \epsilon_{ijk}
+\qquad i=1,\ldots,a;\quad j=1,\ldots,b; \quad k=1,\ldots,n 
+$$
+
+$$
+\sum_{i=1}^a \alpha_i = 0 \qquad \beta_j\sim NID\left(0,\sigma_{\beta}^2\right) \qquad
+(\alpha\beta)_{ij} \sim NID\left(0,\sigma_{\alpha\beta}^2\right) \qquad
+\epsilon_{ijk} \sim NID\left(0,\sigma^2\right)
+$$
+
+The random effects $\left\{\beta_j\right\}$,
+$\left\{(\alpha\beta)_{ij}\right\}$, and error terms $\left\{\epsilon_{ijk}\right\}$ are assumed pairwise independent.
+
+The mean, covariance structure, expected mean squares and estimators for the unrestricted mixed model are given below.
+
+$$
+E\left\{Y_{ijk}\right\}=\mu_{\bullet\bullet}+ \alpha_i \qquad
+\mbox{COV}\left\{Y_{ijk},Y_{i'j'k'}\right\} =
+\left\{ \begin{array}{r@{\quad:\quad}l}
+   \sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 +  \sigma^2 & i=i',j=j',k=k' \\
+   \sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 & i=i', j=j',k\ne k' \\
+     \sigma_{\beta}^2&  i\ne i', j= j',\forall k,k' \\
+     0 & \forall i,i', j\ne j', \forall k,k' \\
+    \end{array} \right.
+$$
+
+$$
+E\{MSA\} = \sigma^2 +n\sigma_{\alpha\beta}^2+\frac{bn\sum_{i=1}^a\alpha_i^2}{a-1} \qquad
+E\{MSB\} = \sigma^2 +n\sigma_{\alpha\beta}^2+ an\sigma_{\beta}^2
+$$
+$$
+E\{MSAB\}= \sigma^2 +n\sigma_{\alpha\beta}^2  \qquad E\{MSE\}=\sigma^2
+$$
+
+$$
+s^2=MSE \qquad s_{\alpha\beta}^2=\frac{MSAB-MSE}{n} 
+\qquad s_{\beta}^2=\frac{MSB-MSAB}{an}
+$$
+The variances and covariances of the means are developed below, which can be used
+to make inferences regarding the fixed effects in the model.
+
+$$
+V\left\{\overline{Y}_{ij\bullet}\right\} = 
+V\left\{\frac{1}{n}\sum_{k=1}^nY_{ijk}\right\}=
+\frac{1}{n^2}\left[\sum_{k=1}^n V\left\{Y_{ijk}\right\} +
+2\sum_{k=1}^{n-1}\sum_{k'=k+1}^n\mbox{COV}\left\{Y_{ijk},Y_{ijk'}\right\}\right]
+=
+$$
+$$
+= \frac{1}{n^2}\left[n\left(\sigma_{\beta}^2 + \sigma_{\alpha\beta}^2 +  \sigma^2\right)
++n(n-1)\left(\sigma_{\beta}^2 + \sigma_{\alpha\beta}^2\right)\right] = 
+\frac{n\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{n}
+$$
+$$
+\mbox{COV}\left\{\overline{Y}_{ij\bullet},\overline{Y}_{i'j'\bullet}\right\}=0 \quad j\neq j' \quad \forall i,i'
+$$
+$$
+\mbox{COV}\left\{\overline{Y}_{ij\bullet},\overline{Y}_{i'j\bullet}\right\}=
+\frac{1}{n^2} \mbox{COV}\left\{\sum_{k=1}^nY_{ijk},\sum_{k=1}^nY_{i'jk}\right\}=
+\frac{1}{n^2}n^2\sigma_{\beta}^2
+\quad i\neq i' \quad \forall j
+$$
+
+
+$$
+V\left\{\overline{Y}_{i\bullet\bullet}\right\} = 
+V\left\{\frac{1}{b} \sum_{j=1}^b\overline{Y}_{ij\bullet}\right\} =
+\frac{1}{b^2}\left[\sum_{j=1}^b V\left\{\overline{Y}_{ij\bullet}\right\} +
+2\sum_{j=1}^{b-1}\sum_{j'=j+1}^b
+\mbox{COV}\left\{\overline{Y}_{ij\bullet},\overline{Y}_{ij'\bullet}\right\}\right] =
+$$
+
+$$
+= \frac{1}{b^2}\left[b\frac{n\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{n}
++b(b-1)(0)\right] = \frac{n\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{bn}
+$$
+$$
+\mbox{COV}\left\{\overline{Y}_{i\bullet\bullet},\overline{Y}_{i'\bullet\bullet}\right\}=
+\frac{1}{b^2} \mbox{COV}\left\{\sum_{j=1}^b\overline{Y}_{ij\bullet},\sum_{j=1}^b
+\overline{Y}_{i'j\bullet}\right\}=
+$$
+$$
+\frac{1}{b^2}\left[ b\mbox{COV}\left\{ \overline{Y}_{ij\bullet},
+\overline{Y}_{i'j\bullet}\right\} +
+b(b-1)\mbox{COV}\left\{ \overline{Y}_{ij\bullet},
+\overline{Y}_{i'j'\bullet}\right\}\right] = 
+$$
+
+$$
+=\frac{1}{b^2}\left[b\sigma_\beta^2 + b(b-1)(0)\right]=
+\frac{\sigma_{\beta}^2}{b}=\frac{n\sigma_{\beta}^2}{nb}
+\quad i\neq i' 
+$$
+
+
+
+$$
+V\left\{\overline{Y}_{\bullet j\bullet}\right\} = 
+V\left\{\frac{1}{a} \sum_{i=1}^a\overline{Y}_{ij\bullet}\right\} =
+\frac{1}{a^2}\left[\sum_{i=1}^a V\left\{\overline{Y}_{ij\bullet}\right\} +
+2\sum_{i=1}^{a-1}\sum_{i'=i+1}^a
+\mbox{COV}\left\{\overline{Y}_{ij\bullet},\overline{Y}_{i'j\bullet}\right\}\right] =
+$$
+$$
+=\frac{1}{a^2}\left[a\frac{n\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{n} +
+ a(a-1)\frac{n\sigma_{\beta}^2}{n}\right] =
+\frac{an\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{an}
+$$
+$$
+\mbox{COV}\left\{\overline{Y}_{\bullet j\bullet},\overline{Y}_{\bullet j'\bullet}\right\}=
+\frac{1}{a^2} \mbox{COV}\left\{\sum_{i=1}^a\overline{Y}_{ij\bullet},\sum_{i=1}^a
+\overline{Y}_{ij'\bullet}\right\}=
+\frac{1}{a^2}\left[ a^2(0)\right] = 0 \qquad j\neq j'
+$$
+$$
+V\left\{\overline{Y}_{\bullet\bullet\bullet}\right\}= 
+V\left\{\frac{1}{b}\sum_{j=1}^b\overline{Y}_{\bullet j\bullet}\right\}
+\frac{1}{b^2}\left[bV\left\{\overline{Y}_{\bullet j\bullet}\right\} +
+b(b-1)\mbox{COV}\left\{\overline{Y}_{\bullet j\bullet},
+\overline{Y}_{\bullet j'\bullet}\right\}\right]=
+$$
+$$
+=\frac{1}{b^2}\left[b\frac{an\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{an} +
+ b(b-1)(0)\right] =
+\frac{an\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{abn} 
+$$
+The numerator of the variance of the mean is the expected value of the mean square for factor B. This leads to the following results and a Confidence Interval for the overall population mean.
+
+$$
+V\left\{\overline{Y}_{\bullet\bullet\bullet}\right\}=
+\frac{an\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{abn} \qquad \qquad
+\hat{V}\left\{\overline{Y}_{\bullet\bullet\bullet}\right\}=\frac{MSB}{abn}
+$$
+$$
+(1-\alpha)100\% \mbox{ Confidence Interval for } \mu: \qquad
+\overline{Y}_{\bullet\bullet\bullet} \pm t_{1-\alpha/2;b-1}
+\sqrt{\frac{MSB}{n}}
+$$
+
+For any contrast, $L=\sum_{i=1}^ac_i\alpha_i$ where $\sum_{i=1}^ac_i=0$, among the
+means of factor A, we obtain the following variance for its estimator.
+
+$$
+L=\sum_{i=1}c_i\left(\mu_{\bullet\bullet}+\alpha_i\right) \qquad \qquad 
+\hat{L}=\sum_{i=1}c_i\overline{Y}_{i\bullet\bullet}
+$$
+$$
+V\left\{\hat{L} \right\}=
+\sum_{i=1}^ac_i^2V\left\{\overline{Y}_{i\bullet\bullet}\right\} + 
+2\sum_{i=1}^{a-1}\sum_{i'=i+1}^ac_ic_{i'}
+\mbox{COV}\left\{\overline{Y}_{i\bullet\bullet},\overline{Y}_{i'\bullet\bullet}\right\}=
+$$
+$$
+\sum_{i=1}^ac_i^2\left(\frac{n\sigma_{\beta}^2 + n\sigma_{\alpha\beta}^2 + \sigma^2}{bn}\right) + 
+2\sum_{i=1}^{a-1}\sum_{i'=i+1}^ac_ic_{i'}\left(\frac{n\sigma_{\beta}^2}{bn}\right) = 
+$$
+$$
+\sum_{i=1}^ac_i^2\left(\frac{n\sigma_{\alpha\beta}^2 + \sigma^2}{bn}\right)  +
+\sum_{i=1}^a\sum_{i'=1}^ac_ic_{i'}\left(\frac{n\sigma_{\beta}^2}{bn}\right) = 
+\sum_{i=1}^ac_i^2\left(\frac{n\sigma_{\alpha\beta}^2 + \sigma^2}{bn}\right) +
+\left(\frac{n\sigma_{\beta}^2}{bn}\right)\sum_{i=1}^ac_i\sum_{i'=1}^ac_{i'}
+$$
+Since, by definition, the contrast coefficients sum to zero, the last term is 0 and we obtain the following results.
+
+$$
+V\left\{\hat{L} \right\}=\sum_{i=1}^ac_i^2\left(\frac{n\sigma_{\alpha\beta}^2 + \sigma^2}{bn}\right)   \qquad  E\{MSAB\} = n\sigma_{\alpha\beta}^2 + \sigma^2  \qquad
+\hat{V}\left\{\hat{L} \right\}=\sum_{i=1}^ac_i^2\left(\frac{MSAB}{bn}\right)
+$$
+These results can be used to test whether a contrast is equal to 0 and/or obtain a Confidence Interval for the contrast.
+
+$$
+H_0: L=0 \quad H_A: L \neq 0 \qquad  
+TS: t^*=\frac{\hat{L}}{\sqrt{\sum_{i=1}^ac_i^2\left(\frac{MSAB}{bn}\right)}}
+\qquad RR:|t^*| \geq t_{1-\alpha/2;(a-1)(b-1)}
+$$
+
+$$
+(1-\alpha)100\% \mbox{ Confidence Interval for } L: \qquad
+\hat{L} \pm t_{1-\alpha/2;(a-1)(b-1)} 
+\sqrt{\sum_{i=1}^ac_i^2\left(\frac{MSAB}{bn}\right)}
+$$
+
+In particular, when making pairwise comparisons among treatment means, we have
+$\sum_{i=1}^ac_i^2=2$ and we have the following results.
+
+$$
+V\left\{\overline{Y}_{i\bullet\bullet} - \overline{Y}_{i'\bullet\bullet}\right\}=
+\frac{2\left(n\sigma_{\alpha\beta}^2 + \sigma^2\right)}{bn}  \qquad \qquad
+\hat{V}\left\{\overline{Y}_{i\bullet\bullet} - \overline{Y}_{i'\bullet\bullet}\right\}=
+\frac{2MSAB}{bn}
+$$
+
+
+
+Tukey's method can be used to compare all levels of factor A.
+
+$$
+HSD = q_{1-\alpha;a,(a-1)(b-1)}\sqrt{\frac{MSAB}{bn}}
+$$
+$$
+(1-\alpha)100\% \mbox{ Confidence Interval for } \alpha_i-\alpha_{i'}: \quad
+\left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i'\bullet\bullet}\right) \pm HSD
+$$
+
+**Example 10.7 - Breath Alcohol Concentration Measurement Comparison**
+
+A study compared $a=6$ (fixed) instruments among $b=3$ (random) subjects in measuring breath alcohol levels [@gullberg_2008]. Each subject was measured by each machine $n=10$ times. Scores have been multiplied by 100 to avoid very small variances. 
+
+R code for direct calculations and the **lmer** function are used for the analysis. The confidence level for the **difflsmeans** has been adjusted by the Bonferroni method to construct simultaneous 95% Confidence Intervals among the $6(6-1)/2=15$ pairs of instruments.
+
+$$
+\hat{SE}\left\{\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i'\bullet\bullet}\right\}=
+\sqrt{\frac{2MSAB}{bn}}=\sqrt{\frac{2(0.3083)}{3(10)}}=0.1434
+\qquad t_{1-.05/(2(15));10} = 3.827
+$$
+$$
+95\% \mbox{ CI for } \alpha_i-\alpha_{i'}: \quad
+\left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i'\bullet\bullet}\right)
+\pm 3.827(0.1434) 
+$$
+$$
+\quad \equiv \quad
+95\% \mbox{ CI for } \alpha_i-\alpha_{i'}: \quad
+\left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i'\bullet\bullet}\right)
+\pm 0.549
+$$
+Note that the $P$-values are not adjusted for the multiple tests.
+
+```{r ch1009}
+ba1 <- read.csv("data/breathalyzer.csv")
+head(ba1,3); tail(ba1,3)
+## Create a new data frame that orders first by instrument then subject within instrument
+ba <- ba1[order(ba1$instrument, ba1$subject),]
+head(ba,3)
+tail(ba,3)
+ba$instrument.f <- factor(ba$instrument)
+ba$subject.f <- factor(ba$subject)
+
+Y <- 100*ba$breathAlc
+instMean <- as.vector(tapply(Y, ba$instrument, mean))
+subjMean <- as.vector(tapply(Y, ba$subject, mean))
+inSuMean <- as.vector(tapply(Y, list(ba$subject,ba$instrument), mean))
+a <- length(instMean)
+b <- length(subjMean)
+n <- length(ba$breathAlc)/(a*b)
+
+Ybar_i.. <- rep(instMean, each=b*n)
+Ybar_.j. <- rep(subjMean, each=n, times=a)
+Ybar_ij. <- rep(inSuMean, each=n)
+Ybar_... <- rep(mean(Y), a*b*n)
+## cbind(Y,Ybar_i..,Ybar_.j.,Ybar_ij., Ybar_...)
+SSA <- sum((Ybar_i..-Ybar_...)^2); df_A <- a-1; MSA <- SSA/df_A
+SSB <- sum((Ybar_.j.-Ybar_...)^2); df_B <- b-1; MSB <- SSB/df_B
+SSAB <- sum((Ybar_ij.-Ybar_i..-Ybar_.j.+Ybar_...)^2); df_AB <- (a-1)*(b-1)
+MSAB <- SSAB/df_AB
+SSE <- sum((Y-Ybar_ij.)^2);  df_E <- a*b*(n-1); MSE <- SSE/df_E
+SSTO <- sum((Y-Ybar_...)^2); df_TO <- a*b*n-1
+
+aov.out1 <- cbind(df_A, SSA, MSA, MSA/MSAB, qf(.95,df_A,df_AB),
+                  1-pf(MSA/MSAB,df_A,df_AB))
+aov.out2 <- cbind(df_B, SSB, MSB, MSB/MSAB, qf(.95,df_B,df_AB),
+                  1-pf(MSB/MSAB,df_B,df_AB))
+aov.out3 <- cbind(df_AB, SSAB, MSAB, MSAB/MSE, qf(.95,df_AB,df_E),
+                  1-pf(MSAB/MSE,df_AB,df_E))
+aov.out4 <- cbind(df_E, SSE, MSE,NA,NA,NA)
+aov.out5 <- cbind(df_TO,SSTO,NA,NA,NA,NA)
+aov.out <- rbind(aov.out1,aov.out2,aov.out3,aov.out4, aov.out5)
+colnames(aov.out) <- c("df","SS","MS","F*","F(.95)", "P(>F*)")
+rownames(aov.out) <- c("Instrument", "Subject", "InstxSubj", "Error", "Total")
+round(aov.out,4)
+
+s2 <- MSE
+s2_AB <- (MSAB-MSE)/n
+s2_B <- (MSB-MSAB)/(a*n)
+df_s2_AB <- s2_AB^2 / ((MSAB/n)^2/df_AB + (-MSE/n)^2/df_E)
+df_s2_B <- s2_B^2 / ((MSB/(a*n))^2/df_B + (-MSAB/(a*n))^2/df_AB)
+
+s2.out1 <- cbind(s2_B, df_s2_B, df_s2_B*s2_B/qchisq(.975,df_s2_B), 
+                 df_s2_B*s2_B/qchisq(.025,df_s2_B))
+s2.out2 <- cbind(s2_AB, df_s2_AB, df_s2_AB*s2_AB/qchisq(.975,df_s2_AB), 
+                 df_s2_AB*s2_AB/qchisq(.025,df_s2_AB))
+s2.out3 <- cbind(s2, df_E, df_E*s2/qchisq(.975,df_E), 
+                 df_E*s2/qchisq(.025,df_E))
+s2.out <- rbind(s2.out1,s2.out2,s2.out3)
+colnames(s2.out) <- c("s^2", "Satt df", "LB", "UB")
+rownames(s2.out) <- c("Subject", "InstxSubj", "Error")
+round(s2.out,4)
+
+HSD <- qtukey(.95,a,df_AB) * sqrt(MSAB/(b*n))
+HSD.out <- matrix(rep(0,8*a*(a-1)/2), ncol=8)
+row.count <- 0
+for (i1 in 2:a) {
+  for (i2 in 1:(i1-1)) {
+    row.count <- row.count + 1
+    HSD.out[row.count,1] <- i1
+    HSD.out[row.count,2] <- i2
+    HSD.out[row.count,3] <- instMean[i1]
+    HSD.out[row.count,4] <- instMean[i2]
+    HSD.out[row.count,5] <- instMean[i1] - instMean[i2]
+    HSD.out[row.count,6] <- (instMean[i1] - instMean[i2]) - HSD
+    HSD.out[row.count,7] <- (instMean[i1] - instMean[i2]) + HSD
+    HSD.out[row.count,8] <- 
+      1-ptukey(abs(instMean[i1] - instMean[i2])/sqrt(MSAB/(b*n)),a,df_AB)
+  }
+}
+
+colnames(HSD.out) <- c("i", "i'", "Ybar_i", "Ybar_i'", "Diff", "LB", "UB", "p adj")
+round(HSD.out,4)
+
+## The error terms are incorrect for instrument and subject using the aov command
+mod1 <- aov(100*breathAlc ~ factor(instrument)*factor(subject), data=ba)
+anova(mod1)
+
+## Fit unrestricted mixed model 
+options(contrasts=c("contr.sum", "contr.poly"))
+mod2 <- lmer(100*breathAlc ~ instrument.f + (1|subject.f) + (1|instrument.f:subject.f), data=ba)
+summary(mod2)
+anova(mod2)
+difflsmeans(mod2, level=1-.05/(a*(a-1)/2)) ## Bonferroni adjustment for CI's (not P-values)
+```
+$$ \nabla $$
+
+## Three-Way Mixed Effects Models
+
+In this section, the Three-Way mixed model with two fixed factors and a single random factor (typically subjects) is described. In many cases, there is a single replicate per combination of factors $(n=1)$ and this can be thought of as an extension of a Randomized Block/Repeated Measures Design. Here is the case when $n=1$, factors A and B are fixed, and factor C is random (Subject).
+
+$$
+SSA = bc\sum_{i=1}^a\left(\overline{Y}_{i\bullet\bullet}-
+\overline{Y}_{\bullet\bullet\bullet}\right)^2
+\qquad df_A=a-1  
+$$
+$$
+E\{MSA\}=\sigma^2 + \sigma_{\alpha\beta\gamma}^2+
+b\sigma_{\alpha\gamma}^2+\frac{bc\sum_{i=1}^a\alpha_i^2}{a-1}
+=E\{MSAC\}+\frac{bc\sum_{i=1}^a\alpha_i^2}{a-1}
+$$
+$$
+SSB = ac\sum_{j=1}^b\left(\overline{Y}_{\bullet j\bullet}-
+\overline{Y}_{\bullet\bullet\bullet}\right)^2
+\qquad df_B=b-1  
+$$
+$$
+E\{MSB\}=\sigma^2 + \sigma_{\alpha\beta\gamma}^2+
+a\sigma_{\beta\gamma}^2+\frac{ac\sum_{j=1}^b\beta_j^2}{b-1}
+= E\{MSBC\}+\frac{ac\sum_{j=1}^b\beta_j^2}{b-1}
+$$
+$$
+SSAB=c\sum_{i=1}^a \sum_{j=1}^b \left(
+\overline{Y}_{ij\bullet}-\overline{Y}_{i\bullet\bullet}-
+\overline{Y}_{\bullet j \bullet} +
+\overline{Y}_{\bullet\bullet\bullet} \right)^2
+\qquad df_{AB}=(a-1)(b-1)
+$$
+$$
+E\{MSAB\}=\sigma^2 + \sigma_{\alpha\beta\gamma}^2 + 
+\frac{c\sum_{i=1}^a\sum_{j=1}^b(\alpha\beta)_{ij}^2}{(a-1)(b-1)}
+=E\{MSABC\}+
+\frac{c\sum_{i=1}^a\sum_{j=1}^b(\alpha\beta)_{ij}^2}{(a-1)(b-1)}
+$$
+
+The error terms for the fixed main effects and their 2-way interaction are the interactions between each term and the random factor C.
+
+Tukey's HSD or the Bonferroni method can be used to compare the levels of factors A and B, or the $ab$ treatment means if the interaction is important.
+
+**Example 10.8 - Navigational Techniques for Web Maps**
+
+A study was conducted to measure effects of two factors on subjects' skill on reading web maps [@wu_2011]. The factors included are given below.
+
+- **Navigational Technique** - Combined Panning Buttons (CPB, ($i=1$)),
+Distributed Panning Buttons (DPB, ($i=2$)), Enhanced Navigaor with Continuous Control (ENCC, ($i=3$)), and Grab & Drag (GD, ($i=4$))
+- **Input Method** - Touch Screen (DT, ($j=1$)), Mouse (M, ($j=2$))
+- **Subject** - 36 subjects who each performed once on the 8 combinations of Input Method and Navigational Technique
+
+One response was task completion time (seconds).
+We will analyze the data directly and with the **lmer** function below.
+
+```{r ch1010}
+ntm <- read.csv("data/navtechmap1.csv")
+head(ntm, 3); tail(ntm, 3)
+ntm$inputMet.f <- factor(ntm$inputMeth, levels=1:2, labels=c("DT","M"))
+ntm$navTech.f <- factor(ntm$navTech, levels=1:4, 
+                        labels=c("CPB","DPB","ENCC","GD"))
+ntm$subject.f <- factor(ntm$subject)
+allmean <- mean(ntm$taskTime)
+A_mean <- as.vector(tapply(ntm$taskTime, ntm$navTech.f, mean))
+B_mean <- as.vector(tapply(ntm$taskTime, ntm$inputMet.f, mean))
+C_mean <- as.vector(tapply(ntm$taskTime, ntm$subject.f, mean))
+AB_mean <- as.vector(tapply(ntm$taskTime, list(ntm$inputMet.f,ntm$navTech.f), mean))
+AC_mean <- as.vector(tapply(ntm$taskTime, list(ntm$subject.f,ntm$navTech.f), mean))
+BC_mean <- as.vector(tapply(ntm$taskTime, list(ntm$subject.f,ntm$inputMet.f), mean))
+ABC_mean <- ntm$taskTime
+a <- length(A_mean); b <- length(B_mean); c <- length(C_mean)
+
+Ybar_... <- rep(allmean,a*b*c)
+Ybar_i.. <- rep(A_mean, each=b*c)
+Ybar_.j. <- rep(B_mean, each=c, times=a)
+Ybar_..k <- rep(C_mean, times=a*b)
+Ybar_ij. <- rep(AB_mean, each=c)
+Ybar_i.k <- c(rep(AC_mean[1:c], times=b),
+              rep(AC_mean[(c+1):(2*c)], times=b),
+              rep(AC_mean[(2*c+1):(3*c)], times=b),
+              rep(AC_mean[(3*c+1):(4*c)], times=b))
+Ybar_.jk <- rep(BC_mean, times=a)
+Ybar_ijk <- ABC_mean
+
+SSA <- sum((Ybar_i..-Ybar_...)^2); df_A <- a-1; MSA <- SSA/df_A
+SSB <- sum((Ybar_.j.-Ybar_...)^2); df_B <- b-1; MSB <- SSB/df_B
+SSC <- sum((Ybar_..k-Ybar_...)^2); df_C <- c-1; MSC <- SSC/df_C
+SSAB <- sum((Ybar_ij.-Ybar_i..-Ybar_.j.+Ybar_...)^2)
+df_AB <- (a-1)*(b-1); MSAB <- SSAB/df_AB
+SSAC <- sum((Ybar_i.k-Ybar_i..-Ybar_..k+Ybar_...)^2)
+df_AC <- (a-1)*(c-1); MSAC <- SSAC/df_AC
+SSBC <- sum((Ybar_.jk-Ybar_.j.-Ybar_..k+Ybar_...)^2)
+df_BC <- (b-1)*(c-1); MSBC <- SSBC/df_BC
+SSABC <- sum((Ybar_ijk-Ybar_ij.-Ybar_i.k-Ybar_.jk+Ybar_i..+Ybar_.j.+Ybar_..k-Ybar_...)^2)
+df_ABC <- (a-1)*(b-1)*(c-1); MSABC <- SSABC/df_ABC
+
+aov.out1 <- cbind(df_A, SSA, MSA, df_AC, MSAC,MSA/MSAC, qf(.95,df_A,df_AC),
+                  1-pf(MSA/MSAC,df_A,df_AC))
+aov.out2 <- cbind(df_B, SSB, MSB, df_BC, MSBC, MSB/MSBC, qf(.95,df_B,df_BC),
+                  1-pf(MSB/MSBC,df_B,df_BC))
+aov.out3 <- cbind(df_AB, SSAB, MSAB, df_ABC, MSABC, MSAB/MSABC, qf(.95,df_AB,df_ABC),
+                  1-pf(MSAB/MSABC,df_AB,df_ABC))
+aov.out <- rbind(aov.out1,aov.out2,aov.out3)
+colnames(aov.out) <- c("df", "SS", "MS", "Err df", "Err MS", "F*",
+                       "F(.95)", "P(>F*)")
+rownames(aov.out) <- c("Navigation","Input","Inp/Nav")
+round(aov.out,4)
+
+mod1 <- aov(taskTime ~ navTech.f + inputMet.f + subject.f +
+              navTech.f:inputMet.f + navTech.f:subject.f +
+              inputMet.f:subject.f, data=ntm)
+anova(mod1)
+```
+
+In this case the main effects and the interaction are all very significant, so we will use Tukey's HSD and the Bonferroni minimum significant difference method to compare the 8 treatments (8(8-1)/2=28 comparisons). These will use $MSABC$ as the "error term" with $df=(4-1)(2-1)(36-1)=105$.
+
+$$
+\mbox{Tukey:} \quad HSD = q_{.95,8,105}\sqrt{\frac{MSABC}{c}}
+=4.374\sqrt{\frac{926.4971}{36}}=22.19 
+$$
+
+$$
+\mbox{Bonferroni:} \quad MSD=t_{1-.05/(2(28));105}\sqrt{\frac{2MSABC}{c}}
+=3.206\sqrt{\frac{2(926.4971)}{36}}=23.00
+$$
+
+```{r ch1011}
+ntm <- read.csv("data/navtechmap1.csv")
+ntm$inputMet.f <- factor(ntm$inputMeth, levels=1:2, labels=c("DT","M"))
+ntm$navTech.f <- factor(ntm$navTech, levels=1:4, 
+                        labels=c("CPB","DPB","ENCC","GD"))
+ntm$subject.f <- factor(ntm$subject)
+
+options(contrasts=c("contr.sum","contr.poly"))
+mod2 <- lmer(taskTime ~ navTech.f * inputMet.f + (1|subject.f) +
+               (1|navTech.f:subject.f) + (1|inputMet.f:subject.f),    data=ntm)
+summary(mod2)
+anova(mod2)
+```
+
+$$ \nabla $$

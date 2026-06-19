@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 1 Comparing Two Treatments or Populations | Design and Analysis of Experiments</title>
+  <meta name="description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 1 Comparing Two Treatments or Populations | Design and Analysis of Experiments" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 1 Comparing Two Treatments or Populations | Design and Analysis of Experiments" />
+  
+  <meta name="twitter:description" content="This is a course on Experimental Design and Analysis." />
+  
+
+<meta name="author" content="Larry Winner" />
+
+
+<meta name="date" content="2026-06-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="introduction.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STA 4211 Course Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html"><i class="fa fa-check"></i><b>1</b> Comparing Two Treatments or Populations</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#linear-functions-of-random-variables"><i class="fa fa-check"></i><b>1.1</b> Linear Functions of Random Variables</a></li>
+<li class="chapter" data-level="1.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#students-t-distribution-for-making-inference-on-population-means"><i class="fa fa-check"></i><b>1.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution for Making Inference on Population Means</a></li>
+<li class="chapter" data-level="1.3" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference"><i class="fa fa-check"></i><b>1.3</b> Inference for the Population Mean Difference</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples"><i class="fa fa-check"></i><b>1.3.1</b> Inference for the Population Mean Difference for Paired Samples</a></li>
+<li class="chapter" data-level="1.3.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-independent-samples"><i class="fa fa-check"></i><b>1.3.2</b> Inference for the Population Mean Difference for Independent Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-variance-ratios"><i class="fa fa-check"></i><b>1.4</b> Inference for the Population Variance Ratios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inferences-for-variance-ratios-for-independent-samples"><i class="fa fa-check"></i><b>1.4.1</b> Inferences for Variance Ratios for Independent Samples</a></li>
+<li class="chapter" data-level="1.4.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#test-for-equal-variances-with-paired-samples"><i class="fa fa-check"></i><b>1.4.2</b> Test for Equal Variances with Paired Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#examples"><i class="fa fa-check"></i><b>1.5</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#terminology"><i class="fa fa-check"></i><b>2.1</b> Terminology</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#basics-of-controlled-experiments"><i class="fa fa-check"></i><b>2.2</b> Basics of Controlled Experiments</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#completely-randomized-design-crd"><i class="fa fa-check"></i><b>2.3</b> Completely Randomized Design (CRD)</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#randomized-complete-block-design-rcbd-or-rbd"><i class="fa fa-check"></i><b>2.4</b> Randomized Complete Block Design (RCBD or RBD)</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#overview-of-some-standard-experimental-designs"><i class="fa fa-check"></i><b>2.5</b> Overview of Some Standard Experimental Designs</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#overview-of-observational-study-designs"><i class="fa fa-check"></i><b>2.6</b> Overview of Observational Study Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-factor-studies.html"><a href="single-factor-studies.html"><i class="fa fa-check"></i><b>3</b> Single Factor Studies</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#models-with-r2-factor-levels"><i class="fa fa-check"></i><b>3.1</b> Models with <span class="math inline">\(r=2\)</span> Factor Levels</a></li>
+<li class="chapter" data-level="3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#three-model-formulations"><i class="fa fa-check"></i><b>3.2</b> Three Model Formulations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#cell-means-model"><i class="fa fa-check"></i><b>3.2.1</b> Cell Means Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#treatment-effects-model"><i class="fa fa-check"></i><b>3.2.2</b> Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#reference-group-model"><i class="fa fa-check"></i><b>3.2.3</b> Reference Group Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance-and-f-test"><i class="fa fa-check"></i><b>3.3</b> The Analysis of Variance and <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#general-linear-test-approach"><i class="fa fa-check"></i><b>3.3.1</b> General Linear Test Approach</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#power-calculations"><i class="fa fa-check"></i><b>3.3.2</b> Power Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#technical-details"><i class="fa fa-check"></i><b>3.4</b> Technical Details</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-for-the-cell-means-model-regression-approach"><i class="fa fa-check"></i><b>3.4.1</b> Least Squares Estimation for the Cell Means Model (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#scalar-estimation-for-the-cell-means-model"><i class="fa fa-check"></i><b>3.4.2</b> Scalar Estimation for the Cell Means Model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#estimation-for-the-treatment-effects-model"><i class="fa fa-check"></i><b>3.4.3</b> Estimation for the Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.4.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-regression-approach"><i class="fa fa-check"></i><b>3.4.4</b> Least Squares Estimation (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance"><i class="fa fa-check"></i><b>3.4.5</b> The Analysis of Variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html"><i class="fa fa-check"></i><b>4</b> Analysis of Treatment Means</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#individual-treatment-means"><i class="fa fa-check"></i><b>4.1</b> Individual Treatment Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#comparing-two-treatment-means"><i class="fa fa-check"></i><b>4.2</b> Comparing Two Treatment Means</a></li>
+<li class="chapter" data-level="4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#contrasts-among-treatment-means"><i class="fa fa-check"></i><b>4.3</b> Contrasts Among Treatment Means</a></li>
+<li class="chapter" data-level="4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#simultaneous-comparisons"><i class="fa fa-check"></i><b>4.4</b> Simultaneous Comparisons</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#tukeys-honest-significant-difference-hsd"><i class="fa fa-check"></i><b>4.4.1</b> Tukey’s Honest Significant Difference (HSD)</a></li>
+<li class="chapter" data-level="4.4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#scheffes-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.2</b> Scheffe’s Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#bonferroni-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.3</b> Bonferroni Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#multiple-range-methods"><i class="fa fa-check"></i><b>4.4.4</b> Multiple Range Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html"><i class="fa fa-check"></i><b>5</b> Alternative Tests for Treatment Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#randomizationpermutation-tests"><i class="fa fa-check"></i><b>5.1</b> Randomization/Permutation Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#tests-for-equal-error-variances"><i class="fa fa-check"></i><b>5.2</b> Tests for Equal Error Variances</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#hartleys-test"><i class="fa fa-check"></i><b>5.2.1</b> Hartley’s Test</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#levenes-test"><i class="fa fa-check"></i><b>5.2.2</b> Levene’s Test</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#bartletts-test"><i class="fa fa-check"></i><b>5.2.3</b> Bartlett’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#remedial-measures"><i class="fa fa-check"></i><b>5.3</b> Remedial Measures</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#weighted-least-squares-and-welchs-test"><i class="fa fa-check"></i><b>5.3.1</b> Weighted Least Squares and Welch’s Test</a></li>
+<li class="chapter" data-level="5.3.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#post-hoc-comparisons-with-unequal-variances"><i class="fa fa-check"></i><b>5.3.2</b> Post-hoc Comparisons with Unequal Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#nonparametric-test-for-non-normal-data"><i class="fa fa-check"></i><b>5.4</b> Nonparametric Test for Non-normal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html"><i class="fa fa-check"></i><b>6</b> Balanced Two Factor Designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#two-factor-analysis-of-variance"><i class="fa fa-check"></i><b>6.2</b> Two Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#cell-means-and-factor-effects-models"><i class="fa fa-check"></i><b>6.2.1</b> Cell Means and Factor Effects Models</a></li>
+<li class="chapter" data-level="6.2.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#least-squaresmaximum-likelihood-estimators"><i class="fa fa-check"></i><b>6.2.2</b> Least Squares/Maximum Likelihood Estimators</a></li>
+<li class="chapter" data-level="6.2.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#sums-of-squares-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>6.2.3</b> Sums of Squares and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#factor-effect-contrasts"><i class="fa fa-check"></i><b>6.3</b> Factor Effect Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-there-is-no-interaction"><i class="fa fa-check"></i><b>6.3.1</b> Contrasts when there is No Interaction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-interaction-is-present"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts when Interaction is Present</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="two-factor-designs-with-1-observation-per-treatment.html"><a href="two-factor-designs-with-1-observation-per-treatment.html"><i class="fa fa-check"></i><b>7</b> Two-Factor Designs with 1 Observation per Treatment</a></li>
+<li class="chapter" data-level="8" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html"><i class="fa fa-check"></i><b>8</b> Unbalanced Two-Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#statistical-model-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>8.1</b> Statistical Model and the Analysis of Variance</a></li>
+<li class="chapter" data-level="8.2" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#least-squares-estimators-and-contrastslinear-functions-among-means"><i class="fa fa-check"></i><b>8.2</b> Least Squares Estimators and Contrasts/Linear Functions Among Means</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="higher-order-models.html"><a href="higher-order-models.html"><i class="fa fa-check"></i><b>9</b> Higher Order Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="higher-order-models.html"><a href="higher-order-models.html#three-factor-models---mean-structure"><i class="fa fa-check"></i><b>9.1</b> Three Factor Models - Mean Structure</a></li>
+<li class="chapter" data-level="9.2" data-path="higher-order-models.html"><a href="higher-order-models.html#statistical-model-and-the-analysis-of-variance-1"><i class="fa fa-check"></i><b>9.2</b> Statistical Model and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="block-designs.html"><a href="block-designs.html"><i class="fa fa-check"></i><b>10</b> Block Designs</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="block-designs.html"><a href="block-designs.html#randomized-block-and-repeated-measures-designs"><i class="fa fa-check"></i><b>10.1</b> Randomized Block and Repeated Measures Designs</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="block-designs.html"><a href="block-designs.html#model-structure-and-estimators"><i class="fa fa-check"></i><b>10.1.1</b> Model Structure and Estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="block-designs.html"><a href="block-designs.html#analysis-of-variance-and-the-f-test"><i class="fa fa-check"></i><b>10.2</b> Analysis of Variance and the <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="block-designs.html"><a href="block-designs.html#checking-model-assumptions"><i class="fa fa-check"></i><b>10.2.1</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="10.2.2" data-path="block-designs.html"><a href="block-designs.html#relative-efficiency-and-within-subject-variance-covariance-matrix"><i class="fa fa-check"></i><b>10.2.2</b> Relative Efficiency and Within-Subject Variance-Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="block-designs.html"><a href="block-designs.html#latin-square-designs"><i class="fa fa-check"></i><b>10.3</b> Latin Square Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html"><i class="fa fa-check"></i><b>11</b> Random and Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#way-random-effects-model"><i class="fa fa-check"></i><b>11.1</b> 1-Way Random Effects Model</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>11.1.1</b> Analysis of Variance</a></li>
+<li class="chapter" data-level="11.1.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-population-mean-mu_bullet"><i class="fa fa-check"></i><b>11.1.2</b> Estimating the Population Mean <span class="math inline">\(\mu_{\bullet}\)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>11.1.3</b> Estimating the Intraclass Correlation Coefficient</a></li>
+<li class="chapter" data-level="11.1.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-within-group-variance"><i class="fa fa-check"></i><b>11.1.4</b> Estimating the Within Group Variance</a></li>
+<li class="chapter" data-level="11.1.5" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-between-group-variance"><i class="fa fa-check"></i><b>11.1.5</b> Estimating the Between Group Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-random-effects-model"><i class="fa fa-check"></i><b>11.2</b> Two-Way Random Effects Model</a></li>
+<li class="chapter" data-level="11.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-mixed-effects-model"><i class="fa fa-check"></i><b>11.3</b> Two-Way Mixed Effects Model</a></li>
+<li class="chapter" data-level="11.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#three-way-mixed-effects-models"><i class="fa fa-check"></i><b>11.4</b> Three-Way Mixed Effects Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>12</b> Nested Designs</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="nested-designs.html"><a href="nested-designs.html#estimators-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>12.1</b> Estimators and the Analysis of Variance</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-designs.html"><a href="nested-designs.html#tests-contrasts-and-pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Tests, Contrasts, and Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="nested-designs.html"><a href="nested-designs.html#repeated-measures-design"><i class="fa fa-check"></i><b>12.3</b> Repeated Measures Design</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="nested-designs.html"><a href="nested-designs.html#model-structure"><i class="fa fa-check"></i><b>12.3.1</b> Model Structure</a></li>
+<li class="chapter" data-level="12.3.2" data-path="nested-designs.html"><a href="nested-designs.html#analysis-of-variance-and-f-tests"><i class="fa fa-check"></i><b>12.3.2</b> Analysis of Variance and <span class="math inline">\(F\)</span>-tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="nested-designs.html"><a href="nested-designs.html#treatment-comparisons"><i class="fa fa-check"></i><b>12.3.3</b> Treatment Comparisons</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html"><i class="fa fa-check"></i><b>13</b> Analysis of Covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#additive-model"><i class="fa fa-check"></i><b>13.1</b> Additive Model</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#adjusted-means"><i class="fa fa-check"></i><b>13.1.1</b> Adjusted means</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#interaction-model"><i class="fa fa-check"></i><b>13.2</b> Interaction Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html"><i class="fa fa-check"></i><b>14</b> Response Surface and Mixture Designs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
+<li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="comparing-two-treatments-or-populations" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Comparing Two Treatments or Populations<a href="comparing-two-treatments-or-populations.html#comparing-two-treatments-or-populations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this Chapter, we introduce two designs for comparing two treatments or populations.
+These could be measurement devices, drug formulations, brands of food, or any pair of
+conditions. The two designs are based on <strong>independent</strong> or <strong>paired</strong> samples. We will
+develop the <span class="math inline">\(t\)</span>-tests for each design in this chapter to compare means. We will also include methods of comparing population variances for independent or paired samples.</p>
+<p>We begin with linear functions of random variables, then introduce Student’s <span class="math inline">\(t\)</span>-distribution for normally distributed data. Next, we cover <span class="math inline">\(t\)</span>-tests for
+both paired and independent samples. Then we consider tests for equal variances for
+both independent and paired samples. Finally, we will apply these methods directly and
+using <strong>R</strong> functions.</p>
+<p>Note that we will use capital letters for estimators that are random variables based on
+random samples, such as <span class="math inline">\(\overline{Y}\)</span>, <span class="math inline">\(\overline{D}\)</span>, and <span class="math inline">\(S^2\)</span>. We will use lower
+case letters to represent estimators from a specific sample,
+such as <span class="math inline">\(\overline{y}\)</span>, <span class="math inline">\(\overline{d}\)</span>, and <span class="math inline">\(s^2\)</span>,
+resulting from
+an experiment or observational study, being used to construct a Confidence Interval
+or test a hypothesis.</p>
+<div id="linear-functions-of-random-variables" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Linear Functions of Random Variables<a href="comparing-two-treatments-or-populations.html#linear-functions-of-random-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Let <span class="math inline">\(Y_1,\ldots,Y_n\)</span> be a sample of random variables with the following properties.</p>
+<p><span class="math display">\[
+E\left\{Y_i\right\} = \mu_i  \qquad V\left\{Y_i\right\} = \sigma_i^2  \qquad
+\mbox{COV}\left\{Y_i,Y_{i&#39;}\right\}=\sigma_{ii&#39;} \qquad  i=1,\ldots,n \quad i\neq i&#39;
+\]</span></p>
+<p>Now, let <span class="math inline">\(a_1,\ldots,a_n\)</span> be a set of constants (not random variables), and define
+<span class="math inline">\(U=\sum_{i=1}^na_iY_i\)</span>. Then, we have the following results regarding the distribution
+of <span class="math inline">\(U\)</span>.</p>
+<p><span class="math display">\[
+E\{U\} = E\left\{\sum_{i=1}^na_iY_i\right\}=\sum_{i=1}^na_i\mu_i  \qquad
+V\{U\}=V\left\{\sum_{i=1}^na_iY_i\right\}=\sum_{i=1}^na_i^2\sigma_i^2+
+2\sum_{i=1}^{n-1}\sum_{i&#39;=i+1}^na_ia_{i&#39;}\sigma_{ii&#39;}
+\]</span></p>
+<p>Note that when <span class="math inline">\(Y_1,\ldots,Y_n\)</span> are independent, then
+<span class="math inline">\(V\{U\}=V\left\{\sum_{i=1}^na_iY_i\right\}=\sum_{i=1}^na_i^2\sigma_i^2\)</span>.
+Also, if <span class="math inline">\(Y_1,\ldots,Y_n\)</span> are normally distributed, then <span class="math inline">\(U\)</span> is as well.</p>
+<p><strong>Sample Mean for a Random Sample from a Normal Distribution</strong></p>
+<p>Let <span class="math inline">\(Y_1,\ldots,Y_n\)</span> be a random sample from a normal distribution with mean <span class="math inline">\(\mu\)</span> and
+variance <span class="math inline">\(\sigma^2\)</span>. Then we are interested in the distribution of the sample mean
+<span class="math inline">\(\overline{Y}\)</span>, which is a special case of <span class="math inline">\(U\)</span> described above, with <span class="math inline">\(a_i=1/n\)</span>.</p>
+<p><span class="math display">\[
+E\left\{Y_i\right\}=\mu \quad V\left\{Y_i\right\}=\sigma^2 \quad
+\mbox{COV}\left\{Y_i,Y_{i&#39;}\right\}=0 \qquad
+\overline{Y}=\frac{\sum_{i=1}^nY_i}{n}=\sum_{i=1}^n\left(\frac{1}{n}\right)Y_i
+\]</span>
+<span class="math display">\[
+E\left\{\overline{Y}\right\}=
+E\left\{\frac{\sum_{i=1}^nY_i}{n}\right\}=
+\sum_{i=1}^n\left(\frac{1}{n}\right)E\left\{Y_i\right\}=
+\sum_{i=1}^n\left(\frac{1}{n}\right)\mu=
+n\left(\frac{1}{n}\right)\mu=\mu
+\]</span>
+<span class="math display">\[
+V\left\{\overline{Y}\right\}=
+V\left\{\sum_{i=1}^n\left(\frac{1}{n}\right)Y_i\right\}=
+\]</span>
+<span class="math display">\[
+\sum_{i=1}^n\left(\frac{1}{n}\right)^2V\left\{Y_i\right\}+
+2\sum_{i=1}^{n-1}\sum_{i&#39;=i+1}^n\left(\frac{1}{n}\right)\left(\frac{1}{n}\right)
+\mbox{COV}\left\{Y_i,Y_{i&#39;}\right\}=
+\]</span>
+<span class="math display">\[
+n\left(\frac{1}{n}\right)^2\sigma^2+2\frac{n(n-1)}{2}\left(\frac{1}{n}\right)^2(0)=
+\frac{\sigma^2}{n}  \quad \Rightarrow \quad
+\overline{Y} \sim N\left(\mu,\frac{\sigma^2}{n}\right)
+\]</span></p>
+<p>Thus for the sample mean in this setting, it is normally distributed with mean <span class="math inline">\(\mu\)</span>
+and variance <span class="math inline">\(\sigma^2/n\)</span>. Further we say that it’s <strong>Standard Error</strong> is
+<span class="math inline">\(SE\left\{\overline{Y}\right\}=\sqrt{\sigma^2/n}\)</span>.</p>
+<p><strong>Distribution of Paired Differences and Their Mean Difference</strong></p>
+<p>Suppose we are observing measurements on a sample of experimental units under two
+conditions. For example, we may be observing vertical leap on a sample of basketball players, with each player being measured wearing two different brands of shoes (two measurements per player). Suppose the brands have means <span class="math inline">\(\mu_1\)</span> and <span class="math inline">\(\mu_2\)</span>,
+their variances are equal <span class="math inline">\(\sigma_1^2=\sigma_2^2=\sigma^2\)</span>, and the covariance
+of vertical leaps within players is <span class="math inline">\(\sigma_{12}\)</span>. The covariance would expected
+to be positive, as players will tend to be above or below the mean for both brands, depending on their natural jumping ability. Suppose there are a sample of <span class="math inline">\(n\)</span> players in the experiment.
+We observe the pairs
+<span class="math inline">\(\left\{\left(Y_{11},Y_{21}\right),\ldots,\left(Y_{1n},Y_{2n}\right)\right\}\)</span> and
+we are interested in the difference in the leaps for the players <span class="math inline">\(D_i=Y_{1i}-Y_{2i}\)</span>.
+Note that by definition, the within player covariance is
+<span class="math inline">\(\sigma_{12}=\rho\sigma_1\sigma_2\)</span>, where <span class="math inline">\(\rho\)</span> is the correlation between the within
+player measurements. Now we derive the distribution of the within player differences,
+and the mean difference, where we assume differences across players are independent.</p>
+<p><span class="math display">\[
+E\left\{Y_{1i}\right\}=\mu_1 \quad E\left\{Y_{2i}\right\}=\mu_2 \qquad
+V\left\{Y_{1i}\right\}=V\left\{Y_{2i}\right\}=\sigma^2 \qquad
+\mbox{COV}\left\{Y_{1i},Y_{2i}\right\}=\sigma_{12}=\rho\sigma^2
+\]</span>
+<span class="math display">\[
+D_i=Y_{1i}-Y_{2i}=(1)Y_{1i} + (-1)Y_{2i} \quad \Rightarrow \quad a_1=1,a_2=-1
+\]</span>
+<span class="math display">\[
+E\left\{D_i\right\}=E\left\{Y_{1i}-Y_{2i}\right\}=
+(1)
+E\left\{Y_{1i}\right\}+(-1)E\left\{Y_{2i}\right\}=\mu_1-\mu_2=\mu_D
+\]</span>
+<span class="math display">\[
+V\left\{D_i\right\}=V\left\{Y_{1i}-Y_{2i}\right\}=
+(1)^2V\left\{Y_{1i}\right\}+(-1)^2V\left\{Y_{2i}\right\}+
+2(1)(-1)\mbox{COV}\left\{Y_{1i},Y_{2i}\right\}=
+\]</span>
+<span class="math display">\[
+\sigma_1^2+\sigma_2^2-2\rho\sigma_1\sigma_2=2\sigma^2-2\rho\sigma^2=
+2(1-\rho)\sigma^2=\sigma_D^2
+\]</span></p>
+<p>Now, we are interested in the mean of the <span class="math inline">\(n\)</span> differences <span class="math inline">\(\overline{D}\)</span>.
+Making use of the results from the distribution of the sample mean above, we have the following results. Further,
+we will assume that measurements are (jointly) normally distributed among players.</p>
+<p><span class="math display">\[
+E\left\{\overline{D}\right\}=\mu_D=\mu_1-\mu_2 \qquad
+V\left\{\overline{D}\right\}=\frac{\sigma_D^2}{n}=\frac{2(1-\rho)\sigma^2}{n} \qquad
+\overline{D}\sim N\left(\mu_D,\frac{\sigma_D^2}{n}\right)
+\]</span></p>
+</div>
+<div id="students-t-distribution-for-making-inference-on-population-means" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Student’s <span class="math inline">\(t\)</span>-Distribution for Making Inference on Population Means<a href="comparing-two-treatments-or-populations.html#students-t-distribution-for-making-inference-on-population-means" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Now consider the sample variance <span class="math inline">\(S^2\)</span>, assuming independent, normally distributed data
+with population mean <span class="math inline">\(\mu\)</span> and variance <span class="math inline">\(\sigma^2\)</span>.</p>
+<p><span class="math display">\[
+S^2 = \frac{\sum_{i=1}^n\left(Y_i-\overline{Y}\right)^2}{n-1}  \qquad \qquad
+W=\frac{(n-1)S^2}{\sigma^2}\sim \chi_{n-1}^2
+\]</span>
+That is, the scaled sample variance follows a Chi-square distribution with <span class="math inline">\(n-1\)</span>
+degrees of freedom. Further, under the normal model, the sample mean
+<span class="math inline">\(\overline{Y}\)</span> and sample variance <span class="math inline">\(S^2\)</span> are independent. We define two random variables
+that are independent. <span class="math inline">\(Z\)</span> follows a standard normal distribution and <span class="math inline">\(W\)</span>
+follows a Chi-square distribution with <span class="math inline">\(\nu\)</span> degrees of freedom, and the resulting
+random variable <span class="math inline">\(T\)</span> follows Student’s <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(\nu\)</span> degrees of freedom.</p>
+<p><span class="math display">\[
+Z \sim N(0,1) \qquad W\sim \chi_{\nu}^2 \qquad Z\perp W \quad \Rightarrow \quad
+T=\frac{Z}{\sqrt{W/\nu}}\sim t_{\nu}
+\]</span></p>
+<p><strong>Inference Concerning a Population Mean Based on the Sample Mean and Variance</strong></p>
+<p>Returning to the random sample from a normal distribution with
+population mean <span class="math inline">\(\mu\)</span> and variance
+<span class="math inline">\(\sigma^2\)</span>, we have the following results for the sample mean <span class="math inline">\(\overline{Y}\)</span> and variance
+<span class="math inline">\(S^2\)</span>.</p>
+<p><span class="math display">\[
+\overline{Y} \sim N\left(\mu,\frac{\sigma^2}{n}\right) \quad \Rightarrow \quad
+Z=\frac{\overline{Y}-\mu}{\sqrt{\sigma^2/n}} \sim N(0,1)  \qquad
+W=\frac{(n-1)S^2}{\sigma^2} \sim \chi_{n-1}^2 \qquad Z\perp W
+\]</span>
+<span class="math display">\[
+T=\frac{Z}{\sqrt{W/(n-1)}} =
+\frac{\frac{\overline{Y}-\mu}{\sqrt{\sigma^2/n}}}{\sqrt{\frac{(n-1)S^2}{\sigma^2}/(n-1)}}
+= \frac{\overline{Y}-\mu}{\sqrt{S^2/n}}=
+\frac{\overline{Y}-\mu}{\hat{SE}\left\{\overline{Y}\right\}} \sim t_{n-1}
+\]</span></p>
+<p>That is when we divide <span class="math inline">\(\overline{Y}-\mu\)</span> by its estimated standard error, we obtain a random variable that follows Student’s <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n-1\)</span> degrees of freedom.
+This allows inference for the population mean, without having to know the population variance. We get the following result when we take repeated samples of size <span class="math inline">\(n\)</span>, observing <span class="math inline">\(\overline{Y}\)</span> and <span class="math inline">\(S^2\)</span>.</p>
+<p><span class="math display">\[
+1-\alpha=P\left(t_{\alpha/2;n-1} \leq
+\frac{\overline{Y}-\mu}{\hat{SE}\left\{\overline{Y}\right\}} \leq
+t_{1-\alpha/2;n-1}
+\right)=
+\]</span>
+<span class="math display">\[
+P\left(\overline{Y}-t_{1-\alpha/2;n-1}\hat{SE}\left\{\overline{Y}\right\}\leq
+\mu\leq \overline{Y}-t_{\alpha/2;n-1}\hat{SE}\left\{\overline{Y}\right\}\right)
+\]</span></p>
+<p>We can construct a <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Interval for <span class="math inline">\(\mu\)</span> or test whether
+<span class="math inline">\(\mu=\mu_0\)</span> from this result based on a particular sample, with <span class="math inline">\(\overline{y}\)</span>
+and <span class="math inline">\(s^2\)</span>, the observed sample mean and variance.</p>
+<p>For the hypothesis test, we denote the Test Statistic
+as <span class="math inline">\(TS\)</span> and the Rejection Region as <span class="math inline">\(RR\)</span>.</p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ CI for } \mu:
+\left[\overline{y}-t_{1-\alpha/2;n-1}\sqrt{\frac{s^2}{n}},
+\overline{y}-t_{\alpha/2;n-1}\sqrt{\frac{s^2}{n}}\right]
+\qquad \hat{SE}\left\{\overline{Y}\right\}=\sqrt{\frac{s^2}{n}}
+\]</span></p>
+<p><span class="math display">\[
+H_0:\mu=\mu_0 \qquad H_A:\mu \neq \mu_0 \qquad
+TS:t^*=\frac{\overline{y}-\mu_0}{\sqrt{\frac{s^2}{n}}}
+\]</span>
+<span class="math display">\[
+RR:|t^*|\geq t_{1-\alpha/2;n-1}
+\qquad P=2P\left(t_{n-1}\geq|t^*|\right)
+\]</span></p>
+</div>
+<div id="inference-for-the-population-mean-difference" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Inference for the Population Mean Difference<a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we use the results from Sections 1.1 and 1.2 to make inferences for
+population mean differences. First, the paired difference case is described,
+as it is a direct application of the previous case with differences replacing
+individual observations. Next we consider independent samples, first assuming equal variances, then when variances are unequal in the two conditions.</p>
+<div id="inference-for-the-population-mean-difference-for-paired-samples" class="section level3 hasAnchor" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> Inference for the Population Mean Difference for Paired Samples<a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Note that for the paired data case described above, we have the following results.</p>
+<p><span class="math display">\[
+D_i=Y_{1i}-Y_{2i} \quad i=1,\ldots,n \qquad \overline{D}=\frac{1}{n}\sum_{i=1}^nD_i   \qquad  
+S_D^2 = \frac{1}{n-1}\sum_{i=1}^n\left(D_i-\overline{D}\right)^2
+\]</span>
+<span class="math display">\[
+\overline{D} \sim N\left(\mu_D,\frac{\sigma_D^2}{n}\right)  \qquad
+\frac{(n-1)S_D^2}{\sigma_D^2}\sim \chi_{n-1}^2  \qquad \overline{D} \perp S_D^2
+\quad \Rightarrow \quad \frac{\overline{D}-\mu_D}{\sqrt{S_D^2/n}}\sim t_{n-1}
+\]</span></p>
+<p>From this, we can construct Confidence Intervals and test hypotheses for <span class="math inline">\(\mu_D\)</span>.
+As we did for the sample mean <span class="math inline">\(\overline{Y}\)</span>, we can write the estimated standard error
+for <span class="math inline">\(\overline{D}\)</span> as <span class="math inline">\(\hat{SE}\left\{\overline{D}\right\}=\sqrt{S_D^2/n}\)</span>.</p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ CI for } \mu_D:
+\left[\overline{d}-t_{1-\alpha/2;n-1}\sqrt{\frac{s_d^2}{n}},
+\overline{d}-t_{\alpha/2;n-1}\sqrt{\frac{s_d^2}{n}}\right]
+\qquad \hat{SE}\left\{\overline{D}\right\}=\sqrt{\frac{s_d^2}{n}}
+\]</span></p>
+<p><span class="math display">\[
+H_0:\mu_D=\Delta_0 \qquad H_A:\mu_D \neq \Delta_0 \qquad
+TS:t^*=\frac{\overline{d}-\Delta_0}{\sqrt{\frac{s_d^2}{n}}}
+\]</span></p>
+<p><span class="math display">\[
+RR:|t^*|\geq t_{1-\alpha/2;n-1}
+\qquad P=2P\left(t_{n-1}\geq|t^*|\right)
+\]</span></p>
+<p>In practice, when testing for <span class="math inline">\(\mu_D\)</span>, typically
+<span class="math inline">\(\Delta_0=0\)</span> as we are testing for a difference in
+means.</p>
+</div>
+<div id="inference-for-the-population-mean-difference-for-independent-samples" class="section level3 hasAnchor" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> Inference for the Population Mean Difference for Independent Samples<a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-independent-samples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this section, we consider inference for <span class="math inline">\(\mu_1-\mu_2\)</span> based on independent samples.
+We consider two cases, equal variances <span class="math inline">\(\left(\sigma_1^2=\sigma_2^2=\sigma^2\right)\)</span>
+and unequal variances <span class="math inline">\(\left(\sigma_1^2\neq\sigma_2^2\right)\)</span>. In each case we assume
+the following data structure.</p>
+<p><span class="math display">\[Y_{1i} \sim NID\left(\mu_1,\sigma_1^2\right) \quad i=1,\ldots,n_1 \qquad
+Y_{2i} \sim NID\left(\mu_2,\sigma_2^2\right) \quad i=1,\ldots,n_2
+\]</span>
+<span class="math display">\[
+\overline{Y}_1 \sim N\left(\mu_1,\frac{\sigma_1^2}{n_1}\right)  \qquad
+\overline{Y}_2 \sim N\left(\mu_2,\frac{\sigma_2^2}{n_2}\right) \qquad
+\overline{Y}_1 \perp \overline{Y}_2
+\]</span>
+<span class="math display">\[
+\overline{Y}_1 - \overline{Y}_2 \sim
+N\left(\mu_1-\mu_2,\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}\right)
+\]</span></p>
+<div id="equal-variances" class="section level4 hasAnchor" number="1.3.2.1">
+<h4><span class="header-section-number">1.3.2.1</span> Equal Variances<a href="comparing-two-treatments-or-populations.html#equal-variances" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>When the population variances are equal <span class="math inline">\(\left(\sigma_1^2=\sigma_2^2=\sigma^2\right)\)</span>,
+we obtain the following sampling distribution for the difference in means.</p>
+<p><span class="math display">\[
+\overline{Y}_1 - \overline{Y}_2 \sim
+N\left(\mu_1-\mu_2,\sigma^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]\right)
+\]</span>
+We can use the pooled variance <span class="math inline">\(S_p^2\)</span> as the estimator for the common <span class="math inline">\(\sigma^2\)</span>.
+Note that for this model <span class="math inline">\(\overline{Y}_1 - \overline{Y}_2\)</span> and <span class="math inline">\(S_p^2\)</span> are independent.</p>
+<p><span class="math display">\[
+S_p^2=\frac{\left(n_1-1\right)S_1^2+\left(n_2-1\right)S_2^2}{n_1+n_2-2} \qquad \qquad
+\frac{\left(n_1+n_2-2\right)S_p^2}{\sigma^2} \sim \chi_{n_1+n_2-2}^2
+\]</span>
+Then we can obtain the estimated standard error of
+<span class="math inline">\(\overline{Y}_1 - \overline{Y}_2\)</span>, by replacing <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(S_p^2\)</span>.</p>
+<p><span class="math display">\[
+\frac{\overline{Y}_1 - \overline{Y}_2}{
+\sqrt{S_p^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]}}=
+\frac{\overline{Y}_1 - \overline{Y}_2}{
+\hat{SE}\left\{\overline{Y}_1 - \overline{Y}_2\right\}} \sim t_{n_1+n_2-2}
+\]</span>
+From this, we can construct Confidence Intervals and conduct hypothesis tests for
+<span class="math inline">\(\mu_1-\mu_2\)</span>.</p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ CI for } \mu_1-\mu_2:
+\left(\overline{y}_1-\overline{y}_2\right) \pm
+t_{1-\alpha/2;n_1+n_2-2}\sqrt{s_p^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]}
+\]</span>
+<span class="math display">\[
+\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}=
+\sqrt{s_p^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]}
+\]</span></p>
+<p><span class="math display">\[
+H_0:\mu_1-\mu_2=\Delta_0 \qquad H_A:\mu_1-\mu_2 \neq \Delta_0 \qquad
+TS:t^*=\frac{\left(\overline{y}_1-\overline{y}_2\right)-\Delta_0}{
+\sqrt{s_p^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]}}
+\]</span></p>
+<p><span class="math display">\[
+RR:|t^*|\geq t_{1-\alpha/2;n_1+n_2-2}
+\qquad P=2P\left(t_{n_1+n_2-2}\geq|t^*|\right)
+\]</span></p>
+<p>As with the paired case, in practice, typically <span class="math inline">\(\Delta_0=0\)</span> as we are comparing two means.</p>
+</div>
+<div id="unequal-variances" class="section level4 hasAnchor" number="1.3.2.2">
+<h4><span class="header-section-number">1.3.2.2</span> Unequal Variances<a href="comparing-two-treatments-or-populations.html#unequal-variances" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>When the population variances are unequal <span class="math inline">\(\left(\sigma_1^2\neq\sigma_2^2\right)\)</span>,
+we obtain the following sampling distribution for the difference in means.</p>
+<p><span class="math display">\[
+\overline{Y}_1 - \overline{Y}_2 \sim
+N\left(\mu_1-\mu_2,\frac{\sigma^2_1}{n_1}+\frac{\sigma_2^2}{n_2}\right)
+\]</span></p>
+<p>We can estimate <span class="math inline">\(V\left\{\overline{Y}_1 - \overline{Y}_2\right\}\)</span> by replacing <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span> with <span class="math inline">\(S_1^2\)</span> and <span class="math inline">\(S_2^2\)</span>. The problem is that we don’t obtain a Chi-Square
+distribution for a function of <span class="math inline">\(S_1^2\)</span> and <span class="math inline">\(S_2^2\)</span> as we did in the equal variance case.</p>
+<p><strong>Welch’s <span class="math inline">\(t\)</span>-test</strong> replaces the population variances with the sample variances in
+the estimated standard error of
+<span class="math inline">\(\overline{Y}_1 - \overline{Y}_2\)</span> and then makes an adjustment to the degrees of freedom
+for the approximate Chi-Square distribution, matching the mean and variance of the quantity
+in the denominator of the <span class="math inline">\(T=Z/\sqrt{W/{\nu}}\)</span>. We briefly describe the method here.</p>
+<p><span class="math display">\[
+Z=\frac{\left(\overline{Y}_1 - \overline{Y}_2\right)-\left(\mu_1 - \mu_2\right)}{
+\sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma_2^2}{n_2}}} \sim N(0,1)
+\]</span>
+We next want to replace the population variances in the denominator with the sample
+variances. For <span class="math inline">\(W\sim \chi_{\nu}^2\)</span> the mean and variance for <span class="math inline">\(W\)</span> are <span class="math inline">\(\nu\)</span> and <span class="math inline">\(2\nu\)</span>,
+respectively. Now, consider the ratio we will need in the denominator for our approximate
+<span class="math inline">\(T\)</span> ratio. First, we consider the distributions of <span class="math inline">\(S_1^2\)</span> and <span class="math inline">\(S_2^2\)</span>.</p>
+<p><span class="math display">\[
+j=1,2: \quad W_j=\frac{\left(n_j-1\right)S_j^2}{\sigma_j^2} \sim \chi_{n_j-1}^2
+\quad\Rightarrow\quad E\left\{W_j\right\}=n_j-1 \quad V\left\{W_j\right\}=
+2\left(n_j-1\right)
+\]</span>
+<span class="math display">\[
+\quad\Rightarrow\quad E\left\{S_j^2\right\}=
+\frac{\left(n_j-1\right)\sigma_j^2}{\left(n_j-1\right)}=\sigma_j^2 \qquad
+V\left\{S_j^2\right\}=\frac{2\left(n_j-1\right)\sigma_j^4}{\left(n_j-1\right)^2}
+=\frac{2\sigma_j^4}{\left(n_j-1\right)}
+\]</span></p>
+<p><span class="math display">\[
+\frac{W^*}{\nu^*}=
+\frac{\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}}{\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}} \quad
+\Rightarrow \quad E\left\{\frac{W^*}{\nu^*}\right\}=
+\frac{\frac{\sigma^2_1}{n_1}+\frac{\sigma_2^2}{n_2}}{
+\frac{\sigma^2_1}{n_1}+\frac{\sigma_2^2}{n_2}} = 1
+\]</span></p>
+<p><span class="math display">\[
+V\left\{\frac{W^*}{\nu^*}\right\} =
+\left(\frac{1}{\nu^*}\right)^2V\left\{W^*\right\}=
+\frac{2}{\nu^*}=
+\frac{1}{\left(\frac{\sigma^2_1}{n_1}+\frac{\sigma_2^2}{n_2}\right)^2} \left[
+\frac{1}{n_1^2}\frac{2\sigma_1^4}{\left(n_1-1\right)} +
+\frac{1}{n_2^2}\frac{2\sigma_2^4}{\left(n_2-1\right)}
+\right]
+\]</span>
+<span class="math display">\[
+\quad\Rightarrow\quad \nu^*=
+\frac{\left(\frac{\sigma^2_1}{n_1}+\frac{\sigma_2^2}{n_2}\right)^2}{
+\frac{1}{n_1^2}\frac{\sigma_1^4}{\left(n_1-1\right)} +
+\frac{1}{n_2^2}\frac{\sigma_2^4}{\left(n_2-1\right)}}  =
+\frac{\left(\frac{\sigma^2_1}{n_1}+\frac{\sigma_2^2}{n_2}\right)^2}{
+\frac{\left(\sigma_1^2/n_1\right)^2}{\left(n_1-1\right)} +
+\frac{\left(\sigma_2^2/n_2\right)^2}{\left(n_2-1\right)}}
+\]</span>
+Replacing the unknown <span class="math inline">\(\sigma_j^2\)</span> with <span class="math inline">\(S_j^2\)</span>, we get <strong>Satterthwaite’s</strong> approximation
+for the degrees of freedom for Welch’s <span class="math inline">\(t\)</span>-test.</p>
+<p><span class="math display">\[
+\hat{\nu}^*=
+\frac{\left(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}\right)^2}{
+\frac{\left(S_1^2/n_1\right)^2}{\left(n_1-1\right)} +
+\frac{\left(S_2^2/n_2\right)^2}{\left(n_2-1\right)}} =
+\frac{\left(\sum_{j=1}^2g_jMS_j\right)^2}{\sum_{j=1}^2
+\frac{\left(g_jMS_j\right)^2}{\nu_j}}  \quad \mbox{ where } \quad
+g_j=\frac{1}{n_j}  \quad MS_j=S_j^2 \quad \nu_j=n_j-1
+\]</span></p>
+<p>The approximate <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Interval and test of hypothesis for the population mean difference for the unequal variance case are as follow.</p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ CI for } \mu_1-\mu_2:
+\left(\overline{y}_1-\overline{y}_2\right) \pm
+t_{1-\alpha/2;\hat{\nu}^*}\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+\]</span>
+<span class="math display">\[
+\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}=
+\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+\]</span>
+<span class="math display">\[
+H_0:\mu_1-\mu_2=\Delta_0 \qquad H_A:\mu_1-\mu_2 \neq \Delta_0 \qquad
+TS:t^*=\frac{\left(\overline{y}_1-\overline{y}_2\right)-\Delta_0}{
+\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
+\]</span>
+<span class="math display">\[
+RR:|t^*|\geq t_{1-\alpha/2;\hat{\nu}^*}
+\qquad P=2P\left(t_{\hat{\nu}^*}\geq|t^*|\right)
+\]</span></p>
+</div>
+</div>
+</div>
+<div id="inference-for-the-population-variance-ratios" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Inference for the Population Variance Ratios<a href="comparing-two-treatments-or-populations.html#inference-for-the-population-variance-ratios" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we describe tests for testing equal variances for two conditions for
+independent and paired samples. We will consider the independent sample case first,
+as that is much more widely used and covered in standard statistical textbooks. Then
+we will briefly cover a method that can be used for paired samples.</p>
+<div id="inferences-for-variance-ratios-for-independent-samples" class="section level3 hasAnchor" number="1.4.1">
+<h3><span class="header-section-number">1.4.1</span> Inferences for Variance Ratios for Independent Samples<a href="comparing-two-treatments-or-populations.html#inferences-for-variance-ratios-for-independent-samples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Returning to the estimated variances for independent samples, we have the following
+results for independent random samples from normal distributions.</p>
+<p><span class="math display">\[
+j=1,2: \quad S_j^2=\frac{1}{n_j-1}\sum_{i=1}^{n_j}\left(Y_{ji}-\overline{Y}_j\right)^2
+\qquad \frac{\left(n_j-1\right)S_j^2}{\sigma_j^2}\sim \chi_{n_j-1}^2 \qquad
+S_1^2 \perp S_2^2
+\]</span></p>
+<p>When we have two independent Chi-Square random variables with <span class="math inline">\(\nu_1\)</span>, and <span class="math inline">\(\nu_2\)</span>
+degrees of freedom,
+respectively, we obtain the following distribution result, which allows us to make
+inference concerning the variance ratio.</p>
+<p><span class="math display">\[
+W_1 \sim \chi_{\nu_1}^2 \qquad W_2 \sim \chi_{\nu_2}^2 \qquad W_1\perp W_2
+\quad \Rightarrow \quad F=\frac{W_1/{\nu_1}}{W_2/{\nu_2}}\sim F_{\nu_1,\nu_2}
+\]</span></p>
+<p>Where <span class="math inline">\(F_{\nu_1,\nu_2}\)</span> is the <span class="math inline">\(F\)</span>-distribution with <span class="math inline">\(\nu_1\)</span> and <span class="math inline">\(\nu_2\)</span>
+numerator and denominator degrees of freedom, respectively. In terms of this case of comparing variances for two conditions with independent samples, we have the following results.</p>
+<p><span class="math display">\[
+F=\frac{W_1/{\nu_1}}{W_2/{\nu_2}}=\frac{\frac{\left(n_1-1\right)S_1^2}{\sigma_1^2}/
+\left(n_1-1\right)}{\frac{\left(n_2-1\right)S_2^2}{\sigma_2^2}/
+\left(n_2-1\right)}=\frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2}=
+\frac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2} \sim F_{n_1-1,n_2-1}
+\]</span>
+This leads to the following results that allow for constructing a Confidence Interval for <span class="math inline">\(\sigma_1^2/\sigma_2^2\)</span> and testing whether that ratio is 1 (equal population variances).</p>
+<p><span class="math display">\[
+1-\alpha = P\left(F_{\alpha/2;n_1-1,n_2-1} \leq
+\frac{S_1^2/S_2^2}{\sigma_1^2/\sigma_2^2} \leq
+F_{1-\alpha/2;n_1-1,n_2-1}
+\right) =
+\]</span>
+<span class="math display">\[
+P\left(
+\frac{S_1^2/S_2^2}{F_{1-\alpha/2;n_1-1,n_2-1}}\leq \frac{\sigma_1^2}{\sigma_2^2} \leq
+\frac{S_1^2/S_2^2}{F_{\alpha/2;n_1-1,n_2-1}}
+\right)
+\]</span>
+Thus, a <span class="math inline">\(100(1-\alpha)\%\)</span> Confidence Interval
+for <span class="math inline">\(\sigma_1^2/\sigma_2^2\)</span> will be obtained as follows.</p>
+<p><span class="math display">\[
+(1-\alpha)100\% \mbox{ CI for } \frac{\sigma_1^2}{\sigma_2^2}: \qquad
+\left[\frac{s_1^2/s_2^2}{F_{1-\alpha/2;n_1-1,n_2-1}},
+\frac{s_1^2/s_2^2}{F_{\alpha/2;n_1-1,n_2-1}}\right]
+\]</span></p>
+<p>If we want to test for equal variances, we have the following test procedure.</p>
+<p><span class="math display">\[
+H_0:\sigma_1^2=\sigma_2^2 \qquad H_A:\sigma_1^2\neq\sigma_2^2 \qquad
+TS: F^*=\frac{s_1^2}{s_2^2}
+\]</span>
+<span class="math display">\[
+RR: F^*\leq F_{\alpha/2;n_1-1,n_2-1} \cup
+F^*\geq F_{1-\alpha/2;n_1-1,n_2-1}
+\]</span>
+<span class="math display">\[
+P=2\mbox{min}\left[P\left(F_{n-1,n-2}\leq F^*\right),P\left(F_{n-1,n-2}\geq F^*\right)\right]
+\]</span></p>
+</div>
+<div id="test-for-equal-variances-with-paired-samples" class="section level3 hasAnchor" number="1.4.2">
+<h3><span class="header-section-number">1.4.2</span> Test for Equal Variances with Paired Samples<a href="comparing-two-treatments-or-populations.html#test-for-equal-variances-with-paired-samples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A test for equal variances is given in <span class="citation">(<a href="#ref-snedecor_1967">Snedecor and Cochran 1967</a>)</span>, which we will<br />
+describe here. The test is based on bivariate normal variables <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span> with standard deviations <span class="math inline">\(\sigma_1\)</span>, and <span class="math inline">\(\sigma_2\)</span>, and correlation <span class="math inline">\(\rho\)</span>. Define the difference <span class="math inline">\(D\)</span> and the sum <span class="math inline">\(S\)</span> as follow, along with their variances and covariance.</p>
+<p><span class="math display">\[D=Y_1-Y_2 \qquad  S=Y_1+Y_2\]</span>
+<span class="math display">\[\sigma_D^2 = V\{Y_1-Y_2\}=V\{Y_1\}+V\{Y_2\}-2\mbox{COV}\{Y_1,Y_2\}=
+\sigma_1^2+\sigma_2^2-2\rho_{12}\sigma_1\sigma_2\]</span></p>
+<p><span class="math display">\[\sigma_S^2 = V\{Y_1+Y_2\}=V\{Y_1\}+V\{Y_2\}+2\mbox{COV}\{Y_1,Y_2\}=
+\sigma_1^2+\sigma_2^2+2\rho_{12}\sigma_1\sigma_2\]</span></p>
+<p><span class="math display">\[\mbox{COV}\{D,S\}=\mbox{COV}\{Y_1-Y_2,Y_1+Y_2\}=\]</span>
+<span class="math display">\[\mbox{COV}\{Y_1,Y_1\}+\mbox{COV}\{Y_1,Y_2\}-\mbox{COV}\{Y_2,Y_1\}-
+\mbox{COV}\{Y_2,Y_2\}=\sigma_1^2-\sigma_2^2\]</span></p>
+<p>The correlation of <span class="math inline">\(D\)</span> and <span class="math inline">\(S\)</span> is the covariance divided by the square root of the product of their variances.</p>
+<p><span class="math display">\[\rho_{DS}=
+\frac{\mbox{COV}\{D,S\}}{
+\sqrt{\left(\sigma_1^2+\sigma_2^2-2\rho_{12}\sigma_1\sigma_2\right)
+\left(\sigma_1^2+\sigma_2^2+2\rho_{12}\sigma_1\sigma_2\right)}}=
+\]</span></p>
+<p><span class="math display">\[
+\frac{\sigma_1^2-\sigma_2^2}{
+\sqrt{\left(\sigma_1^2+\sigma_2^2\right)^2-
+4\rho_{12}^2\sigma_1^2\sigma_2^2}}
+\]</span></p>
+<p>Dividing the numerator and denominator by <span class="math inline">\(\sigma_2^2\)</span> and defining <span class="math inline">\(\phi=\sigma_1^2/\sigma_2^2\)</span>, we obtain the following result for <span class="math inline">\(\rho_{DS}\)</span>.</p>
+<p><span class="math display">\[\rho_{DS}=\frac{\frac{\sigma_1^2}{\sigma_2^2}-1}{
+\sqrt{\frac{\left(\sigma_1^2+\sigma_2^2\right)^2}{\left(\sigma_2^2\right)^2}-4\rho_{12}^2\left(\frac{\sigma_1^2}{\sigma_2^2}\right)
+\left(\frac{\sigma_2^2}{\sigma_2^2}\right)}}=
+\frac{\phi-1}{
+\sqrt{(\phi+1)^2-4\rho_{12}^2\phi}
+}
+\]</span></p>
+<p>Now, letting <span class="math inline">\(F=s_1^2/s_2^2\)</span>, the ratio of the sample variances, we compute the sample version of <span class="math inline">\(\rho_{DS}\)</span>, labelled <span class="math inline">\(r_{DS}\)</span>.</p>
+<p><span class="math display">\[r_{DS}=\frac{F-1}{\sqrt{(F+1)^2-4r_{12}^2F}}\]</span>
+where <span class="math inline">\(r_{12}\)</span> is the sample correlation between <span class="math inline">\(Y_1\)</span> and <span class="math inline">\(Y_2\)</span>. Then the test of whether <span class="math inline">\(\rho_{DS}=0\)</span>, which implies <span class="math inline">\(\sigma_1^2-\sigma_2^2=0\)</span> is conducted with the following <span class="math inline">\(t\)</span>-test,which is of the same form as testing that a Pearson correlation <span class="math inline">\(\rho=0\)</span>.</p>
+<p><span class="math display">\[H_0:\sigma_1^2=\sigma_2^2 \qquad H_A:\sigma_1^2 \neq \sigma_2^2 \qquad
+\mbox{TS: } t_{obs}=\frac{r_{DS}}{\sqrt{\frac{1-r_{DS}^2}{n-2}}}\]</span></p>
+<p><span class="math display">\[ \mbox{RR: } |t_{obs}|\geq t_{1-\alpha/2,n-2}  \qquad
+P=2P\left(t_{n-2}\geq |t_{obs}|\right)  \]</span></p>
+</div>
+</div>
+<div id="examples" class="section level2 hasAnchor" number="1.5">
+<h2><span class="header-section-number">1.5</span> Examples<a href="comparing-two-treatments-or-populations.html#examples" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section we will consider examples of probability distributions and inferences for differences among population means and variances.</p>
+<p>In the first example we will consider an example of a population of two random variables
+being observed on the same units, and examine paired differences.</p>
+<p><strong>Example 1.1: WNBA Team Actual and Predicted Points - Paired Data</strong></p>
+<p>This example concerns all team-games for the WNBA 2010-2024 regular seasons.
+There were 3059 games played, each with two teams, so there are 6118 units.
+Closing betting lines provide a point spread and Over/Under line for each team game.
+We use the convention used in the sports betting literature as assigning favored teams
+a positive spread (opposite of how it’s posted on betting sites).</p>
+<p>Suppose the home team is favored by <span class="math inline">\(HS=+5\)</span> points (and away team underdog by 5 points),
+and the Over/Under is <span class="math inline">\(OU=150\)</span> points. The betting line Predicted scores for the home team <span class="math inline">\(HP\)</span> and away team <span class="math inline">\(AP\)</span> can be obtained as follows.</p>
+<p><span class="math display">\[ HP = \frac{OU+HS}{2}=\frac{150+5}{2}=77.5   \qquad  
+AP = \frac{OU-HS}{2}=\frac{150-5}{2}=72.5   \qquad
+\]</span>
+This preserves the sum (Over/Under) and home team spread.</p>
+<p>Then we observe the Actual score for each team-game. We are interested in the difference
+<span class="math inline">\(D=A-P\)</span> for each team-game, where <span class="math inline">\(A\)</span> is the Actual score (<span class="math inline">\(Y_1\)</span> in the formulas) and <span class="math inline">\(P\)</span> is the Predicted score (<span class="math inline">\(Y_2\)</span> in the formulas). Note that if <span class="math inline">\(D\)</span> is positive, the team scored higher than predicted by the betting lines.</p>
+<p>For this example, we will do the following steps.</p>
+<ul>
+<li>Treating this as a population, obtain parameters for <span class="math inline">\(A\)</span>, <span class="math inline">\(P\)</span>, and <span class="math inline">\(D=A-P\)</span> along with Shapiro-Wilk tests for normality and a histogram with superimposed normal distribution for <span class="math inline">\(D=A-P\)</span>.</li>
+<li>Treating this as a single sample from a <strong>metaphorical population</strong> where these 6118 games could be replayed many times, obtain a 95% Confidence Interval for <span class="math inline">\(\mu_D\)</span> and test <span class="math inline">\(H_0:\mu_D=0\)</span>, implying that on average, the predictions are correct.</li>
+<li>Treating this as a population, take 100000 (pseudo) random samples of size <span class="math inline">\(n=20\)</span> and observe the quantity <span class="math inline">\(t=\left(\overline{d}-\mu_d\right)/\sqrt{s_d^2/n}\)</span> and plot the superimposed <span class="math inline">\(t_{19}\)</span> distribution. Further, obtain the coverage rate for the 95% Confidence Intervals for <span class="math inline">\(\mu_D\)</span>.</li>
+<li>For the 100000 samples described above, conduct the test of equal variances and consider the distribution of observed correlations <span class="math inline">\(r_{DS}\)</span></li>
+</ul>
+<p><strong>Population Parameters, Normality Tests, and Histogram</strong></p>
+<p>Population parameters for <span class="math inline">\(A\)</span>, <span class="math inline">\(P\)</span>, and <span class="math inline">\(D=A-P\)</span> are given in Table <a href="comparing-two-treatments-or-populations.html#tab:chapter1a1">1.1</a>.
+and a histogram
+with a superimposed normal distribution for the differences is given in Figure <a href="comparing-two-treatments-or-populations.html#fig:chapter1a1">1.1</a>.</p>
+<p>These differences are approximately normally distributed with mean <span class="math inline">\(\mu=0.0814\)</span> and standard deviation <span class="math inline">\(\sigma=10.0813\)</span> points.</p>
+<p>As the <strong>shapiro.test</strong> function does not report <span class="math inline">\(P\)</span>-values for sample sizes above 5000
+(as they are considered unreliable for relatively large samples), we take 500 random samples, each of <span class="math inline">\(n=1000\)</span> games, and obtain the average <span class="math inline">\(P\)</span>-values for those 500 samples.
+For the Actual points, the average <span class="math inline">\(P\)</span>-value is .1369, for Predicted, it is .0584,
+and for the Difference, it is .4550. Thus, there is not strong evidence against normalty, particularly for the Differences.</p>
+<pre><code>##  [1] &quot;team&quot;         &quot;date&quot;         &quot;year&quot;         &quot;tmGmYr&quot;       &quot;opGmYr&quot;      
+##  [6] &quot;home&quot;         &quot;teamPts&quot;      &quot;oppPts&quot;       &quot;OT&quot;           &quot;tmSprd&quot;      
+## [11] &quot;OU&quot;           &quot;tmSpDev&quot;      &quot;oppTeam&quot;      &quot;tmWin&quot;        &quot;tmATSWin&quot;    
+## [16] &quot;tmOver&quot;       &quot;tmWinSeas&quot;    &quot;tmLosSeas&quot;    &quot;tmWinStrk&quot;    &quot;tmLosStrk&quot;   
+## [21] &quot;tmATSWinSeas&quot; &quot;tmATSLosSeas&quot; &quot;tmATSWinStrk&quot; &quot;tmATSLosStrk&quot; &quot;tmOVRSeas&quot;   
+## [26] &quot;tmUDRSeas&quot;    &quot;tmOVRStrk&quot;    &quot;tmUDRStrk&quot;    &quot;opWin&quot;        &quot;opATSWin&quot;    
+## [31] &quot;opOver&quot;       &quot;opWinSeas&quot;    &quot;opLosSeas&quot;    &quot;opWinStrk&quot;    &quot;opLosStrk&quot;   
+## [36] &quot;opATSWinSeas&quot; &quot;opATSLosSeas&quot; &quot;opATSWinStrk&quot; &quot;opATSLosStrk&quot; &quot;opOVRSeas&quot;   
+## [41] &quot;opUDRSeas&quot;    &quot;opOVRStrk&quot;    &quot;opUDRStrk&quot;    &quot;day&quot;          &quot;month&quot;       
+## [46] &quot;year.1&quot;       &quot;dmy&quot;          &quot;code&quot;</code></pre>
+<table>
+<caption><span id="tab:chapter1a1">Table 1.1: </span>Predicted and Actual Points and the Actual-Predicted difference - WNBA 2010/2024</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Predicted</th>
+<th align="right">Actual</th>
+<th align="right">Diff (A-P)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">N</td>
+<td align="right">6118.0000</td>
+<td align="right">6118.0000</td>
+<td align="right">6118.0000</td>
+</tr>
+<tr class="even">
+<td align="left">Mean</td>
+<td align="right">79.7896</td>
+<td align="right">79.8710</td>
+<td align="right">0.0814</td>
+</tr>
+<tr class="odd">
+<td align="left">Variance</td>
+<td align="right">33.0773</td>
+<td align="right">131.8456</td>
+<td align="right">101.6167</td>
+</tr>
+<tr class="even">
+<td align="left">Standard Deviation</td>
+<td align="right">5.7513</td>
+<td align="right">11.4824</td>
+<td align="right">10.0805</td>
+</tr>
+<tr class="odd">
+<td align="left">Correlation</td>
+<td align="right">0.4793</td>
+<td align="right">0.4793</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="left">Standard Error</td>
+<td align="right">0.0735</td>
+<td align="right">0.1468</td>
+<td align="right">0.1289</td>
+</tr>
+<tr class="odd">
+<td align="left">Average Shapiro-Wilk P-value</td>
+<td align="right">0.0584</td>
+<td align="right">0.1369</td>
+<td align="right">0.4550</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chapter1a1"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/chapter1a1-1.png" alt="Distribution of team point prediction errors - WNBA 2010/2024" width="80%" />
+<p class="caption">
+Figure 1.1: Distribution of team point prediction errors - WNBA 2010/2024
+</p>
+</div>
+<p>Note that the Actual scores have mean <span class="math inline">\(\mu_A=79.87\)</span>, variance <span class="math inline">\(\sigma_A^2=131.85\)</span>, and standard deviation <span class="math inline">\(\sigma_A=11.48\)</span>, and the Predicted scores have mean <span class="math inline">\(\mu_P=79.79\)</span>,
+variance <span class="math inline">\(\sigma_P^2=33.08\)</span>,
+and standard deviation <span class="math inline">\(\sigma_P=5.75\)</span>, and the correlation between actual and predicted scores is <span class="math inline">\(\rho_{AP}=.479\)</span>. This leads to the following
+direct computation of the mean, variance, and standard deviations among the team point prediction errors
+<span class="math inline">\(D=A-P\)</span> based on rules for linear functions of random variables.</p>
+<p><span class="math display">\[ E\{D\}=\mu_D=E\{A-P\}=\mu_A-\mu_P=79.87-79.79=0.08 \]</span>
+<span class="math display">\[ V\{D\}=\sigma_D^2=V\{A-P\}=\sigma_A^2+\sigma_P^2-2\rho_{AP}\sigma_A\sigma_P = \]</span>
+<span class="math display">\[=131.85+33.08-2(.479)(11.48)(5.75) = 101.62
+\quad \Rightarrow \quad \sigma_D = 10.08 \]</span></p>
+<p><strong>Treating these Team-Games as a Sample from a Conceptual or “Metaphorical” Population </strong></p>
+<p>We obtain a 95% Confidence Interval for <span class="math inline">\(\mu_D\)</span> and a test of <span class="math inline">\(H_0:\mu_D=0\)</span> for the
+population mean Difference as follow with <span class="math inline">\(\overline{d}=0.0814\)</span>, <span class="math inline">\(s_d^2=101.6167\)</span>, <span class="math inline">\(n=6118\)</span>,
+<span class="math inline">\(\sqrt{s_d^2/n}=0.1289\)</span>,and <span class="math inline">\(t_{.975;6118-1}=1.9604\)</span>.</p>
+<p><span class="math display">\[ \overline{d} \pm t_{.025;n-1}\sqrt{\frac{s_d^2}{n}}  \equiv  0.0814 \pm 1.9604(0.1289)  \equiv  0.0814 \pm 0.2527
+\equiv  (-0.1713, 0.3341) \]</span></p>
+<p>The interval contains 0, showing no evidence of a systematic “bias” in team point predictions.</p>
+<p><span class="math display">\[
+H_0:\mu_D=0 \qquad H_A:\mu_D \neq 0 \qquad TS: t^*=\frac{0.0814}{0.1289}=0.6315
+\]</span>
+<span class="math display">\[
+RR: |t^*| \geq 1.9604  \qquad  P=2P\left(t_{6117} \geq 0.3221\right)=.5277
+\]</span></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="comparing-two-treatments-or-populations.html#cb5-1" tabindex="-1"></a><span class="fu">t.test</span>(wnba<span class="sc">$</span>teamPts, wnba<span class="sc">$</span>tmPred, <span class="at">paired=</span><span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## 
+##  Paired t-test
+## 
+## data:  wnba$teamPts and wnba$tmPred
+## t = 0.63155, df = 6117, p-value = 0.5277
+## alternative hypothesis: true mean difference is not equal to 0
+## 95 percent confidence interval:
+##  -0.1712672  0.3340655
+## sample estimates:
+## mean difference 
+##      0.08139915</code></pre>
+<p>Results by year are given in Table <a href="comparing-two-treatments-or-populations.html#tab:chapter1a2">1.2</a>
+and displayed in Figure <a href="comparing-two-treatments-or-populations.html#fig:chapter1a2">1.2</a>. Only for 2011, when the average team point prediction error
+was close to <span class="math inline">\(-1\)</span>, does the 95% Confidence Interval fail to contain 0.</p>
+<table>
+<caption><span id="tab:chapter1a2">Table 1.2: </span>95% Confidence Intervals for mean prediction error by year - WNBA 2010/2024</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">n</th>
+<th align="right">mean</th>
+<th align="right">SD</th>
+<th align="right">LB</th>
+<th align="right">UB</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">2010</td>
+<td align="right">408</td>
+<td align="right">0.2684</td>
+<td align="right">10.2038</td>
+<td align="right">-0.7247</td>
+<td align="right">1.2614</td>
+</tr>
+<tr class="even">
+<td align="left">2011</td>
+<td align="right">408</td>
+<td align="right">-0.9975</td>
+<td align="right">9.8182</td>
+<td align="right">-1.9531</td>
+<td align="right">-0.0420</td>
+</tr>
+<tr class="odd">
+<td align="left">2012</td>
+<td align="right">408</td>
+<td align="right">0.1275</td>
+<td align="right">9.6650</td>
+<td align="right">-0.8132</td>
+<td align="right">1.0681</td>
+</tr>
+<tr class="even">
+<td align="left">2013</td>
+<td align="right">408</td>
+<td align="right">-0.8480</td>
+<td align="right">10.1696</td>
+<td align="right">-1.8378</td>
+<td align="right">0.1417</td>
+</tr>
+<tr class="odd">
+<td align="left">2014</td>
+<td align="right">408</td>
+<td align="right">0.2990</td>
+<td align="right">9.7827</td>
+<td align="right">-0.6531</td>
+<td align="right">1.2511</td>
+</tr>
+<tr class="even">
+<td align="left">2015</td>
+<td align="right">408</td>
+<td align="right">-0.2892</td>
+<td align="right">10.4884</td>
+<td align="right">-1.3100</td>
+<td align="right">0.7315</td>
+</tr>
+<tr class="odd">
+<td align="left">2016</td>
+<td align="right">408</td>
+<td align="right">0.9350</td>
+<td align="right">9.9229</td>
+<td align="right">-0.0307</td>
+<td align="right">1.9008</td>
+</tr>
+<tr class="even">
+<td align="left">2017</td>
+<td align="right">408</td>
+<td align="right">0.2880</td>
+<td align="right">10.3358</td>
+<td align="right">-0.7179</td>
+<td align="right">1.2939</td>
+</tr>
+<tr class="odd">
+<td align="left">2018</td>
+<td align="right">406</td>
+<td align="right">0.6613</td>
+<td align="right">10.4139</td>
+<td align="right">-0.3547</td>
+<td align="right">1.6773</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="right">408</td>
+<td align="right">0.0833</td>
+<td align="right">10.1730</td>
+<td align="right">-0.9067</td>
+<td align="right">1.0734</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="right">264</td>
+<td align="right">0.7273</td>
+<td align="right">10.2293</td>
+<td align="right">-0.5124</td>
+<td align="right">1.9669</td>
+</tr>
+<tr class="even">
+<td align="left">2021</td>
+<td align="right">384</td>
+<td align="right">-0.5260</td>
+<td align="right">9.7460</td>
+<td align="right">-1.5039</td>
+<td align="right">0.4518</td>
+</tr>
+<tr class="odd">
+<td align="left">2022</td>
+<td align="right">432</td>
+<td align="right">0.5822</td>
+<td align="right">10.2943</td>
+<td align="right">-0.3913</td>
+<td align="right">1.5557</td>
+</tr>
+<tr class="even">
+<td align="left">2023</td>
+<td align="right">480</td>
+<td align="right">0.6625</td>
+<td align="right">10.4264</td>
+<td align="right">-0.2726</td>
+<td align="right">1.5976</td>
+</tr>
+<tr class="odd">
+<td align="left">2024</td>
+<td align="right">480</td>
+<td align="right">-0.5740</td>
+<td align="right">9.4645</td>
+<td align="right">-1.4228</td>
+<td align="right">0.2749</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chapter1a2"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/chapter1a2-1.png" alt="95% Confidence Intervals for mean prediction error by year - WNBA 2010/2024" width="80%" />
+<p class="caption">
+Figure 1.2: 95% Confidence Intervals for mean prediction error by year - WNBA 2010/2024
+</p>
+</div>
+<p><strong>Taking 100000 Random Samples of <span class="math inline">\(n=20\)</span> from this Population of Team-Games </strong></p>
+<p>Now we treat this as a population of games, and consider taking (pseudo) random samples and observing the properties of the estimated mean differences and
+95% Confidence Intervals
+in repeated sampling.
+We take 100000 random samples of size <span class="math inline">\(n=20\)</span>, implying an estimated standard error of <span class="math inline">\(\hat{SE}_{\overline{Y}}=\sqrt{s_d^2/n}\)</span>, where we are using the
+sample variance in the standard error.</p>
+<p>First, we compute the value <span class="math inline">\(t=\left(\overline{d}-\mu_D\right)/\sqrt{s_d^2/n}\)</span> for
+each sample, where <span class="math inline">\(\mu_D=0.0814\)</span> and <span class="math inline">\(n=20\)</span>. Figure <a href="comparing-two-treatments-or-populations.html#fig:chapter1a3">1.3</a> gives a histogram of the <span class="math inline">\(t\)</span>-values, with a superimposed <span class="math inline">\(t_{19}\)</span> distribution. The model fits exceedingly well.</p>
+<p>When we construct 95% Confidence Intervals for <span class="math inline">\(\mu_D\)</span> of the form
+<span class="math inline">\(\overline{d} \pm t_{.975;20-1}\sqrt{s_d^2/20}\)</span>, we find that 95.06% include the
+true <span class="math inline">\(\mu_D=0.0814\)</span>.
+Note that different samples (based on different seeds) will have slightly different results.</p>
+<p>For the first random sample of the 100000 generated, we observe <span class="math inline">\(\overline{d}=-0.300\)</span> and <span class="math inline">\(s_d^2=121.320\)</span>.</p>
+<p><span class="math display">\[
+\overline{d}  \pm t_{.975;,n-1}\sqrt{\frac{s_d^2}{n}}  \equiv
+-0.300  \pm 2.093\sqrt{\frac{121.320}{20}} \equiv -0.300\pm 5.155 \equiv
+\left[-5.545,4.855\right]
+\]</span>
+For the test of equal variances for the paired data
+<span class="math inline">\(\left(H_0:\sigma_A^2=\sigma_P^2\right)\)</span>, we should suspect that the test will reject
+often, given the the true ratio is <span class="math inline">\(\sigma_A^2/\sigma_P^2=131.85/33.08=4\)</span>.
+We will conduct the test anyway to observe the <strong>power</strong> of the test, the proportion of
+samples that reject the null hypothesis. Further, we will save the sample correlations
+<span class="math inline">\(r_{AP}\)</span> for the samples and obtain a histogram with a line at the population correlation <span class="math inline">\(\rho_{AP}=0.4793\)</span>.</p>
+<p>The first sample of <span class="math inline">\(n=20\)</span> produced <span class="math inline">\(s_A^2=117.474\)</span>, <span class="math inline">\(s_P^2=20.057\)</span>, and <span class="math inline">\(r_{AP}=0.167\)</span>.
+We now conduct the test described in Section 1.4.2. First, we compute the <span class="math inline">\(F\)</span>-statistic: <span class="math inline">\(F=s_A^2/s_P^2=117.474/20.057=5.857\)</span>.</p>
+<p><span class="math display">\[
+r_{DS}=\frac{F-1}{\sqrt{(F+1)^2-4r_{AP}^2F}} = \frac{5.857-1}{\sqrt{(5.857+1)^2-4(0.167)^2(5.857)}} =
+\frac{4.857}{6.809}=0.713
+\]</span>
+Now, we conduct the <span class="math inline">\(t\)</span>-test for equal variances.</p>
+<p><span class="math display">\[
+H_0:\sigma_A^2=\sigma_P^2 \quad H_A:\sigma_A^2\neq\sigma_P^2 \quad
+TS:t^*=\frac{0.713}{\sqrt{\frac{1-0.713^2}{20-2}}}=\frac{0.713}{0.165}=4.321
+\]</span>
+<span class="math display">\[
+RR:|t^*| \geq t_{.975,18}=2.093  \qquad  2P=P\left(t_{18}\geq4.321\right)=.0004
+\]</span>
+We conclude the variances are not equal. Of the 100000 samples, the null hypothesis
+of equal variances was rejected in 90.67% of the samples.</p>
+<p>Figure <a href="comparing-two-treatments-or-populations.html#fig:chapter1a4">1.4</a> gives a histogram of the sample correlations <span class="math inline">\(r_{AP}\)</span> of the Actual and Predicted scores with a line at the population correlation <span class="math inline">\(\rho_{AP}=0.479\)</span>. As is the case when the population correlation is positive, the sampling distribution is skewed left.</p>
+<pre><code>## [1] -0.3</code></pre>
+<pre><code>## [1] 121.3197</code></pre>
+<pre><code>## [1] 0.95059</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chapter1a3"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/chapter1a3-1.png" alt="Distribution of t values for team point prediction errors - WNBA 2010/2024" width="80%" />
+<p class="caption">
+Figure 1.3: Distribution of t values for team point prediction errors - WNBA 2010/2024
+</p>
+</div>
+<pre><code>## [1] 117.4737</code></pre>
+<pre><code>## [1] 20.05658</code></pre>
+<pre><code>## [1] 0.1669815</code></pre>
+<pre><code>## [1] 0.90672</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chapter1a4"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/chapter1a4-1.png" alt="Distribution of of correlations between Actual and Predicted Points - WNBA 2010/2024" width="80%" />
+<p class="caption">
+Figure 1.4: Distribution of of correlations between Actual and Predicted Points - WNBA 2010/2024
+</p>
+</div>
+<p><span class="math display">\[ \nabla  \]</span></p>
+<p>Next we consider Independent samples for NBA and WNBA regular season games for
+seasons ending in 2010-2024. The analyses will be done in a similar manner to
+Example 1.1.</p>
+<p><strong>Example 1.2: NBA and WNBA Combined Total Points and Over/Under Line - Independent Data</strong></p>
+<p>This example concerns all games for the NBA 2009/10-2023/24 and WNBA 2010-2024 regular seasons.
+There were 19116 NBA and 3059 WNBA games played. For each game, we will compare the total
+combined points for the two teams with the Over/Under betting line and observe the difference (Actual - OU). We will consider the differences for the two “associations.”
+Positive differences mean the teams combine for more points than the Over/Under line, and negative differences mean the teams combine for fewer points than the Over/Under line.
+Note that <span class="math inline">\(Y\)</span> is the difference score for the games, but we are comparing the differences
+for the NBA and WNBA, which will be independent samples.</p>
+<p>For this example, we will do the following steps.</p>
+<ul>
+<li>Treating these as two populations, obtain parameters for the differences by league and histograms with superimposed normal distributions for the differences.</li>
+<li>Treating these as single samples from two <strong>metaphorical populations</strong> where these 19116 NBA and 3059 WNBA games could be replayed many times, obtain 95% Confidence Intervals for <span class="math inline">\(\mu_1-\mu_2\)</span> and test <span class="math inline">\(H_0:\mu_1-\mu_2=0\)</span>, implying that on average, the prediction errors are equivalent for the two leagues, based on equal and unequal variance assumptions.</li>
+<li>Treating these as populations, take 100000 (pseudo) random samples of size <span class="math inline">\(n_1=40\)</span> and <span class="math inline">\(n_2=20\)</span> and observe the quantity <span class="math inline">\(t=\left[\left(\overline{y}_1-\overline{y}_2\right)-\left(\mu_1-\mu_2\right)\right]/\sqrt{s_p^2\left(1/n_1+1/n_2\right)}\)</span> and plot the superimposed <span class="math inline">\(t_{58}\)</span> distribution. Further, obtain the coverage rate for the 95% Confidence Intervals for <span class="math inline">\(\mu_1-\mu_2\)</span>, based
+on the equal variance and unequal variance assumptions.</li>
+<li>For the 100000 samples described above, conduct the test of equal variances and obtain the empirical power of the <span class="math inline">\(F\)</span>-test.</li>
+</ul>
+<p><strong>Population Parameters and Histograms</strong></p>
+<p>Population parameters for the league total prediction errors are given in Table <a href="comparing-two-treatments-or-populations.html#tab:chapter1b1">1.3</a>
+and histograms
+with superimposed normal distributions for the differences are given in Figure <a href="comparing-two-treatments-or-populations.html#fig:chapter1b1">1.5</a>.</p>
+<p>For the NBA, we have <span class="math inline">\(N_1=19116\)</span>, <span class="math inline">\(\mu_1=0.443\)</span>, and <span class="math inline">\(\sigma_1=17.72\)</span>.
+For the WNBA, we have <span class="math inline">\(N_2=3059\)</span>, <span class="math inline">\(\mu_2=0.163\)</span>, and <span class="math inline">\(\sigma_2=16.27\)</span>.
+On average, both leagues Over/Under predictions are very accurate (mean differences less than half a point), but the variability is quite large.</p>
+<pre><code>##   team season1 tmGmYr opGmYr day month year   mdy opTeam home neutral tmPts
+## 1  ATL    2006      1      1   1    11 2006 39022    PHI    0       0    75
+##   opPts ot tmWin tmWinSea tmLosSea tmWinStr tmLosStr tmSprd tmWinATS
+## 1    88  0     0        0        0        0        0    5.5       -1
+##   tmWinATSSea tmLosATSSea tmWinATSStr tmLosATSStr tmOU tmWinOvr tmWinOvrSea
+## 1           0           0           0           0  199       -1           0
+##   tmLosOvrSea tmWinOvrStr tmLosOvrStr opWin opWinSea opLosSea opWinStr opLosStr
+## 1           0           0           0     1        0        0        0        0
+##   opSprd opWinATS opWinATSSea opLosATSSea opWinATSStr opLosATSStr opOU opWinOvr
+## 1   -5.5        1           0           0           0           0  199       -1
+##   opWinOvrSea opLosOvrSea opWinOvrStr opLosOvrStr                    code X
+## 1           0           0           0           0 1PHIATL2006\\\\11\\\\01</code></pre>
+<pre><code>##   team      date year tmGmYr opGmYr home teamPts oppPts OT tmSprd    OU tmSpDev
+## 1  ATL 5/15/2010 2010      1      1    0      75     70  0    5.5 168.5    10.5
+##   oppTeam tmWin tmATSWin tmOver tmWinSeas tmLosSeas tmWinStrk tmLosStrk
+## 1      LV     1        1     -1         0         0         0         0
+##   tmATSWinSeas tmATSLosSeas tmATSWinStrk tmATSLosStrk tmOVRSeas tmUDRSeas
+## 1            0            0            0            0         0         0
+##   tmOVRStrk tmUDRStrk opWin opATSWin opOver opWinSeas opLosSeas opWinStrk
+## 1         0         0     0       -1     -1         0         0         0
+##   opLosStrk opATSWinSeas opATSLosSeas opATSWinStrk opATSLosStrk opOVRSeas
+## 1         0            0            0            0            0         0
+##   opUDRSeas opOVRStrk opUDRStrk day month year.1       dmy            code
+## 1         0         0         0  15     5   2010 15/5/2010 1ATLLV15/5/2010</code></pre>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  nba_tot_diff and wnba_tot_diff
+## t = 0.8212, df = 22173, p-value = 0.4115
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.3886726  0.9491923
+## sample estimates:
+## mean of x mean of y 
+## 0.4430582 0.1627983</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  nba_tot_diff and wnba_tot_diff
+## t = 0.87327, df = 4303.3, p-value = 0.3826
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -0.3489294  0.9094492
+## sample estimates:
+## mean of x mean of y 
+## 0.4430582 0.1627983</code></pre>
+<table>
+<caption><span id="tab:chapter1b1">Table 1.3: </span>NBA and WNBA Combined Points - Over/Under 2010-2024</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">NBA</th>
+<th align="right">WNBA</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">N</td>
+<td align="right">19116.0000</td>
+<td align="right">3059.0000</td>
+</tr>
+<tr class="even">
+<td align="left">Mean</td>
+<td align="right">0.4431</td>
+<td align="right">0.1628</td>
+</tr>
+<tr class="odd">
+<td align="left">Variance</td>
+<td align="right">313.8896</td>
+<td align="right">264.7473</td>
+</tr>
+<tr class="even">
+<td align="left">Standard Deviation</td>
+<td align="right">17.7169</td>
+<td align="right">16.2711</td>
+</tr>
+<tr class="odd">
+<td align="left">Standard Error</td>
+<td align="right">0.1281</td>
+<td align="right">0.2942</td>
+</tr>
+</tbody>
+</table>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chapter1b1"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/chapter1b1-1.png" alt="Distribution of combined point prediction errors - NBa and WNBA 2010/2024" width="80%" />
+<p class="caption">
+Figure 1.5: Distribution of combined point prediction errors - NBa and WNBA 2010/2024
+</p>
+</div>
+<p><strong>Treating these Games as Samples from Conceptual or “Metaphorical” Populations </strong></p>
+<p>First, we consider the equal variance case, noting that the standard deviations are fairly similar (17.72 and 16.27, respectively), however with these large samples, we will easily reject <span class="math inline">\(H_0:\sigma_1^2=\sigma_2^2\)</span>.</p>
+<p><span class="math display">\[
+TS: F^*=\frac{313.89}{264.75}=1.186 \qquad RR: F^*\leq F_{.025,19915,3058}= 0.948 \cup
+F^*\geq F_{.025,19915,3058}= 1.056
+\]</span></p>
+<p>Then we will consider the unequal variance case.</p>
+<p>The summary statistics and calculations are given below.</p>
+<p><span class="math display">\[
+\mbox{NBA: } n_1=19116 \quad \overline{y}_1=0.443 \quad s_1^2 = 313.89 \qquad
+\mbox{WNBA: } n_2=3059 \quad \overline{y}_2=0.163 \quad s_2^2 = 264.75
+\]</span>
+<span class="math display">\[
+s_P^2 = \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}=
+\frac{(19116-1)(313.89)+(3059-1)(264.75)}{19119+3059-2} = 307.11
+\]</span>
+<span class="math display">\[
+\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}=
+\sqrt{s_P^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]}
+=\sqrt{307.11\left[\frac{1}{19116}+\frac{1}{3059}\right]}=0.341
+\]</span>
+We obtain a 95% Confidence Interval for <span class="math inline">\(\mu_1-\mu_2\)</span> and a test of <span class="math inline">\(H_0:\mu_1-\mu_2=0\)</span> for the
+population mean Difference as follow with <span class="math inline">\(\overline{y}_1-\overline{y}_2=0.280\)</span>,
+<span class="math inline">\(\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}=0.341\)</span>, and <span class="math inline">\(t_{.975;19116+3059-2}=1.9601\)</span>.</p>
+<p><span class="math display">\[ \overline{y}_1-\overline{y}_2 \pm t_{.975;n_1+n_2-2}\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}  \equiv  0.280 \pm 1.9601(0.341)  \equiv  0.280 \pm 0.668
+\equiv  (-0.388,0.948)
+\]</span>
+<span class="math display">\[
+H_0:\mu_1-\mu_2=0 \quad H_A:\mu_1-\mu_2\neq 0 \qquad
+TS:t^*=\frac{\overline{y}_1-\overline{y}_2}{\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}}=\frac{0.280}{0.341}=0.821
+\]</span>
+<span class="math display">\[
+RR: |t^*| \geq t_{.975;22173} = 1.9601
+P=2P\left(t_{22173}\geq|t^*|\right)=.4117
+\]</span></p>
+<p>Thus, even with these large “samples”, we fail to reject <span class="math inline">\(H_0: \mu_1-\mu_2=0\)</span>.</p>
+<p>Now, we consider the unequal variance case (Welch’s Test, with Satterthwaite’s Approximation for the degrees of freedom). The sample mean difference doesn’t change.
+We obtain the estimated standard error of the mean difference and approximate degrees of freedom here.</p>
+<p><span class="math display">\[
+\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}=
+\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}=\sqrt{\frac{313.89}{19116}+\frac{264.75}{3059}}
+=0.321
+\]</span>
+<span class="math display">\[
+\hat{\nu}^* = \frac{\left(\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}\right)^2}{
+\frac{\left(\frac{s_1^2}{n_1}\right)^2}{n_1-1} +
+\frac{\left(\frac{s_2^2}{n_2}\right)^2}{n_2-1}
+} =
+\frac{\left(\frac{313.89}{19116}+\frac{264.75}{3059}\right)^2}{
+\frac{\left(\frac{313.89}{19116}\right)^2}{19116-1} +
+\frac{\left(\frac{264.75}{3059}\right)^2}{3059-1}
+}=4303.65
+\]</span></p>
+<p>Now, <span class="math inline">\(t_{.975;4303.65}=1.9605\)</span>, and we obtain a 95% Confidence Interval for <span class="math inline">\(\mu_1-\mu_2\)</span> and test <span class="math inline">\(H_0:\mu_1-\mu_2=0\)</span>.</p>
+<p><span class="math display">\[
+0.280 \pm 1.9605(0.321)\equiv 0.280\pm 0.629 \equiv (-0.349,0.909)
+\]</span>
+<span class="math display">\[
+H_0: \mu_1-\mu_2=0  \qquad  TS: t^*=\frac{0.280}{0.321}=0.872
+\]</span>
+<span class="math display">\[
+RR: |t^*| \geq 1.9605 \qquad P=2P\left(t_{4303.65}\geq |t^*|\right)=.3833
+\]</span></p>
+<p>These results are in agreement with <strong>t.test</strong> functions in the previous code block (up to rounding error).</p>
+<p><strong>Taking 100000 Random Samples of <span class="math inline">\(n_1=40\)</span> and <span class="math inline">\(n_2=20\)</span> from these Populations of Games</strong></p>
+<p>Now we treat these as two populations of games, and consider taking (pseudo) random samples and observing the properties of the estimated mean differences and
+95% Confidence Intervals
+in repeated sampling, based on both the equal and unequal variance cases.
+We take 100000 random samples of sizes <span class="math inline">\(n_1=40\)</span> NBA and <span class="math inline">\(n_2=20\)</span> WNBA games.</p>
+<p>First, we compute the value
+<span class="math inline">\(t=\left[\left(\overline{y}_1-\overline{y}_2\right)-\left(\mu_1-\mu_2\right)\right]/\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}\)</span> for
+each sample, where <span class="math inline">\(\mu_1-\mu_2=0.280\)</span> with <span class="math inline">\(n_1=40\)</span> and <span class="math inline">\(n_2=20\)</span>. Figure <a href="comparing-two-treatments-or-populations.html#fig:chapter1b2">1.6</a> gives a histogram of the <span class="math inline">\(t\)</span>-values, with a superimposed <span class="math inline">\(t_{58}\)</span> distribution. The model gives a reasonable fit, but does not fit as well as in Example 1.1, due to unequal variances and sample sizes.</p>
+<p>As we have computed Confidence Intervals and tests for the “full sample”, we will
+not repeat the calculations for our first random samples here.</p>
+<p>When we construct 95% Confidence Intervals for <span class="math inline">\(\mu_1-\mu_2\)</span>, we find that 92.88% of the Equal variance case intervals include the
+true <span class="math inline">\(\mu_1-\mu_2=0.280\)</span>. Based on the unequal variance case, 94.55% cover 0.280.
+Note that different samples (based on different seeds) will have slightly different results.</p>
+<p>For testing <span class="math inline">\(H_0:\sigma_1^2=\sigma_2^2\)</span>, <span class="math inline">\(F_{.025,39,19}=0.477\)</span> and <span class="math inline">\(F_{.975,39,19}=2.338\)</span>,
+so we will reject <span class="math inline">\(H_0\)</span> if <span class="math inline">\(s_1^2/s_2^2\)</span> is less than 0.477 or greater than 2.338.
+Of these 100000 samples, <span class="math inline">\(H_0\)</span> is rejected in 36.15% of samples.</p>
+<pre><code>## [1] 0.92876</code></pre>
+<pre><code>## [1] 0.94554</code></pre>
+<pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
+## -5.537120 -0.695593  0.001199  0.017788  0.715335  6.380007</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:chapter1b2"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/chapter1b2-1.png" alt="Distribution of t values for combined team point prediction errors - NBA and WNBA 2010/2024" width="80%" />
+<p class="caption">
+Figure 1.6: Distribution of t values for combined team point prediction errors - NBA and WNBA 2010/2024
+</p>
+</div>
+<pre><code>## [1] 0.36154</code></pre>
+<p><span class="math display">\[
+\nabla
+\]</span></p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-snedecor_1967" class="csl-entry">
+Snedecor, George W., and William G. Cochran. 1967. <em>Statistical Methods</em>. 6th ed. Ames, Iowa: The Iowa State University Press.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "link": "https://github.com/LarryWinner/STA4211-Notes1.git/edit/main/%s",
+  "text": "Edit"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -1,0 +1,1871 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Single Factor Studies | Design and Analysis of Experiments</title>
+  <meta name="description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Single Factor Studies | Design and Analysis of Experiments" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Single Factor Studies | Design and Analysis of Experiments" />
+  
+  <meta name="twitter:description" content="This is a course on Experimental Design and Analysis." />
+  
+
+<meta name="author" content="Larry Winner" />
+
+
+<meta name="date" content="2026-06-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="analysis-of-treatment-means.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STA 4211 Course Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html"><i class="fa fa-check"></i><b>1</b> Comparing Two Treatments or Populations</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#linear-functions-of-random-variables"><i class="fa fa-check"></i><b>1.1</b> Linear Functions of Random Variables</a></li>
+<li class="chapter" data-level="1.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#students-t-distribution-for-making-inference-on-population-means"><i class="fa fa-check"></i><b>1.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution for Making Inference on Population Means</a></li>
+<li class="chapter" data-level="1.3" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference"><i class="fa fa-check"></i><b>1.3</b> Inference for the Population Mean Difference</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples"><i class="fa fa-check"></i><b>1.3.1</b> Inference for the Population Mean Difference for Paired Samples</a></li>
+<li class="chapter" data-level="1.3.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-independent-samples"><i class="fa fa-check"></i><b>1.3.2</b> Inference for the Population Mean Difference for Independent Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-variance-ratios"><i class="fa fa-check"></i><b>1.4</b> Inference for the Population Variance Ratios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inferences-for-variance-ratios-for-independent-samples"><i class="fa fa-check"></i><b>1.4.1</b> Inferences for Variance Ratios for Independent Samples</a></li>
+<li class="chapter" data-level="1.4.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#test-for-equal-variances-with-paired-samples"><i class="fa fa-check"></i><b>1.4.2</b> Test for Equal Variances with Paired Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#examples"><i class="fa fa-check"></i><b>1.5</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#terminology"><i class="fa fa-check"></i><b>2.1</b> Terminology</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#basics-of-controlled-experiments"><i class="fa fa-check"></i><b>2.2</b> Basics of Controlled Experiments</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#completely-randomized-design-crd"><i class="fa fa-check"></i><b>2.3</b> Completely Randomized Design (CRD)</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#randomized-complete-block-design-rcbd-or-rbd"><i class="fa fa-check"></i><b>2.4</b> Randomized Complete Block Design (RCBD or RBD)</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#overview-of-some-standard-experimental-designs"><i class="fa fa-check"></i><b>2.5</b> Overview of Some Standard Experimental Designs</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#overview-of-observational-study-designs"><i class="fa fa-check"></i><b>2.6</b> Overview of Observational Study Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-factor-studies.html"><a href="single-factor-studies.html"><i class="fa fa-check"></i><b>3</b> Single Factor Studies</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#models-with-r2-factor-levels"><i class="fa fa-check"></i><b>3.1</b> Models with <span class="math inline">\(r=2\)</span> Factor Levels</a></li>
+<li class="chapter" data-level="3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#three-model-formulations"><i class="fa fa-check"></i><b>3.2</b> Three Model Formulations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#cell-means-model"><i class="fa fa-check"></i><b>3.2.1</b> Cell Means Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#treatment-effects-model"><i class="fa fa-check"></i><b>3.2.2</b> Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#reference-group-model"><i class="fa fa-check"></i><b>3.2.3</b> Reference Group Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance-and-f-test"><i class="fa fa-check"></i><b>3.3</b> The Analysis of Variance and <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#general-linear-test-approach"><i class="fa fa-check"></i><b>3.3.1</b> General Linear Test Approach</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#power-calculations"><i class="fa fa-check"></i><b>3.3.2</b> Power Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#technical-details"><i class="fa fa-check"></i><b>3.4</b> Technical Details</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-for-the-cell-means-model-regression-approach"><i class="fa fa-check"></i><b>3.4.1</b> Least Squares Estimation for the Cell Means Model (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#scalar-estimation-for-the-cell-means-model"><i class="fa fa-check"></i><b>3.4.2</b> Scalar Estimation for the Cell Means Model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#estimation-for-the-treatment-effects-model"><i class="fa fa-check"></i><b>3.4.3</b> Estimation for the Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.4.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-regression-approach"><i class="fa fa-check"></i><b>3.4.4</b> Least Squares Estimation (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance"><i class="fa fa-check"></i><b>3.4.5</b> The Analysis of Variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html"><i class="fa fa-check"></i><b>4</b> Analysis of Treatment Means</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#individual-treatment-means"><i class="fa fa-check"></i><b>4.1</b> Individual Treatment Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#comparing-two-treatment-means"><i class="fa fa-check"></i><b>4.2</b> Comparing Two Treatment Means</a></li>
+<li class="chapter" data-level="4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#contrasts-among-treatment-means"><i class="fa fa-check"></i><b>4.3</b> Contrasts Among Treatment Means</a></li>
+<li class="chapter" data-level="4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#simultaneous-comparisons"><i class="fa fa-check"></i><b>4.4</b> Simultaneous Comparisons</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#tukeys-honest-significant-difference-hsd"><i class="fa fa-check"></i><b>4.4.1</b> Tukey’s Honest Significant Difference (HSD)</a></li>
+<li class="chapter" data-level="4.4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#scheffes-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.2</b> Scheffe’s Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#bonferroni-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.3</b> Bonferroni Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#multiple-range-methods"><i class="fa fa-check"></i><b>4.4.4</b> Multiple Range Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html"><i class="fa fa-check"></i><b>5</b> Alternative Tests for Treatment Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#randomizationpermutation-tests"><i class="fa fa-check"></i><b>5.1</b> Randomization/Permutation Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#tests-for-equal-error-variances"><i class="fa fa-check"></i><b>5.2</b> Tests for Equal Error Variances</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#hartleys-test"><i class="fa fa-check"></i><b>5.2.1</b> Hartley’s Test</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#levenes-test"><i class="fa fa-check"></i><b>5.2.2</b> Levene’s Test</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#bartletts-test"><i class="fa fa-check"></i><b>5.2.3</b> Bartlett’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#remedial-measures"><i class="fa fa-check"></i><b>5.3</b> Remedial Measures</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#weighted-least-squares-and-welchs-test"><i class="fa fa-check"></i><b>5.3.1</b> Weighted Least Squares and Welch’s Test</a></li>
+<li class="chapter" data-level="5.3.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#post-hoc-comparisons-with-unequal-variances"><i class="fa fa-check"></i><b>5.3.2</b> Post-hoc Comparisons with Unequal Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#nonparametric-test-for-non-normal-data"><i class="fa fa-check"></i><b>5.4</b> Nonparametric Test for Non-normal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html"><i class="fa fa-check"></i><b>6</b> Balanced Two Factor Designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#two-factor-analysis-of-variance"><i class="fa fa-check"></i><b>6.2</b> Two Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#cell-means-and-factor-effects-models"><i class="fa fa-check"></i><b>6.2.1</b> Cell Means and Factor Effects Models</a></li>
+<li class="chapter" data-level="6.2.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#least-squaresmaximum-likelihood-estimators"><i class="fa fa-check"></i><b>6.2.2</b> Least Squares/Maximum Likelihood Estimators</a></li>
+<li class="chapter" data-level="6.2.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#sums-of-squares-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>6.2.3</b> Sums of Squares and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#factor-effect-contrasts"><i class="fa fa-check"></i><b>6.3</b> Factor Effect Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-there-is-no-interaction"><i class="fa fa-check"></i><b>6.3.1</b> Contrasts when there is No Interaction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-interaction-is-present"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts when Interaction is Present</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="two-factor-designs-with-1-observation-per-treatment.html"><a href="two-factor-designs-with-1-observation-per-treatment.html"><i class="fa fa-check"></i><b>7</b> Two-Factor Designs with 1 Observation per Treatment</a></li>
+<li class="chapter" data-level="8" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html"><i class="fa fa-check"></i><b>8</b> Unbalanced Two-Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#statistical-model-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>8.1</b> Statistical Model and the Analysis of Variance</a></li>
+<li class="chapter" data-level="8.2" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#least-squares-estimators-and-contrastslinear-functions-among-means"><i class="fa fa-check"></i><b>8.2</b> Least Squares Estimators and Contrasts/Linear Functions Among Means</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="higher-order-models.html"><a href="higher-order-models.html"><i class="fa fa-check"></i><b>9</b> Higher Order Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="higher-order-models.html"><a href="higher-order-models.html#three-factor-models---mean-structure"><i class="fa fa-check"></i><b>9.1</b> Three Factor Models - Mean Structure</a></li>
+<li class="chapter" data-level="9.2" data-path="higher-order-models.html"><a href="higher-order-models.html#statistical-model-and-the-analysis-of-variance-1"><i class="fa fa-check"></i><b>9.2</b> Statistical Model and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="block-designs.html"><a href="block-designs.html"><i class="fa fa-check"></i><b>10</b> Block Designs</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="block-designs.html"><a href="block-designs.html#randomized-block-and-repeated-measures-designs"><i class="fa fa-check"></i><b>10.1</b> Randomized Block and Repeated Measures Designs</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="block-designs.html"><a href="block-designs.html#model-structure-and-estimators"><i class="fa fa-check"></i><b>10.1.1</b> Model Structure and Estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="block-designs.html"><a href="block-designs.html#analysis-of-variance-and-the-f-test"><i class="fa fa-check"></i><b>10.2</b> Analysis of Variance and the <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="block-designs.html"><a href="block-designs.html#checking-model-assumptions"><i class="fa fa-check"></i><b>10.2.1</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="10.2.2" data-path="block-designs.html"><a href="block-designs.html#relative-efficiency-and-within-subject-variance-covariance-matrix"><i class="fa fa-check"></i><b>10.2.2</b> Relative Efficiency and Within-Subject Variance-Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="block-designs.html"><a href="block-designs.html#latin-square-designs"><i class="fa fa-check"></i><b>10.3</b> Latin Square Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html"><i class="fa fa-check"></i><b>11</b> Random and Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#way-random-effects-model"><i class="fa fa-check"></i><b>11.1</b> 1-Way Random Effects Model</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>11.1.1</b> Analysis of Variance</a></li>
+<li class="chapter" data-level="11.1.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-population-mean-mu_bullet"><i class="fa fa-check"></i><b>11.1.2</b> Estimating the Population Mean <span class="math inline">\(\mu_{\bullet}\)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>11.1.3</b> Estimating the Intraclass Correlation Coefficient</a></li>
+<li class="chapter" data-level="11.1.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-within-group-variance"><i class="fa fa-check"></i><b>11.1.4</b> Estimating the Within Group Variance</a></li>
+<li class="chapter" data-level="11.1.5" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-between-group-variance"><i class="fa fa-check"></i><b>11.1.5</b> Estimating the Between Group Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-random-effects-model"><i class="fa fa-check"></i><b>11.2</b> Two-Way Random Effects Model</a></li>
+<li class="chapter" data-level="11.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-mixed-effects-model"><i class="fa fa-check"></i><b>11.3</b> Two-Way Mixed Effects Model</a></li>
+<li class="chapter" data-level="11.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#three-way-mixed-effects-models"><i class="fa fa-check"></i><b>11.4</b> Three-Way Mixed Effects Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>12</b> Nested Designs</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="nested-designs.html"><a href="nested-designs.html#estimators-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>12.1</b> Estimators and the Analysis of Variance</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-designs.html"><a href="nested-designs.html#tests-contrasts-and-pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Tests, Contrasts, and Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="nested-designs.html"><a href="nested-designs.html#repeated-measures-design"><i class="fa fa-check"></i><b>12.3</b> Repeated Measures Design</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="nested-designs.html"><a href="nested-designs.html#model-structure"><i class="fa fa-check"></i><b>12.3.1</b> Model Structure</a></li>
+<li class="chapter" data-level="12.3.2" data-path="nested-designs.html"><a href="nested-designs.html#analysis-of-variance-and-f-tests"><i class="fa fa-check"></i><b>12.3.2</b> Analysis of Variance and <span class="math inline">\(F\)</span>-tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="nested-designs.html"><a href="nested-designs.html#treatment-comparisons"><i class="fa fa-check"></i><b>12.3.3</b> Treatment Comparisons</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html"><i class="fa fa-check"></i><b>13</b> Analysis of Covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#additive-model"><i class="fa fa-check"></i><b>13.1</b> Additive Model</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#adjusted-means"><i class="fa fa-check"></i><b>13.1.1</b> Adjusted means</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#interaction-model"><i class="fa fa-check"></i><b>13.2</b> Interaction Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html"><i class="fa fa-check"></i><b>14</b> Response Surface and Mixture Designs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
+<li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="single-factor-studies" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Single Factor Studies<a href="single-factor-studies.html#single-factor-studies" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In this chapter, we consider the case where there is a single factor. The factor can be <strong>qualitative</strong> or <strong>quantitative</strong>. Qualitative factors can be <strong>nominal</strong> or <strong>ordinal</strong>. Nominal factors have no inherent ordering, while ordinal factors have an underlying ordering that is non-numeric. Quantitative factors can be used in linear or nonlinear regression models, however in some cases researchers don’t wish to place a structure to the model and treat levels as categories.</p>
+<p>The factor levels, unless specified otherwise, will be treated as all levels of interest to researchers. These are referred to as <strong>fixed factors</strong>. Later in the course, we will consider factors with levels that are a sample from a population of levels, which will be referred to as <strong>random factors</strong>.</p>
+<p>We will let the number of levels of the factor be represented as <span class="math inline">\(r\)</span> where <span class="math inline">\(r \geq 2\)</span>. When <span class="math inline">\(r=2\)</span>, the analysis can be analyzed as an independent sample <span class="math inline">\(t\)</span>-test, which we will see gives identical conclusions as the 1-Way Analysis of Variance described below.</p>
+<p>The analysis will be the same whether the data are obtained from a Controlled Experiment or Observational Study, however interpretations of cause and effect are stronger for Controlled Experiments.</p>
+<p>In this chapter, we will focus on models with independent, normally distributed errors with constant variance. We will consider other tests in subsequent chapters.</p>
+<div id="models-with-r2-factor-levels" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Models with <span class="math inline">\(r=2\)</span> Factor Levels<a href="single-factor-studies.html#models-with-r2-factor-levels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we consider a Controlled Experiment and an Observational Study, each
+with two groups. We use the independent sample <span class="math inline">\(t\)</span>-test in each case to compare the two means.</p>
+<p><strong>Example 2.1 - Tai Chi and Strength Training in Hip Replacement Patients</strong></p>
+<p>A controlled experiment was conducted to compare post-operative effects of an in-home
+training treatment for patients who have received hip replacement surgery
+<span class="citation">(<a href="#ref-zeng_2015">Zeng et al. 2015</a>)</span>. The final analysis was based on <span class="math inline">\(n_T=59\)</span> subjects who completed the
+protocol, 32 in the treatment group (Tai Chi and strength training) and 27 in the control group. Patients were randomly assigned to the <span class="math inline">\(r=2\)</span> conditions. One response that was reported was Timed Up and Go Test (TUG) to measure mobility (lower times are better). The means, standard deviations, and sample sizes are given below for the treatment and control groups (the units are seconds).</p>
+<p><span class="math display">\[ \mbox{Treatment: } \overline{y}_T=14.61 \quad s_T= 2.60 \quad n_T=32 \]</span>
+<span class="math display">\[ \mbox{Control: } \overline{y}_C=19.06 \quad s_C=3.37 \quad n_C=27 \]</span></p>
+<p>For the 2-sample <span class="math inline">\(t\)</span>-test (aka independent sample <span class="math inline">\(t\)</span>-test), we will first compute the pooled variance then the <span class="math inline">\(t\)</span>-statistic, critical value <span class="math inline">\((\alpha=0.05)\)</span> and <span class="math inline">\(P\)</span>-value for a 2-sided test.</p>
+<p><span class="math display">\[ \mbox{Pooled Variance:} \quad s_p^2 = \frac{(32-1)(2.60)^2+(27-1)(3.37)^2}{32+27-2}
+= 8.86  \qquad s_p=\sqrt{8.86}=2.98\]</span></p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad t^* = \frac{14.61-19.06}{\sqrt{8.86\left(\frac{1}{32}+\frac{1}{27}\right)}}
+=\frac{-4.45}{0.78}=-5.71
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Rejection Region:} \quad |t^*| \geq t_{.975,57}=2.002  \qquad
+\mbox{P-value:} \quad 2P\left(t_{57}\geq |-5.71|\right)&lt;.0001
+\]</span>
+<span class="math display">\[
+95\% \mbox{ Confidence Interval:} \quad -5.71 \pm 2.002(0.78) \quad \equiv \quad
+-5.71 \pm 1.56 \quad \equiv \quad (-7.27,-4.15)
+\]</span></p>
+<p>The <strong>Effect Size</strong> is the absolute difference in the sample means in units of the pooled standard deviation. In this example, <span class="math inline">\(e=4.45/2.98=1.49\)</span> which is considered a large effect size.</p>
+<p><span class="math display">\[\nabla\]</span></p>
+<p><strong>Example 2.2 - Firefighter Air Consumption</strong></p>
+<p>An observational study was conducted to compare firefighters that were classified into two categories of air consumption, slow and fast <span class="citation">(<a href="#ref-wohlgemuth_2024">Wohlgemuth et al. 2024</a>)</span>. The firefighters were classified based on scores for 10 tasks pertinent to firefighting. Once the <span class="math inline">\(n_T=160\)</span> firefighters were classified into the two groups (94 fast and 66 slow), the groups were compared with respect to several physical characteristics including Age, Body Mass Index, and Peak Heart Rate (none of these were used in classifying as Fast/Slow Air Consumption).
+Summary statistics for the response Body Fat Percentage and the corresponding <span class="math inline">\(t\)</span>-test are given below.</p>
+<p><span class="math display">\[
+\mbox{Fast: } \overline{y}_F=20.71 \quad s_F=6.65 \quad n_F=94 \qquad
+\mbox{Slow: } \overline{y}_S=25.11 \quad s_S=8.93 \quad n_S=66 \]</span></p>
+<p><span class="math display">\[
+s_p^2 = \frac{(94-1)(6.65)^2+(66-1)(8.93)^2}{94+66-2}=58.84  \qquad  s_p=7.67\]</span></p>
+<p><span class="math display">\[
+t^*=\frac{20.71-25.11}{\sqrt{58.85\left(\frac{1}{94}+\frac{1}{66}\right)}} =
+\frac{-4.40}{1.23}=-3.57  \qquad t_{.975,158}=1.975 \qquad P=.0005
+\]</span>
+<span class="math display">\[
+95\% \mbox{ Confidence Interval:} \quad -4.40 \pm 1.975(1.23) \quad \equiv \quad
+-4.40 \pm 2.43 \quad \equiv \quad (-6.83,-1.97)
+\]</span></p>
+<p>For this example, the effect size is <span class="math inline">\(e=4.40/7.67=0.57\)</span>.</p>
+<p>Idealized normal distributions for the Tai Chi and Firefighter Air Consumption studies are given in Figure <a href="single-factor-studies.html#fig:ch0201">3.1</a> and Figure <a href="single-factor-studies.html#fig:ch0201a">3.2</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch0201"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch0201-1.png" alt="Idealized normal distibutions for the Tai Chi study" width="80%" />
+<p class="caption">
+Figure 3.1: Idealized normal distibutions for the Tai Chi study
+</p>
+</div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch0201a"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch0201a-1.png" alt="Idealized normal distibutions for the Firefighter air consumption study" width="80%" />
+<p class="caption">
+Figure 3.2: Idealized normal distibutions for the Firefighter air consumption study
+</p>
+</div>
+<p><span class="math display">\[\nabla\]</span></p>
+<p>There are various ways to parameterize single factor models. We will consider
+the following three formulations in this chapter.</p>
+<ul>
+<li><strong>Cell Means Model</strong> - Each treatment mean is its own parameter (no intercept term)</li>
+<li><strong>Treatment Effect Model</strong> - Intercept is the mean of the group means, each treatment has an effect relative to the mean, with effects summing to 0</li>
+<li><strong>Reference Group Model</strong> - Intercept corresponds to the mean for Group 1, remaining parameters are differences between remaining group means and group 1 mean</li>
+</ul>
+</div>
+<div id="three-model-formulations" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Three Model Formulations<a href="single-factor-studies.html#three-model-formulations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="cell-means-model" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Cell Means Model<a href="single-factor-studies.html#cell-means-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The model and assumptions are given below for the <strong>Cell Means Model</strong>. Note that the total sample size is <span class="math inline">\(n_T=n_1+\cdots+n_r=\sum_{i=1}^rn_i\)</span>. When all sample sizes are equal <span class="math inline">\((n_i=n)\)</span>, the design is said to be <strong>balanced</strong>.</p>
+<p><span class="math display">\[ Y_{ij}=\mu_i + \epsilon_{ij}
+\qquad i=1,\ldots,r; \quad j=1,\ldots, n_i \qquad \epsilon_{ij} \sim NID\left(0,\sigma^2\right) \]</span></p>
+<p><span class="math display">\[ E\{Y_{ij}\} = E\{\mu_i + \epsilon_{ij}\} = \mu_i+0=\mu_i \qquad
+V\{Y_{ij}\} = V\{\mu_i + \epsilon_{ij}\} = 0 +\sigma^2=\sigma^2 \]</span></p>
+<p>For this model, the treatment/population mean for the <span class="math inline">\(i^{th}\)</span> condition is <span class="math inline">\(\mu_i\)</span> and the variance of the individual measurements within each condition is assumed to be <span class="math inline">\(\sigma^2\)</span> (standard deviation = <span class="math inline">\(\sigma\)</span>) . Further, the individual measurements within each condition are assumed to be independent and normally distributed.</p>
+<p>The point estimators for the population means, which are derived below, are the sample means for the various groups. The estimator for the population variance is the pooled variance among the individual groups, which is the same for all three model forms.</p>
+</div>
+<div id="treatment-effects-model" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Treatment Effects Model<a href="single-factor-studies.html#treatment-effects-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(\mu_i\)</span> be the mean for treatment <span class="math inline">\(i\)</span>, and let <span class="math inline">\(\mu_{\bullet}\)</span>
+be the unweighted mean of the <span class="math inline">\(\mu_i^s\)</span>.</p>
+<p><span class="math display">\[
+\mu_{\bullet}=\frac{\sum_{i=1}^r\mu_i}{r}  \qquad
+\mu_i = \mu_{\bullet} + \left(\mu_i-\mu_{\bullet}\right) = \mu_{\bullet} + \tau_i
+\quad \Rightarrow \quad \tau_i = \mu_i-\mu_{\bullet}
+\]</span>
+<span class="math display">\[
+\mu_1=\cdots=\mu_r=\mu_{\bullet} \quad \Rightarrow \quad
+\tau_1=\cdots=\tau_r = 0
+\]</span></p>
+<p><span class="math display">\[
+Y_{ij}=\mu_{\bullet} +\tau_i + \epsilon_{ij}
+\qquad i=1,\ldots,r; \quad j=1,\ldots, n_i \qquad \epsilon_{ij} \sim NID\left(0,\sigma^2\right) \]</span>
+<span class="math display">\[ E\{Y_{ij}\} = E\{\mu_{\bullet} +\tau_i + \epsilon_{ij}\} = \mu_{\bullet} +\tau_i+0=\mu_{\bullet} +\tau_i \qquad
+V\{Y_{ij}\} = V\{\mu_{\bullet} +\tau_i + \epsilon_{ij}\} = 0 +\sigma^2=\sigma^2
+\]</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^{r}\tau_i=0 \quad \Rightarrow \quad \tau_r = -\sum_{i=1}^{r-1}\tau_i
+\]</span></p>
+<p>The point estimator for the overall population mean is the unweighted mean of group sample means. The estimator for the effect of group <span class="math inline">\(i\)</span> is the difference between the sample mean for group <span class="math inline">\(i\)</span> and the overall unweighted mean.</p>
+</div>
+<div id="reference-group-model" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Reference Group Model<a href="single-factor-studies.html#reference-group-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This model, which is the default model for the <strong>lm</strong> and <strong>aov</strong> functions in R,
+uses group 1 (based on alpha-numeric ordering of the group levels) as the intercept.
+The remaining parameters are the differences between the remaining <span class="math inline">\(r-1\)</span> group means and the mean for group 1. The point estimators are based on the corresponding sample means.</p>
+<p>An example where <span class="math inline">\(r=3\)</span> conditions have means of <span class="math inline">\(\mu_1=40\)</span>, <span class="math inline">\(\mu_2=50\)</span>, and <span class="math inline">\(\mu_3=60\)</span>, respectively and standard deviation <span class="math inline">\(\sigma=10\)</span> is given in Figure <a href="single-factor-studies.html#fig:ch0202">3.3</a>.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch0202"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch0202-1.png" alt="Normal distibutions with means=40,50,60 and standard deviation=10" width="80%" />
+<p class="caption">
+Figure 3.3: Normal distibutions with means=40,50,60 and standard deviation=10
+</p>
+</div>
+<p><strong>Example 2.3 - Virtual Training for a Lifeboat Launching Task</strong>
+A study in South Korea compared <span class="math inline">\(r=4\)</span> methods of training to conduct a lifeboat launching task <span class="citation">(<a href="#ref-jung_2018">Jung and Ahn 2018</a>)</span>.
+The treatments and their labels from the paper are given below and the response <span class="math inline">\(Y\)</span> was a procedural knowledge score for subjects post training.</p>
+<ul>
+<li><strong>Lecture/Materials</strong> - Traditional Lecture with no computer component (LEC/MAT)</li>
+<li><strong>Monitor/Keyboard</strong> - Trained virtually with a monitor, keyboard, and mouse (MON/KEY)</li>
+<li><strong>Head-Mounted Display/Joypad</strong> - Trained virtually with HMD and joypad (HMD/JOY)</li>
+<li><strong>Head-Mounted Display/Wearable Sensors</strong> - (HMD/WEA)</li>
+</ul>
+<p>There were a total of <span class="math inline">\(n_T=64\)</span> subjects and they were randomized so that 16 subjects received each treatment <span class="math inline">\(\left(n_1=n_2=n_3=n_4=16\right)\)</span>. Data that have been generated to match the authors’ reported means and standard deviations are given in Table <a href="single-factor-studies.html#tab:ch0203">3.1</a>.
+Note that when we later run this analysis in R, there will be a variable for treatment and a variable for procedural score.
+Figure <a href="single-factor-studies.html#fig:ch0203">3.4</a> gives the generated observed values (dots), treatment means (green lines), and the overall mean (red line).</p>
+<table>
+<caption><span id="tab:ch0203">Table 3.1: </span>Lifeboat Virtual Training Data</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">LEC/MAT (i=1)</th>
+<th align="right">MON/KEY (i=2)</th>
+<th align="right">HMD/JOY (i=3)</th>
+<th align="right">HMD/WEA (i=4)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">j=1</td>
+<td align="right">4.5614</td>
+<td align="right">5.4532</td>
+<td align="right">1.8773</td>
+<td align="right">9.8257</td>
+</tr>
+<tr class="even">
+<td align="left">j=2</td>
+<td align="right">6.6593</td>
+<td align="right">8.9208</td>
+<td align="right">6.1884</td>
+<td align="right">8.9988</td>
+</tr>
+<tr class="odd">
+<td align="left">j=3</td>
+<td align="right">5.6427</td>
+<td align="right">8.3489</td>
+<td align="right">6.8029</td>
+<td align="right">5.4112</td>
+</tr>
+<tr class="even">
+<td align="left">j=4</td>
+<td align="right">6.4394</td>
+<td align="right">8.3175</td>
+<td align="right">9.4535</td>
+<td align="right">4.9396</td>
+</tr>
+<tr class="odd">
+<td align="left">j=5</td>
+<td align="right">4.8635</td>
+<td align="right">9.7848</td>
+<td align="right">8.7312</td>
+<td align="right">8.6486</td>
+</tr>
+<tr class="even">
+<td align="left">j=6</td>
+<td align="right">0.3268</td>
+<td align="right">6.2697</td>
+<td align="right">6.4198</td>
+<td align="right">5.1459</td>
+</tr>
+<tr class="odd">
+<td align="left">j=7</td>
+<td align="right">5.6990</td>
+<td align="right">7.1327</td>
+<td align="right">8.4955</td>
+<td align="right">7.0656</td>
+</tr>
+<tr class="even">
+<td align="left">j=8</td>
+<td align="right">6.3545</td>
+<td align="right">7.0886</td>
+<td align="right">5.9008</td>
+<td align="right">7.9552</td>
+</tr>
+<tr class="odd">
+<td align="left">j=9</td>
+<td align="right">6.7509</td>
+<td align="right">5.0733</td>
+<td align="right">3.3336</td>
+<td align="right">5.7284</td>
+</tr>
+<tr class="even">
+<td align="left">j=10</td>
+<td align="right">6.6019</td>
+<td align="right">8.3865</td>
+<td align="right">1.6530</td>
+<td align="right">6.6314</td>
+</tr>
+<tr class="odd">
+<td align="left">j=11</td>
+<td align="right">3.2365</td>
+<td align="right">9.4227</td>
+<td align="right">9.4710</td>
+<td align="right">7.5014</td>
+</tr>
+<tr class="even">
+<td align="left">j=12</td>
+<td align="right">6.1655</td>
+<td align="right">8.9142</td>
+<td align="right">7.2818</td>
+<td align="right">8.2456</td>
+</tr>
+<tr class="odd">
+<td align="left">j=13</td>
+<td align="right">2.4060</td>
+<td align="right">8.5150</td>
+<td align="right">9.7649</td>
+<td align="right">4.2465</td>
+</tr>
+<tr class="even">
+<td align="left">j=14</td>
+<td align="right">1.9851</td>
+<td align="right">6.8198</td>
+<td align="right">3.4931</td>
+<td align="right">3.2286</td>
+</tr>
+<tr class="odd">
+<td align="left">j=15</td>
+<td align="right">5.2198</td>
+<td align="right">8.6390</td>
+<td align="right">8.9848</td>
+<td align="right">6.5520</td>
+</tr>
+<tr class="even">
+<td align="left">j=16</td>
+<td align="right">5.9765</td>
+<td align="right">6.2467</td>
+<td align="right">9.9261</td>
+<td align="right">9.8754</td>
+</tr>
+<tr class="odd">
+<td align="left">n</td>
+<td align="right">16.0000</td>
+<td align="right">16.0000</td>
+<td align="right">16.0000</td>
+<td align="right">16.0000</td>
+</tr>
+<tr class="even">
+<td align="left">Mean</td>
+<td align="right">4.9306</td>
+<td align="right">7.7083</td>
+<td align="right">6.7361</td>
+<td align="right">6.8750</td>
+</tr>
+<tr class="odd">
+<td align="left">SD</td>
+<td align="right">1.9400</td>
+<td align="right">1.4300</td>
+<td align="right">2.8200</td>
+<td align="right">1.9900</td>
+</tr>
+</tbody>
+</table>
+<pre><code>##   grp.trt procKnow
+## 1       1   4.5614
+## 2       1   6.6593</code></pre>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch0203"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch0203-1.png" alt="Procedural knowledge scores for lifeboat training study" width="80%" />
+<p class="caption">
+Figure 3.4: Procedural knowledge scores for lifeboat training study
+</p>
+</div>
+<p>Using the summary data from the table, we will obtain point estimates and standard errors directly for the three model formulations directly, then using R. First, we compute the pooled standard deviation (aka residual standard error).</p>
+<p><span class="math display">\[
+s=\sqrt{\frac{\sum_{i=1}^r\left(n_i-1\right)s_i^2}{n_T-r}} =
+\sqrt{\frac{(16-1)\left(1.94^2+1.43^2+2.82^2+1.99^2\right)}{64-4}} = 2.105
+\]</span></p>
+<p><strong>Cell Means Model</strong></p>
+<p><span class="math display">\[
+\hat{\mu}_1=\overline{y}_1=4.931 \quad
+\hat{\mu}_2=\overline{y}_2=7.708 \quad
+\hat{\mu}_3=\overline{y}_3=6.736 \quad
+\hat{\mu}_4=\overline{y}_4=6.875 \]</span></p>
+<p><span class="math display">\[
+\hat{SE}\left\{\hat{\mu}_i\right\}=\frac{s}{\sqrt{n_i}}=\frac{2.105}{\sqrt{16}}=0.526
+\qquad i=1,2,3,4
+\]</span></p>
+<p><strong>Treatment Effects Model</strong></p>
+<p><span class="math display">\[
+\hat{\mu}=\frac{4.931+7.708+6.736+6.875}{4}=6.563 \]</span></p>
+<p><span class="math display">\[
+\hat{SE}\left\{\hat{\mu}\right\}=s\sqrt{\frac{1}{r^2}\sum_{i=1}^r\frac{1}{n_i}} =
+2.105\sqrt{\frac{1}{4^2}4\left(\frac{1}{16}\right)}=0.263
+\]</span>
+<span class="math display">\[
+\hat{\tau}_1=4.931-6.563=-1.632
+\quad \hat{\tau}_2=1.145
+\quad \hat{\tau}_3=0.173
+\quad \hat{\tau}_4=0.312 \]</span></p>
+<p>To obtain the standard error for <span class="math inline">\(\hat{\tau}_k\)</span>, we can re-write it as follows and make use of independence among group means.</p>
+<p><span class="math display">\[
+\hat{\tau}_k = \overline{y}_k-\hat{\mu} =
+\overline{y}_k - \frac{1}{r}\sum_{i=1}^r\overline{y}_i
+=\frac{r-1}{r} \overline{y}_k - \frac{1}{r}\sum_{i=1 \atop i \not=k}^r\overline{y}_i
+\]</span></p>
+<p><span class="math display">\[
+\hat{SE}\left\{\hat{\tau}_k\right\} =
+s\sqrt{\frac{1}{r^2}\left(\frac{(r-1)^2}{n_k}+
+\sum_{i=1 \atop i \not=k}^r\frac{1}{n_i}\right)} =
+2.105\sqrt{\frac{1}{4^2}\left(\frac{(4-1)^2}{16}+3\frac{1}{16}\right)}
+=0.456
+\]</span></p>
+<p><strong>Reference Group Model</strong></p>
+<p><span class="math display">\[
+\hat{\mu}_1 = \overline{y}_1 = 4.931 \qquad \hat{SE}\left\{\hat{\mu}_1\right\}=
+\frac{s}{\sqrt{n_1}}=\frac{2.105}{\sqrt{16}}=0.526
+\]</span></p>
+<p><span class="math display">\[
+i=2,\ldots, r \quad \hat{\tau}_i = \overline{y}_i-\overline{y}_1
+\qquad \hat{SE}\left\{\hat{\tau}_i\right\}=s \sqrt{\frac{1}{n_i}+\frac{1}{n_1}}
+\]</span>
+<span class="math display">\[
+\hat{\tau}_2=7.708-4.931=2.777 \quad
+\hat{\tau}_3=6.736-4.931=1.805 \quad
+\hat{\tau}_4=6.875-4.931=1.944
+\]</span>
+<span class="math display">\[
+\hat{SE}\left\{\hat{\tau}_i\right\}=2.105 \sqrt{\frac{1}{16}+\frac{1}{16}} =
+0.744
+\]</span></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="single-factor-studies.html#cb25-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
+<span id="cb25-2"><a href="single-factor-studies.html#cb25-2" tabindex="-1"></a><span class="fu">head</span>(vt,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   grp.trt procKnow
+## 1       1   4.5614
+## 2       1   6.6593</code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="single-factor-studies.html#cb27-1" tabindex="-1"></a><span class="do">## Cell Means Model (Separate means for each group, no intercept)</span></span>
+<span id="cb27-2"><a href="single-factor-studies.html#cb27-2" tabindex="-1"></a>vt.mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(procKnow <span class="sc">~</span> <span class="fu">factor</span>(grp.trt) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data=</span>vt)</span>
+<span id="cb27-3"><a href="single-factor-studies.html#cb27-3" tabindex="-1"></a><span class="fu">summary</span>(vt.mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = procKnow ~ factor(grp.trt) - 1, data = vt)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.0831 -1.4444  0.5774  1.5495  3.1900 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## factor(grp.trt)1   4.9306     0.5262    9.37 2.37e-13 ***
+## factor(grp.trt)2   7.7083     0.5262   14.65  &lt; 2e-16 ***
+## factor(grp.trt)3   6.7361     0.5262   12.80  &lt; 2e-16 ***
+## factor(grp.trt)4   6.8750     0.5262   13.06  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.105 on 60 degrees of freedom
+## Multiple R-squared:  0.9139, Adjusted R-squared:  0.9082 
+## F-statistic: 159.2 on 4 and 60 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="single-factor-studies.html#cb29-1" tabindex="-1"></a><span class="do">## Treatment Effects Model</span></span>
+<span id="cb29-2"><a href="single-factor-studies.html#cb29-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.sum&quot;</span>,<span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb29-3"><a href="single-factor-studies.html#cb29-3" tabindex="-1"></a>vt.mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(procKnow <span class="sc">~</span> <span class="fu">factor</span>(grp.trt), <span class="at">data=</span>vt)</span>
+<span id="cb29-4"><a href="single-factor-studies.html#cb29-4" tabindex="-1"></a><span class="fu">summary</span>(vt.mod2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = procKnow ~ factor(grp.trt), data = vt)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.0831 -1.4444  0.5774  1.5495  3.1900 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        6.5625     0.2631  24.943  &lt; 2e-16 ***
+## factor(grp.trt)1  -1.6319     0.4557  -3.581 0.000686 ***
+## factor(grp.trt)2   1.1458     0.4557   2.514 0.014622 *  
+## factor(grp.trt)3   0.1736     0.4557   0.381 0.704573    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.105 on 60 degrees of freedom
+## Multiple R-squared:  0.1981, Adjusted R-squared:  0.158 
+## F-statistic: 4.941 on 3 and 60 DF,  p-value: 0.003931</code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="single-factor-studies.html#cb31-1" tabindex="-1"></a><span class="do">## Reference Group Model (Default in R)</span></span>
+<span id="cb31-2"><a href="single-factor-studies.html#cb31-2" tabindex="-1"></a><span class="fu">options</span>(<span class="at">contrasts=</span><span class="fu">c</span>(<span class="st">&quot;contr.treatment&quot;</span>,<span class="st">&quot;contr.poly&quot;</span>))</span>
+<span id="cb31-3"><a href="single-factor-studies.html#cb31-3" tabindex="-1"></a>vt.mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(procKnow <span class="sc">~</span> <span class="fu">factor</span>(grp.trt), <span class="at">data=</span>vt)</span>
+<span id="cb31-4"><a href="single-factor-studies.html#cb31-4" tabindex="-1"></a><span class="fu">summary</span>(vt.mod3)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = procKnow ~ factor(grp.trt), data = vt)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.0831 -1.4444  0.5774  1.5495  3.1900 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        4.9306     0.5262   9.370 2.37e-13 ***
+## factor(grp.trt)2   2.7778     0.7442   3.733 0.000423 ***
+## factor(grp.trt)3   1.8056     0.7442   2.426 0.018277 *  
+## factor(grp.trt)4   1.9444     0.7442   2.613 0.011329 *  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.105 on 60 degrees of freedom
+## Multiple R-squared:  0.1981, Adjusted R-squared:  0.158 
+## F-statistic: 4.941 on 3 and 60 DF,  p-value: 0.003931</code></pre>
+<p><span class="math display">\[\nabla\]</span></p>
+</div>
+</div>
+<div id="the-analysis-of-variance-and-f-test" class="section level2 hasAnchor" number="3.3">
+<h2><span class="header-section-number">3.3</span> The Analysis of Variance and <span class="math inline">\(F\)</span>-test<a href="single-factor-studies.html#the-analysis-of-variance-and-f-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In this section, we obtain a decomposition of the total variation of the individual measurements around the overall mean, the <strong>Total Sum of Squares</strong>, which we will denote <span class="math inline">\(SSTO\)</span>. The <strong>Degrees of Freedom</strong> associated with the total sum of squares is <span class="math inline">\(df_{TO}=n_T-1\)</span>.</p>
+<p><span class="math display">\[
+\overline{Y}_{\bullet\bullet}=
+\frac{\sum_{i=1}^r\sum_{j=1}^{n_i}Y_{ij}}{n_T}
+\qquad \qquad
+SSTO = \sum_{i=1}^r\sum_{j=1}^{n_i}
+  \left(Y_{ij}-\overline{Y}_{\bullet\bullet}\right)^2
+\qquad  df_{TO}=n_T-1
+\]</span></p>
+<p>The total sum of squares can be partitioned into the <strong>Error Sum of Squares</strong> and the <strong>Treatment Sum of Squares</strong>. The error sum of squares can be thought of as how variable are measurements within the same treatment or group. The treatment sum of squares represents how variable the treatment or group means are around the overall mean (weighted by their sample sizes). The sums of squares are given below (note that in R, for linear models, the error sum of squares is labelled as <span class="math inline">\(RSS\)</span>, for the residual sum of squares).
+As with linear regression models, the error sum of squares is the sum of the squared distances from the observed values to their predicted values.</p>
+<p><span class="math display">\[
+SSE = \sum_{i=1}^r\sum_{j=1}^{n_i}  \left(Y_{ij}-\hat{Y}_{ij}\right)^2
+\]</span>
+Noting that for this model, <span class="math inline">\(\hat{Y}_{ij}=\overline{Y}_{i\bullet}\)</span>,
+we obtain the following formula for <span class="math inline">\(SSE\)</span>. The degrees of freedom for the error sum of squares is <span class="math inline">\(df_E=n_T-r\)</span>.</p>
+<p><span class="math display">\[
+SSE=\sum_{i=1}^r\sum_{j=1}^{n_i} \left(Y_{ij}-\overline{Y}_{i\bullet}\right)^2
+\qquad df_E=n_T-r
+\]</span></p>
+<p>Another useful way of computing <span class="math inline">\(SSE\)</span> based on published summary statistics is given below. Suppose the authors have published the sample sizes <span class="math inline">\(\left\{n_i\right\}\)</span>,
+the sample means <span class="math inline">\(\left\{\overline{y}_{i\bullet}\right\}\)</span> using lower case <span class="math inline">\(y\)</span> as these are observed means from a realization of this experiment, and the sample standard deviations <span class="math inline">\(\left\{s_i\right\}\)</span> for the <span class="math inline">\(r\)</span> treatments. Then <span class="math inline">\(SSE\)</span> can be computed as below.</p>
+<p><span class="math display">\[
+s_i = \sqrt{\frac{\sum_{j=1}^{n_i}\left(y_{ij}-\overline{y}_{i\bullet}\right)^2}{n_i-1}}
+\quad \Rightarrow \quad
+SSE = \sum_{i=1}^r\left(n_i-1\right)s_i^2
+\]</span></p>
+<p>The <strong>Treatment Sum of Squares</strong>, denoted as <span class="math inline">\(SSTR\)</span>, acts like the regression sum of squares for linear regression models. That is,
+<span class="math inline">\(SSTR\)</span> represents the sum of squared differences from the predicted values to the overall mean. The degrees of freedom for the treatment sum of squares is <span class="math inline">\(df_{TR}=r-1\)</span>.
+Keeping in mind that the fitted value for <span class="math inline">\(Y_{ij}\)</span> is <span class="math inline">\(\hat{Y_{ij}} = \overline{Y}_{i\bullet}\)</span>, we obtain SSTR as follows.</p>
+<p><span class="math display">\[
+SSTR = \sum_{i=1}^r\sum_{j=1}^{n_i}
+\left(\overline{Y}_{i\bullet}-
+  \overline{Y}_{\bullet\bullet}\right)^2
+= \sum_{i=1}^r n_i \left(\overline{Y}_{i\bullet}-
+  \overline{Y}_{\bullet\bullet}\right)^2
+\qquad df_{TR}=r-1
+\]</span></p>
+<p>For each sum of squares, the <strong>Mean Square</strong> is the sum of squares divided by its corresponding degrees of freedom, and are used for inferences among the means.</p>
+<p>In single factor models, the goal is typically to test for differences among the treatment or group means. The null hypothesis is that the means are all equal, while the alternative hypothesis is that there are differences among the means. In the next chapter, we consider specific comparisons among treatments.</p>
+<p><span class="math display">\[
+H_0: \mu_1=\cdots = \mu_r \quad \Rightarrow \quad \tau_1=\cdots = \tau_r = 0
+\]</span>
+The test statistic is the <span class="math inline">\(F\)</span>-statistic from the Analysis of Variance and will be used in many forms throughout this course. Under the null hypothesis, the <span class="math inline">\(F\)</span>-statistic follows the <span class="math inline">\(F\)</span>-distribution, based on its numerator and denominator degrees of freedom. Large values of the <span class="math inline">\(F\)</span>-statistic are evidence against the null hypothesis. Technical details of the test are given in Section 2.4.</p>
+<p><span class="math display">\[
+\mbox{Test Statistic:} \quad F^* =
+\frac{\left[\frac{SSTR}{df_{TR}}\right]}
+{\left[\frac{SSE}{df_{E}}\right]}
+\quad = \quad \frac{MSTR}{MSE}
+\]</span></p>
+<p><span class="math display">\[
+\mbox{Rejection Region:} \quad F^* \geq F_{1-\alpha;r-1,n_T-r}  \qquad
+P=P\left(F_{r-1,n_T-r} \geq F^*\right)
+\]</span></p>
+<p>The <strong>effect size</strong> for the One-Way ANOVA model is <span class="math inline">\(\eta^2=SSTR/SSTO\)</span>,
+that is, the fraction of the total variation that is “attributable” to differences in the group means.</p>
+<p><strong>Example 2.4 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><span class="math display">\[
+n_1=n_2=n_3=n_4=16 \qquad \overline{y}_{1\bullet}=4.931 \quad
+\overline{y}_{2\bullet}=7.708 \quad
+\overline{y}_{3\bullet}=6.736 \quad
+\overline{y}_{4\bullet}=6.875 \quad
+\overline{y}_{\bullet\bullet}=6.563
+\]</span></p>
+<p><span class="math display">\[
+SSTR=16\left[(4.931-6.563)^2+(7.708-6.563)^2+(6.736-6.563)^2+(6.875-6.563)^2\right]
+=65.628
+\]</span></p>
+<p><span class="math display">\[
+s_1=1.94 \quad s_2=1.43 \quad s_3=2.82 \quad s_4=1.99
+\]</span>
+<span class="math display">\[
+\quad \Rightarrow \quad SSE=(16-1)\left(1.94^2+1.43^2+2.82^2+1.99^2\right)=265.815
+\]</span></p>
+<p>Now, we test for differences among the effects of the <span class="math inline">\(r=4\)</span> teaching methods. The degrees of freedom for treatments is <span class="math inline">\(df_{TR}=r-1=3\)</span> and for error is <span class="math inline">\(df_E=n_T-r=60\)</span>.</p>
+<p><span class="math display">\[
+H_0: \mu_1=\cdots = \mu_4 \quad \Rightarrow \quad \tau_1=\cdots = \tau_4 = 0
+\]</span>
+<span class="math display">\[
+\mbox{Test Statistic:} \quad F^* =
+\frac{\left[\frac{SSTR}{df_{TR}}\right]}
+{\left[\frac{SSE}{df_{E}}\right]}
+=\frac{\left[\frac{65.789}{3}\right]}
+{\left[\frac{265.815}{60}\right]}
+= \frac{21.930}{4.430} = 4.950
+\]</span>
+<span class="math display">\[
+\mbox{Rejection Region:} \quad F^* \geq F_{.95;3,60}=2.578  \qquad
+P=P\left(F_{3,60} \geq 4.950\right) = .0039
+\]</span>
+<span class="math display">\[
+\eta^2=\frac{SSTR}{SSTO}=\frac{SSTR}{SSTR+SSE}=\frac{65.789}{65.789+265.815}=
+\frac{65.789}{331.604}=0.1984
+\]</span>
+Approximately 20% of the total variation is due to differences in the training methods.</p>
+<p>We obtain the Sums of Squares for Treatments and Error below
+using the <strong>anova</strong> of the <strong>lm</strong> model fit. A warning involves the fact that
+when using the cell means model (with no intercept) the
+Treatment Sum of Squares and Degrees of Freedom are incorrect here.
+The Treatment Sum of Squares in this form also includes the correction for the mean,
+<span class="math inline">\(n_T\overline{y}_{\bullet\bullet}^2\)</span>.
+We are testing <span class="math inline">\(H_0:\mu_1=\mu_2=\mu_3=\mu_4=0\)</span>, which is a much stronger hypothesis
+than testing <span class="math inline">\(H_0:\mu_1=\mu_2=\mu_3=\mu_4\)</span>. We will use the Treatment Effects model or the Reference Group model function to obtain
+the correct degrees of freedom and <span class="math inline">\(F\)</span>-statistic below.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="single-factor-studies.html#cb33-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
+<span id="cb33-2"><a href="single-factor-studies.html#cb33-2" tabindex="-1"></a><span class="fu">head</span>(vt,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   grp.trt procKnow
+## 1       1   4.5614
+## 2       1   6.6593</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="single-factor-studies.html#cb35-1" tabindex="-1"></a>vt.mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(procKnow <span class="sc">~</span> <span class="fu">factor</span>(grp.trt) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data=</span>vt)</span>
+<span id="cb35-2"><a href="single-factor-studies.html#cb35-2" tabindex="-1"></a><span class="fu">summary</span>(vt.mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = procKnow ~ factor(grp.trt) - 1, data = vt)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.0831 -1.4444  0.5774  1.5495  3.1900 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## factor(grp.trt)1   4.9306     0.5262    9.37 2.37e-13 ***
+## factor(grp.trt)2   7.7083     0.5262   14.65  &lt; 2e-16 ***
+## factor(grp.trt)3   6.7361     0.5262   12.80  &lt; 2e-16 ***
+## factor(grp.trt)4   6.8750     0.5262   13.06  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.105 on 60 degrees of freedom
+## Multiple R-squared:  0.9139, Adjusted R-squared:  0.9082 
+## F-statistic: 159.2 on 4 and 60 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="single-factor-studies.html#cb37-1" tabindex="-1"></a><span class="fu">anova</span>(vt.mod1)    <span class="do">## Incorrect df, SS, and MS for Treatments and F-stat</span></span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: procKnow
+##                 Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## factor(grp.trt)  4 2821.91  705.48  159.24 &lt; 2.2e-16 ***
+## Residuals       60  265.81    4.43                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="single-factor-studies.html#cb39-1" tabindex="-1"></a>vt.mod2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(procKnow <span class="sc">~</span> <span class="fu">factor</span>(grp.trt), <span class="at">data=</span>vt)</span>
+<span id="cb39-2"><a href="single-factor-studies.html#cb39-2" tabindex="-1"></a><span class="fu">anova</span>(vt.mod2)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: procKnow
+##                 Df  Sum Sq Mean Sq F value   Pr(&gt;F)   
+## factor(grp.trt)  3  65.664 21.8880  4.9406 0.003931 **
+## Residuals       60 265.815  4.4302                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="single-factor-studies.html#cb41-1" tabindex="-1"></a><span class="fu">options</span>(<span class="at">es.use_symbols=</span><span class="cn">TRUE</span>)</span>
+<span id="cb41-2"><a href="single-factor-studies.html#cb41-2" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="single-factor-studies.html#cb41-3" tabindex="-1"></a><span class="fu">eta_squared</span>(vt.mod1)</span></code></pre></div>
+<pre><code>## For one-way between subjects designs, partial eta squared is equivalent
+##   to eta squared. Returning eta squared.</code></pre>
+<pre><code>## # Effect Size for ANOVA
+## 
+## Parameter       |   η² |       95% CI
+## -------------------------------------
+## factor(grp.trt) | 0.91 | [0.88, 1.00]
+## 
+## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="single-factor-studies.html#cb44-1" tabindex="-1"></a><span class="fu">eta_squared</span>(vt.mod2)</span></code></pre></div>
+<pre><code>## For one-way between subjects designs, partial eta squared is equivalent
+##   to eta squared. Returning eta squared.</code></pre>
+<pre><code>## # Effect Size for ANOVA
+## 
+## Parameter       |   η² |       95% CI
+## -------------------------------------
+## factor(grp.trt) | 0.20 | [0.05, 1.00]
+## 
+## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
+<p>Note that for the cell means model (vt.mod1) the sum of squares for treatments includes the “correction for the mean,” thus it is larger than <span class="math inline">\(SSTR\)</span> by
+<span class="math inline">\(n_T\overline{y}_{\bullet\bullet}^2\)</span>. The effect size for that model is also too large
+<span class="math inline">\(\eta^2=2821.91/(2821.91+265.81)=0.91\)</span>.</p>
+<p>Here we will conduct the analysis directly from the raw data,
+computing <span class="math inline">\(\left\{n_i\right\}\)</span>, <span class="math inline">\(\left\{\overline{y}_{i\bullet}\right\}\)</span>,
+and <span class="math inline">\(\left\{s_i\right\}\)</span> as well as sums of squares and degrees of freedom.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="single-factor-studies.html#cb47-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
+<span id="cb47-2"><a href="single-factor-studies.html#cb47-2" tabindex="-1"></a><span class="fu">head</span>(vt,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   grp.trt procKnow
+## 1       1   4.5614
+## 2       1   6.6593</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="single-factor-studies.html#cb49-1" tabindex="-1"></a><span class="fu">attach</span>(vt)</span>
+<span id="cb49-2"><a href="single-factor-studies.html#cb49-2" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="single-factor-studies.html#cb49-3" tabindex="-1"></a><span class="do">#### &quot;Brute-Force&quot; Calculations  </span></span>
+<span id="cb49-4"><a href="single-factor-studies.html#cb49-4" tabindex="-1"></a>n.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(procKnow, grp.trt, length))   <span class="do">## Treatment sample sizes</span></span>
+<span id="cb49-5"><a href="single-factor-studies.html#cb49-5" tabindex="-1"></a>mean.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(procKnow, grp.trt, mean))  <span class="do">## Treatment means</span></span>
+<span id="cb49-6"><a href="single-factor-studies.html#cb49-6" tabindex="-1"></a>sd.trt <span class="ot">&lt;-</span> <span class="fu">as.vector</span>(<span class="fu">tapply</span>(procKnow, grp.trt, sd))      <span class="do">## Treatment SDs</span></span>
+<span id="cb49-7"><a href="single-factor-studies.html#cb49-7" tabindex="-1"></a>mean.all <span class="ot">&lt;-</span> <span class="fu">mean</span>(procKnow)                              <span class="do">## Overall Mean</span></span>
+<span id="cb49-8"><a href="single-factor-studies.html#cb49-8" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">length</span>(n.trt)                                      <span class="do">## Number of Treatments</span></span>
+<span id="cb49-9"><a href="single-factor-studies.html#cb49-9" tabindex="-1"></a>n_T <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt)                                       <span class="do">## Overall Mean</span></span>
+<span id="cb49-10"><a href="single-factor-studies.html#cb49-10" tabindex="-1"></a></span>
+<span id="cb49-11"><a href="single-factor-studies.html#cb49-11" tabindex="-1"></a><span class="do">#### Sums of Squares, degrees of freedom, Mean Squares, F-test</span></span>
+<span id="cb49-12"><a href="single-factor-studies.html#cb49-12" tabindex="-1"></a>SSTR <span class="ot">&lt;-</span> <span class="fu">sum</span>(n.trt <span class="sc">*</span> (mean.trt <span class="sc">-</span> mean.all)<span class="sc">^</span><span class="dv">2</span>);    dfTR <span class="ot">&lt;-</span> r<span class="dv">-1</span>      </span>
+<span id="cb49-13"><a href="single-factor-studies.html#cb49-13" tabindex="-1"></a>SSE <span class="ot">&lt;-</span> <span class="fu">sum</span>((n.trt<span class="dv">-1</span>) <span class="sc">*</span> sd.trt<span class="sc">^</span><span class="dv">2</span>);                dfE <span class="ot">&lt;-</span> n_T<span class="sc">-</span>r</span>
+<span id="cb49-14"><a href="single-factor-studies.html#cb49-14" tabindex="-1"></a>SSTO <span class="ot">&lt;-</span> SSTR <span class="sc">+</span> SSE;                              dfTO <span class="ot">&lt;-</span> n_T<span class="dv">-1</span></span>
+<span id="cb49-15"><a href="single-factor-studies.html#cb49-15" tabindex="-1"></a>MSTR <span class="ot">&lt;-</span> SSTR <span class="sc">/</span> dfTR</span>
+<span id="cb49-16"><a href="single-factor-studies.html#cb49-16" tabindex="-1"></a>MSE <span class="ot">&lt;-</span> SSE <span class="sc">/</span> dfE</span>
+<span id="cb49-17"><a href="single-factor-studies.html#cb49-17" tabindex="-1"></a>F_star <span class="ot">&lt;-</span> MSTR <span class="sc">/</span> MSE</span>
+<span id="cb49-18"><a href="single-factor-studies.html#cb49-18" tabindex="-1"></a>F<span class="fl">.95</span> <span class="ot">&lt;-</span> <span class="fu">qf</span>(.<span class="dv">95</span>,dfTR,dfE)</span>
+<span id="cb49-19"><a href="single-factor-studies.html#cb49-19" tabindex="-1"></a>pF <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fu">pf</span>(F_star, dfTR, dfE)</span>
+<span id="cb49-20"><a href="single-factor-studies.html#cb49-20" tabindex="-1"></a>eta2 <span class="ot">&lt;-</span> SSTR<span class="sc">/</span>SSTO</span>
+<span id="cb49-21"><a href="single-factor-studies.html#cb49-21" tabindex="-1"></a></span>
+<span id="cb49-22"><a href="single-factor-studies.html#cb49-22" tabindex="-1"></a><span class="do">#### Set-up output</span></span>
+<span id="cb49-23"><a href="single-factor-studies.html#cb49-23" tabindex="-1"></a>trt.out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dfTR, SSTR, MSTR, F_star, F<span class="fl">.95</span>, pF, eta2)</span>
+<span id="cb49-24"><a href="single-factor-studies.html#cb49-24" tabindex="-1"></a>err.out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dfE,  SSE,  MSE,  <span class="cn">NA</span>,     <span class="cn">NA</span>,   <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
+<span id="cb49-25"><a href="single-factor-studies.html#cb49-25" tabindex="-1"></a>tot.out <span class="ot">&lt;-</span> <span class="fu">cbind</span>(dfTO, SSTO, <span class="cn">NA</span>,   <span class="cn">NA</span>,     <span class="cn">NA</span>,   <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
+<span id="cb49-26"><a href="single-factor-studies.html#cb49-26" tabindex="-1"></a>aov.out <span class="ot">&lt;-</span> <span class="fu">rbind</span>(trt.out, err.out, tot.out)</span>
+<span id="cb49-27"><a href="single-factor-studies.html#cb49-27" tabindex="-1"></a><span class="fu">colnames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;df&quot;</span>, <span class="st">&quot;SS&quot;</span>, <span class="st">&quot;MS&quot;</span>, <span class="st">&quot;F*&quot;</span>, <span class="st">&quot;F(.95)&quot;</span>, <span class="st">&quot;P(&gt;F*)&quot;</span>, <span class="st">&quot;eta2&quot;</span>)</span>
+<span id="cb49-28"><a href="single-factor-studies.html#cb49-28" tabindex="-1"></a><span class="fu">rownames</span>(aov.out) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Treatment&quot;</span>, <span class="st">&quot;Error&quot;</span>, <span class="st">&quot;Total&quot;</span>)</span>
+<span id="cb49-29"><a href="single-factor-studies.html#cb49-29" tabindex="-1"></a><span class="fu">round</span>(aov.out,<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##           df       SS      MS     F* F(.95) P(&gt;F*)   eta2
+## Treatment  3  65.6639 21.8880 4.9406 2.7581 0.0039 0.1981
+## Error     60 265.8149  4.4302     NA     NA     NA     NA
+## Total     63 331.4788      NA     NA     NA     NA     NA</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="single-factor-studies.html#cb51-1" tabindex="-1"></a><span class="fu">detach</span>(vt)</span></code></pre></div>
+<p><span class="math display">\[\nabla\]</span></p>
+<div id="general-linear-test-approach" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> General Linear Test Approach<a href="single-factor-studies.html#general-linear-test-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We begin with <span class="math inline">\(r\)</span> treatments with no restrictions on their population means <span class="math inline">\(\left\{\mu_i\right\}\)</span>. We then place a restriction on the population means.
+Both models are fit, and the Error Sums of Squares and Degrees of Freedom are obtained
+for each model.</p>
+<p><strong>Example 2.5 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p>Consider the following restrictions in light of the virtual training
+experiment.</p>
+<ul>
+<li>No treatment differences among the 4 treatments: <span class="math inline">\(\mu_1=\mu_2=\mu_3=\mu_4\)</span></li>
+<li>No treatment differences among the 3 virtual reality treatments: <span class="math inline">\(\mu_2=\mu_3=\mu_4\)</span></li>
+<li>No treatment differences among the 2 Head-Mounted Display treatments: <span class="math inline">\(\mu_3=\mu_4\)</span></li>
+</ul>
+<p>All of these can be tested using a general linear test. Note that the first test
+is the same as the <span class="math inline">\(F\)</span>-test conducted from the Analysis of Variance.</p>
+<p>The form of the test is as follows. Let the Complete model be the model with all <span class="math inline">\(r\)</span>
+means allowed to be different values. In the virtual reality case we have the following numbers of restrictions.</p>
+<ul>
+<li><span class="math inline">\(H_0:\mu_1=\mu_2=\mu_3=\mu_4\)</span> - There are 3 restrictions</li>
+<li><span class="math inline">\(H_0:\mu_1, \quad \mu_2=\mu_3=\mu_4\)</span> - There are 2 restrictions</li>
+<li><span class="math inline">\(H_0:\mu_1, \mu_2, \quad \mu_3=\mu_4\)</span> - There is 1 restriction</li>
+</ul>
+<p>Once we fit the Complete (No restriction) and Reduced (Restricted) models,
+we can obtain the Test Statistic as follows. Start with the first restriction:
+<span class="math inline">\(\mu_1=\mu_2=\mu_3=\mu_4=\mu_c\)</span> where <span class="math inline">\(\mu_c\)</span> is the common mean.</p>
+<p><span class="math display">\[
+\mbox{Reduced Model: (1 Mean)} \qquad \hat{\mu}_c = \overline{Y}_{\bullet\bullet} = \hat{Y}_{ij}(R)
+\]</span></p>
+<p><span class="math display">\[
+  \quad \Rightarrow \quad SSE(R)=\sum_{i=1}^r\sum_{j=1}^{n_i}\left(Y_{ij}-\hat{Y}_{ij}(R)\right)^2
+  = \sum_{i=1}^r\sum_{j=1}^{n_i}\left(Y_{ij}-\overline{Y}_{\bullet\bullet}\right)^2 = SSTO
+  \qquad df_R = n_T-1
+  \]</span></p>
+<p><span class="math display">\[
+\mbox{Complete Model: (4 Means)} \qquad \hat{\mu}_i = \overline{Y}_{i\bullet}=\hat{Y}_{ij}(C)
+  \]</span>
+<span class="math display">\[
+  \quad \Rightarrow \quad SSE(C)=\sum_{i=1}^r\sum_{j=1}^{n_i}\left(Y_{ij}-\hat{Y}_{ij}(C)\right)^2
+  = \sum_{i=1}^r\sum_{j=1}^{n_i}\left(Y_{ij}-\overline{Y}_{i\bullet}\right)^2 = SSE
+  \qquad df_C = n_T-r
+  \]</span></p>
+<p>The general linear <span class="math inline">\(F\)</span>-test is conducted as follows once the previous models have been fit.</p>
+<p><span class="math display">\[
+  F^*=\frac{\left[\frac{SSE(R)-SSE(C)}{df_R-df_C}\right]}{\left[\frac{SSE(C)}{df_C}\right]}
+  \qquad \mbox{Reject } H_0 \mbox{ if: } \quad F^* \geq F_{1-\alpha,df_R-df_C, df_C}
+  \]</span></p>
+<p>In the case of the test of <span class="math inline">\(H_0:\mu_1=\mu_2=\cdots = \mu_r\)</span>,
+we obtain the following result where we reproduce the ANOVA <span class="math inline">\(F\)</span>-test.</p>
+<p><span class="math display">\[
+SSE(R)=SSTO \quad SSE(C) = SSE \quad \Rightarrow \quad SSE(R)-SSE(C)=SSTR
+\]</span></p>
+<p><span class="math display">\[
+df_R = n_T-1 \quad df_C = n_T-r \quad \Rightarrow \quad df_R-df_C =
+\left(n_T-1\right)-\left(n_T-r\right) = r-1
+\]</span></p>
+<p><span class="math display">\[
+F^*=\frac{\left[\frac{SSE(R)-SSE(C)}{df_R-df_C}\right]}{\left[\frac{SSE(C)}{df_C}\right]}=
+\frac{\left[\frac{SSTR}{r-1}\right]}{\left[\frac{SSE}{n_T-r}\right]}=\frac{MSTR}{MSE}
+\]</span></p>
+<p>For the second model described above (equality of virtual reality means),
+the reduced model would have a single mean for the LEC/MAT control group
+and common means for the three virtual reality treatments.</p>
+<p><span class="math display">\[
+\hat{Y}_{1j}=\overline{Y}_{1\bullet}  \qquad \qquad
+\hat{Y}_{2j}=\hat{Y}_{3j}=\hat{Y}_{4j}=\frac{\sum_{i=2}^4\sum_{j=1}^{n_i}Y_{ij}}{n_2+n_3+n_4} = \frac{\sum_{i=2}^4n_i\overline{Y}_{i\bullet}}{\sum_{i=2}^4 n_i}
+\]</span></p>
+<p>The third model involves leaving treatments 1 and 2 as individual groups and combines treatments 3 and 4 into a single group.</p>
+<p><span class="math display">\[
+\hat{Y}_{1j}=\overline{Y}_{1\bullet}  \qquad
+\hat{Y}_{2j}=\overline{Y}_{2\bullet}  \qquad
+\hat{Y}_{3j}=\hat{Y}_{4j}=  \frac{\sum_{i=3}^4n_i\overline{Y}_{i\bullet}}{\sum_{i=3}^4 n_i}
+\]</span>
+We will fit these models in R and use the <strong>anova</strong> command to conduct the <span class="math inline">\(F\)</span>-tests from the various model fits. The trick is to create new treatment factors for the various restrictions, and fit an <strong>lm</strong> or <strong>aov</strong> object.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="single-factor-studies.html#cb52-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
+<span id="cb52-2"><a href="single-factor-studies.html#cb52-2" tabindex="-1"></a><span class="fu">head</span>(vt,<span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   grp.trt procKnow
+## 1       1   4.5614
+## 2       1   6.6593</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="single-factor-studies.html#cb54-1" tabindex="-1"></a><span class="do">## Create grouping variable that separates control (1) vs virtual (234)</span></span>
+<span id="cb54-2"><a href="single-factor-studies.html#cb54-2" tabindex="-1"></a>vt<span class="sc">$</span>grp.trt_1_234 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vt<span class="sc">$</span>grp.trt<span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">234</span>)</span>
+<span id="cb54-3"><a href="single-factor-studies.html#cb54-3" tabindex="-1"></a><span class="do">## Create grouping variable that separates control (1) vs MON/KEY (2) vs HMD (34)</span></span>
+<span id="cb54-4"><a href="single-factor-studies.html#cb54-4" tabindex="-1"></a>vt<span class="sc">$</span>grp.trt_1_2_34 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>(vt<span class="sc">$</span>grp.trt<span class="sc">==</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fu">ifelse</span>(vt<span class="sc">$</span>grp.trt<span class="sc">==</span><span class="dv">2</span>,<span class="dv">2</span>,<span class="dv">34</span>))</span>
+<span id="cb54-5"><a href="single-factor-studies.html#cb54-5" tabindex="-1"></a></span>
+<span id="cb54-6"><a href="single-factor-studies.html#cb54-6" tabindex="-1"></a><span class="fu">table</span>(vt<span class="sc">$</span>grp.trt_1_234)</span></code></pre></div>
+<pre><code>## 
+##   1 234 
+##  16  48</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="single-factor-studies.html#cb56-1" tabindex="-1"></a><span class="fu">table</span>(vt<span class="sc">$</span>grp.trt_1_2_34)</span></code></pre></div>
+<pre><code>## 
+##  1  2 34 
+## 16 16 32</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="single-factor-studies.html#cb58-1" tabindex="-1"></a><span class="do">#### Testing H0_1:\mu_1=\mu_2=\mu_3=\mu_4</span></span>
+<span id="cb58-2"><a href="single-factor-studies.html#cb58-2" tabindex="-1"></a>vt.mod0 <span class="ot">&lt;-</span> <span class="fu">lm</span>(procKnow <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data=</span>vt)                 <span class="do">## 1 mean  (H0)</span></span>
+<span id="cb58-3"><a href="single-factor-studies.html#cb58-3" tabindex="-1"></a>vt.mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(procKnow <span class="sc">~</span> <span class="fu">factor</span>(grp.trt), <span class="at">data=</span>vt)   <span class="do">## 4 means</span></span>
+<span id="cb58-4"><a href="single-factor-studies.html#cb58-4" tabindex="-1"></a><span class="fu">anova</span>(vt.mod0)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: procKnow
+##           Df Sum Sq Mean Sq F value Pr(&gt;F)
+## Residuals 63 331.48  5.2616</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="single-factor-studies.html#cb60-1" tabindex="-1"></a><span class="fu">anova</span>(vt.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: procKnow
+##                 Df  Sum Sq Mean Sq F value   Pr(&gt;F)   
+## factor(grp.trt)  3  65.664 21.8880  4.9406 0.003931 **
+## Residuals       60 265.815  4.4302                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="single-factor-studies.html#cb62-1" tabindex="-1"></a><span class="fu">anova</span>(vt.mod0, vt.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: procKnow ~ 1
+## Model 2: procKnow ~ factor(grp.trt)
+##   Res.Df    RSS Df Sum of Sq      F   Pr(&gt;F)   
+## 1     63 331.48                                
+## 2     60 265.81  3    65.664 4.9406 0.003931 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="single-factor-studies.html#cb64-1" tabindex="-1"></a><span class="do">#### Testing H02: \mu_2=\mu_3=\mu_4</span></span>
+<span id="cb64-2"><a href="single-factor-studies.html#cb64-2" tabindex="-1"></a>vt.mod2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(procKnow <span class="sc">~</span> <span class="fu">factor</span>(grp.trt_1_234), <span class="at">data=</span>vt)   <span class="do">## 2 means</span></span>
+<span id="cb64-3"><a href="single-factor-studies.html#cb64-3" tabindex="-1"></a><span class="fu">anova</span>(vt.mod2)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: procKnow
+##                       Df  Sum Sq Mean Sq F value   Pr(&gt;F)    
+## factor(grp.trt_1_234)  1  56.816  56.816  12.825 0.000672 ***
+## Residuals             62 274.663   4.430                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="single-factor-studies.html#cb66-1" tabindex="-1"></a><span class="fu">anova</span>(vt.mod2, vt.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: procKnow ~ factor(grp.trt_1_234)
+## Model 2: procKnow ~ factor(grp.trt)
+##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+## 1     62 274.66                           
+## 2     60 265.81  2    8.8479 0.9986 0.3744</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="single-factor-studies.html#cb68-1" tabindex="-1"></a><span class="do">#### Testing H03: \mu_3=\mu_4</span></span>
+<span id="cb68-2"><a href="single-factor-studies.html#cb68-2" tabindex="-1"></a>vt.mod3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(procKnow <span class="sc">~</span> <span class="fu">factor</span>(grp.trt_1_2_34), <span class="at">data=</span>vt)   <span class="do">## 3 means</span></span>
+<span id="cb68-3"><a href="single-factor-studies.html#cb68-3" tabindex="-1"></a><span class="fu">anova</span>(vt.mod3)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: procKnow
+##                        Df Sum Sq Mean Sq F value   Pr(&gt;F)   
+## factor(grp.trt_1_2_34)  2  65.51  32.755  7.5123 0.001212 **
+## Residuals              61 265.97   4.360                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="single-factor-studies.html#cb70-1" tabindex="-1"></a><span class="fu">anova</span>(vt.mod3, vt.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Model 1: procKnow ~ factor(grp.trt_1_2_34)
+## Model 2: procKnow ~ factor(grp.trt)
+##   Res.Df    RSS Df Sum of Sq      F Pr(&gt;F)
+## 1     61 265.97                           
+## 2     60 265.81  1   0.15432 0.0348 0.8526</code></pre>
+<p>These are the interpretations of the results of the three tests from the models fit above.</p>
+<ul>
+<li><span class="math inline">\(H_0:\mu_1=\mu_2=\mu_3=\mu_4\)</span> - Conclude the 4 means are NOT all equal</li>
+<li><span class="math inline">\(H_0:\mu_1,\quad \mu_2=\mu_3=\mu_4\)</span> - Fail to reject that the 3 virtual means are equal</li>
+<li><span class="math inline">\(H_0:\mu_1, \mu_2,\quad  \mu_3=\mu_4\)</span> - Fail to reject that the 2 HMD means are equal</li>
+</ul>
+<p><span class="math display">\[\nabla\]</span></p>
+<p>Later we will see formally how to make contrasts among treatments
+to answer specific research questions.</p>
+</div>
+<div id="power-calculations" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Power Calculations<a href="single-factor-studies.html#power-calculations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When the null hypothesis <span class="math inline">\(H_0:\mu_1=\cdots =\mu_r\)</span> is false, the <span class="math inline">\(F\)</span>-statistic is distributed non-central <span class="math inline">\(F\)</span> with degrees of freedom <span class="math inline">\(\nu_1=r-1\)</span> and <span class="math inline">\(\nu_2=n_T-r\)</span>,
+and non-centrality parameter <span class="math inline">\(\lambda\)</span> defined below. We will use the notation
+<span class="math inline">\(F^* \sim F_{\nu_1,\nu_2}\left(\lambda\right)\)</span>.</p>
+<p><span class="math display">\[
+\lambda = \frac{\sum_{i=1}^rn_i\left(\mu_i-\mu_{\bullet}\right)^2}{\sigma^2}
+\qquad \qquad \mu_{\bullet}=\frac{\sum_{i=1}^rn_i\mu_i}{n_T}
+\]</span>
+For a given configuration <span class="math inline">\(\left\{n_i\right\}\)</span>, <span class="math inline">\(\left\{\mu_i\right\}\)</span>, and <span class="math inline">\(\sigma^2\)</span>,
+the <strong>power</strong> of the test, the probability that it will reject <span class="math inline">\(H_0\)</span> can be computed as follows.</p>
+<ul>
+<li>Compute the non-centrality parameter <span class="math inline">\(\lambda\)</span></li>
+<li>Obtain the critical value for the <span class="math inline">\(F\)</span>-statistic: <span class="math inline">\(F_{1-\alpha;r-1,n_T-r}\)</span></li>
+<li>Obtain the area in the non-central <span class="math inline">\(F\)</span>-distribution that exceeds the critical value in the previous step:
+<span class="math inline">\(P\left(F_{\nu_1,\nu_2}\left(\lambda\right) \ge F_{1-\alpha;r-1,n_T-r} \right)\)</span></li>
+</ul>
+<p>In many practical applications, researchers are interested in detecting a certain effect size among treatments and must iteratively solve for sample sizes that assure a certain power, such as 0.80.</p>
+<p><strong>Example 2.6 - Obtaining the Power of the <span class="math inline">\(F\)</span>-test</strong></p>
+<p>Consider the example described previously, and suppose we have samples of size <span class="math inline">\(n_i=5\)</span> from each treatment.</p>
+<p><span class="math display">\[
+n_1=n_2=n_3=5 \qquad \mu_1=40 \quad \mu_2=50 \quad \mu_3=60
+\quad \mu_{\bullet}=50\qquad \sigma^2=10^2=100
+\]</span></p>
+<p><span class="math display">\[
+\lambda = \frac{5(40-50)^2+5(50-50)^2+5(60-50)^2}{100}=\frac{1000}{100}=10
+\]</span></p>
+<p>If we were conducting a test of equal means, we would reject the null hypothesis if the <span class="math inline">\(F\)</span>-statistic <span class="math inline">\(MSTR/MSE\)</span> exceeds the <span class="math inline">\(1-\alpha\)</span> quantile of the <span class="math inline">\(F_{r-1,n_T-r}\)</span> distribution. The following plot gives the central and non-central F-distributions for this scenario with with critical value for <span class="math inline">\(\alpha=0.05\)</span> significance level <span class="math inline">\(F_{.95;2,12}=3.885\)</span>. Note that the area above 3.885 in the non-central F-distribution represents the <strong>power</strong>, the probability that we reject <span class="math inline">\(H_0\)</span> under this scenario for <span class="math inline">\(r\)</span>, <span class="math inline">\(\left\{\mu_i\right\}\)</span>, <span class="math inline">\(\sigma\)</span>, and <span class="math inline">\(\left\{n_i\right\}\)</span>. Using the <strong>pf</strong> function in R, we find the power to be .7015. In many experimental settings, the goal is to reach a power of .80 to detect a particular effect. In that case, given the settings for
+<span class="math inline">\(\left\{\mu_i\right\}\)</span>, and <span class="math inline">\(\sigma\)</span>, we would need to increase the sample sizes within treatments, <span class="math inline">\(\left\{n_i\right\}\)</span>.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="single-factor-studies.html#cb72-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="dv">5</span>,<span class="dv">3</span>)</span>
+<span id="cb72-2"><a href="single-factor-studies.html#cb72-2" tabindex="-1"></a>mu <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>)</span>
+<span id="cb72-3"><a href="single-factor-studies.html#cb72-3" tabindex="-1"></a>sigma <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb72-4"><a href="single-factor-studies.html#cb72-4" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">length</span>(mu)</span>
+<span id="cb72-5"><a href="single-factor-studies.html#cb72-5" tabindex="-1"></a>n_T <span class="ot">&lt;-</span> <span class="fu">sum</span>(n)</span>
+<span id="cb72-6"><a href="single-factor-studies.html#cb72-6" tabindex="-1"></a>nu_1 <span class="ot">&lt;-</span> r<span class="dv">-1</span></span>
+<span id="cb72-7"><a href="single-factor-studies.html#cb72-7" tabindex="-1"></a>nu_2 <span class="ot">&lt;-</span> n_T<span class="sc">-</span>r</span>
+<span id="cb72-8"><a href="single-factor-studies.html#cb72-8" tabindex="-1"></a>(F<span class="fl">.95</span> <span class="ot">&lt;-</span> <span class="fu">qf</span>(<span class="dv">1</span><span class="fl">-.05</span>,nu_1, nu_2))</span></code></pre></div>
+<pre><code>## [1] 3.885294</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="single-factor-studies.html#cb74-1" tabindex="-1"></a>(mu_dot <span class="ot">&lt;-</span> <span class="fu">sum</span>(n<span class="sc">*</span>mu) <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code></pre></div>
+<pre><code>## [1] 50</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="single-factor-studies.html#cb76-1" tabindex="-1"></a>(lambda <span class="ot">&lt;-</span> <span class="fu">sum</span>(n<span class="sc">*</span>(mu<span class="sc">-</span>mu_dot)<span class="sc">^</span><span class="dv">2</span>) <span class="sc">/</span> sigma<span class="sc">^</span><span class="dv">2</span>) </span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="single-factor-studies.html#cb78-1" tabindex="-1"></a>(power_HA <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(F<span class="fl">.95</span>, nu_1, nu_2, lambda))</span></code></pre></div>
+<pre><code>## [1] 0.7015083</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="single-factor-studies.html#cb80-1" tabindex="-1"></a>f.grid <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">8</span>,.<span class="dv">01</span>)</span>
+<span id="cb80-2"><a href="single-factor-studies.html#cb80-2" tabindex="-1"></a></span>
+<span id="cb80-3"><a href="single-factor-studies.html#cb80-3" tabindex="-1"></a><span class="fu">plot</span>(f.grid, <span class="fu">df</span>(f.grid, nu_1, nu_2), <span class="at">type=</span><span class="st">&quot;l&quot;</span>, <span class="at">col=</span><span class="st">&quot;red3&quot;</span>,</span>
+<span id="cb80-4"><a href="single-factor-studies.html#cb80-4" tabindex="-1"></a>     <span class="at">xlab=</span><span class="st">&quot;f&quot;</span>, <span class="at">ylab=</span><span class="st">&quot;density&quot;</span>)</span>
+<span id="cb80-5"><a href="single-factor-studies.html#cb80-5" tabindex="-1"></a><span class="fu">lines</span>(f.grid, <span class="fu">df</span>(f.grid, nu_1, nu_2, lambda), <span class="at">col=</span><span class="st">&quot;blue4&quot;</span>)</span>
+<span id="cb80-6"><a href="single-factor-studies.html#cb80-6" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">v=</span>F<span class="fl">.95</span>)</span>
+<span id="cb80-7"><a href="single-factor-studies.html#cb80-7" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="fu">c</span>(<span class="st">&quot;Central F&quot;</span>, <span class="st">&quot;Non-Central F&quot;</span>), <span class="at">lty=</span><span class="dv">1</span>,</span>
+<span id="cb80-8"><a href="single-factor-studies.html#cb80-8" tabindex="-1"></a>       <span class="at">col=</span><span class="fu">c</span>(<span class="st">&quot;red4&quot;</span>, <span class="st">&quot;blue4&quot;</span>))</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch0208"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch0208-1.png" alt="Central and non-central F-distributions used for testing for treatment effects and power calculations" width="80%" />
+<p class="caption">
+Figure 3.5: Central and non-central F-distributions used for testing for treatment effects and power calculations
+</p>
+</div>
+<p><span class="math display">\[\nabla\]</span></p>
+</div>
+</div>
+<div id="technical-details" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Technical Details<a href="single-factor-studies.html#technical-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="least-squares-estimation-for-the-cell-means-model-regression-approach" class="section level3 hasAnchor" number="3.4.1">
+<h3><span class="header-section-number">3.4.1</span> Least Squares Estimation for the Cell Means Model (Regression Approach)<a href="single-factor-studies.html#least-squares-estimation-for-the-cell-means-model-regression-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The cell means model can be written as a regression model
+in matrix form as follows. Note that there will not be an intercept in this formulation. We assume the data are stacked by treatment, then replicate within treatment in the <span class="math inline">\(n_T\times 1\)</span> vector <span class="math inline">\(Y\)</span>. The vector <span class="math inline">\(\beta\)</span> representing the regression coefficients is the <span class="math inline">\(r\times 1\)</span> vector containing <span class="math inline">\(\mu_1, \ldots,\mu_r\)</span> and the <span class="math inline">\(X\)</span> matrix is the <span class="math inline">\(n_T\times r\)</span> matrix containing a 1 if the observation in the current row is in the treatment (column) <span class="math inline">\(i\)</span> and 0 otherwise. We will formalize this for the simple case of <span class="math inline">\(r=3\)</span> treatments and <span class="math inline">\(n_1=n_2=n_3=2\)</span> replicates per treatment, then we will generalize it.
+As with the linear regression model, we will write the model in matrix form as follows.</p>
+<p><span class="math display">\[ Y = X\beta + \epsilon \]</span>
+where:</p>
+<p><span class="math display">\[
+Y = \begin{bmatrix}
+Y_{11} \\ Y_{12} \\ Y_{21} \\ Y_{22} \\
+Y_{31} \\ Y_{32} \\ \end{bmatrix}
+\qquad
+X = \begin{bmatrix}
+1 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 \\ \end{bmatrix}
+\qquad
+\beta = \begin{bmatrix}
+\mu_1 \\ \mu_2 \\ \mu_3 \\ \end{bmatrix}
+\qquad
+\epsilon = \begin{bmatrix}
+\epsilon_{11} \\ \epsilon_{12} \\ \epsilon_{21} \\ \epsilon_{22} \\
+\epsilon_{31} \\ \epsilon_{32} \\ \end{bmatrix}
+\]</span>
+Recall that in linear regression, we obtain the ordinary least squares estimator of <span class="math inline">\(\beta\)</span>, which is labelled <span class="math inline">\(b\)</span> as follows. Further the variance-covariance matrix of <span class="math inline">\(b\)</span> is given as well.</p>
+<p><span class="math display">\[ b = \left(X&#39;X\right)^{-1}X&#39;Y \qquad V\{b\} =
+\sigma^2\left(X&#39;X\right)^{-1} \]</span></p>
+<p>For this example, we obtain the following results.</p>
+<p><span class="math display">\[
+X&#39;X =
+\begin{bmatrix}
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\ \end{bmatrix}
+\begin{bmatrix}
+1 &amp; 0 &amp; 0 \\ 1 &amp; 0 &amp; 0 \\
+0 &amp; 1 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 1 \\ 0 &amp; 0 &amp; 1 \\ \end{bmatrix}
+=
+\begin{bmatrix}
+2 &amp; 0 &amp; 0 \\ 0 &amp; 2 &amp; 0 \\ 0 &amp; 0 &amp; 2 \\ \end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad \left(X&#39;X\right)^{-1}=
+\begin{bmatrix}
+\frac{1}{2} &amp; 0 &amp; 0 \\ 0 &amp; \frac{1}{2} &amp; 0 \\ 0 &amp; 0 &amp; \frac{1}{2} \\ \end{bmatrix}
+\]</span></p>
+<p>Continuing on the computations, we obtain the following results.</p>
+<p><span class="math display">\[
+X&#39;Y =
+\begin{bmatrix}
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\ \end{bmatrix}
+\begin{bmatrix}
+Y_{11} \\ Y_{12} \\ Y_{21} \\ Y_{22} \\
+Y_{31} \\ Y_{32} \\ \end{bmatrix}
+=
+\begin{bmatrix}
+Y_{11}+Y_{12} \\ Y_{21}+Y_{22} \\ Y_{31}+Y_{32}\\ \end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad
+b = \left(X&#39;X\right)^{-1}X&#39;Y =
+\begin{bmatrix}
+\frac{1}{2} &amp; 0 &amp; 0 \\ 0 &amp; \frac{1}{2} &amp; 0 \\ 0 &amp; 0 &amp; \frac{1}{2} \\ \end{bmatrix}
+\begin{bmatrix}
+Y_{11}+Y_{12} \\ Y_{21}+Y_{22} \\ Y_{31}+Y_{32}\\ \end{bmatrix}
+=
+\begin{bmatrix}
+\frac{Y_{11}+Y_{12}}{2} \\
+\frac{Y_{21}+Y_{22}}{2} \\
+\frac{Y_{31}+Y_{32}}{2} \\
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+V\{b\} =
+\sigma^2\left(X&#39;X\right)^{-1}
+=\sigma^2 \begin{bmatrix}
+\frac{1}{2} &amp; 0 &amp; 0 \\ 0 &amp; \frac{1}{2} &amp; 0 \\ 0 &amp; 0 &amp; \frac{1}{2} \\ \end{bmatrix}
+\]</span></p>
+<p>So, this leads to the (hopefully) not surprising general results.</p>
+<p><span class="math display">\[
+\overline{Y}_{i\bullet} = \frac{\sum_{j=1}^{n_i}Y_{ij}}{n_i}
+\qquad \qquad
+b = \begin{bmatrix}
+\overline{Y}_{1\bullet} \\ \overline{Y}_{2\bullet} \\ \vdots \\
+\overline{Y}_{r-1,\bullet} \\
+\overline{Y}_{r\bullet} \\ \end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+V\{b\} = \sigma^2
+\begin{bmatrix}
+\frac{1}{n_1} &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\
+0 &amp; \frac{1}{n_2} &amp; \cdots &amp; 0 &amp; 0\\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; \frac{1}{n_{r-1}} &amp; 0 \\
+0 &amp; 0 &amp; \cdots &amp; 0 &amp; \frac{1}{n_r}  \\ \end{bmatrix}
+\]</span></p>
+<p><strong>Example 2.7 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p>For this example, we will set up the <span class="math inline">\(X\)</span> matrix and <span class="math inline">\(Y\)</span> vector as follow.
+Let <span class="math inline">\(1_{16}\)</span> represent a <span class="math inline">\(16\times 1\)</span> vector of <span class="math inline">\(1^s\)</span> and
+<span class="math inline">\(0_{16}\)</span> represent a <span class="math inline">\(16\times 1\)</span> vector of <span class="math inline">\(0^s\)</span> and
+<span class="math inline">\(Y_i\)</span> be the <span class="math inline">\(16\times 1\)</span> vector of <span class="math inline">\(Y_{i1},\ldots,Y_{i,16}\)</span> for <span class="math inline">\(i=1,2,3,4\)</span>.
+Further, let <span class="math inline">\(Y_{i\bullet}=\sum_{j=1}^{n_i}Y_{ij}\)</span> and
+<span class="math inline">\(\overline{Y}_{i\bullet} = Y_{i\bullet}/n_i\)</span>.</p>
+<p><span class="math display">\[
+X =
+\begin{bmatrix}
+1_{16} &amp; 0_{16} &amp; 0_{16} &amp; 0_{16}  \\
+0_{16} &amp; 1_{16} &amp; 0_{16} &amp; 0_{16}  \\
+0_{16} &amp; 0_{16} &amp; 1_{16} &amp; 0_{16}  \\
+0_{16} &amp; 0_{16} &amp; 0_{16} &amp; 1_{16}  \\
+\end{bmatrix}
+\qquad
+X&#39;X =
+\begin{bmatrix}
+16 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 16 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 16 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 16\\
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+Y =
+\begin{bmatrix}
+Y_1 \\ Y_2 \\ Y_3 \\ Y_4\\
+\end{bmatrix}
+\qquad
+X&#39;Y =
+\begin{bmatrix}
+Y_{1\bullet} \\
+Y_{2\bullet} \\
+Y_{3\bullet} \\
+Y_{4\bullet} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+78.8888 \\ 123.3334 \\ 107.7777 \\109.9999 \\
+\end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[
+b=(X&#39;X)^{-1}X&#39;Y
+=
+\begin{bmatrix}
+\frac{1}{16} &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; \frac{1}{16} &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; \frac{1}{16} &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; \frac{1}{16}\\
+\end{bmatrix}
+\begin{bmatrix}
+78.8888 \\ 123.3334 \\ 107.7777 \\109.9999 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+4.9306 \\ 7.7083 \\ 6.7361 \\ 6.8750 \\
+\end{bmatrix}
+\]</span>
+The variance of each element of <span class="math inline">\(b\)</span> is <span class="math inline">\(\sigma^2/16\)</span>, and the standard error is <span class="math inline">\(\sigma/\sqrt{16}=\sigma/4\)</span>. Here, we make use of the <strong>lm</strong> function in R to obtain point estimates and estimated standard errors for the cell means model. Note that the intercept is removed <span class="math inline">\((-1)\)</span> in the command and we have to define the treatment as a factor variable (so as not to fit a straight line).</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="single-factor-studies.html#cb81-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
+<span id="cb81-2"><a href="single-factor-studies.html#cb81-2" tabindex="-1"></a><span class="fu">head</span>(vt, <span class="dv">2</span>)</span></code></pre></div>
+<pre><code>##   grp.trt procKnow
+## 1       1   4.5614
+## 2       1   6.6593</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="single-factor-studies.html#cb83-1" tabindex="-1"></a>vt.mod1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(procKnow <span class="sc">~</span> <span class="fu">factor</span>(grp.trt) <span class="sc">-</span> <span class="dv">1</span>, <span class="at">data=</span>vt)</span>
+<span id="cb83-2"><a href="single-factor-studies.html#cb83-2" tabindex="-1"></a><span class="fu">summary</span>(vt.mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = procKnow ~ factor(grp.trt) - 1, data = vt)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.0831 -1.4444  0.5774  1.5495  3.1900 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## factor(grp.trt)1   4.9306     0.5262    9.37 2.37e-13 ***
+## factor(grp.trt)2   7.7083     0.5262   14.65  &lt; 2e-16 ***
+## factor(grp.trt)3   6.7361     0.5262   12.80  &lt; 2e-16 ***
+## factor(grp.trt)4   6.8750     0.5262   13.06  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.105 on 60 degrees of freedom
+## Multiple R-squared:  0.9139, Adjusted R-squared:  0.9082 
+## F-statistic: 159.2 on 4 and 60 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>The summary output includes the residual standard error, which is our estimate of <span class="math inline">\(\sigma\)</span>, the standard deviation of the model errors. Derivation of the unbiased estimator of
+<span class="math inline">\(\sigma^2\)</span> is described below.</p>
+<p><span class="math display">\[\nabla\]</span></p>
+</div>
+<div id="scalar-estimation-for-the-cell-means-model" class="section level3 hasAnchor" number="3.4.2">
+<h3><span class="header-section-number">3.4.2</span> Scalar Estimation for the Cell Means Model<a href="single-factor-studies.html#scalar-estimation-for-the-cell-means-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We re-write the model here in scalar form.</p>
+<p><span class="math display">\[ Y_{ij}=\mu_i + \epsilon_{ij}
+\qquad i=1,\ldots,r; \quad j=1,\ldots, n_i \qquad \epsilon_{ij} \sim NID\left(0,\sigma^2\right) \]</span></p>
+<p>Let <span class="math inline">\(Q=\sum_{i=1}^r\sum_{j=1}^{n_i}\epsilon_{ij}^2\)</span>. We choose <span class="math inline">\(\hat{\mu}_k\)</span> that minimizes <span class="math inline">\(Q\)</span> for <span class="math inline">\(k=1,\ldots ,r\)</span>. This is done by taking the derivative of <span class="math inline">\(Q\)</span> with respect to <span class="math inline">\(\mu_k\)</span>, setting it equal to zero and solving for the least squares estimator.</p>
+<p><span class="math display">\[
+Q=\sum_{i=1}^r\sum_{j=1}^{n_i}\epsilon_{ij}^2
+= \sum_{i=1}^r\sum_{j=1}^{n_i}\left(Y_{ij}-\mu_i\right)^2
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad
+\frac{\partial Q}{\partial \mu_k} =
+\frac{\partial}{\partial \mu_k}\sum_{i=1}^r\sum_{j=1}^{n_i}\left(Y_{ij}-\mu_i\right)^2
+=2\sum_{j=1}^{n_k}\left(Y_{kj}-\mu_k\right)(-1)
+\]</span></p>
+<p>Note that this only involves the <span class="math inline">\(n_k\)</span> observations for treatment <span class="math inline">\(k\)</span>.
+Now we set the partial derivative to zero for the least squares (and maximum likelihood) estimator of <span class="math inline">\(\mu_k\)</span>.</p>
+<p><span class="math display">\[
+-2\sum_{j=1}^{n_k}\left(Y_{kj}-\hat{\mu_k}\right) = 0
+\quad \Rightarrow \quad \sum_{j=1}^{n_k}Y_{kj} = n_k\hat{\mu_k}
+\quad \Rightarrow \quad \hat{\mu_k}= \frac{\sum_{j=1}^{n_k}Y_{kj}}{n_k}
+=\overline{Y}_{k\bullet}
+\]</span></p>
+<p>Thus the fitted values for <span class="math inline">\(Y_{ij}\)</span> are <span class="math inline">\(\hat{Y}_{ij}=\overline{Y}_{i\bullet}\)</span>.</p>
+</div>
+<div id="estimation-for-the-treatment-effects-model" class="section level3 hasAnchor" number="3.4.3">
+<h3><span class="header-section-number">3.4.3</span> Estimation for the Treatment Effects Model<a href="single-factor-studies.html#estimation-for-the-treatment-effects-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(\mu_i\)</span> be the population mean for treatment <span class="math inline">\(i\)</span>, and let <span class="math inline">\(\mu_{\bullet}\)</span>
+be the unweighted mean of the <span class="math inline">\(\mu_i^s\)</span>. Note that this will differ from <span class="math inline">\(\mu_{\bullet}\)</span> used in the cell means model when the sample sizes are not all equal.</p>
+<p><span class="math display">\[
+\mu_{\bullet}=\frac{\sum_{i=1}^r\mu_i}{r}  \qquad
+\mu_i = \mu_{\bullet} + \left(\mu_i-\mu_{\bullet}\right) = \mu_{\bullet} + \tau_i
+\quad \Rightarrow \quad \tau_i = \mu_i-\mu_{\bullet}
+\]</span></p>
+<p>We will refer to <span class="math inline">\(\tau_i\)</span> as the effect of treatment <span class="math inline">\(i\)</span> relative to the mean among all treatments. The sum of <span class="math inline">\(\tau_i\)</span> is zero, when we use the unweighted mean <span class="math inline">\(\mu_{\bullet}\)</span>.</p>
+<p><span class="math display">\[
+\mu_1=\cdots=\mu_r=\mu_{\bullet} \quad \Rightarrow \quad
+\tau_1=\cdots=\tau_r = 0
+\]</span></p>
+<p><span class="math display">\[
+Y_{ij}=\mu_{\bullet} +\tau_i + \epsilon_{ij}
+\qquad i=1,\ldots,r; \quad j=1,\ldots, n_i \qquad \epsilon_{ij} \sim NID\left(0,\sigma^2\right) \]</span></p>
+<p><span class="math display">\[ E\{Y_{ij}\} = E\{\mu_{\bullet} +\tau_i + \epsilon_{ij}\} = \mu_{\bullet} +\tau_i+0=\mu_{\bullet} +\tau_i \qquad
+V\{Y_{ij}\} = V\{\mu_{\bullet} +\tau_i + \epsilon_{ij}\} = 0 +\sigma^2=\sigma^2
+\]</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^{r}\tau_i=0 \quad \Rightarrow \quad \tau_r = -\sum_{i=1}^{r-1}\tau_i
+\]</span></p>
+</div>
+<div id="least-squares-estimation-regression-approach" class="section level3 hasAnchor" number="3.4.4">
+<h3><span class="header-section-number">3.4.4</span> Least Squares Estimation (Regression Approach)<a href="single-factor-studies.html#least-squares-estimation-regression-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Let <span class="math inline">\(Y\)</span> be defined as before. We will parameterize <span class="math inline">\(\beta\)</span> in terms
+of <span class="math inline">\(\mu_{\bullet}\)</span> and <span class="math inline">\(\tau_1,\ldots,\tau_{r-1}\)</span>, keeping in mind the result above
+regarding <span class="math inline">\(\tau_r\)</span>. First consider the case as we did previously with <span class="math inline">\(r=3\)</span>
+and <span class="math inline">\(n_1=n_2=n_3=2\)</span>.</p>
+<p><span class="math display">\[
+Y = \begin{bmatrix}
+Y_{11} \\ Y_{12} \\ Y_{21} \\ Y_{22} \\
+Y_{31} \\ Y_{32} \\ \end{bmatrix}
+\qquad
+X = \begin{bmatrix}
+1 &amp; \phantom{-}1 &amp; \phantom{-}0 \\ 1 &amp; \phantom{-}1 &amp; \phantom{-}0 \\
+1 &amp; \phantom{-}0 &amp; \phantom{-}1 \\ 1 &amp; \phantom{-}0 &amp; \phantom{-}1 \\
+1 &amp; -1 &amp; -1 \\ 1 &amp; -1 &amp; -1 \\ \end{bmatrix}
+\qquad
+\beta = \begin{bmatrix}
+\mu_{\bullet} \\ \tau_1 \\ \tau_2 \\ \end{bmatrix}\phantom{-}
+\qquad
+\epsilon = \begin{bmatrix}
+\epsilon_{11} \\ \epsilon_{12} \\ \epsilon_{21} \\ \epsilon_{22} \\
+\epsilon_{31} \\ \epsilon_{32} \\ \end{bmatrix}
+\]</span></p>
+<p><span class="math display">\[ b = \left(X&#39;X\right)^{-1}X&#39;Y \qquad V\{b\} =
+\sigma^2\left(X&#39;X\right)^{-1} \]</span></p>
+<p>For this example, we obtain the following results.</p>
+<p><span class="math display">\[
+X&#39;X =
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; \phantom{-}1 &amp; \phantom{-}1 \\
+1 &amp; 1 &amp; 0 &amp; 0 &amp; -1 &amp; -1 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; -1 &amp; -1 \\ \end{bmatrix}
+\begin{bmatrix}
+1 &amp; \phantom{-}1 &amp; \phantom{-}0 \\ 1 &amp; \phantom{-}1 &amp; \phantom{-}0 \\
+1 &amp; \phantom{-}0 &amp; \phantom{-}1 \\ 1 &amp; \phantom{-}0 &amp; \phantom{-}1 \\
+1 &amp; -1 &amp; -1 \\ 1 &amp; -1 &amp; -1 \\ \end{bmatrix}
+=
+\begin{bmatrix}
+6 &amp; 0 &amp; 0 \\ 0 &amp; 4 &amp; 2 \\ 0 &amp; 2 &amp; 4 \\ \end{bmatrix}
+\]</span></p>
+<p>Making use of cofactors, we obtain <span class="math inline">\(\left(X&#39;X\right)^{-1}\)</span> below.</p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad \left(X&#39;X\right)^{-1}=
+\begin{bmatrix}
+\frac{1}{6} &amp; \phantom{-}0 &amp; \phantom{-}0 \\
+0 &amp; \phantom{-}\frac{1}{3} &amp; -\frac{1}{6} \\
+0 &amp; -\frac{1}{6} &amp; \phantom{-}\frac{1}{3} \\ \end{bmatrix} =
+\frac{1}{6}
+\begin{bmatrix}
+1 &amp; \phantom{-}0 &amp; \phantom{-}0 \\ 0 &amp; \phantom{-}2 &amp; -1 \\ 0 &amp; -1 &amp; \phantom{-}2 \\
+\end{bmatrix}
+\]</span></p>
+<p>Continuing on the computations, we obtain the following results.</p>
+<p><span class="math display">\[
+X&#39;Y =
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; \phantom{-}1 &amp; \phantom{-}1 \\
+1 &amp; 1 &amp; 0 &amp; 0 &amp; -1 &amp; -1 \\
+0 &amp; 0 &amp; 1 &amp; 1 &amp; -1 &amp; -1 \\ \end{bmatrix}
+\begin{bmatrix}
+Y_{11} \\ Y_{12} \\ Y_{21} \\ Y_{22} \\
+Y_{31} \\ Y_{32} \\ \end{bmatrix}
+=
+\begin{bmatrix}
+Y_{11}+Y_{12}+Y_{21}+Y_{22}+Y_{31}+Y_{32} \\
+Y_{11}+Y_{12}-Y_{31}-Y_{32} \\
+Y_{21}+Y_{22}-Y_{31}-Y_{32}\\ \end{bmatrix}
+\]</span></p>
+<p>When the dust settles, the estimator <span class="math inline">\(b\)</span> for <span class="math inline">\(\beta\)</span> is obtained below.</p>
+<p><span class="math display">\[
+b=\left(X&#39;X\right)^{-1}X&#39;Y =
+\frac{1}{6}
+\begin{bmatrix}
+1 &amp; \phantom{-}0 &amp; \phantom{-}0 \\ 0 &amp; \phantom{-}2 &amp; -1 \\ 0 &amp; -1 &amp; \phantom{-}2 \\
+\end{bmatrix}
+\begin{bmatrix}
+Y_{11}+Y_{12}+Y_{21}+Y_{22}+Y_{31}+Y_{32} \\
+Y_{11}+Y_{12}-Y_{31}-Y_{32} \\
+Y_{21}+Y_{22}-Y_{31}-Y_{32}\\ \end{bmatrix}
+=
+\begin{bmatrix}
+\overline{Y}_{\bullet\bullet} \\
+\overline{Y}_{1\bullet} - \overline{Y}_{\bullet\bullet} \\
+\overline{Y}_{2\bullet} - \overline{Y}_{\bullet\bullet} \\
+\end{bmatrix}
+\]</span>
+The general result is as follows, allowing for unequal sample sizes.</p>
+<p><span class="math display">\[
+b =
+\begin{bmatrix}
+\frac{1}{r}\sum_{i=1}^r \overline{Y}_{i\bullet} \\
+\frac{r-1}{r}\overline{Y}_{1\bullet}-\frac{1}{r}\sum_{i=2}^r\overline{Y}_{i\bullet} \\
+\vdots \\
+\frac{r-1}{r}\overline{Y}_{r-1,\bullet}-\frac{1}{r}\sum_{i=1 \atop i \ne r-1}^r\overline{Y}_{i\bullet}
+\end{bmatrix}
+\qquad
+\hat{\tau}_r=-\sum_{i=1}^{r-1}\hat{\tau}_i=
+\frac{r-1}{r}\overline{Y}_{r\bullet}-\frac{1}{r}\sum_{i=1}^{r-1}\overline{Y}_{i\bullet}
+\]</span>
+From these expressions, we obtain the following variances for <span class="math inline">\(\hat{\mu}\)</span> and
+<span class="math inline">\(\hat{\tau}_k\)</span>.</p>
+<p><span class="math display">\[
+V\left\{\hat{\mu}\right\} = V\left\{\frac{1}{r}\sum_{i=1}^r \overline{Y}_{i\bullet}\right\}=
+\frac{1}{r^2}\sum_{i=1}^rV\left\{\overline{Y}_{i\bullet}\right\}=
+\frac{\sigma^2}{r^2}\sum_{i=1}^r\frac{1}{n_i}
+\]</span>
+<span class="math display">\[V\left\{\hat{\tau}_k\right\} =
+V\left\{\frac{r-1}{r}\overline{Y}_{k\bullet}-\frac{1}{r}\sum_{i=1 \atop i \ne k}^r\overline{Y}_{i\bullet}\right\}=
+\frac{\sigma^2}{r^2}\left[
+\frac{(r-1)^2}{n_k} + \sum_{i=1 \atop i \ne k}^r\frac{1}{n_i}
+\right]
+\]</span></p>
+</div>
+<div id="the-analysis-of-variance" class="section level3 hasAnchor" number="3.4.5">
+<h3><span class="header-section-number">3.4.5</span> The Analysis of Variance<a href="single-factor-studies.html#the-analysis-of-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In this section, we obtain a decomposition of the total variation of the individual measurements around the overall mean, the <strong>Total Sum of Squares</strong>, which we will denote <span class="math inline">\(SSTO\)</span>. Further, we will derive the expectations of the error and treatment sums of squares (and mean squares).</p>
+<p><span class="math display">\[
+\overline{Y}_{\bullet\bullet}=
+\frac{\sum_{i=1}^r\sum_{j=1}^{n_i}Y_{ij}}{n_T}
+\qquad \qquad
+SSTO = \sum_{i=1}^r\sum_{j=1}^{n_i}
+  \left(Y_{ij}-\overline{Y}_{\bullet\bullet}\right)^2
+\]</span>
+A useful expansion of this is helpful for derivations below.</p>
+<p><span class="math display">\[
+SSTO = \sum_{i=1}^r\sum_{j=1}^{n_i}
+  \left(Y_{ij}^2 + \overline{Y}_{\bullet\bullet}^2
+  -2Y_{ij}\overline{Y}_{\bullet\bullet}\right)
+\]</span>
+<span class="math display">\[
+\quad \Rightarrow \quad
+SSTO = \sum_{i=1}^r\sum_{j=1}^{n_i} Y_{ij}^2 +
+  n_T\overline{Y}_{\bullet\bullet}^2 -
+  2\overline{Y}_{\bullet\bullet}\sum_{i=1}^r\sum_{j=1}^{n_i} Y_{ij}=
+  \sum_{i=1}^r\sum_{j=1}^{n_i} Y_{ij}^2 +
+  n_T\overline{Y}_{\bullet\bullet}^2 -
+  2\overline{Y}_{\bullet\bullet}n_T\overline{Y}_{\bullet\bullet}
+  \]</span>
+<span class="math display">\[
+  \quad \Rightarrow \quad
+SSTO
+  = \sum_{i=1}^r\sum_{j=1}^{n_i} Y_{ij}^2 -
+  n_T\overline{Y}_{\bullet\bullet}^2
+  \]</span></p>
+<p>As was the case for the linear regression model, we obtain fitted values for the observations in the form <span class="math inline">\(\hat{Y}=Xb\)</span>. This leads to the error sum of squares, labelled as <span class="math inline">\(SSE=\left(Y-\hat{Y}\right)&#39;\left(Y-\hat{Y}\right)\)</span> here (note that in R, for linear models, it is labelled as <span class="math inline">\(RSS\)</span>, for the residual sum of squares).</p>
+<p><span class="math display">\[
+SSE = \sum_{i=1}^r\sum_{j=1}^{n_i}  \left(Y_{ij}-\hat{Y}_{ij}\right)^2
+\]</span>
+Noting that for this model, <span class="math inline">\(\hat{Y}_{ij}=\overline{Y}_{i\bullet}\)</span>,
+we obtain the following formula for <span class="math inline">\(SSE\)</span>.</p>
+<p><span class="math display">\[
+SSE=\sum_{i=1}^r\sum_{j=1}^{n_i} \left(Y_{ij}-\overline{Y}_{i\bullet}\right)^2
+\]</span>
+We can expand this form of <span class="math inline">\(SSE\)</span> which will be used to derive the unbiased estimator for <span class="math inline">\(\sigma^2\)</span>, the error variance.</p>
+<p><span class="math display">\[
+SSE=\sum_{i=1}^r\sum_{j=1}^{n_i}\left(
+Y_{ij}^2 + \overline{Y}_{i\bullet}^2 -
+2Y_{ij}\overline{Y}_{i\bullet}\right)
+\]</span>
+<span class="math display">\[
+\quad \Rightarrow \quad
+SSE = \sum_{i=1}^r\sum_{j=1}^{n_i} Y_{ij}^2
++ \sum_{i=1}^r n_i\overline{Y}_{i\bullet}^2
+-2\sum_{i=1}^r\overline{Y}_{i\bullet}\sum_{j=1}^{n_i} Y_{ij}=
+\sum_{i=1}^r\sum_{j=1}^{n_i} Y_{ij}^2
++ \sum_{i=1}^r n_i\overline{Y}_{i\bullet}^2
+-2\sum_{i=1}^r  n_i\overline{Y}_{i\bullet}^2
+\]</span>
+<span class="math display">\[
+\quad \Rightarrow \quad
+SSE =\sum_{i=1}^r\sum_{j=1}^{n_i} Y_{ij}^2 -
+\sum_{i=1}^r n_i\overline{Y}_{i\bullet}^2
+\]</span></p>
+<p>To obtain an unbiased estimator for <span class="math inline">\(\sigma^2\)</span>, consider the following results from the Cell Means Model.</p>
+<p><span class="math display">\[
+E\left\{Y_{ij}\right\}=\mu_i
+\qquad
+V\left\{Y_{ij}\right\}= \sigma^2
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad
+E\left\{Y_{ij}^2\right\} =
+V\left\{Y_{ij}\right\} +
+\left[E\left\{Y_{ij}\right\}\right]^2
+=
+\sigma^2 + \mu_i^2
+\]</span></p>
+<p>Similarly, we obtain the expected values of the squares of the treatment means below.</p>
+<p><span class="math display">\[
+E\left\{\overline{Y}_{i\bullet}\right\}
+=\frac{1}{n_i}\sum_{j=1}^{n_i}E\left\{Y_{ij}\right\}
+=\mu_i
+\qquad
+V\left\{\overline{Y}_{i\bullet}\right\}
+=\frac{1}{n_i^2}\sum_{j=1}^{n_i}V\left\{Y_{ij}\right\}
+=\frac{\sigma^2}{n_i}
+\]</span>
+<span class="math display">\[
+\quad \Rightarrow \quad
+E\left\{\overline{Y}_{i\bullet}^2\right\}=
+\frac{\sigma^2}{n_i} + \mu_i^2
+\]</span>
+Next, we obtain <span class="math inline">\(E\left\{SSE\right\}\)</span> making use of these results.</p>
+<p><span class="math display">\[
+E\left\{SSE\right\} =
+\sum_{i=1}^r\sum_{j=1}^{n_i} E\left\{Y_{ij}^2\right\} -
+\sum_{i=1}^r n_iE\left\{\overline{Y}_{i\bullet}^2\right\}
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad
+E\left\{SSE\right\} =
+\sum_{i=1}^r n_i\left(\sigma^2 + \mu_i^2\right)
+- \sum_{i=1}^r n_i\left(\frac{\sigma^2}{n_i} + \mu_i^2\right)
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad
+E\left\{SSE\right\}
+=n_T\sigma^2 - r\sigma^2 = \left(n_T-r\right)\sigma^2
+\]</span></p>
+<p>Thus, if we divide <span class="math inline">\(SSE\)</span> by <span class="math inline">\(n_T-r\)</span>, we obtain an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>. This is the <strong>Mean Square Error</strong>, denoted as <span class="math inline">\(MSE\)</span>, and often labelled as <span class="math inline">\(S^2\)</span> (as an estimator) and <span class="math inline">\(s^2\)</span> when computed on an observed set of data. The denominator <span class="math inline">\(n_T-r\)</span> is the <strong>Error Degrees of Freedom</strong>.</p>
+<p><span class="math display">\[
+MSE = \frac{SSE}{n_T-r}  \qquad E\left\{MSE\right\} = \sigma^2
+\]</span></p>
+<p>The <strong>Treatment Sum of Squares</strong>, denoted as <span class="math inline">\(SSTR\)</span>, acts like the regression sum of squares for linear regression models. That is,
+<span class="math inline">\(SSTR = \left(\hat{Y}-\overline{Y}1\right)&#39;\left(\hat{Y}-\overline{Y}1\right)\)</span>.
+Keeping in mind that the fitted value for <span class="math inline">\(Y_{ij}\)</span> is <span class="math inline">\(\hat{Y_{ij}} = \overline{Y}_{i\bullet}\)</span>, we obtain SSTR as follows.</p>
+<p><span class="math display">\[
+SSTR = \sum_{i=1}^r\sum_{j=1}^{n_i}
+\left(\overline{Y}_{i\bullet}-
+  \overline{Y}_{\bullet\bullet}\right)^2
+= \sum_{i=1}^r n_i \left(\overline{Y}_{i\bullet}-
+  \overline{Y}_{\bullet\bullet}\right)^2
+\]</span></p>
+<p>Again, it is helpful to expand this as before.</p>
+<p><span class="math display">\[
+SSTR = \sum_{i=1}^r n_i \overline{Y}_{i\bullet}^2
+- n_T\overline{Y}_{\bullet\bullet}^2
+\]</span></p>
+<p>We know the expectation of the first term from the derivation of <span class="math inline">\(E\left\{SSE\right\}\)</span>, so we just need the second term.</p>
+<p><span class="math display">\[
+E\left\{\overline{Y}_{\bullet\bullet}\right\}
+=\frac{\sum_{i=1}^r\sum_{j=1}^{n_i}E\left\{Y_{ij}\right\}}{n_T}
+=\frac{\sum_{i=1}^rn_i\mu_i}{n_T} = \mu_{\bullet}
+\]</span></p>
+<p><span class="math display">\[
+V\left\{\overline{Y}_{\bullet\bullet}\right\}
+=\frac{1}{n_T^2}\sum_{i=1}^r\sum_{j=1}^{n_i}
+V\left\{Y_{ij}\right\} = \frac{\sigma^2}{n_T}
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad
+E\left\{SSTR\right\} =
+\sum_{i=1}^r n_i\left(\frac{\sigma^2}{n_i} + \mu_i^2\right) -
+\left(\sigma^2 + n_T \mu_{\bullet}^2\right)
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad
+E\left\{SSTR\right\} =
+\sigma^2(r-1) + \sum_{i=1}^rn_i\mu_i^2 - n_T\mu_{\bullet}^2
+\]</span></p>
+<p><span class="math display">\[
+\quad \Rightarrow \quad
+E\left\{SSTR\right\}
+= \sigma^2(r-1) + \sum_{i=1}^rn_i\left(\mu_i-\mu_{\bullet}\right)^2
+\]</span>
+The last step involving the <span class="math inline">\(\mu^s\)</span> is easiest to see as follows.</p>
+<p><span class="math display">\[
+\sum_{i=1}^rn_i\left(\mu_i-\mu_{\bullet}\right)^2=
+\sum_{i=1}^rn_i\left(\mu_i^2+\mu_{\bullet}^2-2\mu_i\mu_{\bullet}\right)=
+\sum_{i=1}^rn_i \mu_i^2+n_T\mu_{\bullet}^2-2\mu_{\bullet}\sum_{i=1}^rn_i \mu_i
+\]</span>
+<span class="math display">\[
+\mbox{ where } \sum_{i=1}^rn_i \mu_i = n_T\mu_{\bullet} \quad \Rightarrow \quad
+\sum_{i=1}^rn_i\left(\mu_i-\mu_{\bullet}\right)^2=
+\sum_{i=1}^rn_i \mu_i^2-n_T\mu_{\bullet}^2
+\]</span></p>
+<p>The treatment degrees of freedom are <span class="math inline">\(r-1\)</span>, the number of treatments minus one. We compute the <strong>Treatment Mean Square</strong> by dividing the Treatment Sum of Squares by its degrees of freedom and obtain its expectation below.</p>
+<p><span class="math display">\[
+MSTR = \frac{SSTR}{r-1} \qquad
+E\left\{MSTR\right\} = \sigma^2 + \frac{\sum_{i=1}^rn_i\left(\mu_i-\mu_{\bullet}\right)^2}{r-1}
+\]</span></p>
+<p>When all treatment means are equal, that is, <span class="math inline">\(\mu_1=\cdots=\mu_r=\mu_{\bullet}\)</span>,
+then the expected mean squares for treatment and error are equal
+<span class="math inline">\(\left(E\left\{MSTR\right\} = E\left\{MSE\right\}=\sigma^2\right)\)</span>,
+otherwise it is higher for treatments than for error.
+Further, under the assumptions of the model thus far (normal, independent errors with constant variance) we obtain the following results.</p>
+<p><span class="math display">\[
+\frac{SSE}{\sigma^2}=\frac{\left(n_T-r\right)MSE}{\sigma^2} \sim \chi_{n_T-r}^2
+\]</span></p>
+<p><span class="math display">\[
+\frac{SSTR}{\sigma^2}=\frac{(r-1)MSTR}{\sigma^2} \sim \chi_{r-1}^2(\lambda)
+\]</span></p>
+<p>where <span class="math inline">\(\lambda\)</span> is the non-centrality parameter of the chi-square distribution. In the One-Way Analysis of Variance, <span class="math inline">\(\lambda\)</span> is computed as follow.</p>
+<p><span class="math display">\[
+\lambda = \frac{\sum_{i=1}^rn_i\left(\mu_i-\mu_{\bullet}\right)^2}{\sigma^2}
+\]</span></p>
+<p>Further <span class="math inline">\(MSTR\)</span> and <span class="math inline">\(MSE\)</span> are independent. When all <span class="math inline">\(\mu_i\)</span> are equal, then the
+chi-square distribution for <span class="math inline">\(SSTR/\sigma^2\)</span> is “central” chi-square, and we can use
+the (central) <span class="math inline">\(F\)</span>-distribution to test the hypothesis <span class="math inline">\(H_0:\mu_1=\cdots = \mu_r\)</span>.</p>
+<p>We will make use of the following results when testing for differences among means. Suppose <span class="math inline">\(W_1\)</span> is chi-square with <span class="math inline">\(\nu_1\)</span> degrees of freedom,
+<span class="math inline">\(W_2\)</span> is chi-square with <span class="math inline">\(\nu_2\)</span> degrees of freedom
+and <span class="math inline">\(W_1\)</span> and <span class="math inline">\(W_2\)</span> are independent, then we get the following distributional result.</p>
+<p><span class="math display">\[
+W_1 \sim \chi_{\nu_1}^2 \quad
+W_2 \sim \chi_{\nu_2}^2 \quad W_1 \bot W_2 \quad \Rightarrow \quad
+F = \frac{W_1/\nu_1}{W_2/\nu_2} \sim F_{\nu_1,\nu_2}
+\]</span></p>
+<p>When <span class="math inline">\(W_1\)</span> is chi-square with <span class="math inline">\(\nu_1\)</span> degrees of freedom and non-centrality parameter <span class="math inline">\(\lambda\)</span> and
+<span class="math inline">\(W_2\)</span> is chi-square with <span class="math inline">\(\nu_2\)</span> degrees of freedom
+and <span class="math inline">\(W_1\)</span> and <span class="math inline">\(W_2\)</span> are independent, then we get the following distributional result.</p>
+<p><span class="math display">\[
+W_1 \sim \chi_{\nu_1}^2(\lambda) \quad
+W_2 \sim \chi_{\nu_2}^2 \quad W_1 \bot W_2 \quad \Rightarrow \quad
+F = \frac{W_1/\nu_1}{W_2/\nu_2} \sim F_{\nu_1,\nu_2}(\lambda)
+\]</span></p>
+<p>This is the non-central <span class="math inline">\(F\)</span>-distribution. We can use R to obtain probabilities, densities, quantiles, and random samples for non-central <span class="math inline">\(F\)</span>-distributions.</p>
+
+<pre><code>## Warning: package &#39;agricolae&#39; was built under R version 4.5.3</code></pre>
+<pre><code>## Warning: package &#39;multcompView&#39; was built under R version 4.5.3</code></pre>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-jung_2018" class="csl-entry">
+Jung, J., and Y. J. Ahn. 2018. <span>“Effects of Interface on Procedural Skill Transfer in Virtual Training: Lifeboat Launching Operation Study.”</span> <em>Computer Animation and Virtual Worlds</em> 29: e1812. <a href="https://doi.org/10.1002/cav.1812">https://doi.org/10.1002/cav.1812</a>.
+</div>
+<div id="ref-wohlgemuth_2024" class="csl-entry">
+Wohlgemuth, K. J., A. Jesko, V. Frost, M. J. Conner, and J. A. Mota. 2024. <span>“Characteristics of Slow and Fast Performers on a Firefighter Air Consumption Test.”</span> <em>Applied Ergonomics</em> 118. <a href="https://doi.org/10.1016/j.apergo.2024.104262">https://doi.org/10.1016/j.apergo.2024.104262</a>.
+</div>
+<div id="ref-zeng_2015" class="csl-entry">
+Zeng, R., J. Lin, S. Wu, L. Chen, S. Chen, H. Gao, Y. Zheng, and H. Ma. 2015. <span>“A Randomized Controlled Trial: Preoperative Home-Based Combined Tai Chi and Strength Training (TCST) to Improve Balance and Aerobic Capacity in Patients with Total Hip Arthroplasty (THA).”</span> <em>Archives of Gerontology and Geriatrics</em> 60: 265–71.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="analysis-of-treatment-means.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "link": "https://github.com/LarryWinner/STA4211-Notes1.git/edit/main/%s",
+  "text": "Edit"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

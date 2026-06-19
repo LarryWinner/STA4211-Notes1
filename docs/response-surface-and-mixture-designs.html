@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 14 Response Surface and Mixture Designs | Design and Analysis of Experiments</title>
+  <meta name="description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 14 Response Surface and Mixture Designs | Design and Analysis of Experiments" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="This is a course on Experimental Design and Analysis." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 14 Response Surface and Mixture Designs | Design and Analysis of Experiments" />
+  
+  <meta name="twitter:description" content="This is a course on Experimental Design and Analysis." />
+  
+
+<meta name="author" content="Larry Winner" />
+
+
+<meta name="date" content="2026-06-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="analysis-of-covariance-ancova.html"/>
+
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">STA 4211 Course Notes</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html"><i class="fa fa-check"></i><b>1</b> Comparing Two Treatments or Populations</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#linear-functions-of-random-variables"><i class="fa fa-check"></i><b>1.1</b> Linear Functions of Random Variables</a></li>
+<li class="chapter" data-level="1.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#students-t-distribution-for-making-inference-on-population-means"><i class="fa fa-check"></i><b>1.2</b> Student’s <span class="math inline">\(t\)</span>-Distribution for Making Inference on Population Means</a></li>
+<li class="chapter" data-level="1.3" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference"><i class="fa fa-check"></i><b>1.3</b> Inference for the Population Mean Difference</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples"><i class="fa fa-check"></i><b>1.3.1</b> Inference for the Population Mean Difference for Paired Samples</a></li>
+<li class="chapter" data-level="1.3.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-independent-samples"><i class="fa fa-check"></i><b>1.3.2</b> Inference for the Population Mean Difference for Independent Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inference-for-the-population-variance-ratios"><i class="fa fa-check"></i><b>1.4</b> Inference for the Population Variance Ratios</a>
+<ul>
+<li class="chapter" data-level="1.4.1" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#inferences-for-variance-ratios-for-independent-samples"><i class="fa fa-check"></i><b>1.4.1</b> Inferences for Variance Ratios for Independent Samples</a></li>
+<li class="chapter" data-level="1.4.2" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#test-for-equal-variances-with-paired-samples"><i class="fa fa-check"></i><b>1.4.2</b> Test for Equal Variances with Paired Samples</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="comparing-two-treatments-or-populations.html"><a href="comparing-two-treatments-or-populations.html#examples"><i class="fa fa-check"></i><b>1.5</b> Examples</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="introduction.html"><a href="introduction.html#terminology"><i class="fa fa-check"></i><b>2.1</b> Terminology</a></li>
+<li class="chapter" data-level="2.2" data-path="introduction.html"><a href="introduction.html#basics-of-controlled-experiments"><i class="fa fa-check"></i><b>2.2</b> Basics of Controlled Experiments</a></li>
+<li class="chapter" data-level="2.3" data-path="introduction.html"><a href="introduction.html#completely-randomized-design-crd"><i class="fa fa-check"></i><b>2.3</b> Completely Randomized Design (CRD)</a></li>
+<li class="chapter" data-level="2.4" data-path="introduction.html"><a href="introduction.html#randomized-complete-block-design-rcbd-or-rbd"><i class="fa fa-check"></i><b>2.4</b> Randomized Complete Block Design (RCBD or RBD)</a></li>
+<li class="chapter" data-level="2.5" data-path="introduction.html"><a href="introduction.html#overview-of-some-standard-experimental-designs"><i class="fa fa-check"></i><b>2.5</b> Overview of Some Standard Experimental Designs</a></li>
+<li class="chapter" data-level="2.6" data-path="introduction.html"><a href="introduction.html#overview-of-observational-study-designs"><i class="fa fa-check"></i><b>2.6</b> Overview of Observational Study Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="single-factor-studies.html"><a href="single-factor-studies.html"><i class="fa fa-check"></i><b>3</b> Single Factor Studies</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#models-with-r2-factor-levels"><i class="fa fa-check"></i><b>3.1</b> Models with <span class="math inline">\(r=2\)</span> Factor Levels</a></li>
+<li class="chapter" data-level="3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#three-model-formulations"><i class="fa fa-check"></i><b>3.2</b> Three Model Formulations</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#cell-means-model"><i class="fa fa-check"></i><b>3.2.1</b> Cell Means Model</a></li>
+<li class="chapter" data-level="3.2.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#treatment-effects-model"><i class="fa fa-check"></i><b>3.2.2</b> Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.2.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#reference-group-model"><i class="fa fa-check"></i><b>3.2.3</b> Reference Group Model</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance-and-f-test"><i class="fa fa-check"></i><b>3.3</b> The Analysis of Variance and <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#general-linear-test-approach"><i class="fa fa-check"></i><b>3.3.1</b> General Linear Test Approach</a></li>
+<li class="chapter" data-level="3.3.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#power-calculations"><i class="fa fa-check"></i><b>3.3.2</b> Power Calculations</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#technical-details"><i class="fa fa-check"></i><b>3.4</b> Technical Details</a>
+<ul>
+<li class="chapter" data-level="3.4.1" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-for-the-cell-means-model-regression-approach"><i class="fa fa-check"></i><b>3.4.1</b> Least Squares Estimation for the Cell Means Model (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.2" data-path="single-factor-studies.html"><a href="single-factor-studies.html#scalar-estimation-for-the-cell-means-model"><i class="fa fa-check"></i><b>3.4.2</b> Scalar Estimation for the Cell Means Model</a></li>
+<li class="chapter" data-level="3.4.3" data-path="single-factor-studies.html"><a href="single-factor-studies.html#estimation-for-the-treatment-effects-model"><i class="fa fa-check"></i><b>3.4.3</b> Estimation for the Treatment Effects Model</a></li>
+<li class="chapter" data-level="3.4.4" data-path="single-factor-studies.html"><a href="single-factor-studies.html#least-squares-estimation-regression-approach"><i class="fa fa-check"></i><b>3.4.4</b> Least Squares Estimation (Regression Approach)</a></li>
+<li class="chapter" data-level="3.4.5" data-path="single-factor-studies.html"><a href="single-factor-studies.html#the-analysis-of-variance"><i class="fa fa-check"></i><b>3.4.5</b> The Analysis of Variance</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html"><i class="fa fa-check"></i><b>4</b> Analysis of Treatment Means</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#individual-treatment-means"><i class="fa fa-check"></i><b>4.1</b> Individual Treatment Means</a></li>
+<li class="chapter" data-level="4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#comparing-two-treatment-means"><i class="fa fa-check"></i><b>4.2</b> Comparing Two Treatment Means</a></li>
+<li class="chapter" data-level="4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#contrasts-among-treatment-means"><i class="fa fa-check"></i><b>4.3</b> Contrasts Among Treatment Means</a></li>
+<li class="chapter" data-level="4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#simultaneous-comparisons"><i class="fa fa-check"></i><b>4.4</b> Simultaneous Comparisons</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#tukeys-honest-significant-difference-hsd"><i class="fa fa-check"></i><b>4.4.1</b> Tukey’s Honest Significant Difference (HSD)</a></li>
+<li class="chapter" data-level="4.4.2" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#scheffes-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.2</b> Scheffe’s Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.3" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#bonferroni-method-for-multiple-comparisons"><i class="fa fa-check"></i><b>4.4.3</b> Bonferroni Method for Multiple Comparisons</a></li>
+<li class="chapter" data-level="4.4.4" data-path="analysis-of-treatment-means.html"><a href="analysis-of-treatment-means.html#multiple-range-methods"><i class="fa fa-check"></i><b>4.4.4</b> Multiple Range Methods</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html"><i class="fa fa-check"></i><b>5</b> Alternative Tests for Treatment Effects</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#randomizationpermutation-tests"><i class="fa fa-check"></i><b>5.1</b> Randomization/Permutation Tests</a></li>
+<li class="chapter" data-level="5.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#tests-for-equal-error-variances"><i class="fa fa-check"></i><b>5.2</b> Tests for Equal Error Variances</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#hartleys-test"><i class="fa fa-check"></i><b>5.2.1</b> Hartley’s Test</a></li>
+<li class="chapter" data-level="5.2.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#levenes-test"><i class="fa fa-check"></i><b>5.2.2</b> Levene’s Test</a></li>
+<li class="chapter" data-level="5.2.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#bartletts-test"><i class="fa fa-check"></i><b>5.2.3</b> Bartlett’s Test</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#remedial-measures"><i class="fa fa-check"></i><b>5.3</b> Remedial Measures</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#weighted-least-squares-and-welchs-test"><i class="fa fa-check"></i><b>5.3.1</b> Weighted Least Squares and Welch’s Test</a></li>
+<li class="chapter" data-level="5.3.2" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#post-hoc-comparisons-with-unequal-variances"><i class="fa fa-check"></i><b>5.3.2</b> Post-hoc Comparisons with Unequal Variances</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="alternative-tests-for-treatment-effects.html"><a href="alternative-tests-for-treatment-effects.html#nonparametric-test-for-non-normal-data"><i class="fa fa-check"></i><b>5.4</b> Nonparametric Test for Non-normal Data</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html"><i class="fa fa-check"></i><b>6</b> Balanced Two Factor Designs</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#introduction-1"><i class="fa fa-check"></i><b>6.1</b> Introduction</a></li>
+<li class="chapter" data-level="6.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#two-factor-analysis-of-variance"><i class="fa fa-check"></i><b>6.2</b> Two Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#cell-means-and-factor-effects-models"><i class="fa fa-check"></i><b>6.2.1</b> Cell Means and Factor Effects Models</a></li>
+<li class="chapter" data-level="6.2.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#least-squaresmaximum-likelihood-estimators"><i class="fa fa-check"></i><b>6.2.2</b> Least Squares/Maximum Likelihood Estimators</a></li>
+<li class="chapter" data-level="6.2.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#sums-of-squares-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>6.2.3</b> Sums of Squares and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#factor-effect-contrasts"><i class="fa fa-check"></i><b>6.3</b> Factor Effect Contrasts</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-there-is-no-interaction"><i class="fa fa-check"></i><b>6.3.1</b> Contrasts when there is No Interaction</a></li>
+<li class="chapter" data-level="6.3.2" data-path="balanced-two-factor-designs.html"><a href="balanced-two-factor-designs.html#contrasts-when-interaction-is-present"><i class="fa fa-check"></i><b>6.3.2</b> Contrasts when Interaction is Present</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="two-factor-designs-with-1-observation-per-treatment.html"><a href="two-factor-designs-with-1-observation-per-treatment.html"><i class="fa fa-check"></i><b>7</b> Two-Factor Designs with 1 Observation per Treatment</a></li>
+<li class="chapter" data-level="8" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html"><i class="fa fa-check"></i><b>8</b> Unbalanced Two-Factor Analysis of Variance</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#statistical-model-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>8.1</b> Statistical Model and the Analysis of Variance</a></li>
+<li class="chapter" data-level="8.2" data-path="unbalanced-two-factor-analysis-of-variance.html"><a href="unbalanced-two-factor-analysis-of-variance.html#least-squares-estimators-and-contrastslinear-functions-among-means"><i class="fa fa-check"></i><b>8.2</b> Least Squares Estimators and Contrasts/Linear Functions Among Means</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="higher-order-models.html"><a href="higher-order-models.html"><i class="fa fa-check"></i><b>9</b> Higher Order Models</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="higher-order-models.html"><a href="higher-order-models.html#three-factor-models---mean-structure"><i class="fa fa-check"></i><b>9.1</b> Three Factor Models - Mean Structure</a></li>
+<li class="chapter" data-level="9.2" data-path="higher-order-models.html"><a href="higher-order-models.html#statistical-model-and-the-analysis-of-variance-1"><i class="fa fa-check"></i><b>9.2</b> Statistical Model and the Analysis of Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="block-designs.html"><a href="block-designs.html"><i class="fa fa-check"></i><b>10</b> Block Designs</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="block-designs.html"><a href="block-designs.html#randomized-block-and-repeated-measures-designs"><i class="fa fa-check"></i><b>10.1</b> Randomized Block and Repeated Measures Designs</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="block-designs.html"><a href="block-designs.html#model-structure-and-estimators"><i class="fa fa-check"></i><b>10.1.1</b> Model Structure and Estimators</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="block-designs.html"><a href="block-designs.html#analysis-of-variance-and-the-f-test"><i class="fa fa-check"></i><b>10.2</b> Analysis of Variance and the <span class="math inline">\(F\)</span>-test</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="block-designs.html"><a href="block-designs.html#checking-model-assumptions"><i class="fa fa-check"></i><b>10.2.1</b> Checking Model Assumptions</a></li>
+<li class="chapter" data-level="10.2.2" data-path="block-designs.html"><a href="block-designs.html#relative-efficiency-and-within-subject-variance-covariance-matrix"><i class="fa fa-check"></i><b>10.2.2</b> Relative Efficiency and Within-Subject Variance-Covariance Matrix</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="block-designs.html"><a href="block-designs.html#latin-square-designs"><i class="fa fa-check"></i><b>10.3</b> Latin Square Designs</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html"><i class="fa fa-check"></i><b>11</b> Random and Mixed Effects Models</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#way-random-effects-model"><i class="fa fa-check"></i><b>11.1</b> 1-Way Random Effects Model</a>
+<ul>
+<li class="chapter" data-level="11.1.1" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#analysis-of-variance"><i class="fa fa-check"></i><b>11.1.1</b> Analysis of Variance</a></li>
+<li class="chapter" data-level="11.1.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-population-mean-mu_bullet"><i class="fa fa-check"></i><b>11.1.2</b> Estimating the Population Mean <span class="math inline">\(\mu_{\bullet}\)</span></a></li>
+<li class="chapter" data-level="11.1.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-intraclass-correlation-coefficient"><i class="fa fa-check"></i><b>11.1.3</b> Estimating the Intraclass Correlation Coefficient</a></li>
+<li class="chapter" data-level="11.1.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-within-group-variance"><i class="fa fa-check"></i><b>11.1.4</b> Estimating the Within Group Variance</a></li>
+<li class="chapter" data-level="11.1.5" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#estimating-the-between-group-variance"><i class="fa fa-check"></i><b>11.1.5</b> Estimating the Between Group Variance</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-random-effects-model"><i class="fa fa-check"></i><b>11.2</b> Two-Way Random Effects Model</a></li>
+<li class="chapter" data-level="11.3" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#two-way-mixed-effects-model"><i class="fa fa-check"></i><b>11.3</b> Two-Way Mixed Effects Model</a></li>
+<li class="chapter" data-level="11.4" data-path="random-and-mixed-effects-models.html"><a href="random-and-mixed-effects-models.html#three-way-mixed-effects-models"><i class="fa fa-check"></i><b>11.4</b> Three-Way Mixed Effects Models</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="nested-designs.html"><a href="nested-designs.html"><i class="fa fa-check"></i><b>12</b> Nested Designs</a>
+<ul>
+<li class="chapter" data-level="12.1" data-path="nested-designs.html"><a href="nested-designs.html#estimators-and-the-analysis-of-variance"><i class="fa fa-check"></i><b>12.1</b> Estimators and the Analysis of Variance</a></li>
+<li class="chapter" data-level="12.2" data-path="nested-designs.html"><a href="nested-designs.html#tests-contrasts-and-pairwise-comparisons"><i class="fa fa-check"></i><b>12.2</b> Tests, Contrasts, and Pairwise Comparisons</a></li>
+<li class="chapter" data-level="12.3" data-path="nested-designs.html"><a href="nested-designs.html#repeated-measures-design"><i class="fa fa-check"></i><b>12.3</b> Repeated Measures Design</a>
+<ul>
+<li class="chapter" data-level="12.3.1" data-path="nested-designs.html"><a href="nested-designs.html#model-structure"><i class="fa fa-check"></i><b>12.3.1</b> Model Structure</a></li>
+<li class="chapter" data-level="12.3.2" data-path="nested-designs.html"><a href="nested-designs.html#analysis-of-variance-and-f-tests"><i class="fa fa-check"></i><b>12.3.2</b> Analysis of Variance and <span class="math inline">\(F\)</span>-tests</a></li>
+<li class="chapter" data-level="12.3.3" data-path="nested-designs.html"><a href="nested-designs.html#treatment-comparisons"><i class="fa fa-check"></i><b>12.3.3</b> Treatment Comparisons</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html"><i class="fa fa-check"></i><b>13</b> Analysis of Covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="13.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#additive-model"><i class="fa fa-check"></i><b>13.1</b> Additive Model</a>
+<ul>
+<li class="chapter" data-level="13.1.1" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#adjusted-means"><i class="fa fa-check"></i><b>13.1.1</b> Adjusted means</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="analysis-of-covariance-ancova.html"><a href="analysis-of-covariance-ancova.html#interaction-model"><i class="fa fa-check"></i><b>13.2</b> Interaction Model</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html"><i class="fa fa-check"></i><b>14</b> Response Surface and Mixture Designs</a>
+<ul>
+<li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
+<li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Design and Analysis of Experiments</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="response-surface-and-mixture-designs" class="section level1 hasAnchor" number="14">
+<h1><span class="header-section-number">Chapter 14</span> Response Surface and Mixture Designs<a href="response-surface-and-mixture-designs.html#response-surface-and-mixture-designs" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Response surface and mixture designs are used in a wide range of engineering fields. The goal is to choose levels of a group of numeric predictor variables that optimize the response variable(s). Response surfaces are based on <span class="math inline">\(k\)</span> predictors at several levels and models are typically based on a second-order model with linear, interaction, and quadratic terms among the predictors.
+Mixture designs have several inputs, but these are restricted to sum to 1 (or 100%).</p>
+<div id="response-surface-designs" class="section level2 hasAnchor" number="14.1">
+<h2><span class="header-section-number">14.1</span> Response Surface Designs<a href="response-surface-and-mixture-designs.html#response-surface-designs" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The model for a second order response surface with <span class="math inline">\(k\)</span> factors is given below and
+can be implemented easily using the <strong>rsm</strong> package in R.</p>
+<p><span class="math display">\[
+Y = \beta_0 + \sum_{i=1}^k \beta_{i}X_i + \sum_{i=1}^{k-1}\sum_{i&#39;=i+1}^k\beta_{ii&#39;}X_iX_i&#39;
++ \sum_{i=1}^k\beta_{ii}X_i^2 + \epsilon
+\]</span>
+The model has <span class="math inline">\(1+k+k(k-1)/2+k\)</span> parameters. Once the regression model is fit,
+individual parameters and groups (linear terms, 2-factor interactions, quadratic terms) can be tested for significance. The fitted model can be written in scalar or matrix form.</p>
+<p><span class="math display">\[
+\hat{Y}=\hat{\beta}_0 + \sum_{i=1}^k \hat{\beta}_{i}X_i + \sum_{i=1}^{k-1}\sum_{i&#39;=i+1}^k\hat{\beta}_{ii&#39;}X_iX_i&#39;
++ \sum_{i=1}^k\hat{\beta}_{ii}X_i^2 =
+\hat{\beta}_0+ B_1&#39;x + x&#39;B_2x
+\]</span>
+where <span class="math inline">\(x\)</span>, <span class="math inline">\(B_1\)</span>, <span class="math inline">\(B_2\)</span> are defined as follow.
+<span class="math display">\[
+x=\begin{bmatrix}
+X_1 \\ \vdots \\ X_k \\
+\end{bmatrix}
+\qquad
+B_1 =
+\begin{bmatrix}
+\hat{\beta}_1 \\ \vdots \\ \hat{\beta}_k\\
+\end{bmatrix}
+\qquad
+B_2 =
+\begin{bmatrix}
+\hat{\beta}_{11} &amp; \hat{\beta}_{12}/2 &amp; \cdots &amp; \hat{\beta}_{1k}/2 \\
+\hat{\beta}_{12}/2 &amp; \hat{\beta}_{22} &amp; \cdots &amp; \hat{\beta}_{2k}/2 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+\hat{\beta}_{1k}/2 &amp; \hat{\beta}_{2k}/2 &amp; \cdots &amp; \hat{\beta}_{kk}\\
+\end{bmatrix}
+\]</span>
+Taking the derivative of <span class="math inline">\(\hat{Y}\)</span> with respect to <span class="math inline">\(x\)</span>, setting it equal to zero, gives the optimal set of inputs for the <span class="math inline">\(k\)</span> factors (which may fall outside of possible values). This is printed directly
+in the summary of the <strong>rsm</strong> fit.</p>
+<p><span class="math display">\[
+\frac{\partial \hat{Y}}{\partial x}= B_1 + 2B_2x \quad \stackrel{\rm set}{=}0 \quad
+\Rightarrow \quad x^* = -\frac{1}{2}B_2^{-1}B_1
+\]</span></p>
+<p>Two commonly used designs for response surfaces are the <strong>Central Composite Design</strong> and the <strong>Box-Behnken Design</strong>.</p>
+<p>In the Central Composite Design, there are <span class="math inline">\(k\)</span> factors, each with three equally spaced levels coded <span class="math inline">\(-1,0,+1\)</span>. A <span class="math inline">\(2^k\)</span> factorial is set up with each factor at <span class="math inline">\(+/-1\)</span>. Then <span class="math inline">\(2k\)</span> observations are made with <span class="math inline">\(k-1\)</span> variables at their 0 levels and the remaining factor at <span class="math inline">\(\pm \alpha\)</span> where <span class="math inline">\(\alpha\)</span> is commonly <span class="math inline">\(\sqrt{2}\)</span>, <span class="math inline">\(\sqrt{3}\)</span>, or 2, these are labelled “axial points.”
+Finally, there are <span class="math inline">\(c\)</span> observations with each of the <span class="math inline">\(k\)</span> factors at their center (0) levels, which permits a goodness of fit test.</p>
+<p><strong>Example 13.1 - Solar Drying of Avocado Pulp</strong></p>
+<p>A study was conducted as a response surface design with <span class="math inline">\(k=4\)</span> factors to measure solar drying of avocado pulp <span class="citation">(<a href="#ref-kowarit_2024">Kowarit, Sathpornprasath, and Jansri 2024</a>)</span>. The 4 factors are described below, and the response was moisture content of the avocado pulp (lower values are better). This is a central composite design with <span class="math inline">\(\alpha=2\)</span>.</p>
+<ul>
+<li><strong>Hot Air Temperature</strong> (<span class="math inline">\(X_1\)</span>, Celsius): -1=40, 0=55, +1=70 (axial points at 25, 85)</li>
+<li><strong>Drying Time</strong> (<span class="math inline">\(X_2\)</span>, hours): -1=13, 0=16.5, +1=20 (axial points at 9.5, 23.5)</li>
+<li><strong>Raw Material Thickness</strong> (<span class="math inline">\(X_3\)</span>, cm): -1=0.5, 0=0.75, +1=1.00 (axial points at 0.25, 1.25)</li>
+<li><strong>Wind Speed</strong> (<span class="math inline">\(X_4\)</span>, meters/second): -1=0.12, 0=0.19, +1=0.26 (axial points at 0.05, 0.33)</li>
+</ul>
+<p>There were <span class="math inline">\(2^4=16\)</span> runs with the 4 factors at +/-1, <span class="math inline">\(4(2)=8\)</span> runs at the axial points for each factor (with the other 3 factors at their 0 level), and 6 runs at the center points, for a total of 30 experimental runs.
+The R program and output are given below, with response surface and
+contour plots in Figure <a href="response-surface-and-mixture-designs.html#fig:ch1301">14.1</a> and Figure <a href="response-surface-and-mixture-designs.html#fig:ch1301a">14.2</a>,
+respectively.</p>
+<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb548-1"><a href="response-surface-and-mixture-designs.html#cb548-1" tabindex="-1"></a>am <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/avocado.csv&quot;</span>)</span>
+<span id="cb548-2"><a href="response-surface-and-mixture-designs.html#cb548-2" tabindex="-1"></a><span class="fu">head</span>(am); <span class="fu">tail</span>(am)</span></code></pre></div>
+<pre><code>##   run hotAirTemp dryTime rawMatThck windSpeed moisture
+## 1   1         70    20.0       1.00      0.26    20.33
+## 2   2         70    13.0       1.00      0.12    20.15
+## 3   3         85    16.5       0.75      0.19    18.26
+## 4   4         55    16.5       0.75      0.19    18.90
+## 5   5         55    16.5       0.75      0.19    17.99
+## 6   6         70    20.0       0.50      0.12    18.54</code></pre>
+<pre><code>##    run hotAirTemp dryTime rawMatThck windSpeed moisture
+## 25  25         70    13.0       1.00      0.26    20.29
+## 26  26         55     9.5       0.75      0.19    19.03
+## 27  27         40    20.0       1.00      0.26    21.61
+## 28  28         55    16.5       0.75      0.19    18.90
+## 29  29         55    16.5       0.75      0.19    18.90
+## 30  30         40    13.0       0.50      0.12    17.73</code></pre>
+<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb551-1"><a href="response-surface-and-mixture-designs.html#cb551-1" tabindex="-1"></a>mod1 <span class="ot">&lt;-</span> <span class="fu">rsm</span>(moisture <span class="sc">~</span> <span class="fu">SO</span>(hotAirTemp, dryTime,rawMatThck,windSpeed), <span class="at">data=</span>am)</span>
+<span id="cb551-2"><a href="response-surface-and-mixture-designs.html#cb551-2" tabindex="-1"></a><span class="fu">summary</span>(mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## rsm(formula = moisture ~ SO(hotAirTemp, dryTime, rawMatThck, 
+##     windSpeed), data = am)
+## 
+##                          Estimate  Std. Error t value Pr(&gt;|t|)   
+## (Intercept)            2.1996e+01  1.1195e+01  1.9649 0.068230 . 
+## hotAirTemp             2.6835e-01  1.5944e-01  1.6831 0.113053   
+## dryTime               -4.8311e-01  7.3777e-01 -0.6548 0.522495   
+## rawMatThck            -8.5945e+00  9.1563e+00 -0.9386 0.362780   
+## windSpeed             -6.4616e+01  3.2146e+01 -2.0101 0.062761 . 
+## hotAirTemp:dryTime    -6.8333e-03  5.4205e-03 -1.2607 0.226691   
+## hotAirTemp:rawMatThck -5.9667e-02  7.5887e-02 -0.7863 0.443959   
+## hotAirTemp:windSpeed   2.1786e-01  2.7102e-01  0.8038 0.434049   
+## dryTime:rawMatThck    -1.4143e-01  3.2523e-01 -0.4349 0.669856   
+## dryTime:windSpeed      1.5561e+00  1.1615e+00  1.3397 0.200282   
+## rawMatThck:windSpeed  -2.4071e+01  1.6261e+01 -1.4803 0.159495   
+## hotAirTemp^2          -1.2204e-03  9.6599e-04 -1.2633 0.225752   
+## dryTime^2              2.7585e-02  1.7743e-02  1.5547 0.140853   
+## rawMatThck^2           1.2027e+01  3.4776e+00  3.4584 0.003511 **
+## windSpeed^2            1.3274e+02  4.4357e+01  2.9925 0.009110 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Multiple R-squared:  0.7643, Adjusted R-squared:  0.5444 
+## F-statistic: 3.475 on 14 and 15 DF,  p-value: 0.01123
+## 
+## Analysis of Variance Table
+## 
+## Response: moisture
+##                                                 Df  Sum Sq Mean Sq F value
+## FO(hotAirTemp, dryTime, rawMatThck, windSpeed)   4 23.1131  5.7783  4.4595
+## TWI(hotAirTemp, dryTime, rawMatThck, windSpeed)  6  9.1073  1.5179  1.1715
+## PQ(hotAirTemp, dryTime, rawMatThck, windSpeed)   4 30.8123  7.7031  5.9450
+## Residuals                                       15 19.4359  1.2957        
+## Lack of fit                                     10 18.7458  1.8746 13.5823
+## Pure error                                       5  0.6901  0.1380        
+##                                                   Pr(&gt;F)
+## FO(hotAirTemp, dryTime, rawMatThck, windSpeed)  0.014231
+## TWI(hotAirTemp, dryTime, rawMatThck, windSpeed) 0.371796
+## PQ(hotAirTemp, dryTime, rawMatThck, windSpeed)  0.004511
+## Residuals                                               
+## Lack of fit                                     0.005031
+## Pure error                                              
+## 
+## Stationary point of response surface:
+## hotAirTemp    dryTime rawMatThck  windSpeed 
+## 67.1141331 14.0922992  0.7835529  0.1767657 
+## 
+## Eigenanalysis:
+## eigen() decomposition
+## $values
+## [1] 133.931086216  10.838362960   0.023680706  -0.002003314
+## 
+## $vectors
+##                     [,1]          [,2]          [,3]         [,4]
+## hotAirTemp  0.0008310985  0.0017517386 -0.1599582827  0.987121871
+## dryTime     0.0058342613 -0.0005625942  0.9871073880  0.159952022
+## rawMatThck -0.0982548808 -0.9951596092 -0.0002787034  0.001803565
+## windSpeed   0.9951438334 -0.0982546031 -0.0056810736 -0.001584081</code></pre>
+<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb553-1"><a href="response-surface-and-mixture-designs.html#cb553-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb553-2"><a href="response-surface-and-mixture-designs.html#cb553-2" tabindex="-1"></a><span class="fu">persp</span>(mod1, <span class="sc">~</span> hotAirTemp<span class="sc">+</span>dryTime<span class="sc">+</span>rawMatThck<span class="sc">+</span>windSpeed, </span>
+<span id="cb553-3"><a href="response-surface-and-mixture-designs.html#cb553-3" tabindex="-1"></a>   <span class="at">at=</span><span class="fu">summary</span>(mod1)<span class="sc">$</span>canonical<span class="sc">$</span>xs)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch1301"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch1301-1.png" alt="Response Surface for avocado pulp study - 3D Plots" width="80%" />
+<p class="caption">
+Figure 14.1: Response Surface for avocado pulp study - 3D Plots
+</p>
+</div>
+<div class="sourceCode" id="cb554"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb554-1"><a href="response-surface-and-mixture-designs.html#cb554-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb555-1"><a href="response-surface-and-mixture-designs.html#cb555-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))</span>
+<span id="cb555-2"><a href="response-surface-and-mixture-designs.html#cb555-2" tabindex="-1"></a><span class="fu">contour</span>(mod1, <span class="sc">~</span> hotAirTemp<span class="sc">+</span>dryTime<span class="sc">+</span>rawMatThck<span class="sc">+</span>windSpeed, </span>
+<span id="cb555-3"><a href="response-surface-and-mixture-designs.html#cb555-3" tabindex="-1"></a>   <span class="at">at=</span><span class="fu">summary</span>(mod1)<span class="sc">$</span>canonical<span class="sc">$</span>xs)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch1301a"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch1301a-1.png" alt="Response Surface for avocado pulp study - Contour Plots" width="80%" />
+<p class="caption">
+Figure 14.2: Response Surface for avocado pulp study - Contour Plots
+</p>
+</div>
+<div class="sourceCode" id="cb556"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb556-1"><a href="response-surface-and-mixture-designs.html#cb556-1" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+<p>The linear (first order) terms and polynomial quadratic terms are significant as groups with <span class="math inline">\(P\)</span>-values of .0142 and .0045, respectively. The two-factor interactions are not, with <span class="math inline">\(P\)</span>=.3718.
+The stationary (optimal) point is <span class="math inline">\(x^*\)</span>=(67.11,14.09,0.78,0.18).</p>
+<p><span class="math display">\[\nabla \]</span></p>
+<p>The Box-Behnken design places runs at every combination of <span class="math inline">\(\pm 1\)</span> for each pair of factors, with all other factors at their 0 (central) level. There are multiple runs for each factor at their central level.
+The analysis is the same as for the Central Composite Design.</p>
+<p><strong>Example 13.2 – Gels of Diclofenac and Curcumin for Transdermal Drug Delivery</strong></p>
+<p>A study (Chaudhary, et al (2011)) had 3 factors, each at 3 levels
+<span class="citation">(<a href="#ref-chaudhary_2011">Chaudhary et al. 2011</a>)</span>.
+The factors were as follow.</p>
+<ul>
+<li><strong>Polymer Concentration</strong> - (0.5, 1.0, 1.5 % w/w)</li>
+<li><strong>Ethanol Concentration</strong> (10, 15, 20 % w/w)</li>
+<li><strong>PG Concentration</strong> (5, 10, 15 %w/w).</li>
+</ul>
+<p>There were three response variables: <span class="math inline">\(Y1\)</span> = Flux of DDEA (mg/(cm2 h)), <span class="math inline">\(Y2\)</span> = Flux of CRM (mg/(cm2 h)),
+and <span class="math inline">\(Y3\)</span> = Viscosity of Gel (cp). The experiment had <span class="math inline">\(n\)</span> = 17 runs. The design and data are given below.</p>
+<table>
+<caption><span id="tab:ch1302">Table 14.1: </span>Box-Behnken Design for Drug Delivery Study</caption>
+<thead>
+<tr class="header">
+<th align="right">runnum</th>
+<th align="right">polyconc</th>
+<th align="right">ethnconc</th>
+<th align="right">pgconc</th>
+<th align="right">fluxddea</th>
+<th align="right">fluxcrm</th>
+<th align="right">viscgel</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">-1</td>
+<td align="right">-1</td>
+<td align="right">0</td>
+<td align="right">0.67</td>
+<td align="right">1.48</td>
+<td align="right">185</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.24</td>
+<td align="right">1.90</td>
+<td align="right">1924</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">-1</td>
+<td align="right">0.25</td>
+<td align="right">3.31</td>
+<td align="right">2018</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">-1</td>
+<td align="right">1</td>
+<td align="right">0.22</td>
+<td align="right">2.88</td>
+<td align="right">2310</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">-1</td>
+<td align="right">0.11</td>
+<td align="right">3.30</td>
+<td align="right">3227</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">-1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.67</td>
+<td align="right">1.72</td>
+<td align="right">145</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">-1</td>
+<td align="right">0</td>
+<td align="right">-1</td>
+<td align="right">0.69</td>
+<td align="right">1.37</td>
+<td align="right">143</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.23</td>
+<td align="right">1.87</td>
+<td align="right">1923</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">-1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.67</td>
+<td align="right">1.52</td>
+<td align="right">176</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.24</td>
+<td align="right">1.91</td>
+<td align="right">1800</td>
+</tr>
+<tr class="odd">
+<td align="right">11</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.24</td>
+<td align="right">1.92</td>
+<td align="right">1921</td>
+</tr>
+<tr class="even">
+<td align="right">12</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.17</td>
+<td align="right">2.98</td>
+<td align="right">3071</td>
+</tr>
+<tr class="odd">
+<td align="right">13</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.23</td>
+<td align="right">2.01</td>
+<td align="right">1783</td>
+</tr>
+<tr class="even">
+<td align="right">14</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.24</td>
+<td align="right">1.87</td>
+<td align="right">1922</td>
+</tr>
+<tr class="odd">
+<td align="right">15</td>
+<td align="right">1</td>
+<td align="right">-1</td>
+<td align="right">0</td>
+<td align="right">0.11</td>
+<td align="right">3.07</td>
+<td align="right">3320</td>
+</tr>
+<tr class="even">
+<td align="right">16</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.16</td>
+<td align="right">3.45</td>
+<td align="right">2801</td>
+</tr>
+<tr class="odd">
+<td align="right">17</td>
+<td align="right">0</td>
+<td align="right">-1</td>
+<td align="right">-1</td>
+<td align="right">0.20</td>
+<td align="right">1.71</td>
+<td align="right">2245</td>
+</tr>
+</tbody>
+</table>
+<p><span class="math display">\[\nabla\]</span></p>
+</div>
+<div id="mixture-models" class="section level2 hasAnchor" number="14.2">
+<h2><span class="header-section-number">14.2</span> Mixture Models<a href="response-surface-and-mixture-designs.html#mixture-models" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Mixture models are similar to response surface models, with the restriction that the
+sum of the <span class="math inline">\(X\)</span> levels is equal to 1, that is the <span class="math inline">\(X\)</span> variables are components of a mixture.
+There are four widely used models that can be implemented in the <strong>mixexp</strong> package in R.
+Note that these models do not include an intercept, as the X’s sum to 1, and we will use as <span class="math inline">\(k\)</span>
+as the number of mixture components.</p>
+<p><span class="math display">\[
+\mbox{Linear:} \quad E\{Y\}=\sum_{i=1}^k \beta_iX_i
+\]</span>
+<span class="math display">\[
+\mbox{Quadratic:} \quad  E\{Y\}=\sum_{i=1}^k \beta_iX_i +
+\sum_{i=1}^{k-1}\sum_{i&#39;=i+1}^k \beta_{ii&#39;}X_iX_{i&#39;}
+\]</span>
+<span class="math display">\[
+\mbox{Full Cubic:} \quad
+E\{Y\}=\sum_{i=1}^k \beta_iX_i +
+\sum_{i=1}^{k-1}\sum_{i&#39;=i+1}^k \beta_{ii&#39;}X_iX_{i&#39;}
++ \sum_{i=1}^{k-1}\sum_{i&#39;=i+1}^k\delta_{ii&#39;}X_iX_{i&#39;}\left(X_i-X_{i&#39;}\right) + \]</span></p>
+<p><span class="math display">\[ + \sum_{i=1}^{k-2}\sum_{i&#39;=i+1}^{k-1}\sum_{i&#39;&#39;=i&#39;+1}^k\beta_{ii&#39;i&#39;&#39;}X_iX_{i&#39;}X_{i&#39;&#39;}
+\]</span>
+<span class="math display">\[
+\mbox{Special Cubic:} \quad
+E\{Y\}=\sum_{i=1}^k \beta_iX_i +
+\sum_{i=1}^{k-1}\sum_{i&#39;=i+1}^k \beta_{ii&#39;}X_iX_{i&#39;} +
+\sum_{i=1}^{k-2}\sum_{i&#39;=i+1}^{k-1}\sum_{i&#39;&#39;=i&#39;+1}^k\beta_{ii&#39;i&#39;&#39;}X_iX_{i&#39;}X_{i&#39;&#39;}
+\]</span>
+The goal is to choose the mixture that optimizes the output.</p>
+<p><strong>Example 13.3 - Breaking Strength of Lipstick Blends</strong></p>
+<p>A mixture experiment considered <span class="math inline">\(k=3\)</span> inputs for lipstick <span class="citation">(<a href="#ref-hui_2017">Hui, Tamburic, and Grant-Poss 2017</a>)</span>.
+One response was breaking strength (grams), with the following inputs,
+this was Stage 1C in the paper, and the Full Cubic model was fit.</p>
+<ul>
+<li><strong>Sweet Almond Oil</strong> <span class="math inline">\((X_1)\)</span></li>
+<li><strong>Hydrogenated Polyisobutene</strong> <span class="math inline">\((X_2)\)</span></li>
+<li><strong>Octydodecanol</strong> <span class="math inline">\((X_3)\)</span></li>
+</ul>
+<p>The R code and output are given below.</p>
+<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb557-1"><a href="response-surface-and-mixture-designs.html#cb557-1" tabindex="-1"></a>lsa <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/lipstick_sweetalmond.csv&quot;</span>)</span>
+<span id="cb557-2"><a href="response-surface-and-mixture-designs.html#cb557-2" tabindex="-1"></a><span class="fu">attach</span>(lsa)</span>
+<span id="cb557-3"><a href="response-surface-and-mixture-designs.html#cb557-3" tabindex="-1"></a>lsa</span></code></pre></div>
+<pre><code>##    ExpNum      X1      X2      X3 Break Soft
+## 1       1 1.00000 0.00000 0.00000 325.8 62.0
+## 2       2 1.00000 0.00000 0.00000 239.2 53.0
+## 3       3 0.00000 1.00000 0.00000 332.9 61.3
+## 4       4 0.00000 0.00000 1.00000 242.1 58.8
+## 5       5 0.66667 0.33333 0.00000 247.3 53.3
+## 6       6 0.33333 0.66667 0.00000 258.9 53.3
+## 7       7 0.66667 0.00000 0.33333 342.1 61.5
+## 8       8 0.66667 0.00000 0.33333 343.0 57.8
+## 9       9 0.33333 0.33333 0.33333 292.5 53.8
+## 10     10 0.00000 0.66667 0.33333 299.9 52.8
+## 11     11 0.33333 0.00000 0.66667 399.2 61.3
+## 12     12 0.00000 0.33333 0.66667 407.6 58.0
+## 13     13 0.66667 0.16667 0.16667 258.9 53.3
+## 14     14 0.16667 0.66667 0.16667 326.0 55.0
+## 15     15 0.16667 0.16667 0.66667 325.1 53.8
+## 16     16 0.16667 0.16667 0.66667 436.8 59.0</code></pre>
+<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb559-1"><a href="response-surface-and-mixture-designs.html#cb559-1" tabindex="-1"></a>mixvars <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;X1&quot;</span>,<span class="st">&quot;X2&quot;</span>,<span class="st">&quot;X3&quot;</span>) <span class="do">### Creates group of mixvars</span></span>
+<span id="cb559-2"><a href="response-surface-and-mixture-designs.html#cb559-2" tabindex="-1"></a>ls.mod1 <span class="ot">&lt;-</span> <span class="fu">MixModel</span>(lsa,<span class="st">&quot;Break&quot;</span>,mixvars,<span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##      
+##               coefficients    Std.err    t.value         Prob
+## X1                283.4746   33.32269  8.5069535 0.0001444655
+## X2                331.9844   47.06751  7.0533671 0.0004063754
+## X3                244.3524   47.08335  5.1897831 0.0020349071
+## cubic(X1, X2)    -201.1627  393.63036 -0.5110446 0.6275740863
+## cubic(X1, X3)    -437.2026  349.65399 -1.2503865 0.2577122053
+## cubic(X2, X3)    -667.6002  388.25675 -1.7194813 0.1363220821
+## X2:X1            -222.8240  196.31796 -1.1350157 0.2996670546
+## X3:X1             464.4747  180.58235  2.5720936 0.0422159307
+## X2:X3             314.0409  210.14454  1.4944045 0.1856908476
+## X2:X3:X1        -1152.8906 1320.00853 -0.8733963 0.4160293996
+##      
+## Residual standard error:  47.18515  on  6 degrees of freedom 
+## Corrected Multiple R-squared:  0.7582724</code></pre>
+<div class="sourceCode" id="cb561"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb561-1"><a href="response-surface-and-mixture-designs.html#cb561-1" tabindex="-1"></a><span class="do">### Fits model, must specify: dataframe,&quot;Y&quot;,mixvars,</span></span>
+<span id="cb561-2"><a href="response-surface-and-mixture-designs.html#cb561-2" tabindex="-1"></a><span class="do">### model (1=linear, 2=quadratic, 3=full cubic, 4=special cubic)</span></span>
+<span id="cb561-3"><a href="response-surface-and-mixture-designs.html#cb561-3" tabindex="-1"></a><span class="fu">anova</span>(ls.mod1)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: Break
+##               Df Sum Sq Mean Sq  F value    Pr(&gt;F)    
+## X1             1 822487  822487 369.4245 1.283e-06 ***
+## X2             1 418251  418251 187.8594 9.375e-06 ***
+## X3             1 380430  380430 170.8724 1.236e-05 ***
+## cubic(X1, X2)  1    802     802   0.3604   0.57023    
+## cubic(X1, X3)  1   1624    1624   0.7293   0.42589    
+## cubic(X2, X3)  1   5300    5300   2.3807   0.17378    
+## X1:X2          1   7691    7691   3.4546   0.11243    
+## X1:X3          1  11369   11369   5.1064   0.06457 .  
+## X2:X3          1   3437    3437   1.5437   0.26042    
+## X1:X2:X3       1   1698    1698   0.7629   0.41602    
+## Residuals      6  13358    2226                       
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb563-1"><a href="response-surface-and-mixture-designs.html#cb563-1" tabindex="-1"></a><span class="fu">summary</span>(ls.mod1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mixmodnI, data = frame)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -60.722 -15.433   0.876  12.755  50.978 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## X1              283.47      33.32   8.507 0.000144 ***
+## X2              331.98      47.07   7.053 0.000406 ***
+## X3              244.35      47.08   5.190 0.002035 ** 
+## cubic(X1, X2)  -201.16     393.63  -0.511 0.627570    
+## cubic(X1, X3)  -437.20     349.65  -1.250 0.257712    
+## cubic(X2, X3)  -667.60     388.25  -1.719 0.136321    
+## X1:X2          -222.83     196.32  -1.135 0.299661    
+## X1:X3           464.47     180.58   2.572 0.042215 *  
+## X2:X3           314.04     210.14   1.494 0.185689    
+## X1:X2:X3      -1152.90    1320.00  -0.873 0.416021    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 47.18 on 6 degrees of freedom
+## Multiple R-squared:  0.992,  Adjusted R-squared:  0.9786 
+## F-statistic: 74.25 on 10 and 6 DF,  p-value: 1.76e-05</code></pre>
+<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb565-1"><a href="response-surface-and-mixture-designs.html#cb565-1" tabindex="-1"></a><span class="fu">MixturePlot</span>(X3,X2,X1,Break,<span class="at">x3lab=</span><span class="st">&quot;Octydodecanol&quot;</span>, <span class="at">x2lab=</span><span class="st">&quot;Hydrogenated Polyisobutene&quot;</span>,</span>
+<span id="cb565-2"><a href="response-surface-and-mixture-designs.html#cb565-2" tabindex="-1"></a><span class="at">x1lab=</span><span class="st">&quot;Sweet Almond Oil&quot;</span>, <span class="at">corner.labs=</span><span class="fu">c</span>(<span class="st">&quot;Oct&quot;</span>,<span class="st">&quot;HP&quot;</span>,<span class="st">&quot;SAO&quot;</span>),</span>
+<span id="cb565-3"><a href="response-surface-and-mixture-designs.html#cb565-3" tabindex="-1"></a><span class="at">constrts=</span><span class="cn">FALSE</span>,<span class="at">contrs=</span><span class="cn">TRUE</span>,<span class="at">cols=</span><span class="cn">TRUE</span>, <span class="at">mod=</span><span class="dv">2</span>,<span class="at">n.breaks=</span><span class="dv">9</span>)</span></code></pre></div>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ch1303"></span>
+<img src="bookdownproj_STA4211Notes1_files/figure-html/ch1303-1.png" alt="Mixture Plot for lipstick study" width="80%" />
+<p class="caption">
+Figure 14.3: Mixture Plot for lipstick study
+</p>
+</div>
+<div class="sourceCode" id="cb566"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb566-1"><a href="response-surface-and-mixture-designs.html#cb566-1" tabindex="-1"></a><span class="fu">cbind</span>(X1,X2,X3,Break, <span class="fu">predict</span>(ls.mod1))</span></code></pre></div>
+<pre><code>##         X1      X2      X3 Break         
+## 1  1.00000 0.00000 0.00000 325.8 283.4746
+## 2  1.00000 0.00000 0.00000 239.2 283.4746
+## 3  0.00000 1.00000 0.00000 332.9 331.9841
+## 4  0.00000 0.00000 1.00000 242.1 244.3521
+## 5  0.66667 0.33333 0.00000 247.3 235.2266
+## 6  0.33333 0.66667 0.00000 258.9 281.1992
+## 7  0.66667 0.00000 0.33333 342.1 341.2641
+## 8  0.66667 0.00000 0.33333 343.0 341.2641
+## 9  0.33333 0.33333 0.33333 292.5 305.6438
+## 10 0.00000 0.66667 0.33333 299.9 323.1077
+## 11 0.33333 0.00000 0.66667 399.2 392.9941
+## 12 0.00000 0.33333 0.66667 407.6 392.8011
+## 13 0.66667 0.16667 0.16667 258.9 263.7996
+## 14 0.16667 0.66667 0.16667 326.0 285.0699
+## 15 0.16667 0.16667 0.66667 325.1 385.8225
+## 16 0.16667 0.16667 0.66667 436.8 385.8225</code></pre>
+<p>The highest breaking strengths <span class="math inline">\((&gt;360)\)</span> appear at blends of approximately 50/50% between Sweet Almond Oil and Octydodecanol, based on the plot of the simplex.</p>
+<p><span class="math display">\[\nabla \]</span></p>
+
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div class="csl-entry">
+Aksu, M. I., H. Imik, and M. Karoglu. 2007. <span>“Influence of Dietary Sorghum (Sorghum Vulgare) and Corn Supplemented with Methionine on Cut-up Pieces Weights of Broiler Carcass and Quality Properties of Breast and Drumsticks Meat.”</span> <em>Food Science and Technology International</em> 13 (5): 361–67.
+</div>
+<div class="csl-entry">
+Beata, C., J. Cordel, and N. Marlois. 2007. <span>“Effect of Alpha-Casozepine (Zylkene) on Cats with Anxiety.”</span> <em>Journal of Veterinary Behavior: Clinical Applications and Research</em> 2 (2): 40–46.
+</div>
+<div class="csl-entry">
+Bishop, D., C. E. Frazier, L. Lanza-Kaduce, and L. Winner. 1996. <span>“The Transfer of Juveniles to Criminal Court: Does It Make a Difference?”</span> <em>Crime &amp; Delinquency</em> 42: 171–91.
+</div>
+<div class="csl-entry">
+Bronet, F., M-C. Nogales, E. Martinez, M. Ariza, C. Rubio, J-A. Garcia-Velasco, and M. Meseguer. 2015. <span>“Is There a Relationship Between Time-Lapse Parameters and Embryo Sex?”</span> <em>Fertility and Sterility</em> 103 (2): 396–401.
+</div>
+<div class="csl-entry">
+Carr, D. J., C. Lankester, A. Peare, N. Fabri, and N. Gridley. 2012. <span>“Does Quilting Improve the Fragment Protective Performance of Body Armour?”</span> <em>Textile Research Journal</em> 82 (9): 883–88.
+</div>
+<div class="csl-entry">
+Carraro, A., C. A. Elliott, and E. Gobbi. 2019. <span>“Perceived Treadmill Function Is Correlated with Enjoyment of Use in Trained Runners: A User-Centered Approach.”</span> <em>Applied Ergonomics</em> 74: 37–40.
+</div>
+<div class="csl-entry">
+Chang, P.-C., S.-Y. Chou, and K.-K. Shieh. 2013. <span>“Reading Performance and Visual Fatigue When Using Electronic Displays in Long-Duration Reading Tasks Under Various Lighting Conditions.”</span> <em>Displays</em> 34: 208–14.
+</div>
+<div class="csl-entry">
+Chaudhary, H., K. Kohli, S. Amin, P. Rathee, and V. Kumar. 2011. <span>“Optimization and Formulation Design of Gels of Diclfenac and Curcumin for Transdermal Drug Delivery by Box-Behnken Statistical Design.”</span> <em>Journal of Pharmaceutical Sciences</em> 100 (2): 580–93.
+</div>
+<div class="csl-entry">
+Cook, S. R., and G. Proulx. 1989. <span>“Mechanical Evaluation and Performance Improvement of the Rotating Jaw Conibear 120 Trap.”</span> <em>Journal of Testing and Evaluation</em> 17 (3): 190–95.
+</div>
+<div class="csl-entry">
+Deverajan, S., R. H. McQueen, and S. Wen. 2017. <span>“Can Common Finishing Treatments Used in Chef Jacket Fabrics Improve Protection Against Scald Injury?”</span> <em>Fashion &amp; Textiles</em> 4 (19): 1:15. <a href="https://doi.org/10.1186/s40691-017-0103-3">https://doi.org/10.1186/s40691-017-0103-3</a>.
+</div>
+<div class="csl-entry">
+Fidaleo, M., M. Moresi, A. Cammaroto, M. Ladrange, and R. Nardi. 2012. <span>“Soy Sauce Desalting by Electrodialysis.”</span> <em>Journal of Food Engineering</em> 110: 175–81.
+</div>
+<div class="csl-entry">
+Garcia, M. L., and J. Diaz. 1976. <span>“Combability Measurements on Human Hair.”</span> <em>Journal of the Society of Cosmetic Chemists</em> 27: 379–98.
+</div>
+<div class="csl-entry">
+Genova, G., P. Iacopini, M. Baldi, A. Ranieri, P. Storchi, and L. Sebastiani. 2012. <span>“Temperature and Storage Effects on Antioxidant Activity of Juice from Red and White Grapes.”</span> <em>International Journal of Food Science &amp; Technology</em> 47: 13–23.
+</div>
+<div class="csl-entry">
+Grand, A. N., and L. N. Bell. 1997. <span>“Caffeine Content of Fountain and Private Label Store Brand Carbonated Beverages.”</span> <em>Journal of the American Dietetic Association</em> 97 (2): 179–82.
+</div>
+<div class="csl-entry">
+Gullberg, R. G. 2008. <span>“Employing Components-of-Variance to Evaluate Forensic Breath Test Instruments.”</span> <em>Science and Justice</em> 48: 2–7.
+</div>
+<div class="csl-entry">
+Hanihara, T., Y. Dodo, O. Kondo, T. Nara, N. Doi, and N. Sensui. 1999. <span>“Intra- and Inter-Observer Errors in Facial Flatness Measurements.”</span> <em>Anthropological Science</em> 107 (1): 25–39.
+</div>
+<div class="csl-entry">
+Hinneh, M., E. E. Abotsi, D. Van de Walle, D. A. Tzompa-Sosa, A. De Winne, J. Simonis, J. Messens K. anf Van Durme, E. O. Afoakwa, L. De Cooman, and K. Dewettink. 2020. <span>“Pod Storage with Roasting: A Tool to Diversifying the Flavor Profiles of Dark Chocolates Produced from ???bulk??? Cocoa Beans? (Part II: Quality and Sensory Profiling of Chocolates).”</span> <em>Food Research International</em> 132 (109116).
+</div>
+<div class="csl-entry">
+Hsu, S.-H., and S.-P. Wu. 1991. <span>“An Investigation for Determining the Optimal Length of Chopsticks.”</span> <em>Applied Ergonomics</em> 22 (6): 395–400.
+</div>
+<div class="csl-entry">
+Hui, W. N., S. Tamburic, and P. Grant-Poss. 2017. <span>“Lip-Smacking Results.”</span> <em>Cosmetics &amp; Toiletries</em> 132 (3): 48–68.
+</div>
+<div class="csl-entry">
+Hyllegard, K., J. Ogle, and R.-N. Yan. 2009. <span>“The Impact of Advertising Message Strategy - Fair Labour v Sex Appeal - Upon Gen y Consumers’ Intent to Patronize an Apparel Retailer.”</span> <em>Journal of Fashion Marketing and Management</em> 13 (1): 109–27.
+</div>
+<div class="csl-entry">
+Ismail, S., S. Siddiqui, F. Shafiq, M. Ishaq, and S. Khan. 2014. <span>“Blood Transfusion in Patients Having Caesarean Section: A Prospective Multicentre Observational Study of Practice in Three Pakistan Hospitals.”</span> <em>International Journal of Obstetric Anesthesia</em> 23: 253–59.
+</div>
+<div class="csl-entry">
+Jensen, C. R. 2002. <span>“Variance Components Calculations: Common Methods and Misapplications in the Semiconductor Industry.”</span> <em>Quality Engineering</em> 14 (4): 647–57.
+</div>
+<div class="csl-entry">
+Jung, J., and Y. J. Ahn. 2018. <span>“Effects of Interface on Procedural Skill Transfer in Virtual Training: Lifeboat Launching Operation Study.”</span> <em>Computer Animation and Virtual Worlds</em> 29: e1812. <a href="https://doi.org/10.1002/cav.1812">https://doi.org/10.1002/cav.1812</a>.
+</div>
+<div class="csl-entry">
+Keshtkaran, Z., F. Sharif, and M. Rambod. 2014. <span>“Students’ Readiness for and Perception of Inter-Professional Learning: A Cross-Sectional Study.”</span> <em>Nurse Education Today</em> 34: 991–98.
+</div>
+<div class="csl-entry">
+Kowarit, S., K. Sathpornprasath, and S. N. Jansri. 2024. <span>“Application of Hot Air-Derived RSM Conditions and Shading for Solar Drying of Avocado Pulp and Its Properties.”</span> <em>Solar Energy</em> 278: 1–12. <a href="https://doi.org/10.1016/j.solener.2024.112768">https://doi.org/10.1016/j.solener.2024.112768</a>.
+</div>
+<div class="csl-entry">
+Landy, D., and H. Sigall. 1974. <span>“Beauty Is Talent: Task Evaluation as a Function of the Performer’s Physical Attraction.”</span> <em>Journal of Personality and Social Psychology</em> 29 (3): 299–304.
+</div>
+<div class="csl-entry">
+Ma’Or, Z., S. Yehuda, and W. Voss. 1997. <span>“Skin Smoothing Effects of Dead Sea Minerals: Comparative Profilometric Evaluation of Skin Surface.”</span> <em>International Journal of Cosmetic Science</em> 19: 105–10.
+</div>
+<div class="csl-entry">
+Marchiori, D., O. Cornielle, and O. Klein. 2012. <span>“Container Size Influences Snack Food Intake Independently of Portion Size.”</span> <em>Appetite</em> 58: 814–17.
+</div>
+<div class="csl-entry">
+Meilgaard, M. 1960. <span>“Hop Analysis, Cohumulone Factor and the Bitterness of Beer: Review and Critical Evaluation.”</span> <em>Journal of the Institute of Brewing</em> 66 (1): 35–50.
+</div>
+<div class="csl-entry">
+O’Hare, D., and N. Stenhouse. 2009. <span>“Under the Weather: An Evaluation of Different Modes of Presenting Meteorological Information for Pilots.”</span> <em>Applied Ergonomics</em> 40: 688–93.
+</div>
+<div class="csl-entry">
+O’Keeffe, C., and R. Wiseman. 2005. <span>“Testing Alleged Mediumship: Methods and Results.”</span> <em>British Journal of Psychology</em> 96: 165–79.
+</div>
+<div class="csl-entry">
+Oliveira, A. S., F. M. Dalla Nora, R. O. Mello, P. A. Mello, B. Tischer, A. B. Costa, and J. S. Barin. 2017. <span>“One-Shot, Reagent-Free Determination of the Alcohol Content of Distilled Beverages by Thermal Infrared Enthalpimetry.”</span> <em>Talanta</em> 171: 335–40. <a href="https://doi.org/10.1016/j.talanta.2017.05.011">https://doi.org/10.1016/j.talanta.2017.05.011</a>.
+</div>
+<div class="csl-entry">
+Ouedrhiria, W., M. Balouiri, S. Bouhdid, M., S. Moja, F. O. Chahdie, M. Taleb, and H. Greche. 2016. <span>“Mixture Designs of Origanum Compactum, Origanum Majorana and Thymus Serpyllum Essential Oils: Optimization of Their Antibacterial Effect.”</span> <em>Industrial Crops and Products</em> 89: 1–9.
+</div>
+<div class="csl-entry">
+Ranthinam, A., J. R. Rao, and B. U. Nair. 2011. <span>“Adsorption of Phenol onto Activated Carbon from Seaweed: Determination of the Optimal Experimental Parameters Using Factorial Design.”</span> <em>Journal of the Taiwan Institute of Chemical Engineers</em> 42: 952–56.
+</div>
+<div class="csl-entry">
+Schultz, A. M., and H. H. Biswell. 1952. <span>“Competition Between Grasses Reseeded on Burned Brushlands in California.”</span> <em>Journal of Range Management</em> 5 (5): 338–45.
+</div>
+<div class="csl-entry">
+Simonson, D. K. 2007. <span>“Creative Life Cycles in Literature: Poets Vs Novelists or Conceptualists Versus Experimentalists?”</span> <em>Psychology of Aesthetics, Creativity, and the Arts</em> 1 (3): 133–39.
+</div>
+<div class="csl-entry">
+Smith, K. V. 1969. <span>“Stock Price and Economic Indexes for Generating Efficient Portfolios.”</span> <em>The Journal of Business</em> 42 (3): 332–36.
+</div>
+<div class="csl-entry">
+Smith, P. K., T. Niiler, and P. W. McCullough. 2010. <span>“Evaluating Makiwara Punching Board Performance.”</span> <em>Journal of Asian Martial Arts</em> 19 (2): 34–45.
+</div>
+<div class="csl-entry">
+Snedecor, George W., and William G. Cochran. 1967. <em>Statistical Methods</em>. 6th ed. Ames, Iowa: The Iowa State University Press.
+</div>
+<div class="csl-entry">
+Song, X-j., M. Zhang, and A. S. Mujumdar. 2007. <span>“Optimization of Vacuum Microwave Predrying and Vacuum Frying Conditions to Produce Fried Potato Chips.”</span> <em>Drying Technology</em> 25: 2027–34.
+</div>
+<div class="csl-entry">
+Suaria, G., and S. Aliani. 2014. <span>“Floating Debris in the Mediterranean Sea.”</span> <em>Marine Pollution Bulletin</em> 86: 494–504.
+</div>
+<div class="csl-entry">
+Tan, K. S., S. V. Wong, R. S. Radin Umar, A. M. S. Hamouda, and N. K. Gupta. 2009. <span>“Impact Behavior Modeling of Motorcycle Front Wheel-Tire Assembly.”</span> <em>International Journal of Automotive Technology</em> 10 (3): 329–39.
+</div>
+<div class="csl-entry">
+To, W. M., T. W. Yu, T. M. Lai, and S. P. Li. 2007. <span>“Characterization of Commercial Clothes Dryers Based on Energy-Efficiency Analysis.”</span> <em>International Journal of Clothing Science and Technology</em> 19 (5): 270–90.
+</div>
+<div class="csl-entry">
+Wohlgemuth, K. J., A. Jesko, V. Frost, M. J. Conner, and J. A. Mota. 2024. <span>“Characteristics of Slow and Fast Performers on a Firefighter Air Consumption Test.”</span> <em>Applied Ergonomics</em> 118. <a href="https://doi.org/10.1016/j.apergo.2024.104262">https://doi.org/10.1016/j.apergo.2024.104262</a>.
+</div>
+<div class="csl-entry">
+Wu, F-G., H. Lin, and M. You. 2011. <span>“The Enhanced Navigator for the Touch Screen: A Comparative Study on Navigational Techniques of Web Maps.”</span> <em>Displays</em> 32: 284–95.
+</div>
+<div class="csl-entry">
+Zeng, R., J. Lin, S. Wu, L. Chen, S. Chen, H. Gao, Y. Zheng, and H. Ma. 2015. <span>“A Randomized Controlled Trial: Preoperative Home-Based Combined Tai Chi and Strength Training (TCST) to Improve Balance and Aerobic Capacity in Patients with Total Hip Arthroplasty (THA).”</span> <em>Archives of Gerontology and Geriatrics</em> 60: 265–71.
+</div>
+<div class="csl-entry">
+Zouid, I., R. Siret, F. Jourjon, E. Mehinagic, and L. Rolle. 2013. <span>“Impact of Grapes Heterogeneity According to Sugar Level on Both Physical and Mechanical Berries Properties and Their Anthocyanins Extractability at Harvest.”</span> <em>Journal of Texture Studies</em> 44: 95–103.
+</div>
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-chaudhary_2011" class="csl-entry">
+Chaudhary, H., K. Kohli, S. Amin, P. Rathee, and V. Kumar. 2011. <span>“Optimization and Formulation Design of Gels of Diclfenac and Curcumin for Transdermal Drug Delivery by Box-Behnken Statistical Design.”</span> <em>Journal of Pharmaceutical Sciences</em> 100 (2): 580–93.
+</div>
+<div id="ref-hui_2017" class="csl-entry">
+Hui, W. N., S. Tamburic, and P. Grant-Poss. 2017. <span>“Lip-Smacking Results.”</span> <em>Cosmetics &amp; Toiletries</em> 132 (3): 48–68.
+</div>
+<div id="ref-kowarit_2024" class="csl-entry">
+Kowarit, S., K. Sathpornprasath, and S. N. Jansri. 2024. <span>“Application of Hot Air-Derived RSM Conditions and Shading for Solar Drying of Avocado Pulp and Its Properties.”</span> <em>Solar Energy</em> 278: 1–12. <a href="https://doi.org/10.1016/j.solener.2024.112768">https://doi.org/10.1016/j.solener.2024.112768</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="analysis-of-covariance-ancova.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  },
+  "link": "https://github.com/LarryWinner/STA4211-Notes1.git/edit/main/%s",
+  "text": "Edit"
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
