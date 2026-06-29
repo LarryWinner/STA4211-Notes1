@@ -26,7 +26,7 @@ The **1-factor-at-a-time** method is used in some fields of study. This involves
 
 We first consider the population mean structures for **additive** and **interaction** models based on hypothetical values for an experiment of the "halo effect". 
 
-**Example 5.1 - Halo Effect**
+**Example 6.1 - Halo Effect**
 
 In this study, researchers were interested in observing the "halo effect" where individuals who are known to be good/bad in a particular dimension and assumed to also be good/bad in another dimension. This phenomenon has been studied involving people, consumer products, and in many other subject areas. This hypothetical data is taken from a psychology experiment where students were given a picture of a student who had written an essay (Good, Bad, No Picture), and an essay that was supposedly written by the student (Good, Poor). The response measured was the score that the student assigned to the essay. Each student rater was assigned to one Picture/Essay Quality condition [@landy_1974].
 
@@ -603,7 +603,7 @@ $$
 \mbox{Partial-} \eta_{AB}^2 = \frac{SSAB}{SSAB+SSE}   \qquad
 $$
 
-**Example 5.2 - Drumstick Weights of Broiler Chickens**
+**Example 6.2 - Drumstick Weights of Broiler Chickens**
 
 A study was conducted to compare weights of chicken parts under 4 diets 
 [@aksu_2007]. The 4 diets were combinations of two factors, each with two levels $(a=b=2)$. Factor A was base diet (Sorghum $(i=1)$ and Corn $(i=2)$).
@@ -801,7 +801,7 @@ eta_squared(ds.mod1, partial=FALSE)
 
 $$ \nabla $$
 
-**Example 5.3 - Reading Times on Electronic Readers**
+**Example 6.3 - Reading Times on Electronic Readers**
 
 Next, consider a study that compared $a=3$ electronic reader models, each at $b=4$ illuminance levels [@chang_2013]. The three reader models are described as follows.
 

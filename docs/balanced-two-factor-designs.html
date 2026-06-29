@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -347,7 +348,7 @@ div.csl-indent {
 <p>In a controlled experiment, experimental units are obtained and randomly assigned to the <span class="math inline">\(ab\)</span> treatments, with <span class="math inline">\(n\)</span> units per treatment. In observational studies, <span class="math inline">\(n\)</span> units are sampled from each of the <span class="math inline">\(ab\)</span> populations/subpopulations.</p>
 <p>The <strong>1-factor-at-a-time</strong> method is used in some fields of study. This involves selecting a particular level of factor A and obtain the best level of factor B. Then, at the “best” level of factor B, obtain the best level of factor A. This method has problems, in particular it does not permit studying interactions between the factors. It is best (when feasible) to conduct the experiment at all <span class="math inline">\(ab\)</span> treatment levels.</p>
 <p>We first consider the population mean structures for <strong>additive</strong> and <strong>interaction</strong> models based on hypothetical values for an experiment of the “halo effect”.</p>
-<p><strong>Example 5.1 - Halo Effect</strong></p>
+<p><strong>Example 6.1 - Halo Effect</strong></p>
 <p>In this study, researchers were interested in observing the “halo effect” where individuals who are known to be good/bad in a particular dimension and assumed to also be good/bad in another dimension. This phenomenon has been studied involving people, consumer products, and in many other subject areas. This hypothetical data is taken from a psychology experiment where students were given a picture of a student who had written an essay (Good, Bad, No Picture), and an essay that was supposedly written by the student (Good, Poor). The response measured was the score that the student assigned to the essay. Each student rater was assigned to one Picture/Essay Quality condition <span class="citation">(<a href="#ref-landy_1974">Landy and Sigall 1974</a>)</span>.</p>
 <p>For this example, factor A is the Picture condition with <span class="math inline">\(a=3\)</span> levels and factor B is Essay quality with <span class="math inline">\(b=2\)</span> levels. Let <span class="math inline">\(\mu_{ij}\)</span> be the mean when factor A is at level <span class="math inline">\(i\)</span> and factor <span class="math inline">\(B\)</span> is at level <span class="math inline">\(j\)</span>. Further, let <span class="math inline">\(\mu_{i\bullet}\)</span> be the mean when factor A is at level <span class="math inline">\(i\)</span> (across levels of factor B) and <span class="math inline">\(\mu_{\bullet j}\)</span> be the mean when factor B is at level <span class="math inline">\(j\)</span>. Finally <span class="math inline">\(\mu_{\bullet\bullet}\)</span> is the overall mean across all levels of factors A and B.</p>
 <p>Consider the following hypothetical means.</p>
@@ -828,7 +829,7 @@ H_A^B: \mbox { Not all } \beta_j=0
 \mbox{Partial-} \eta_B^2 = \frac{SSB}{SSA+SSE}   \qquad
 \mbox{Partial-} \eta_{AB}^2 = \frac{SSAB}{SSAB+SSE}   \qquad
 \]</span></p>
-<p><strong>Example 5.2 - Drumstick Weights of Broiler Chickens</strong></p>
+<p><strong>Example 6.2 - Drumstick Weights of Broiler Chickens</strong></p>
 <p>A study was conducted to compare weights of chicken parts under 4 diets
 <span class="citation">(<a href="#ref-aksu_2007">Aksu, Imik, and Karoglu 2007</a>)</span>. The 4 diets were combinations of two factors, each with two levels <span class="math inline">\((a=b=2)\)</span>. Factor A was base diet (Sorghum <span class="math inline">\((i=1)\)</span> and Corn <span class="math inline">\((i=2)\)</span>).
 Factor B was methionine supplement (Absent <span class="math inline">\((j=1)\)</span> and Present <span class="math inline">\((j=2)\)</span>).
@@ -1039,7 +1040,7 @@ Based on <span class="math inline">\(\eta_{AB}^2\)</span>, approximately 9% of t
 ## 
 ## - One-sided CIs: upper bound fixed at [1.00].</code></pre>
 <p><span class="math display">\[ \nabla \]</span></p>
-<p><strong>Example 5.3 - Reading Times on Electronic Readers</strong></p>
+<p><strong>Example 6.3 - Reading Times on Electronic Readers</strong></p>
 <p>Next, consider a study that compared <span class="math inline">\(a=3\)</span> electronic reader models, each at <span class="math inline">\(b=4\)</span> illuminance levels <span class="citation">(<a href="#ref-chang_2013">Chang, Chou, and Shieh 2013</a>)</span>. The three reader models are described as follows.</p>
 <ul>
 <li>Sony PRS 700 - 6” diagonal screen size <span class="math inline">\((i=1)\)</span></li>
@@ -1261,7 +1262,7 @@ L=\sum_{j=1}^b c_j\mu_{\bullet j} \qquad
 </div>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-aksu_2007" class="csl-entry">
 Aksu, M. I., H. Imik, and M. Karoglu. 2007. <span>“Influence of Dietary Sorghum (Sorghum Vulgare) and Corn Supplemented with Methionine on Cut-up Pieces Weights of Broiler Carcass and Quality Properties of Breast and Drumsticks Meat.”</span> <em>Food Science and Technology International</em> 13 (5): 361–67.

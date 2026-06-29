@@ -74,7 +74,7 @@ Two commonly used designs for response surfaces are the **Central Composite Desi
 In the Central Composite Design, there are $k$ factors, each with three equally spaced levels coded $-1,0,+1$. A $2^k$ factorial is set up with each factor at $+/-1$. Then $2k$ observations are made with $k-1$ variables at their 0 levels and the remaining factor at $\pm \alpha$ where $\alpha$ is commonly $\sqrt{2}$, $\sqrt{3}$, or 2, these are labelled "axial points."
 Finally, there are $c$ observations with each of the $k$ factors at their center (0) levels, which permits a goodness of fit test.
 
-**Example 13.1 - Solar Drying of Avocado Pulp**
+**Example 14.1 - Solar Drying of Avocado Pulp**
 
 A study was conducted as a response surface design with $k=4$ factors to measure solar drying of avocado pulp [@kowarit_2024]. The 4 factors are described below, and the response was moisture content of the avocado pulp (lower values are better). This is a central composite design with $\alpha=2$.
 
@@ -116,7 +116,7 @@ $$\nabla $$
 The Box-Behnken design places runs at every combination of $\pm 1$ for each pair of factors, with all other factors at their 0 (central) level. There are multiple runs for each factor at their central level.
 The analysis is the same as for the Central Composite Design.
 
-**Example 13.2 – Gels of Diclofenac and Curcumin for Transdermal Drug Delivery**
+**Example 14.2 – Gels of Diclofenac and Curcumin for Transdermal Drug Delivery**
 
 A study (Chaudhary, et al (2011)) had 3 factors, each at 3 levels
 [@chaudhary_2011]. 
@@ -165,7 +165,7 @@ E\{Y\}=\sum_{i=1}^k \beta_iX_i +
 $$
 The goal is to choose the mixture that optimizes the output.
 
-**Example 13.3 - Breaking Strength of Lipstick Blends**
+**Example 14.3 - Breaking Strength of Lipstick Blends**
 
 A mixture experiment considered $k=3$ inputs for lipstick [@hui_2017].
 One response was breaking strength (grams), with the following inputs,

@@ -28,7 +28,7 @@ In this chapter, we will focus on models with independent, normally distributed 
 In this section, we consider a Controlled Experiment and an Observational Study, each
 with two groups. We use the independent sample $t$-test in each case to compare the two means.
 
-**Example 2.1 - Tai Chi and Strength Training in Hip Replacement Patients**
+**Example 3.1 - Tai Chi and Strength Training in Hip Replacement Patients**
 
 A controlled experiment was conducted to compare post-operative effects of an in-home
 training treatment for patients who have received hip replacement surgery
@@ -61,7 +61,7 @@ The **Effect Size** is the absolute difference in the sample means in units of t
 
 $$\nabla$$
 
-**Example 2.2 - Firefighter Air Consumption**
+**Example 3.2 - Firefighter Air Consumption**
 
 An observational study was conducted to compare firefighters that were classified into two categories of air consumption, slow and fast [@wohlgemuth_2024]. The firefighters were classified based on scores for 10 tasks pertinent to firefighting. Once the $n_T=160$ firefighters were classified into the two groups (94 fast and 66 slow), the groups were compared with respect to several physical characteristics including Age, Body Mass Index, and Peak Heart Rate (none of these were used in classifying as Fast/Slow Air Consumption).
 Summary statistics for the response Body Fat Percentage and the corresponding $t$-test are given below.
@@ -184,7 +184,7 @@ legend("topleft", c("N(40,100)","N(50,100)", "N(60,100)"),
 
 ```
 
-**Example 2.3 - Virtual Training for a Lifeboat Launching Task**
+**Example 3.3 - Virtual Training for a Lifeboat Launching Task**
 A study in South Korea compared $r=4$ methods of training to conduct a lifeboat launching task [@jung_2018]. 
 The treatments and their labels from the paper are given below and the response $Y$ was a procedural knowledge score for subjects post training.
 
@@ -405,7 +405,7 @@ $$
 The **effect size** for the One-Way ANOVA model is $\eta^2=SSTR/SSTO$,
 that is, the fraction of the total variation that is "attributable" to differences in the group means. 
 
-**Example 2.4 - Virtual Training for a Lifeboat Launching Task**
+**Example 3.4 - Virtual Training for a Lifeboat Launching Task**
 
 $$
 n_1=n_2=n_3=n_4=16 \qquad \overline{y}_{1\bullet}=4.931 \quad
@@ -527,7 +527,7 @@ We begin with $r$ treatments with no restrictions on their population means $\le
 Both models are fit, and the Error Sums of Squares and Degrees of Freedom are obtained 
 for each model. 
 
-**Example 2.5 - Virtual Training for a Lifeboat Launching Task**
+**Example 3.5 - Virtual Training for a Lifeboat Launching Task**
 
 Consider the following restrictions in light of the virtual training
 experiment.
@@ -672,7 +672,7 @@ $P\left(F_{\nu_1,\nu_2}\left(\lambda\right) \ge F_{1-\alpha;r-1,n_T-r} \right)$
 
 In many practical applications, researchers are interested in detecting a certain effect size among treatments and must iteratively solve for sample sizes that assure a certain power, such as 0.80.
 
-**Example 2.6 - Obtaining the Power of the $F$-test**
+**Example 3.6 - Obtaining the Power of the $F$-test**
 
 Consider the example described previously, and suppose we have samples of size $n_i=5$ from each treatment.
 
@@ -831,7 +831,7 @@ V\{b\} = \sigma^2
 $$
 
 
-**Example 2.7 - Virtual Training for a Lifeboat Launching Task**
+**Example 3.7 - Virtual Training for a Lifeboat Launching Task**
 
 For this example, we will set up the $X$ matrix and $Y$ vector as follow.
 Let $1_{16}$ represent a $16\times 1$ vector of $1^s$ and

@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -364,7 +365,7 @@ many permutations of the <span class="math inline">\(n_T\)</span> responses are 
 The <span class="math inline">\(P\)</span>-value is the number of more extreme values than the observed statistic plus 1,
 divided by the number of permutations plus 1. That is, the observed value counts in both the numerator and denominator. Often the number of permutations is 9999 in practice.</p>
 <p>This test is applied to the lifeboat training data here.</p>
-<p><strong>Example 4.1 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 5.1 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>Here we will apply the Randomization test to the Lifeboat training data.
 For the original sample, <span class="math inline">\(SSTR=65.664\)</span>. Note that for each permutation, the total sum of squares will be the same, <span class="math inline">\(SSTO=331.479\)</span>, so we can simply save <span class="math inline">\(SSTR\)</span> from each permuation, as opposed to computing <span class="math inline">\(F^*\)</span>. The R code and output are given below.</p>
 <div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="alternative-tests-for-treatment-effects.html#cb118-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
@@ -417,7 +418,7 @@ Further, its derivation is based on equal sample sizes.
 It uses a special table of critical values available in many textbooks and online. There is a R package that purports to generate the critical values, but I have had issues with certain sample sizes/numbers of treatments in obtaining results.</p>
 <p>The test statistic <span class="math inline">\((H)\)</span> is simply the ratio of the largest to smallest variance (not standard deviation), and the critical values are indexed by the number of treatments/groups <span class="math inline">\((r)\)</span>
 and the number of degrees of freedom for each sample variance <span class="math inline">\((n-1)\)</span>, where <span class="math inline">\(n\)</span> is the number of units per treatment.</p>
-<p><strong>Example 4.2 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 5.2 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>For the lifeboat training experiment, there were <span class="math inline">\(r=4\)</span> treatments
 and each sample size was <span class="math inline">\(n=16\)</span>. The sample standard deviations are given below.
 The critical value for this test with <span class="math inline">\(\alpha=0.05\)</span>, <span class="math inline">\(r=4\)</span>, and <span class="math inline">\(n-1=15\)</span>
@@ -456,7 +457,7 @@ SSE_L = \sum_{i=1}^r\sum_{j=1}^{n_i}\left(d_{ij}-\overline{d}_{i\bullet}\right)^
            {\left[\frac{SSE_L}{n_T-r}\right]} \qquad
 \mbox{Rejection Region:} \quad F_L^* \ge F_{1-\alpha;r-1,n_T-r}
 \]</span></p>
-<p><strong>Example 4.3 - Virtual Training for a Lifeboat Launching Task </strong></p>
+<p><strong>Example 5.3 - Virtual Training for a Lifeboat Launching Task </strong></p>
 <p>We will first create the <span class="math inline">\(d_{ij}\)</span> “brute-force”, then use the <strong>leveneTest</strong> function in the
 <strong>car</strong> package.</p>
 <div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="alternative-tests-for-treatment-effects.html#cb126-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
@@ -512,7 +513,7 @@ C=1+\frac{1}{3(r-1)}\left[\left(\sum_{i=1}^r\frac{1}{n_i-1}\right)-\left(\frac{1
 X_B^2 \ge \chi_{1-\alpha;r-1}^2 \qquad
 P = P\left(\chi_{r-1}^2 \ge X_B^2\right)
 \]</span></p>
-<p><strong>Example 4.4 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 5.4 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>For the lifeboat training experiment, there were <span class="math inline">\(r=4\)</span> treatments
 and each sample size was <span class="math inline">\(n=16\)</span>. The sample variances are given below.
 The critical value for this test with <span class="math inline">\(\alpha=0.05\)</span> and <span class="math inline">\(r=4\)</span>
@@ -662,7 +663,7 @@ The test statistic and rejection region for the general linear test are given be
 \qquad
 \mbox{Rejection Region:} F_{EWLS}^* \ge F_{1-\alpha,r-1,n_T-r}
 \]</span></p>
-<p><strong>Example 4.5 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 5.5 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>For the lifeboat training experiment, there were <span class="math inline">\(r=4\)</span> treatments
 and each sample size was <span class="math inline">\(n=16\)</span>. The following R code
 runs the matrix form of the general linear test and
@@ -758,7 +759,7 @@ F^*=\frac{1}{r-1}\left[\sum_{i=1}^rw_i\left(\overline{y}_{i\bullet}\right)^2
 <p><span class="math display">\[
 F_W=m_WF^* \stackrel{\cdot}{\sim}F_{r-1,\nu_W}
 \]</span></p>
-<p><strong>Example 4.6 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 5.6 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>For the lifeboat training experiment, there were <span class="math inline">\(r=4\)</span> treatments
 and each sample size was <span class="math inline">\(n=16\)</span>. The following R code produces Welch’s
 <span class="math inline">\(F_W\)</span>-test directly from the treatment means, variances, and sample sizes as well as using the <strong>oneway.test</strong> function in R.</p>
@@ -805,7 +806,7 @@ GH_{ii&#39;}=\frac{q_{1-\alpha;r,\nu_{ii&#39;}}}{\sqrt{2}}\sqrt{\frac{s_i^2}{n_i
 Simultaneous <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Intervals for <span class="math inline">\(\mu_i-\mu_{i&#39;}\)</span>
 are of the form
 <span class="math inline">\(\left(\overline{y}_{i\bullet}-\overline{y}_{i&#39;\bullet}\right)\pm GH_{ii&#39;}\)</span>.</p>
-<p><strong>Example 4.7 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 5.7 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>For the lifeboat training experiment, there were <span class="math inline">\(r=4\)</span> treatments
 and each sample size was <span class="math inline">\(n=16\)</span>. The following R code computes Simultaneous 95% Confidence Intervals and adjusted <span class="math inline">\(P\)</span>-values based on the Games-Howell method.</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="alternative-tests-for-treatment-effects.html#cb150-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>
@@ -930,7 +931,7 @@ approximate Confidence Intervals for the differences in mean ranks among the <sp
 z_{1-\alpha/(2g)} \sqrt{\frac{n_T\left(n_T+1\right)}{2}
 \left(\frac{1}{n_i}+\frac{1}{n_{i&#39;}}\right)}
 \]</span></p>
-<p><strong>Example 4.8 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 5.8 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>For the lifeboat training experiment, there were <span class="math inline">\(r=4\)</span> treatments
 and each sample size was <span class="math inline">\(n=16\)</span>. We will directly compute the ranks, test, and multiple comparisons. Then the <strong>kruskal.test</strong> function will be used. Note that the <strong>rank</strong> function in R correctly adjusts ranks for ties. The null hypothesis is that the population medians are equal for the <span class="math inline">\(r=4\)</span> treatments.</p>
 <div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="alternative-tests-for-treatment-effects.html#cb163-1" tabindex="-1"></a>vt <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/virtual_training.csv&quot;</span>)</span>

@@ -90,7 +90,7 @@ $$
 \sum_{k=1}^c(\alpha\beta\gamma)_{ijk}=0
 $$
 
-**Example 8.1 - Flavonoids in Wine**
+**Example 9.1 - Flavonoids in Wine**
 
 The following "population means" are based on observed experimental values to apply the formulas above and have been adjusted to have integer values for all effects [@genova_2012]. There were three factors, each at two levels, described below and the response was total flavonoids.
 
@@ -470,7 +470,7 @@ TS:F_{C}^*=\frac{MSC}{MSE}  \qquad RR:F_{C}^* \ge
 F_{1-\alpha;c-1,abc(n-1)}
 $$
 
-**Example 8.2 - Finishing Treatments for Chef Jackets**
+**Example 9.2 - Finishing Treatments for Chef Jackets**
 
 A study was conducted to observe the effects of three factors for protecting chef jackets from scald injuries [@devarajan_2017]. Three responses were measured: absorbed energy (kj/m^2)
 at 3 sensors (upper, middle, and lower). This example will analyze the upper sensor

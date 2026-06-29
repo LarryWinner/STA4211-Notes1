@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -498,7 +499,7 @@ E\{MSE\}=E\left\{\frac{SSE}{df_E}\right\} = \sigma^2
 H_0:\sigma_{\mu}^2=0 \quad H_A:\sigma_{\mu}^2&gt;0 \qquad TS: F^*=\frac{MSTR}{MSE}
 \qquad RR:F^*\geq F_{1-\alpha;r-1,r(n-1)}
 \]</span></p>
-<p><strong>Example 10.1 - Alpha Acids in Varieties of Beer</strong></p>
+<p><strong>Example 11.1 - Alpha Acids in Varieties of Beer</strong></p>
 <p>A study was conducted to measure alpha acids in a sample of <span class="math inline">\(r=10\)</span> varieties of beer <span class="citation">(<a href="#ref-meilgaard_1960">Meilgaard 1960</a>)</span>. There were <span class="math inline">\(n=10\)</span> replicates per variety. The following R code obtains the ANOVA based on direct computations and a plot of the measurements is given in
 Figure <a href="random-and-mixed-effects-models.html#fig:ch1001">11.1</a>.</p>
 <div class="sourceCode" id="cb354"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb354-1"><a href="random-and-mixed-effects-models.html#cb354-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
@@ -563,7 +564,7 @@ t=\frac{\overline{Y}_{\bullet\bullet}-\mu_{\bullet}}{\hat{SE}\left\{\overline{Y}
 (1-\alpha)100\% \mbox{ CI for } \mu_{\bullet} \equiv
 \overline{Y}_{\bullet\bullet} \pm t_{1-\alpha/2;r-1}\sqrt{\frac{MSTR}{rn}}
 \]</span></p>
-<p><strong>Example 10.2 - Alpha Acids in Varieties of Beer</strong></p>
+<p><strong>Example 11.2 - Alpha Acids in Varieties of Beer</strong></p>
 <p>The following R code obtains the point estimate of the overall mean and 95% Confidence Interval for <span class="math inline">\(\mu_{\bullet}\)</span> based on direct computations.</p>
 <div class="sourceCode" id="cb359"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb359-1"><a href="random-and-mixed-effects-models.html#cb359-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
 <span id="cb359-2"><a href="random-and-mixed-effects-models.html#cb359-2" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(hops<span class="sc">$</span>alphaAcid)</span>
@@ -625,7 +626,7 @@ Then the <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Interva
 \rho_I=\frac{\sigma_{\mu}^2}{\sigma_{\mu}^2+\sigma^2}: \quad
 \left[L^*=\frac{L}{1+L},U^*=\frac{U}{1+U}\right]
 \]</span></p>
-<p><strong>Example 10.3 - Alpha Acids in Varieties of Beer</strong></p>
+<p><strong>Example 11.3 - Alpha Acids in Varieties of Beer</strong></p>
 <p>The following R code obtains the 95% Confidence Interval for <span class="math inline">\(\rho_I\)</span> based on direct computations.</p>
 <div class="sourceCode" id="cb361"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb361-1"><a href="random-and-mixed-effects-models.html#cb361-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
 <span id="cb361-2"><a href="random-and-mixed-effects-models.html#cb361-2" tabindex="-1"></a><span class="fu">head</span>(hops, <span class="dv">3</span>)</span></code></pre></div>
@@ -688,7 +689,7 @@ P\left(\frac{r(n-1)MSE}{\chi_{1-\alpha/2;r(n-1)}^2} \leq \sigma^2
 \]</span></p>
 <p>The Confidence Interval is simply from <span class="math inline">\(SSE\)</span> divided by the upper critical value to <span class="math inline">\(SSE\)</span>
 divided by the lower critical value.</p>
-<p><strong>Example 10.4 - Alpha Acids in Varieties of Beer</strong></p>
+<p><strong>Example 11.4 - Alpha Acids in Varieties of Beer</strong></p>
 <p>The following R code obtains the 95% Confidence Interval for <span class="math inline">\(\sigma^2\)</span> based on direct computations.</p>
 <div class="sourceCode" id="cb365"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb365-1"><a href="random-and-mixed-effects-models.html#cb365-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
 <span id="cb365-2"><a href="random-and-mixed-effects-models.html#cb365-2" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(hops<span class="sc">$</span>alphaAcid)</span>
@@ -770,7 +771,7 @@ The approximate <span class="math inline">\((1-\alpha)100\%\)</span> Confidence 
 (1-\alpha)100\% \mbox{ Confidence Interval for } \sigma_{\mu}^2: \quad
 \left[\frac{(df)\hat{L}}{\chi_{1-\alpha/2;df}},\frac{(df)\hat{L}}{\chi_{\alpha/2;df}}\right]
 \]</span></p>
-<p><strong>Example 10.5 - Alpha Acids in Varieties of Beer</strong></p>
+<p><strong>Example 11.5 - Alpha Acids in Varieties of Beer</strong></p>
 <p>The following R code obtains the approximate 95% Confidence Interval for <span class="math inline">\(\sigma_{\mu}^2\)</span> based on direct computations. Note that <span class="math inline">\(c_1=1/n\)</span> and <span class="math inline">\(c_2=-1/n\)</span>.</p>
 <div class="sourceCode" id="cb367"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb367-1"><a href="random-and-mixed-effects-models.html#cb367-1" tabindex="-1"></a>hops <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/hop_alphaacid.csv&quot;</span>)</span>
 <span id="cb367-2"><a href="random-and-mixed-effects-models.html#cb367-2" tabindex="-1"></a>ybar <span class="ot">&lt;-</span> <span class="fu">mean</span>(hops<span class="sc">$</span>alphaAcid)</span>
@@ -912,7 +913,7 @@ df_{B}=\frac{\left(\frac{1}{an}MSB + \frac{-1}{an}MSAB\right)^2} {
 \frac{\left(\frac{-1}{an}MSAB\right)^2}{(a-1)(b-1)}
 }
 \]</span></p>
-<p><strong>Example 10.6 - Measurements of Skulls by Observers</strong></p>
+<p><strong>Example 11.6 - Measurements of Skulls by Observers</strong></p>
 <p>An anthropological study was conducted to measure variation in frontal chord measurements of skulls by various observers <span class="citation">(<a href="#ref-hanihara_1999">Hanihara et al. 1999</a>)</span>. There were <span class="math inline">\(a=10\)</span> skulls, <span class="math inline">\(b=6\)</span> observers, and <span class="math inline">\(n=2\)</span> replicates per skull/observer. The R code for the analysis and output are included here.</p>
 <div class="sourceCode" id="cb371"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb371-1"><a href="random-and-mixed-effects-models.html#cb371-1" tabindex="-1"></a>sm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/skull_measure.csv&quot;</span>)</span>
 <span id="cb371-2"><a href="random-and-mixed-effects-models.html#cb371-2" tabindex="-1"></a><span class="fu">head</span>(sm, <span class="dv">3</span>)</span></code></pre></div>
@@ -1208,7 +1209,7 @@ HSD = q_{1-\alpha;a,(a-1)(b-1)}\sqrt{\frac{MSAB}{bn}}
 (1-\alpha)100\% \mbox{ Confidence Interval for } \alpha_i-\alpha_{i&#39;}: \quad
 \left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i&#39;\bullet\bullet}\right) \pm HSD
 \]</span></p>
-<p><strong>Example 10.7 - Breath Alcohol Concentration Measurement Comparison</strong></p>
+<p><strong>Example 11.7 - Breath Alcohol Concentration Measurement Comparison</strong></p>
 <p>A study compared <span class="math inline">\(a=6\)</span> (fixed) instruments among <span class="math inline">\(b=3\)</span> (random) subjects in measuring breath alcohol levels <span class="citation">(<a href="#ref-gullberg_2008">Gullberg 2008</a>)</span>. Each subject was measured by each machine <span class="math inline">\(n=10\)</span> times. Scores have been multiplied by 100 to avoid very small variances.</p>
 <p>R code for direct calculations and the <strong>lmer</strong> function are used for the analysis. The confidence level for the <strong>difflsmeans</strong> has been adjusted by the Bonferroni method to construct simultaneous 95% Confidence Intervals among the <span class="math inline">\(6(6-1)/2=15\)</span> pairs of instruments.</p>
 <p><span class="math display">\[
@@ -1487,7 +1488,7 @@ E\{MSAB\}=\sigma^2 + \sigma_{\alpha\beta\gamma}^2 +
 \]</span></p>
 <p>The error terms for the fixed main effects and their 2-way interaction are the interactions between each term and the random factor C.</p>
 <p>Tukey’s HSD or the Bonferroni method can be used to compare the levels of factors A and B, or the <span class="math inline">\(ab\)</span> treatment means if the interaction is important.</p>
-<p><strong>Example 10.8 - Navigational Techniques for Web Maps</strong></p>
+<p><strong>Example 11.8 - Navigational Techniques for Web Maps</strong></p>
 <p>A study was conducted to measure effects of two factors on subjects’ skill on reading web maps <span class="citation">(<a href="#ref-wu_2011">Wu, Lin, and You 2011</a>)</span>. The factors included are given below.</p>
 <ul>
 <li><strong>Navigational Technique</strong> - Combined Panning Buttons (CPB, (<span class="math inline">\(i=1\)</span>)),
@@ -1663,7 +1664,7 @@ We will analyze the data directly and with the <strong>lmer</strong> function be
 ##     collapse</code></pre>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-gullberg_2008" class="csl-entry">
 Gullberg, R. G. 2008. <span>“Employing Components-of-Variance to Evaluate Forensic Breath Test Instruments.”</span> <em>Science and Justice</em> 48: 2–7.

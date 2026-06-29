@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -496,7 +497,7 @@ V\left\{\overline{Y}_{i\bullet}-\overline{Y}_{i&#39;\bullet}\right\}=
 \frac{2\sigma^2}{b}
 \]</span></p>
 <p>Thus, while the variances of the treatment means differ depending on whether blocks are fixed or random, the <strong>variances of the difference in the treatment means are the same</strong>.</p>
-<p><strong>Example 9.1 - Sensory Analysis of Soy Sauce Recipes</strong></p>
+<p><strong>Example 10.1 - Sensory Analysis of Soy Sauce Recipes</strong></p>
 <p>A study compared <span class="math inline">\(r=4\)</span> soy sauce recipes, each judged by a panel of <span class="math inline">\(b=8\)</span> trained raters <span class="citation">(<a href="#ref-fidaleo_2012">Fidaleo et al. 2012</a>)</span>.
 The <span class="math inline">\(r=4\)</span> soy sauce recipes are given below, this being treated as a fixed factor (only recipes of interest).</p>
 <ul>
@@ -642,7 +643,7 @@ HSD = q_{1-\alpha;r,(r-1)(b-1)}\sqrt{\frac{MSE}{b}}
 (1-\alpha)100\% \mbox{ CI for } \tau_i-\tau_{i&#39;}: \qquad
 \left(\overline{Y}_{i\bullet}-\overline{Y}_{i&#39;\bullet}\right) \pm HSD
 \]</span></p>
-<p><strong>Example 9.2 - Methods of Presenting Weather Information to Pilots</strong></p>
+<p><strong>Example 10.2 - Methods of Presenting Weather Information to Pilots</strong></p>
 <p>A study compared <span class="math inline">\(r=3\)</span> cockpit weather displays (treatments) for pilots in terms of information recall <span class="citation">(<a href="#ref-ohare_2009">O’Hare and Stenhouse 2009</a>)</span> There were <span class="math inline">\(b=23\)</span> pilots (blocks) who were exposed to each display on a flight simulator. The three displays are described below. The response <span class="math inline">\(Y\)</span>, is the percent of information correctly recalled by the pilot.</p>
 <ul>
 <li>Ordinary text - English phrases <span class="math inline">\((i=1)\)</span></li>
@@ -756,7 +757,7 @@ Thus, there are differences among the three cockpit weather displays. In particu
 <li>Plot of residuals versus time order when experiment is conducted sequentially or when blocks are days to observe whether serial correlation is present</li>
 <li>Block x Treatment Interactions - Can be tested using Tukey’s ODOFNA test. If significant, the remainder <span class="math inline">\(MSE^*\)</span> can be used after removing the 1 degree of freedom <span class="math inline">\(SS\)</span> for interaction</li>
 </ul>
-<p><strong>Example 9.3 - Methods of Presenting Weather Information to Pilots</strong></p>
+<p><strong>Example 10.3 - Methods of Presenting Weather Information to Pilots</strong></p>
 <p>Here we give examples of the model checks, with the exception of residuals versus time order, as that does not pertain to this study.</p>
 <pre><code>##   trt.y blk.y corrRecall
 ## 1     1     1   45.68415
@@ -853,7 +854,7 @@ There are tests of whether the Population Variance-Covariance
 meets this assumption based on the Sample Variance-Covariance matrix,
 but are beyond the scope of this course. A visual inspection of <span class="math inline">\(S\)</span> should be able to detect large discrepancies. Other structures (including an unstructured form) can be implemented using mixed model software packages. Also, transformations on <span class="math inline">\(Y\)</span> can be implemented (such as the Box-Cox transformation).</p>
 <p>We will use the <strong>cov</strong> function by looping through the treatments to obtain the Variance-Covariance matrix, keeping in mind that <span class="math inline">\(\hat{\mbox{COV}}\{Y_{ij},Y_{ij}\}=\hat{V}\{Y_{ij}\}\)</span>.</p>
-<p><strong>Example 9.4 - Methods of Presenting Weather Information to Pilots</strong></p>
+<p><strong>Example 10.4 - Methods of Presenting Weather Information to Pilots</strong></p>
 <p>Here we compute the Relative Efficiency and the Sample Variance-Covariance matrix for the pilot weather information study based on direct calculations.</p>
 <div class="sourceCode" id="cb329"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb329-1"><a href="block-designs.html#cb329-1" tabindex="-1"></a>pwd <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/pilot_weatherdisplay.csv&quot;</span>)</span>
 <span id="cb329-2"><a href="block-designs.html#cb329-2" tabindex="-1"></a><span class="fu">head</span>(pwd,<span class="dv">3</span>)</span></code></pre></div>
@@ -1023,7 +1024,7 @@ HSD = q(1-\alpha;r,(r-1)(r-2))\sqrt{\frac{MSE}{r}}
 (1-\alpha)100\% \mbox { Confidence Interval for } \tau_k-\tau_{k&#39;}:
 \left(\overline{T}_k-\overline{T}_{k&#39;}\right) \pm HSD
 \]</span></p>
-<p><strong>Example 9.5 - Comparison of Medium (Psychic) Readings</strong></p>
+<p><strong>Example 10.5 - Comparison of Medium (Psychic) Readings</strong></p>
 <p>A study compared <span class="math inline">\(r=5\)</span> Psychic Mediums (treatments) in a Latin Square experiment <span class="citation">(<a href="#ref-okeeffe_2005">O’Keeffe and Wiseman 2005</a>)</span>.
 We will treat Medium as a fixed factor (only interest is comparing these specific ones).
 There were 5 Sitters (row factor) and 5 Sessions (column factor). Each Medium read each Sitter once, and each Medium read in each Session once. This design would look like the previous example, with one less row, one less column, and “F” removed.
@@ -1156,7 +1157,7 @@ We will do computations directly, then use the <strong>aov</strong> and <strong>
 ##     step</code></pre>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-fidaleo_2012" class="csl-entry">
 Fidaleo, M., M. Moresi, A. Cammaroto, M. Ladrange, and R. Nardi. 2012. <span>“Soy Sauce Desalting by Electrodialysis.”</span> <em>Journal of Food Engineering</em> 110: 175–81.

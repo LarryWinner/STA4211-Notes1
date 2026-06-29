@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -350,7 +351,7 @@ div.csl-indent {
 <h2><span class="header-section-number">3.1</span> Models with <span class="math inline">\(r=2\)</span> Factor Levels<a href="single-factor-studies.html#models-with-r2-factor-levels" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In this section, we consider a Controlled Experiment and an Observational Study, each
 with two groups. We use the independent sample <span class="math inline">\(t\)</span>-test in each case to compare the two means.</p>
-<p><strong>Example 2.1 - Tai Chi and Strength Training in Hip Replacement Patients</strong></p>
+<p><strong>Example 3.1 - Tai Chi and Strength Training in Hip Replacement Patients</strong></p>
 <p>A controlled experiment was conducted to compare post-operative effects of an in-home
 training treatment for patients who have received hip replacement surgery
 <span class="citation">(<a href="#ref-zeng_2015">Zeng et al. 2015</a>)</span>. The final analysis was based on <span class="math inline">\(n_T=59\)</span> subjects who completed the
@@ -374,7 +375,7 @@ protocol, 32 in the treatment group (Tai Chi and strength training) and 27 in th
 \]</span></p>
 <p>The <strong>Effect Size</strong> is the absolute difference in the sample means in units of the pooled standard deviation. In this example, <span class="math inline">\(e=4.45/2.98=1.49\)</span> which is considered a large effect size.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 2.2 - Firefighter Air Consumption</strong></p>
+<p><strong>Example 3.2 - Firefighter Air Consumption</strong></p>
 <p>An observational study was conducted to compare firefighters that were classified into two categories of air consumption, slow and fast <span class="citation">(<a href="#ref-wohlgemuth_2024">Wohlgemuth et al. 2024</a>)</span>. The firefighters were classified based on scores for 10 tasks pertinent to firefighting. Once the <span class="math inline">\(n_T=160\)</span> firefighters were classified into the two groups (94 fast and 66 slow), the groups were compared with respect to several physical characteristics including Age, Body Mass Index, and Peak Heart Rate (none of these were used in classifying as Fast/Slow Air Consumption).
 Summary statistics for the response Body Fat Percentage and the corresponding <span class="math inline">\(t\)</span>-test are given below.</p>
 <p><span class="math display">\[
@@ -461,7 +462,7 @@ The remaining parameters are the differences between the remaining <span class="
 Figure 3.3: Normal distibutions with means=40,50,60 and standard deviation=10
 </p>
 </div>
-<p><strong>Example 2.3 - Virtual Training for a Lifeboat Launching Task</strong>
+<p><strong>Example 3.3 - Virtual Training for a Lifeboat Launching Task</strong>
 A study in South Korea compared <span class="math inline">\(r=4\)</span> methods of training to conduct a lifeboat launching task <span class="citation">(<a href="#ref-jung_2018">Jung and Ahn 2018</a>)</span>.
 The treatments and their labels from the paper are given below and the response <span class="math inline">\(Y\)</span> was a procedural knowledge score for subjects post training.</p>
 <ul>
@@ -824,7 +825,7 @@ P=P\left(F_{r-1,n_T-r} \geq F^*\right)
 \]</span></p>
 <p>The <strong>effect size</strong> for the One-Way ANOVA model is <span class="math inline">\(\eta^2=SSTR/SSTO\)</span>,
 that is, the fraction of the total variation that is “attributable” to differences in the group means.</p>
-<p><strong>Example 2.4 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 3.4 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p><span class="math display">\[
 n_1=n_2=n_3=n_4=16 \qquad \overline{y}_{1\bullet}=4.931 \quad
 \overline{y}_{2\bullet}=7.708 \quad
@@ -991,7 +992,7 @@ and <span class="math inline">\(\left\{s_i\right\}\)</span> as well as sums of s
 <p>We begin with <span class="math inline">\(r\)</span> treatments with no restrictions on their population means <span class="math inline">\(\left\{\mu_i\right\}\)</span>. We then place a restriction on the population means.
 Both models are fit, and the Error Sums of Squares and Degrees of Freedom are obtained
 for each model.</p>
-<p><strong>Example 2.5 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 3.5 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>Consider the following restrictions in light of the virtual training
 experiment.</p>
 <ul>
@@ -1171,7 +1172,7 @@ the <strong>power</strong> of the test, the probability that it will reject <spa
 <span class="math inline">\(P\left(F_{\nu_1,\nu_2}\left(\lambda\right) \ge F_{1-\alpha;r-1,n_T-r} \right)\)</span></li>
 </ul>
 <p>In many practical applications, researchers are interested in detecting a certain effect size among treatments and must iteratively solve for sample sizes that assure a certain power, such as 0.80.</p>
-<p><strong>Example 2.6 - Obtaining the Power of the <span class="math inline">\(F\)</span>-test</strong></p>
+<p><strong>Example 3.6 - Obtaining the Power of the <span class="math inline">\(F\)</span>-test</strong></p>
 <p>Consider the example described previously, and suppose we have samples of size <span class="math inline">\(n_i=5\)</span> from each treatment.</p>
 <p><span class="math display">\[
 n_1=n_2=n_3=5 \qquad \mu_1=40 \quad \mu_2=50 \quad \mu_3=60
@@ -1315,7 +1316,7 @@ V\{b\} = \sigma^2
 0 &amp; 0 &amp; \cdots &amp; \frac{1}{n_{r-1}} &amp; 0 \\
 0 &amp; 0 &amp; \cdots &amp; 0 &amp; \frac{1}{n_r}  \\ \end{bmatrix}
 \]</span></p>
-<p><strong>Example 2.7 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 3.7 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>For this example, we will set up the <span class="math inline">\(X\)</span> matrix and <span class="math inline">\(Y\)</span> vector as follow.
 Let <span class="math inline">\(1_{16}\)</span> represent a <span class="math inline">\(16\times 1\)</span> vector of <span class="math inline">\(1^s\)</span> and
 <span class="math inline">\(0_{16}\)</span> represent a <span class="math inline">\(16\times 1\)</span> vector of <span class="math inline">\(0^s\)</span> and
@@ -1778,7 +1779,7 @@ F = \frac{W_1/\nu_1}{W_2/\nu_2} \sim F_{\nu_1,\nu_2}(\lambda)
 </div>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-jung_2018" class="csl-entry">
 Jung, J., and Y. J. Ahn. 2018. <span>“Effects of Interface on Procedural Skill Transfer in Virtual Training: Lifeboat Launching Operation Study.”</span> <em>Computer Animation and Virtual Worlds</em> 29: e1812. <a href="https://doi.org/10.1002/cav.1812">https://doi.org/10.1002/cav.1812</a>.

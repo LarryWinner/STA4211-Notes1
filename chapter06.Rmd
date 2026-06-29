@@ -65,7 +65,7 @@ F^*=\frac{\left[\frac{SSE(R)-SSE(C)}{df_E(R)-df_E(C)}\right]}
 \mbox{Rejection Region:} \quad F^*\ge F_{1-\alpha;1,ab-a-b}
 $$
 
-**Example 6.1 - Economic Indices for 8 Sources Over 18 Years**
+**Example 7.1 - Economic Indices for 8 Sources Over 18 Years**
 
 A study considered U.S. economic indices for $a=8$ business news sources over a $b=18$ year period [@smith_1969]. The sources were: DJIA, Poors, NYSE, GNP, CPI, Forbes, Business Week, and Money Magazine. The years were 1948-1965. There was one index per source per year.
 The following R code runs calculations directly, then structures the data in matrix form

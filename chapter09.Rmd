@@ -203,7 +203,7 @@ $$
 
 Thus, while the variances of the treatment means differ depending on whether blocks are fixed or random, the **variances of the difference in the treatment means are the same**.
 
-**Example 9.1 - Sensory Analysis of Soy Sauce Recipes**
+**Example 10.1 - Sensory Analysis of Soy Sauce Recipes**
 
 A study compared $r=4$ soy sauce recipes, each judged by a panel of $b=8$ trained raters [@fidaleo_2012]. 
 The $r=4$ soy sauce recipes are given below, this being treated as a fixed factor (only recipes of interest).
@@ -425,7 +425,7 @@ $$
 $$
 
 
-**Example 9.2 - Methods of Presenting Weather Information to Pilots**
+**Example 10.2 - Methods of Presenting Weather Information to Pilots**
 
 A study compared $r=3$ cockpit weather displays (treatments) for pilots in terms of information recall [@ohare_2009] There were $b=23$ pilots (blocks) who were exposed to each display on a flight simulator. The three displays are described below. The response $Y$, is the percent of information correctly recalled by the pilot.
 
@@ -515,7 +515,7 @@ Some methods for checking model assumptions are given in this sub-section, invol
 - Plot of residuals versus time order when experiment is conducted sequentially or when blocks are days to observe whether serial correlation is present
 - Block x Treatment Interactions - Can be tested using Tukey's ODOFNA test. If significant, the remainder $MSE^*$ can be used after removing the 1 degree of freedom $SS$ for interaction
 
-**Example 9.3 - Methods of Presenting Weather Information to Pilots**
+**Example 10.3 - Methods of Presenting Weather Information to Pilots**
 
 Here we give examples of the model checks, with the exception of residuals versus time order, as that does not pertain to this study.
 
@@ -634,7 +634,7 @@ but are beyond the scope of this course. A visual inspection of $S$ should be ab
 
 We will use the **cov** function by looping through the treatments to obtain the Variance-Covariance matrix, keeping in mind that $\hat{\mbox{COV}}\{Y_{ij},Y_{ij}\}=\hat{V}\{Y_{ij}\}$.
 
-**Example 9.4 - Methods of Presenting Weather Information to Pilots**
+**Example 10.4 - Methods of Presenting Weather Information to Pilots**
 
 Here we compute the Relative Efficiency and the Sample Variance-Covariance matrix for the pilot weather information study based on direct calculations.
 
@@ -746,7 +746,7 @@ $$
 \left(\overline{T}_k-\overline{T}_{k'}\right) \pm HSD
 $$
 
-**Example 9.5 - Comparison of Medium (Psychic) Readings**
+**Example 10.5 - Comparison of Medium (Psychic) Readings**
 
 A study compared $r=5$ Psychic Mediums (treatments) in a Latin Square experiment [@okeeffe_2005].
 We will treat Medium as a fixed factor (only interest is comparing these specific ones).

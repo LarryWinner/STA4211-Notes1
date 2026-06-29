@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -408,7 +409,7 @@ Y_{ijk}=\mu_{\bullet\bullet} + \alpha_1X_{ijk1}^A + \cdots +\alpha_{a-1}X_{ijk,a
 <p>To test for factor A effects, controlling for factor B effects and interaction effects, we compare Model 1 (Complete) and Model 3 (Reduced).</p>
 <p>To test for factor B effects, controlling for factor A effects and interaction effects, we compare Model 1 (Complete) and Model 4 (Reduced).</p>
 <p>When the test for interaction is “very non-significant” (high <span class="math inline">\(P\)</span>-value), often tests for factor A and B effects use Model 2 as the Complete Model.</p>
-<p><strong>Example 7.1 - Age at Peak for Famous Writers</strong></p>
+<p><strong>Example 8.1 - Age at Peak for Famous Writers</strong></p>
 <p>A study considered the age at career peak for famous writers <span class="citation">(<a href="#ref-simonson_2007">Simonson 2007</a>)</span>.
 The factors were <strong>Style</strong> (Factor A: Conceptualists <span class="math inline">\((i=1)\)</span>, Experimentalists <span class="math inline">\((i=2)\)</span>) and Writer <strong>Type</strong> (Factor B:Poets <span class="math inline">\((j=1)\)</span>, Novelists <span class="math inline">\((j=2)\)</span>). Thus, there are <span class="math inline">\(a=b=2\)</span> levels for the factors, there will only be <span class="math inline">\(a-1=1\)</span> <span class="math inline">\(X\)</span> variable for factor A and <span class="math inline">\(b-1=1\)</span> <span class="math inline">\(X\)</span> variable for factor B, and <span class="math inline">\((a-1)(b-1)=1\)</span> cross-product term for the AB interaction. The numbers of writers for the <span class="math inline">\(ab=4\)</span> conditions are <span class="math inline">\(n_{11}=n_{12}=5,n_{21}=6,n_{22}=7\)</span>.
 The data and the generated X variables are given in Table <a href="unbalanced-two-factor-analysis-of-variance.html#tab:ch0701">8.1</a>.
@@ -808,7 +809,7 @@ As there is strong evidence of main effects and no suggestion of an interaction,
 <p>Experimentalists take longer on average to reach their peak than conceptualists, and novelists take longer than poets.</p>
 <p><span class="math display">\[\nabla \]</span></p>
 <p>A second example with more levels of factor B is included here.</p>
-<p><strong>Example 7.2 - Makiwara Punching Boards</strong></p>
+<p><strong>Example 8.2 - Makiwara Punching Boards</strong></p>
 <p>An experiment was conducted to compare four wood types of and two board types, of karate boards <span class="citation">(<a href="#ref-smith_2010">P. K. Smith, Niiler, and McCullough 2010</a>)</span>. The wood types were: cherry <span class="math inline">\((i=1)\)</span>, ash <span class="math inline">\((i=2)\)</span>, fir <span class="math inline">\((i=3)\)</span>, and oak <span class="math inline">\((i=4)\)</span>. The board types were stacked <span class="math inline">\((j=1)\)</span> and tapered <span class="math inline">\((j=2)\)</span>. Apparently due to breakage, there were unequal numbers of replicates among the <span class="math inline">\(ab=2(4)=8\)</span> treatments. We use the <strong>aov</strong> function in R with the treatment effects form to fit Models 1 (Interaction) and 2 (Additive) to test whether there is an interaction between wood and board types. The response <span class="math inline">\(Y\)</span> is the deflection (millimeters) for the Makiwara board, with a total of <span class="math inline">\(n_T=336\)</span> measurements.</p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb238-1" tabindex="-1"></a>mb1 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/karate_board.csv&quot;</span>)</span>
 <span id="cb238-2"><a href="unbalanced-two-factor-analysis-of-variance.html#cb238-2" tabindex="-1"></a><span class="fu">head</span>(mb1,<span class="dv">2</span>)</span></code></pre></div>
@@ -1046,7 +1047,7 @@ are obtained for each level of factor B.</p>
 <p>The <strong>emmeans</strong> package makes use of the
 least squares (estimated marginal) means, and the formulas given in this section.
 For the interaction comparisons among cell means, the results are the same.</p>
-<p><strong>Example 7.3 - Age at Peak for Famous Writers</strong></p>
+<p><strong>Example 8.3 - Age at Peak for Famous Writers</strong></p>
 <p>Although the interaction was not significant for the Age at Peak of the writers, we will use the Tukey method to compare all pairs of Style/Type means. The Mean Square Error for the interaction model was <span class="math inline">\(MSE=29.32\)</span> with degrees of freedom <span class="math inline">\(n_T-ab=23-2(2)=19\)</span>.</p>
 <p><span class="math display">\[
 \overline{y}_{11\bullet} = 28.60 \qquad n_{11}=5 \qquad
@@ -1243,7 +1244,7 @@ the least squares means, standard errors and pairwise comparisons described in t
 <div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="unbalanced-two-factor-analysis-of-variance.html#cb278-1" tabindex="-1"></a><span class="fu">emmip</span>(ap.emm3, w.style <span class="sc">~</span> w.type)</span></code></pre></div>
 <p><img src="bookdownproj_STA4211Notes1_files/figure-html/ch0704-1.png" width="672" /></p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 7.4 - Makiwara Punching Boards</strong></p>
+<p><strong>Example 8.4 - Makiwara Punching Boards</strong></p>
 <p>For the Karate board experiment, we will conduct tests among levels of factors A and B, respectively. The Mean Square Error was <span class="math inline">\(MSE=3159\)</span> with degrees of freedom <span class="math inline">\(n_T-ab=336-2(4)=328\)</span> for Model 1 (with interaction).</p>
 <p>For comparing the Board Types (Stacked-Tapered), we obtain the following cell means from
 the <strong>tapply</strong> function previously.</p>
@@ -1390,7 +1391,7 @@ and oak has significantly lower deflection than cherry.</p>
 
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-simonson_2007" class="csl-entry">
 Simonson, D. K. 2007. <span>“Creative Life Cycles in Literature: Poets Vs Novelists or Conceptualists Versus Experimentalists?”</span> <em>Psychology of Aesthetics, Creativity, and the Arts</em> 1 (3): 133–39.

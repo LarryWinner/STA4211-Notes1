@@ -186,7 +186,7 @@ $$
 When the experiment is balanced, this simplifies to $\sum_{i=1}^ra_ib_i=0$.
 Among $r$ treatments/groups, we can construct $r-1$ pairwise orthogonal contrasts, whose sums of squares and degrees of freedom sum to $SSTR$ and $df_{TR}$, respectively.
 
-**Example 3.1 - Virtual Training for a Lifeboat Launching Task**
+**Example 4.1 - Virtual Training for a Lifeboat Launching Task**
 
 Here, we re-describe the virtual training study to set up some interesting contrasts among the training methods.
 A study in South Korea compared $r=4$ methods of training to conduct a lifeboat launching task [@jung_2018]. 
@@ -458,7 +458,7 @@ $$
 \left(\frac{1}{n_i}+\frac{1}{n_{i'}}\right)}
 $$
 
-**Example 3.2 - Virtual Training for a Lifeboat Launching Task**
+**Example 4.2 - Virtual Training for a Lifeboat Launching Task**
 
 First, we obtain $r=4$, $\nu=64-4=60$, and $q_{.95;4,60}=3.737$
 for this study.
@@ -564,7 +564,7 @@ F^*=\frac{\left(\hat{L}\right)^2}{(r-1)\hat{V}\left\{\hat{L}\right\}}
 \mbox{Rejection Region:} \quad F^*\geq F_{1-\alpha;r-1,n_T-r}
 $$
 
-**Example 3.3 - Virtual Training for a Lifeboat Launching Task**
+**Example 4.3 - Virtual Training for a Lifeboat Launching Task**
 
 Consider the three pairwise orthogonal contrasts that we previously estimated.
 
@@ -669,7 +669,7 @@ $$
 \mbox{Adjusted P-value:} \quad P=\min\left(1,g\times 2P\left(t_{n_T-r}\ge \left|t^*\right|\right)\right)
 $$
 
-**Example 3.4 - Virtual Training for a Lifeboat Launching Task**
+**Example 4.4 - Virtual Training for a Lifeboat Launching Task**
 
 Consider the $g=3$ pairwise orthogonal contrasts that we previously estimated.
 
@@ -754,7 +754,7 @@ $$
 \sqrt{MSE\left(\frac{1}{n_{(i)}}+\frac{1}{n_{(i')}}\right)} \qquad k=i-i'+1
 $$
 
-**Example 3.5 - Virtual Training for a Lifeboat Launching Task**
+**Example 4.5 - Virtual Training for a Lifeboat Launching Task**
 
 For this example, we have the following values.
 

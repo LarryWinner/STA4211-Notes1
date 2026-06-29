@@ -25,19 +25,19 @@ Studies involve making observations on individual units under various conditions
   - **Observational Factors** - Set of populations/subpopulations observed in a study
 - **Mixed Studies** - Studies that have both experimental and observational factors (not to be confused with Mixed Effects Designs) 
 
-**Example 1.1 - Effect of Container Size on Food Intake**
+**Example 2.1 - Effect of Container Size on Food Intake**
 
 A study was conducted to compare three conditions on food intake in students [@marchiori_2012]. A sample of 88 subjects was obtained, and randomly assigned to one of 3 conditions involving bowl size and portion of M&Ms while watching a television program: 1) Medium portion size/Small container $(n_1 = 30)$, 2) Medium portion/Large container $(n_2 = 29)$, and 3) Large portion/Large container $(n_3 = 29)$. Researchers measured the food intake among the students. Note that this is an **Experimental Study**, as Subjects were assigned at random to treatments.
 
 $$\nabla$$
 
-**Example 1.2 - Waste in the Mediterranean Sea**
+**Example 2.2 - Waste in the Mediterranean Sea**
 
 A study measured the amounts of Natural and Artificial floating debris at samples of transects at 14 locations in the Mediterranean Sea [@suaria_2014]. The researchers wished to compare the amounts of debris of each type among the locations. Note this is an **Observational Study**, as transects were sampled within the selected locations.
 
 $$\nabla$$
 
-**Example 1.3 - Quilting Layers in Body Armour**
+**Example 2.3 - Quilting Layers in Body Armour**
 
 A study was conducted to determine whether the number of quilting layers improved the fragment protective performance of body armour   [@carr_2012]. The researchers sampled 36 specimens of each number of layers (1,2,3, and 5), assigning 12 at random to each of 3 bullet impacts (slow, fast, and edge). The energy absorbed by each specimen was measured. Note this is a **Mixed Study**, as Layers is Observational, and Impact is Experimental.
 
@@ -55,14 +55,14 @@ In this section we describe some aspects and terminology of controlled experimen
 -	**Randomization Process**  - Use of random number generator to assign units to treatments
 -	**Response(s)** - Outcome measurement(s) obtained from treated units
 
-**Example 1.4 - Reading Times on 3 Electronic Readers at 4 Illumination Levels**
+**Example 2.4 - Reading Times on 3 Electronic Readers at 4 Illumination Levels**
 
 An experiment was conducted to measure reading times on 3 e-reader devices at 4 illumination levels [@chang_2013]. 
 A sample of 60 subjects were randomly assigned so that 5 received each of 12 treatments (combinations of 3 e-reader models and 4 illumination levels). The experiment was **Crossed** in the sense that each e-reader model was set at the same 4 illumination levels (200, 500, 1000, 1500Lx). The time to complete a reading task was the measured response.
 
 $$\nabla$$
 
-**Example 1.5 - Combability of Hair for Two Shampoo Formulations**
+**Example 2.5 - Combability of Hair for Two Shampoo Formulations**
 
 An experiment was conducted to compare two shampoo formulations with respect to combability of hair [@garcia_1976]. 
 A sample of 16 hair swatches were created and randomly assigned, such that 8 received shampoo A, and 8 received shampoo B. Each swatch was washed 5 times, and the combability was measured. The experiment was **Nested**, as the swatches receiving shampoo A were different from the swatches receiving shampoo B. Note that the swatches are the experimental units, as they are randomly assigned to treatments (shampoos). The replicates measured are the measurement units.
@@ -85,7 +85,7 @@ represents the treatment and $j$ represents the replicate within the treatment.
 $$ Y_{ij}=\mu_i + \epsilon_{ij} = \mu + \tau_i + \epsilon_{ij}
 \qquad i=1,\ldots,r; \quad j=1,\ldots, n_i \qquad \epsilon_{ij} \sim NID\left(0,\sigma^2\right) $$
 
-**Example 1.6 - Anthocyanin Extractability in Cabernet Franc Grapes**
+**Example 2.6 - Anthocyanin Extractability in Cabernet Franc Grapes**
 
 In a study conducted by researchers in France and Italy, Cabernet Franc
 grapes were harvested at $r=6$ different classes of sugar content (176.5,
@@ -120,7 +120,7 @@ The statistical model can be written as follows where the subscript $i$ represen
 $$ Y_{ij}=\mu_i + \beta_j + \epsilon_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
 \qquad i=1,\ldots,r; \quad j=1,\ldots, b \qquad \epsilon_{ij} \sim NID\left(0,\sigma^2\right) $$
 
-**Example 1.7 - Comparison of 4 Treadmill Models for User Satisfaction**
+**Example 2.7 - Comparison of 4 Treadmill Models for User Satisfaction**
 
 Researchers in Italy and New Zealand conducted an experiment to compare $r=4$ treadmill models (Life Fitness, Precor, Matrix, Technogym) among $b=57$ trained runners [@carraro_2019]. Each runner rated each treadmill model in terms of seven characteristics: Running Surface, Controls, Stability and Safety, Physical Interaction, Console Readability, Aesthetic Appeal, and Enjoyment of Use. The responses were measured on visual Analogue Scales (VAS) from very unpleasant to very pleasant. We will consider Enjoyment of Use (enjoyUse) in Figure \@ref(fig:ch0102) and
 Figure \@ref(fig:ch0102a).
@@ -167,7 +167,7 @@ In this section we list some commonly used experimental designs as well as some 
 -	**Response Surface Designs** – Designs used to fit polynomial regression models to optimize responses for numeric factors
 -	**Mixture Designs** – Designs used to fit models to optimize responses among mixtures (components sum to 1) of numeric factors. 
 
-**Example 1.8 - Advertising Messaging Strategy and Attitude to the Firm**
+**Example 2.8 - Advertising Messaging Strategy and Attitude to the Firm**
 
 An experiment was conducted to compare 4 advertisement conditions [@hyllegard_2009]. 
 A sample of 425 students were selected and randomly assigned to one of 4 conditions. The ads were:
@@ -181,34 +181,34 @@ The response was an overall attitude toward the firm based on a series of rating
 
 $$\nabla$$
 
-**Example 1.9 - Energy Efficiency of 4 Dryer Types and 3 Clothing Categories**
+**Example 2.9 - Energy Efficiency of 4 Dryer Types and 3 Clothing Categories**
 
 A study compared combinations of 4 dryer types and 3 clothing categories on energy efficiency [@to_2007].
 The dryer types were (1=Electric Dryer, 2=Bi-directional Electric dryer, 3=Town Gas-Fired Dryer, 4=LPG-Fired dryer) and the clothing categories were  (1=Towels, 2=Jeans, 3=Thermal Clothing). The response was Energy Efficiency (kWh/kg), and there were 3 replications per treatment.
 
 $$\nabla$$
 
-**Example 1.10 - Comparison of 6 Chopstick Lengths on Feeding Efficiency**
+**Example 2.10 - Comparison of 6 Chopstick Lengths on Feeding Efficiency**
 
 A study compared 6 chopstick lengths (180, 210, 240, 270, 300, 330mm) in terms of the numbers of peanuts picked up and placed in a cup [@hsu_1991]. 
 There were 31 subjects, and each subject used each chopstick. The subjects act as blocks. This can also be treated as a Repeated Measures Design, where each subject receives each treatment.
 
 $$\nabla$$
 
-**Example 1.11 - Caffeine Content of Coke and Pepsi Products at Various Restaurants**
+**Example 2.11 - Caffeine Content of Coke and Pepsi Products at Various Restaurants**
 
 A study compared Coca-Cola and Pepsi-Cola at various restaurants with respect to caffeine content [@grand_1997]. There were 5 restaurants that sold Coca-Cola brand (1=Red Lobster, 2=Applebees, 3=McDs, 4=BK, 5=Hardees) and 7 that sold Pepsi products (6=Arbys, 7=Subway2, 8=Subway1,  9=KFC, 10=PizzaHut, 11=TacoBell, 12=Wendys). Each restaurant sold both sugar and diet formulations. There were 10 measurements per restaurant per formulation. Note that restaurant is nested within brand, but crossed with formulation.
 
 $$\nabla$$
 
-**Example 1.12 - Zylkene v Placebo for Cats with Anxiety Over Time**
+**Example 2.12 - Zylkene v Placebo for Cats with Anxiety Over Time**
 
 A study compared the effects of Zylkene v Placebo in cats with anxiety
 [@beata_2007]. A sample of 34 cats with anxiety was obtained, and randomized to receive either Zylkene or Placebo (17 cats per treatment). Each cat was observed on a global anxiety scale at each of 5 time points. The goal is to compare the treatments and determine whether time effects occur, and whether the treatment effects differ over time.
 
 $$\nabla$$
 
-**Example 1.13 - Effects of Seeding Rates of Hardinggrass and Ryegrass on Growth**
+**Example 2.13 - Effects of Seeding Rates of Hardinggrass and Ryegrass on Growth**
 
 An experiment was conducted to measure the effects of 4 rates of seeding of the perennial hardinggrass and 6 rates for ryegrass [@schultz_1952].
 Hardinggrass was measured on whole (larger) plots, with levels of 1,2,3,4 pounds per acre) while ryegrass which was measured on subplots within the whole plots with levels of 0,3,6,9,12,15 pounds per acre). The experiment was conducted in 3 blocks (replicates).  The response measured was the density of hardinggrass. Note that the experimental units for levels of hardinggrass are larger than those for levels of ryegrass. 
@@ -216,7 +216,7 @@ Hardinggrass was measured on whole (larger) plots, with levels of 1,2,3,4 pounds
 $$\nabla$$
 
 
-**Example 1.14 - Consumer Liking of 16 Dark Chocolate Formulations**
+**Example 2.14 - Consumer Liking of 16 Dark Chocolate Formulations**
 
 An experiment was conducted to compare consumer liking among 16 dark chocolate formulations [@hinneh_2020]. 
 As consumers have quite different tastes and preferences, they are treated as blocks, and there were 16 raters. 
@@ -225,21 +225,21 @@ This represents a Balanced Incomplete Block Design.
 
 $$\nabla$$
 
-**Example 1.15 - Using Seaweed to Extract Phenol from Aqueous Solution**
+**Example 2.15 - Using Seaweed to Extract Phenol from Aqueous Solution**
 
 An experiment was conducted to study the effects of 3 factors (pH (3, 9), adsorbent dosage (1, 10 g/L), and temperature (30, 60C)) on phenol extraction efficiency (%) from an aqueous solution [@ranthinam_2011]. 
 Dried seaweed was treated with zinc chloride, then applied to one of the 8 combinations of the 3 factors. There were two replicates at each factor level. This is an example of a $2^3$ full-factorial design.
 
 $$\nabla$$
 
-**Example 1.16 - Factors Affecting Damage to Motorcycle Wheels**
+**Example 2.16 - Factors Affecting Damage to Motorcycle Wheels**
 
 An experiment was conducted to determine the effect of 5 factors on the Crush Radius on the front wheel of a motorcycle [@tan_2009]. 
 The factors were: Impact speed (3, 6), Impact Mass (51.18, 101.33), Tire Pressure (148, 252), Striker Contact Geometry (0.03, 0.10), and Impact Offset Distance (0, 0.108). Although there are $2^5 = 32$ combinations of the factors, the experimenters ran it in $2^{5-1}=16$ combinations to reduce costs. There were four replicates at each combination of factor settings. This is an example of a $2^{5-1}$ fractional factorial design.
 
 $$\nabla$$
 
-**Example 1.17 - Optimizing Qualities of Potato Chips**
+**Example 2.17 - Optimizing Qualities of Potato Chips**
 
 An experiment varied 3 factors to optimize responses regarding
 potato chips [@song_2007].
@@ -248,7 +248,7 @@ Vacuum microwave pre-drying time (0.95, 3, 6, 9, 11.05 minutes), Vacuum temperat
 
 $$\nabla$$
 
-**Example 1.18 - Optimizing Antibacterial Effect of Mixtures of 3 Essential Oils**
+**Example 2.18 - Optimizing Antibacterial Effect of Mixtures of 3 Essential Oils**
 
 An experiment varied mixtures of 3 types of essential oils in terms of optimizing a response [@ouedrhiria_2016].
 The three oils were:
@@ -264,20 +264,20 @@ $$\nabla$$
 -	**Retrospective Studies** – Studies where subjects are identified based on the outcome of interest and  potential risk factors are identified that previously occurred.
 -	**Matching** – Subjects from different populations are matched, based on external factors, similar to blocking in experimental studies.
 
-**Example 1.19 - Medical Profession Students Attitudes Toward Interdisciplinary Studies**
+**Example 2.19 - Medical Profession Students Attitudes Toward Interdisciplinary Studies**
 
 A survey was conducted to measure students’ in medical professions Readiness for Inter-Professional Learning [@keshtkaran_2014]. Students were sampled from 3 groups: Nursing, Science in Surgical Technology, and Medicine, and given the scale measuring their readiness. This was cross-sectional in the sense that it was taken at one point in time.
 
 $$\nabla$$
 
-**Example 1.20 - Blood Transfusions and Caesarean Deliveries in 3 Pakistan Hospitals**
+**Example 2.20 - Blood Transfusions and Caesarean Deliveries in 3 Pakistan Hospitals**
 
 A prospective study was conducted to compare birth deliveries in 3 Pakistan hospitals over the period of January-June 2010 [@ismail_2014]. In particular, the authors were interested in whether the mother had a Caesarean Section and whether the patient had a subsequent blood transfusion.
 
 $$\nabla$$
 
 
-**Example 1.21 - Fertilization Time-Lapse Variables and Embryo Sex**
+**Example 2.21 - Fertilization Time-Lapse Variables and Embryo Sex**
 
 
 A study at a University-affiliated private fertility center considered the gender of an embryo, as well as various cleavage timing variables, from the time of the fertilization, retrospectively [@bronet_2015]. 
@@ -285,7 +285,7 @@ The researchers were interested in determining whether any of the timing variabl
 
 $$\nabla$$
 
-**Example 1.22 - Recidivism Rates for Juvenile Offenders**
+**Example 2.22 - Recidivism Rates for Juvenile Offenders**
 
 A study compared recidivism rates among juvenile offenders in 2 conditions: transferred to adult court and not transferred to adult court, that is, tried in juvenile court [@bishop_1996]. 
 A database of past criminal record including number and severity of prior and current charges, gender, and age was created, and matches were created where within each pair, one had been transferred, the other had not. Subsequent recidivism was observed within each pair.

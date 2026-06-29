@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -380,7 +381,7 @@ F^*=\frac{\left[\frac{SSE(R)-SSE(C)}{df_E(R)-df_E(C)}\right]}
 \qquad
 \mbox{Rejection Region:} \quad F^*\ge F_{1-\alpha;1,ab-a-b}
 \]</span></p>
-<p><strong>Example 6.1 - Economic Indices for 8 Sources Over 18 Years</strong></p>
+<p><strong>Example 7.1 - Economic Indices for 8 Sources Over 18 Years</strong></p>
 <p>A study considered U.S. economic indices for <span class="math inline">\(a=8\)</span> business news sources over a <span class="math inline">\(b=18\)</span> year period <span class="citation">(<a href="#ref-smith_1969">K. V. Smith 1969</a>)</span>. The sources were: DJIA, Poors, NYSE, GNP, CPI, Forbes, Business Week, and Money Magazine. The years were 1948-1965. There was one index per source per year.
 The following R code runs calculations directly, then structures the data in matrix form
 and uses the <strong>tukey.test</strong> function in the <strong>additivityTests</strong> package. Note that we order the data frame first by source, then by year within source, as <strong>tapply</strong> output is sorted by the alphanumeric levels of the grouping variable(s).</p>
@@ -475,7 +476,7 @@ and uses the <strong>tukey.test</strong> function in the <strong>additivityTests
 ## Caution: You lose important information if you filter this package&#39;s results.
 ## See &#39;? untidy&#39;</code></pre>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-smith_1969" class="csl-entry">
 Smith, K. V. 1969. <span>“Stock Price and Economic Indexes for Generating Efficient Portfolios.”</span> <em>The Journal of Business</em> 42 (3): 332–36.

@@ -45,7 +45,7 @@ divided by the number of permutations plus 1. That is, the observed value counts
 
 This test is applied to the lifeboat training data here.
 
-**Example 4.1 - Virtual Training for a Lifeboat Launching Task**
+**Example 5.1 - Virtual Training for a Lifeboat Launching Task**
 
 Here we will apply the Randomization test to the Lifeboat training data.
 For the original sample, $SSTR=65.664$. Note that for each permutation, the total sum of squares will be the same, $SSTO=331.479$, so we can simply save $SSTR$ from each permuation, as opposed to computing $F^*$. The R code and output are given below.
@@ -101,7 +101,7 @@ It uses a special table of critical values available in many textbooks and onlin
 The test statistic $(H)$ is simply the ratio of the largest to smallest variance (not standard deviation), and the critical values are indexed by the number of treatments/groups $(r)$
 and the number of degrees of freedom for each sample variance $(n-1)$, where $n$ is the number of units per treatment.
 
-**Example 4.2 - Virtual Training for a Lifeboat Launching Task**
+**Example 5.2 - Virtual Training for a Lifeboat Launching Task**
 
 For the lifeboat training experiment, there were $r=4$ treatments
 and each sample size was $n=16$. The sample standard deviations are given below.
@@ -151,7 +151,7 @@ $$
 \mbox{Rejection Region:} \quad F_L^* \ge F_{1-\alpha;r-1,n_T-r}
 $$
 
-**Example 4.3 - Virtual Training for a Lifeboat Launching Task **
+**Example 5.3 - Virtual Training for a Lifeboat Launching Task **
 
 We will first create the $d_{ij}$ "brute-force", then use the **leveneTest** function in the 
 **car** package.
@@ -197,7 +197,7 @@ X_B^2 \ge \chi_{1-\alpha;r-1}^2 \qquad
 P = P\left(\chi_{r-1}^2 \ge X_B^2\right)
 $$
 
-**Example 4.4 - Virtual Training for a Lifeboat Launching Task**
+**Example 5.4 - Virtual Training for a Lifeboat Launching Task**
 
 For the lifeboat training experiment, there were $r=4$ treatments
 and each sample size was $n=16$. The sample variances are given below.
@@ -364,7 +364,7 @@ $$
 \mbox{Rejection Region:} F_{EWLS}^* \ge F_{1-\alpha,r-1,n_T-r}
 $$
 
-**Example 4.5 - Virtual Training for a Lifeboat Launching Task**
+**Example 5.5 - Virtual Training for a Lifeboat Launching Task**
 
 For the lifeboat training experiment, there were $r=4$ treatments
 and each sample size was $n=16$. The following R code 
@@ -454,7 +454,7 @@ $$
 F_W=m_WF^* \stackrel{\cdot}{\sim}F_{r-1,\nu_W}
 $$
 
-**Example 4.6 - Virtual Training for a Lifeboat Launching Task**
+**Example 5.6 - Virtual Training for a Lifeboat Launching Task**
 
 For the lifeboat training experiment, there were $r=4$ treatments
 and each sample size was $n=16$. The following R code produces Welch's
@@ -502,7 +502,7 @@ Simultaneous $(1-\alpha)100\%$ Confidence Intervals for $\mu_i-\mu_{i'}$
 are of the form 
 $\left(\overline{y}_{i\bullet}-\overline{y}_{i'\bullet}\right)\pm GH_{ii'}$.
 
-**Example 4.7 - Virtual Training for a Lifeboat Launching Task**
+**Example 5.7 - Virtual Training for a Lifeboat Launching Task**
 
 For the lifeboat training experiment, there were $r=4$ treatments
 and each sample size was $n=16$. The following R code computes Simultaneous 95% Confidence Intervals and adjusted $P$-values based on the Games-Howell method.
@@ -665,7 +665,7 @@ z_{1-\alpha/(2g)} \sqrt{\frac{n_T\left(n_T+1\right)}{2}
 \left(\frac{1}{n_i}+\frac{1}{n_{i'}}\right)}
 $$
 
-**Example 4.8 - Virtual Training for a Lifeboat Launching Task**
+**Example 5.8 - Virtual Training for a Lifeboat Launching Task**
 
 For the lifeboat training experiment, there were $r=4$ treatments
 and each sample size was $n=16$. We will directly compute the ranks, test, and multiple comparisons. Then the **kruskal.test** function will be used. Note that the **rank** function in R correctly adjusts ranks for ties. The null hypothesis is that the population medians are equal for the $r=4$ treatments.

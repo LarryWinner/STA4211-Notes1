@@ -99,7 +99,7 @@ To test for factor B effects, controlling for factor A effects and interaction e
 
 When the test for interaction is "very non-significant" (high $P$-value), often tests for factor A and B effects use Model 2 as the Complete Model.
 
-**Example 7.1 - Age at Peak for Famous Writers**
+**Example 8.1 - Age at Peak for Famous Writers**
 
 A study considered the age at career peak for famous writers [@simonson_2007].
 The factors were **Style** (Factor A: Conceptualists $(i=1)$, Experimentalists $(i=2)$) and Writer **Type** (Factor B:Poets $(j=1)$, Novelists $(j=2)$). Thus, there are $a=b=2$ levels for the factors, there will only be $a-1=1$ $X$ variable for factor A and $b-1=1$ $X$ variable for factor B, and $(a-1)(b-1)=1$ cross-product term for the AB interaction. The numbers of writers for the $ab=4$ conditions are $n_{11}=n_{12}=5,n_{21}=6,n_{22}=7$.
@@ -197,7 +197,7 @@ $$\nabla $$
 
 A second example with more levels of factor B is included here.
 
-**Example 7.2 - Makiwara Punching Boards**
+**Example 8.2 - Makiwara Punching Boards**
 
 An experiment was conducted to compare four wood types of and two board types, of karate boards [@smith_2010]. The wood types were: cherry $(i=1)$, ash $(i=2)$, fir $(i=3)$, and oak $(i=4)$. The board types were stacked $(j=1)$ and tapered $(j=2)$.  Apparently due to breakage, there were unequal numbers of replicates among the $ab=2(4)=8$ treatments. We use the **aov** function in R with the treatment effects form to fit Models 1 (Interaction) and 2 (Additive) to test whether there is an interaction between wood and board types. The response $Y$ is the deflection (millimeters) for the Makiwara board, with a total of $n_T=336$ measurements.
 
@@ -368,7 +368,7 @@ least squares (estimated marginal) means, and the formulas given in this section
 For the interaction comparisons among cell means, the results are the same.
 
 
-**Example 7.3 - Age at Peak for Famous Writers**
+**Example 8.3 - Age at Peak for Famous Writers**
 
 Although the interaction was not significant for the Age at Peak of the writers, we will use the Tukey method to compare all pairs of Style/Type means. The Mean Square Error for the interaction model was $MSE=29.32$ with degrees of freedom $n_T-ab=23-2(2)=19$.
 
@@ -521,7 +521,7 @@ emmip(ap.emm3, w.style ~ w.type)
 
 $$\nabla$$
 
-**Example 7.4 - Makiwara Punching Boards**
+**Example 8.4 - Makiwara Punching Boards**
 
 For the Karate board experiment, we will conduct tests among levels of factors A and B, respectively. The Mean Square Error was $MSE=3159$ with degrees of freedom $n_T-ab=336-2(4)=328$ for Model 1 (with interaction).
 

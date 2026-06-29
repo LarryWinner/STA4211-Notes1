@@ -203,7 +203,7 @@ H_0:\sigma_{\mu}^2=0 \quad H_A:\sigma_{\mu}^2>0 \qquad TS: F^*=\frac{MSTR}{MSE}
 \qquad RR:F^*\geq F_{1-\alpha;r-1,r(n-1)}
 $$
 
-**Example 10.1 - Alpha Acids in Varieties of Beer**
+**Example 11.1 - Alpha Acids in Varieties of Beer**
 
 A study was conducted to measure alpha acids in a sample of $r=10$ varieties of beer [@meilgaard_1960]. There were $n=10$ replicates per variety. The following R code obtains the ANOVA based on direct computations and a plot of the measurements is given in
 Figure \@ref(fig:ch1001). 
@@ -262,7 +262,7 @@ t=\frac{\overline{Y}_{\bullet\bullet}-\mu_{\bullet}}{\hat{SE}\left\{\overline{Y}
 \overline{Y}_{\bullet\bullet} \pm t_{1-\alpha/2;r-1}\sqrt{\frac{MSTR}{rn}}
 $$
 
-**Example 10.2 - Alpha Acids in Varieties of Beer**
+**Example 11.2 - Alpha Acids in Varieties of Beer**
 
 The following R code obtains the point estimate of the overall mean and 95% Confidence Interval for $\mu_{\bullet}$ based on direct computations.
 
@@ -335,7 +335,7 @@ $$
 \left[L^*=\frac{L}{1+L},U^*=\frac{U}{1+U}\right]
 $$
 
-**Example 10.3 - Alpha Acids in Varieties of Beer**
+**Example 11.3 - Alpha Acids in Varieties of Beer**
 
 The following R code obtains the 95% Confidence Interval for $\rho_I$ based on direct computations.
 
@@ -403,7 +403,7 @@ $$
 The Confidence Interval is simply from $SSE$ divided by the upper critical value to $SSE$
 divided by the lower critical value.
 
-**Example 10.4 - Alpha Acids in Varieties of Beer**
+**Example 11.4 - Alpha Acids in Varieties of Beer**
 
 The following R code obtains the 95% Confidence Interval for $\sigma^2$ based on direct computations.
 
@@ -498,7 +498,7 @@ $$
 \left[\frac{(df)\hat{L}}{\chi_{1-\alpha/2;df}},\frac{(df)\hat{L}}{\chi_{\alpha/2;df}}\right]
 $$
 
-**Example 10.5 - Alpha Acids in Varieties of Beer**
+**Example 11.5 - Alpha Acids in Varieties of Beer**
 
 The following R code obtains the approximate 95% Confidence Interval for $\sigma_{\mu}^2$ based on direct computations. Note that $c_1=1/n$ and $c_2=-1/n$.
 
@@ -636,7 +636,7 @@ df_{B}=\frac{\left(\frac{1}{an}MSB + \frac{-1}{an}MSAB\right)^2} {
 }
 $$
 
-**Example 10.6 - Measurements of Skulls by Observers**
+**Example 11.6 - Measurements of Skulls by Observers**
 
 An anthropological study was conducted to measure variation in frontal chord measurements of skulls by various observers [@hanihara_1999]. There were $a=10$ skulls, $b=6$ observers, and $n=2$ replicates per skull/observer. The R code for the analysis and output are included here.
 
@@ -922,7 +922,7 @@ $$
 \left(\overline{Y}_{i\bullet\bullet}-\overline{Y}_{i'\bullet\bullet}\right) \pm HSD
 $$
 
-**Example 10.7 - Breath Alcohol Concentration Measurement Comparison**
+**Example 11.7 - Breath Alcohol Concentration Measurement Comparison**
 
 A study compared $a=6$ (fixed) instruments among $b=3$ (random) subjects in measuring breath alcohol levels [@gullberg_2008]. Each subject was measured by each machine $n=10$ times. Scores have been multiplied by 100 to avoid very small variances. 
 
@@ -1082,7 +1082,7 @@ The error terms for the fixed main effects and their 2-way interaction are the i
 
 Tukey's HSD or the Bonferroni method can be used to compare the levels of factors A and B, or the $ab$ treatment means if the interaction is important.
 
-**Example 10.8 - Navigational Techniques for Web Maps**
+**Example 11.8 - Navigational Techniques for Web Maps**
 
 A study was conducted to measure effects of two factors on subjects' skill on reading web maps [@wu_2011]. The factors included are given below.
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -384,7 +385,7 @@ TS: F^*=\frac{\left[\frac{SSE(R)-SSE(C)}{df_R-df_C}\right]}{
 \geq F_{1-\alpha;df_R-df_F,df_F}
 \]</span>
 Note that for the current case, <span class="math inline">\(df_R=n_T-2\)</span> and <span class="math inline">\(df_F=n_T-2-(r-1)=n_T-4\)</span>.</p>
-<p><strong>Example 12.1 - Comparison of Skin Softeners</strong></p>
+<p><strong>Example 13.1 - Comparison of Skin Softeners</strong></p>
 <p>A study compared two treatments and a control <span class="math inline">\((r=3)\)</span> for skin softening
 <span class="citation">(<a href="#ref-maor_1997">Ma’Or, Yehuda, and Voss 1997</a>)</span>. The active treatments were as follows, and the covariate was the pre-treatment softness score for the subjects. There were 20 subjects per treatment, so <span class="math inline">\(n_T=3(20)=60\)</span>. The response is skin roughness (lower scores are better).</p>
 <ul>
@@ -591,7 +592,7 @@ Finally, when <span class="math inline">\(r=4\)</span>, have the following resul
 4\hat{\mbox{COV}}\left\{\hat{\tau}_1,\hat{\tau}_3\right\}+
 2\hat{\mbox{COV}}\left\{\hat{\tau}_2,\hat{\tau}_3\right\}
 \]</span></p>
-<p><strong>Example 12.2 - Comparison of Skin Softeners</strong></p>
+<p><strong>Example 13.2 - Comparison of Skin Softeners</strong></p>
 <p>We obtain the adjusted means and their differences along with multiple comparisons with the following R code.</p>
 <div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb514-1"><a href="analysis-of-covariance-ancova.html#cb514-1" tabindex="-1"></a>dsm <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/deadseaminerals.csv&quot;</span>)</span>
 <span id="cb514-2"><a href="analysis-of-covariance-ancova.html#cb514-2" tabindex="-1"></a><span class="fu">head</span>(dsm,<span class="dv">2</span>); <span class="fu">tail</span>(dsm,<span class="dv">2</span>)</span></code></pre></div>
@@ -753,7 +754,7 @@ Y_{ij}= \mu_{\bullet} + \sum_{k=1}^{r-1}\tau_k I_{ijk}  +
 \epsilon_{ijk}
 \]</span></p>
 <p>Comparing adjusted means is more difficult when there is an interaction, as the difference among treatment means differs at different <span class="math inline">\(X\)</span> levels (unlike the additive model). A method was developed by Johnson and Neyman to find regions of <span class="math inline">\(X\)</span> values where two treatments are significantly different and where they are not. We will not pursue that method here, but will run the general linear test for interactions.</p>
-<p><strong>Example 12.3 - Comparison of Skin Softeners</strong></p>
+<p><strong>Example 13.3 - Comparison of Skin Softeners</strong></p>
 <p>We obtain the adjusted means and their differences along with multiple comparisons with the following R code.</p>
 <pre><code>##   trt_Grp pre_x post_y gel gelDS
 ## 1       1 121.1   76.3   1     0
@@ -853,7 +854,7 @@ baseline skin roughness.</p>
 <pre><code>## Warning: package &#39;daewr&#39; was built under R version 4.5.3</code></pre>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-maor_1997" class="csl-entry">
 Ma’Or, Z., S. Yehuda, and W. Voss. 1997. <span>“Skin Smoothing Effects of Dead Sea Minerals: Comparative Profilometric Evaluation of Skin Surface.”</span> <em>International Journal of Cosmetic Science</em> 19: 105–10.

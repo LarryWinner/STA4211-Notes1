@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -480,7 +481,7 @@ L_1,L_2\mbox{ are orthogonal if:} \quad \sum_{i=1}^r\frac{a_ib_i}{n_i}=0
 \]</span></p>
 <p>When the experiment is balanced, this simplifies to <span class="math inline">\(\sum_{i=1}^ra_ib_i=0\)</span>.
 Among <span class="math inline">\(r\)</span> treatments/groups, we can construct <span class="math inline">\(r-1\)</span> pairwise orthogonal contrasts, whose sums of squares and degrees of freedom sum to <span class="math inline">\(SSTR\)</span> and <span class="math inline">\(df_{TR}\)</span>, respectively.</p>
-<p><strong>Example 3.1 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 4.1 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>Here, we re-describe the virtual training study to set up some interesting contrasts among the training methods.
 A study in South Korea compared <span class="math inline">\(r=4\)</span> methods of training to conduct a lifeboat launching task <span class="citation">(<a href="#ref-jung_2018">Jung and Ahn 2018</a>)</span>.
 The treatments and their labels from the paper are given below and the response <span class="math inline">\(Y\)</span> was a procedural knowledge score for subjects post training.</p>
@@ -813,7 +814,7 @@ all <span class="math inline">\(r(r-1)/2\)</span> mean differences we can simply
 \sqrt{MSE
 \left(\frac{1}{n_i}+\frac{1}{n_{i&#39;}}\right)}
 \]</span></p>
-<p><strong>Example 3.2 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 4.2 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>First, we obtain <span class="math inline">\(r=4\)</span>, <span class="math inline">\(\nu=64-4=60\)</span>, and <span class="math inline">\(q_{.95;4,60}=3.737\)</span>
 for this study.
 Using calculations from before, we have the following results.</p>
@@ -939,7 +940,7 @@ F^*=\frac{\left(\hat{L}\right)^2}{(r-1)\hat{V}\left\{\hat{L}\right\}}
 \qquad
 \mbox{Rejection Region:} \quad F^*\geq F_{1-\alpha;r-1,n_T-r}
 \]</span></p>
-<p><strong>Example 3.3 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 4.3 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>Consider the three pairwise orthogonal contrasts that we previously estimated.</p>
 <ul>
 <li><span class="math inline">\(L_1\)</span>: Lecture/Materials vs Virtual Training</li>
@@ -1024,7 +1025,7 @@ H_0:L=\sum_{i=1}^rc_i\mu_i=0 \qquad H_A:L=\sum_{i=1}^rc_i\mu_i \ne 0
 <span class="math display">\[
 \mbox{Adjusted P-value:} \quad P=\min\left(1,g\times 2P\left(t_{n_T-r}\ge \left|t^*\right|\right)\right)
 \]</span></p>
-<p><strong>Example 3.4 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 4.4 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>Consider the <span class="math inline">\(g=3\)</span> pairwise orthogonal contrasts that we previously estimated.</p>
 <ul>
 <li><span class="math inline">\(L_1\)</span> Lecture/Materials vs Virtual Training</li>
@@ -1091,7 +1092,7 @@ As with the SNK method, if two means are not significantly different, no means b
 \frac{q_{(1-\alpha)^{k-1};k,n_T-r}}{\sqrt{2}}
 \sqrt{MSE\left(\frac{1}{n_{(i)}}+\frac{1}{n_{(i&#39;)}}\right)} \qquad k=i-i&#39;+1
 \]</span></p>
-<p><strong>Example 3.5 - Virtual Training for a Lifeboat Launching Task</strong></p>
+<p><strong>Example 4.5 - Virtual Training for a Lifeboat Launching Task</strong></p>
 <p>For this example, we have the following values.</p>
 <p><span class="math display">\[
 r=4 \qquad n_1=\cdots=n_r=16 \qquad MSE=4.430 \qquad \hat{SE}\left\{\hat{D}\right\}=
@@ -1271,7 +1272,7 @@ object to be used in the <strong>SNK.test</strong> and <strong>duncan.test</stro
 </div>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-jung_2018" class="csl-entry">
 Jung, J., and Y. J. Ahn. 2018. <span>“Effects of Interface on Procedural Skill Transfer in Virtual Training: Lifeboat Launching Operation Study.”</span> <em>Computer Animation and Virtual Worlds</em> 29: e1812. <a href="https://doi.org/10.1002/cav.1812">https://doi.org/10.1002/cav.1812</a>.

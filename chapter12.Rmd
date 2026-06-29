@@ -70,7 +70,7 @@ TS: F^*=\frac{\left[\frac{SSE(R)-SSE(C)}{df_R-df_C}\right]}{
 $$
 Note that for the current case, $df_R=n_T-2$ and $df_F=n_T-2-(r-1)=n_T-4$.
 
-**Example 12.1 - Comparison of Skin Softeners**
+**Example 13.1 - Comparison of Skin Softeners**
 
 A study compared two treatments and a control $(r=3)$ for skin softening
 [@maor_1997]. The active treatments were as follows, and the covariate was the pre-treatment softness score for the subjects. There were 20 subjects per treatment, so $n_T=3(20)=60$. The response is skin roughness (lower scores are better).
@@ -219,7 +219,7 @@ $$
 $$
 
 
-**Example 12.2 - Comparison of Skin Softeners**
+**Example 13.2 - Comparison of Skin Softeners**
 
 We obtain the adjusted means and their differences along with multiple comparisons with the following R code.
 
@@ -311,7 +311,7 @@ $$
 Comparing adjusted means is more difficult when there is an interaction, as the difference among treatment means differs at different $X$ levels (unlike the additive model). A method was developed by Johnson and Neyman to find regions of $X$ values where two treatments are significantly different and where they are not. We will not pursue that method here, but will run the general linear test for interactions.
 
 
-**Example 12.3 - Comparison of Skin Softeners**
+**Example 13.3 - Comparison of Skin Softeners**
 
 We obtain the adjusted means and their differences along with multiple comparisons with the following R code.
 

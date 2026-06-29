@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -529,7 +530,7 @@ HSD_B=q_{1-\alpha;b,ab(n-1)}\sqrt{\frac{MSE}{n}}
 \left(\overline{Y}_{ij\bullet}-\overline{Y}_{ij&#39;\bullet}\right)
 \pm HSD_B
 \]</span></p>
-<p><strong>Example 11.1 - Determination of Alcohol Content in Liquor</strong></p>
+<p><strong>Example 12.1 - Determination of Alcohol Content in Liquor</strong></p>
 <p>A study was conducted to measure alcohol content in 3 types of spirits
 <span class="citation">(<a href="#ref-oliveira_2017">Oliveira et al. 2017</a>)</span>. The researchers bought 3 brands each of Vodka, Whisky, and Cachaca. Factor A with <span class="math inline">\(a=3\)</span> is the spirit type (Vodka, Whisky, Cachaca).
 The brands are nested within the spirit types with <span class="math inline">\(b=3\)</span>.
@@ -744,7 +745,7 @@ df_{\beta(\alpha)} = \frac{\left(s_{\beta(\alpha)}^2\right)^2}{
 \chi_{\alpha/2; df_{\beta(\alpha)}}^2}
 \right]
 \]</span></p>
-<p><strong>Example 11.2 - Momentum of Animal Traps</strong></p>
+<p><strong>Example 12.2 - Momentum of Animal Traps</strong></p>
 <p>A study compared <span class="math inline">\(a=8\)</span> models of animal traps in terms of momentum
 <span class="citation">(<a href="#ref-cook_1989">Cook and Proulx 1989</a>)</span>. Within each model, <span class="math inline">\(b=3\)</span> traps were built. Each trap was measured <span class="math inline">\(n=10\)</span> times. We will treat the models as a fixed factor, and the traps within models as a random factor (any number could have been assembled for each model). The response measured was the momentum at HDISP (when both jaws displayed half way). The response has been multiplied by 100 to avoid small variance estimates.</p>
 <div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb436-1"><a href="nested-designs.html#cb436-1" tabindex="-1"></a>at <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/animal_trap.csv&quot;</span>)</span>
@@ -958,7 +959,7 @@ df_{\alpha}=\frac{\left(s_{\alpha}^2\right)^2}{
 \]</span>
 The test and Confidence Interval for <span class="math inline">\(\sigma_{\beta(\alpha)}^2\)</span> are
 the same for the random effects model as for the mixed effects model.</p>
-<p><strong>Example 11.3 - Measurements on Semiconductor Wafers</strong></p>
+<p><strong>Example 12.3 - Measurements on Semiconductor Wafers</strong></p>
 <p>An instructional paper described making measurements on semiconducter wafers <span class="citation">(<a href="#ref-jensen_2002">Jensen 2002</a>)</span>. There were <span class="math inline">\(a=20\)</span> lots (batches) sampled, within each lot, there were <span class="math inline">\(b=2\)</span> wafers sampled, and each wafer was measured at <span class="math inline">\(n=9\)</span> locations (replicates). The response variable was not given for proprietary reasons. In this example, we treat lot and wafer(lot) as random factors. There are two wafer variables, <strong>wafer1</strong> takes on the values
 1 and 2 within each lot, <strong>wafer2</strong> gives each wafer a unique value (1-40) and is less risky of creating an error in computing.</p>
 <pre><code>##   lotNum wafer wafer1 replicate       Y
@@ -1204,7 +1205,7 @@ HSD_k= q_{1-\alpha;a,df^*}\sqrt{\frac{MSB(A)+(c-1)MSE}{bc}}
 \left(\overline{Y}_{i\bullet k}-
 \overline{Y}_{i&#39;\bullet k}\right) \pm HSD_k
 \]</span>
-<strong>Example 11.4 - Treating Cats with Anxiety</strong></p>
+<strong>Example 12.4 - Treating Cats with Anxiety</strong></p>
 <p>A study was conducted to test a drug zylkene versus placebo in cats with anxiety <span class="citation">(<a href="#ref-beata_2007">Beata, Cordel, and Marlois 2007</a>)</span>. There were <span class="math inline">\(a=2\)</span> treatments (zylkene <span class="math inline">\(i=1\)</span> and placebo <span class="math inline">\(i=2\)</span>), with <span class="math inline">\(b=17\)</span> cats randomized to each treatment (34 total) and each cat was observed at each of <span class="math inline">\(c=5\)</span> time points. The response was a clinical globel impression (higher scores mean less anxiety and are better). R code and output are given below.</p>
 <div class="sourceCode" id="cb458"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb458-1"><a href="nested-designs.html#cb458-1" tabindex="-1"></a>caz <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/cat_zyl_uni.csv&quot;</span>)</span>
 <span id="cb458-2"><a href="nested-designs.html#cb458-2" tabindex="-1"></a><span class="fu">head</span>(caz); <span class="fu">tail</span>(caz)</span></code></pre></div>
@@ -1690,7 +1691,7 @@ Y_{ij1} \\ Y_{ij2} \\ \vdots \\Y_{ijc} \\
 </div>
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-beata_2007" class="csl-entry">
 Beata, C., J. Cordel, and N. Marlois. 2007. <span>“Effect of Alpha-Casozepine (Zylkene) on Cats with Anxiety.”</span> <em>Journal of Veterinary Behavior: Clinical Applications and Research</em> 2 (2): 40–46.

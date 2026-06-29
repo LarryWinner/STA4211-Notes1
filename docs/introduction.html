@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -357,13 +358,13 @@ in a wide variety of research fields.</p>
 </ul></li>
 <li><strong>Mixed Studies</strong> - Studies that have both experimental and observational factors (not to be confused with Mixed Effects Designs)</li>
 </ul>
-<p><strong>Example 1.1 - Effect of Container Size on Food Intake</strong></p>
+<p><strong>Example 2.1 - Effect of Container Size on Food Intake</strong></p>
 <p>A study was conducted to compare three conditions on food intake in students <span class="citation">(<a href="#ref-marchiori_2012">Marchiori, Cornielle, and Klein 2012</a>)</span>. A sample of 88 subjects was obtained, and randomly assigned to one of 3 conditions involving bowl size and portion of M&amp;Ms while watching a television program: 1) Medium portion size/Small container <span class="math inline">\((n_1 = 30)\)</span>, 2) Medium portion/Large container <span class="math inline">\((n_2 = 29)\)</span>, and 3) Large portion/Large container <span class="math inline">\((n_3 = 29)\)</span>. Researchers measured the food intake among the students. Note that this is an <strong>Experimental Study</strong>, as Subjects were assigned at random to treatments.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.2 - Waste in the Mediterranean Sea</strong></p>
+<p><strong>Example 2.2 - Waste in the Mediterranean Sea</strong></p>
 <p>A study measured the amounts of Natural and Artificial floating debris at samples of transects at 14 locations in the Mediterranean Sea <span class="citation">(<a href="#ref-suaria_2014">Suaria and Aliani 2014</a>)</span>. The researchers wished to compare the amounts of debris of each type among the locations. Note this is an <strong>Observational Study</strong>, as transects were sampled within the selected locations.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.3 - Quilting Layers in Body Armour</strong></p>
+<p><strong>Example 2.3 - Quilting Layers in Body Armour</strong></p>
 <p>A study was conducted to determine whether the number of quilting layers improved the fragment protective performance of body armour <span class="citation">(<a href="#ref-carr_2012">Carr et al. 2012</a>)</span>. The researchers sampled 36 specimens of each number of layers (1,2,3, and 5), assigning 12 at random to each of 3 bullet impacts (slow, fast, and edge). The energy absorbed by each specimen was measured. Note this is a <strong>Mixed Study</strong>, as Layers is Observational, and Impact is Experimental.</p>
 <p><span class="math display">\[\nabla\]</span></p>
 </div>
@@ -379,11 +380,11 @@ in a wide variety of research fields.</p>
 <li><strong>Randomization Process</strong> - Use of random number generator to assign units to treatments</li>
 <li><strong>Response(s)</strong> - Outcome measurement(s) obtained from treated units</li>
 </ul>
-<p><strong>Example 1.4 - Reading Times on 3 Electronic Readers at 4 Illumination Levels</strong></p>
+<p><strong>Example 2.4 - Reading Times on 3 Electronic Readers at 4 Illumination Levels</strong></p>
 <p>An experiment was conducted to measure reading times on 3 e-reader devices at 4 illumination levels <span class="citation">(<a href="#ref-chang_2013">Chang, Chou, and Shieh 2013</a>)</span>.
 A sample of 60 subjects were randomly assigned so that 5 received each of 12 treatments (combinations of 3 e-reader models and 4 illumination levels). The experiment was <strong>Crossed</strong> in the sense that each e-reader model was set at the same 4 illumination levels (200, 500, 1000, 1500Lx). The time to complete a reading task was the measured response.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.5 - Combability of Hair for Two Shampoo Formulations</strong></p>
+<p><strong>Example 2.5 - Combability of Hair for Two Shampoo Formulations</strong></p>
 <p>An experiment was conducted to compare two shampoo formulations with respect to combability of hair <span class="citation">(<a href="#ref-garcia_1976">Garcia and Diaz 1976</a>)</span>.
 A sample of 16 hair swatches were created and randomly assigned, such that 8 received shampoo A, and 8 received shampoo B. Each swatch was washed 5 times, and the combability was measured. The experiment was <strong>Nested</strong>, as the swatches receiving shampoo A were different from the swatches receiving shampoo B. Note that the swatches are the experimental units, as they are randomly assigned to treatments (shampoos). The replicates measured are the measurement units.</p>
 <p><span class="math display">\[\nabla\]</span></p>
@@ -401,7 +402,7 @@ the Completely Randomized Design is as follows, where the subscript <span class=
 represents the treatment and <span class="math inline">\(j\)</span> represents the replicate within the treatment.</p>
 <p><span class="math display">\[ Y_{ij}=\mu_i + \epsilon_{ij} = \mu + \tau_i + \epsilon_{ij}
 \qquad i=1,\ldots,r; \quad j=1,\ldots, n_i \qquad \epsilon_{ij} \sim NID\left(0,\sigma^2\right) \]</span></p>
-<p><strong>Example 1.6 - Anthocyanin Extractability in Cabernet Franc Grapes</strong></p>
+<p><strong>Example 2.6 - Anthocyanin Extractability in Cabernet Franc Grapes</strong></p>
 <p>In a study conducted by researchers in France and Italy, Cabernet Franc
 grapes were harvested at <span class="math inline">\(r=6\)</span> different classes of sugar content (176.5,
 192.6, 209.3, 225.0, 242.1, and 258.5 grams/litre).
@@ -427,7 +428,7 @@ When the blocks are individuals who receive each treatment, this design is often
 <p>The statistical model can be written as follows where the subscript <span class="math inline">\(i\)</span> represents the treatment and <span class="math inline">\(j\)</span> represents the block.</p>
 <p><span class="math display">\[ Y_{ij}=\mu_i + \beta_j + \epsilon_{ij} = \mu + \tau_i + \beta_j + \epsilon_{ij}
 \qquad i=1,\ldots,r; \quad j=1,\ldots, b \qquad \epsilon_{ij} \sim NID\left(0,\sigma^2\right) \]</span></p>
-<p><strong>Example 1.7 - Comparison of 4 Treadmill Models for User Satisfaction</strong></p>
+<p><strong>Example 2.7 - Comparison of 4 Treadmill Models for User Satisfaction</strong></p>
 <p>Researchers in Italy and New Zealand conducted an experiment to compare <span class="math inline">\(r=4\)</span> treadmill models (Life Fitness, Precor, Matrix, Technogym) among <span class="math inline">\(b=57\)</span> trained runners <span class="citation">(<a href="#ref-carraro_2019">Carraro, Elliott, and Gobbi 2019</a>)</span>. Each runner rated each treadmill model in terms of seven characteristics: Running Surface, Controls, Stability and Safety, Physical Interaction, Console Readability, Aesthetic Appeal, and Enjoyment of Use. The responses were measured on visual Analogue Scales (VAS) from very unpleasant to very pleasant. We will consider Enjoyment of Use (enjoyUse) in Figure <a href="introduction.html#fig:ch0102">2.2</a> and
 Figure <a href="introduction.html#fig:ch0102a">2.3</a>.</p>
 <pre><code>##   trdMill subject runSurf controls stblSfty physIntrct consRead aesthApp
@@ -479,7 +480,7 @@ Figure 2.3: Boxplots of Enjoyment of use of 4 treadmills for 57 runners
 <li><strong>Response Surface Designs</strong> – Designs used to fit polynomial regression models to optimize responses for numeric factors</li>
 <li><strong>Mixture Designs</strong> – Designs used to fit models to optimize responses among mixtures (components sum to 1) of numeric factors.</li>
 </ul>
-<p><strong>Example 1.8 - Advertising Messaging Strategy and Attitude to the Firm</strong></p>
+<p><strong>Example 2.8 - Advertising Messaging Strategy and Attitude to the Firm</strong></p>
 <p>An experiment was conducted to compare 4 advertisement conditions <span class="citation">(<a href="#ref-hyllegard_2009">Hyllegard, Ogle, and Yan 2009</a>)</span>.
 A sample of 425 students were selected and randomly assigned to one of 4 conditions. The ads were:</p>
 <ul>
@@ -490,46 +491,46 @@ A sample of 425 students were selected and randomly assigned to one of 4 conditi
 </ul>
 <p>The response was an overall attitude toward the firm based on a series of rating items. Note that each student was exposed to only one condition. Condition 1: Ad1 Only, Condition 2: Ad1&amp;Ad2, Condition 3: Ad1&amp;Ad3, Condition 4: Ad1&amp;Ad4.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.9 - Energy Efficiency of 4 Dryer Types and 3 Clothing Categories</strong></p>
+<p><strong>Example 2.9 - Energy Efficiency of 4 Dryer Types and 3 Clothing Categories</strong></p>
 <p>A study compared combinations of 4 dryer types and 3 clothing categories on energy efficiency <span class="citation">(<a href="#ref-to_2007">To et al. 2007</a>)</span>.
 The dryer types were (1=Electric Dryer, 2=Bi-directional Electric dryer, 3=Town Gas-Fired Dryer, 4=LPG-Fired dryer) and the clothing categories were (1=Towels, 2=Jeans, 3=Thermal Clothing). The response was Energy Efficiency (kWh/kg), and there were 3 replications per treatment.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.10 - Comparison of 6 Chopstick Lengths on Feeding Efficiency</strong></p>
+<p><strong>Example 2.10 - Comparison of 6 Chopstick Lengths on Feeding Efficiency</strong></p>
 <p>A study compared 6 chopstick lengths (180, 210, 240, 270, 300, 330mm) in terms of the numbers of peanuts picked up and placed in a cup <span class="citation">(<a href="#ref-hsu_1991">Hsu and Wu 1991</a>)</span>.
 There were 31 subjects, and each subject used each chopstick. The subjects act as blocks. This can also be treated as a Repeated Measures Design, where each subject receives each treatment.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.11 - Caffeine Content of Coke and Pepsi Products at Various Restaurants</strong></p>
+<p><strong>Example 2.11 - Caffeine Content of Coke and Pepsi Products at Various Restaurants</strong></p>
 <p>A study compared Coca-Cola and Pepsi-Cola at various restaurants with respect to caffeine content <span class="citation">(<a href="#ref-grand_1997">Grand and Bell 1997</a>)</span>. There were 5 restaurants that sold Coca-Cola brand (1=Red Lobster, 2=Applebees, 3=McDs, 4=BK, 5=Hardees) and 7 that sold Pepsi products (6=Arbys, 7=Subway2, 8=Subway1, 9=KFC, 10=PizzaHut, 11=TacoBell, 12=Wendys). Each restaurant sold both sugar and diet formulations. There were 10 measurements per restaurant per formulation. Note that restaurant is nested within brand, but crossed with formulation.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.12 - Zylkene v Placebo for Cats with Anxiety Over Time</strong></p>
+<p><strong>Example 2.12 - Zylkene v Placebo for Cats with Anxiety Over Time</strong></p>
 <p>A study compared the effects of Zylkene v Placebo in cats with anxiety
 <span class="citation">(<a href="#ref-beata_2007">Beata, Cordel, and Marlois 2007</a>)</span>. A sample of 34 cats with anxiety was obtained, and randomized to receive either Zylkene or Placebo (17 cats per treatment). Each cat was observed on a global anxiety scale at each of 5 time points. The goal is to compare the treatments and determine whether time effects occur, and whether the treatment effects differ over time.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.13 - Effects of Seeding Rates of Hardinggrass and Ryegrass on Growth</strong></p>
+<p><strong>Example 2.13 - Effects of Seeding Rates of Hardinggrass and Ryegrass on Growth</strong></p>
 <p>An experiment was conducted to measure the effects of 4 rates of seeding of the perennial hardinggrass and 6 rates for ryegrass <span class="citation">(<a href="#ref-schultz_1952">Schultz and Biswell 1952</a>)</span>.
 Hardinggrass was measured on whole (larger) plots, with levels of 1,2,3,4 pounds per acre) while ryegrass which was measured on subplots within the whole plots with levels of 0,3,6,9,12,15 pounds per acre). The experiment was conducted in 3 blocks (replicates). The response measured was the density of hardinggrass. Note that the experimental units for levels of hardinggrass are larger than those for levels of ryegrass.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.14 - Consumer Liking of 16 Dark Chocolate Formulations</strong></p>
+<p><strong>Example 2.14 - Consumer Liking of 16 Dark Chocolate Formulations</strong></p>
 <p>An experiment was conducted to compare consumer liking among 16 dark chocolate formulations <span class="citation">(<a href="#ref-hinneh_2020">Hinneh et al. 2020</a>)</span>.
 As consumers have quite different tastes and preferences, they are treated as blocks, and there were 16 raters.
 However, due to fatigue, the researchers had each consumer rate only 6 dark chocolate formulations. In a balanced experiment, each formulation would be rated by the same numbers of consumers, and each pair of formulations would be tasted by equal numbers of consumers. In this case, each chocolate was rated by 6 raters, and each pair of chocolates were rated by 2 raters.
 This represents a Balanced Incomplete Block Design.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.15 - Using Seaweed to Extract Phenol from Aqueous Solution</strong></p>
+<p><strong>Example 2.15 - Using Seaweed to Extract Phenol from Aqueous Solution</strong></p>
 <p>An experiment was conducted to study the effects of 3 factors (pH (3, 9), adsorbent dosage (1, 10 g/L), and temperature (30, 60C)) on phenol extraction efficiency (%) from an aqueous solution <span class="citation">(<a href="#ref-ranthinam_2011">Ranthinam, Rao, and Nair 2011</a>)</span>.
 Dried seaweed was treated with zinc chloride, then applied to one of the 8 combinations of the 3 factors. There were two replicates at each factor level. This is an example of a <span class="math inline">\(2^3\)</span> full-factorial design.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.16 - Factors Affecting Damage to Motorcycle Wheels</strong></p>
+<p><strong>Example 2.16 - Factors Affecting Damage to Motorcycle Wheels</strong></p>
 <p>An experiment was conducted to determine the effect of 5 factors on the Crush Radius on the front wheel of a motorcycle <span class="citation">(<a href="#ref-tan_2009">Tan et al. 2009</a>)</span>.
 The factors were: Impact speed (3, 6), Impact Mass (51.18, 101.33), Tire Pressure (148, 252), Striker Contact Geometry (0.03, 0.10), and Impact Offset Distance (0, 0.108). Although there are <span class="math inline">\(2^5 = 32\)</span> combinations of the factors, the experimenters ran it in <span class="math inline">\(2^{5-1}=16\)</span> combinations to reduce costs. There were four replicates at each combination of factor settings. This is an example of a <span class="math inline">\(2^{5-1}\)</span> fractional factorial design.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.17 - Optimizing Qualities of Potato Chips</strong></p>
+<p><strong>Example 2.17 - Optimizing Qualities of Potato Chips</strong></p>
 <p>An experiment varied 3 factors to optimize responses regarding
 potato chips <span class="citation">(<a href="#ref-song_2007">Song, Zhang, and Mujumdar 2007</a>)</span>.
 The factors (and levels) were:
 Vacuum microwave pre-drying time (0.95, 3, 6, 9, 11.05 minutes), Vacuum temperature (83.18, 90, 100, 110, 116.82C), and Frying Time (11.59, 15, 20, 25, 28.41 minutes). Three responses were measured (analyzed one at a time): Moisture Content, Fat Content, and Breaking Force. The goal was to choose factor levels that optimize the response. This is an example of a response surface design.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.18 - Optimizing Antibacterial Effect of Mixtures of 3 Essential Oils</strong></p>
+<p><strong>Example 2.18 - Optimizing Antibacterial Effect of Mixtures of 3 Essential Oils</strong></p>
 <p>An experiment varied mixtures of 3 types of essential oils in terms of optimizing a response <span class="citation">(<a href="#ref-ouedrhiria_2016">Ouedrhiria et al. 2016</a>)</span>.
 The three oils were:
 (O. compactum, O. majorana, and T. serypyllum). Three responses were measured (analyzed one-at-a-time): minimum inhibitory concentration (MIC %) of 3 types of bacterium: B. subtilis. S. aureus, and E. coli. The goal was to choose the mixture of the 3 types of essential oils that minimizes the MIC of the bacterium.</p>
@@ -543,24 +544,24 @@ The three oils were:
 <li><strong>Retrospective Studies</strong> – Studies where subjects are identified based on the outcome of interest and potential risk factors are identified that previously occurred.</li>
 <li><strong>Matching</strong> – Subjects from different populations are matched, based on external factors, similar to blocking in experimental studies.</li>
 </ul>
-<p><strong>Example 1.19 - Medical Profession Students Attitudes Toward Interdisciplinary Studies</strong></p>
+<p><strong>Example 2.19 - Medical Profession Students Attitudes Toward Interdisciplinary Studies</strong></p>
 <p>A survey was conducted to measure students’ in medical professions Readiness for Inter-Professional Learning <span class="citation">(<a href="#ref-keshtkaran_2014">Keshtkaran, Sharif, and Rambod 2014</a>)</span>. Students were sampled from 3 groups: Nursing, Science in Surgical Technology, and Medicine, and given the scale measuring their readiness. This was cross-sectional in the sense that it was taken at one point in time.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.20 - Blood Transfusions and Caesarean Deliveries in 3 Pakistan Hospitals</strong></p>
+<p><strong>Example 2.20 - Blood Transfusions and Caesarean Deliveries in 3 Pakistan Hospitals</strong></p>
 <p>A prospective study was conducted to compare birth deliveries in 3 Pakistan hospitals over the period of January-June 2010 <span class="citation">(<a href="#ref-ismail_2014">Ismail et al. 2014</a>)</span>. In particular, the authors were interested in whether the mother had a Caesarean Section and whether the patient had a subsequent blood transfusion.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.21 - Fertilization Time-Lapse Variables and Embryo Sex</strong></p>
+<p><strong>Example 2.21 - Fertilization Time-Lapse Variables and Embryo Sex</strong></p>
 <p>A study at a University-affiliated private fertility center considered the gender of an embryo, as well as various cleavage timing variables, from the time of the fertilization, retrospectively <span class="citation">(<a href="#ref-bronet_2015">Bronet et al. 2015</a>)</span>.
 The researchers were interested in determining whether any of the timing variables could predict the eventual sex of the embryo.</p>
 <p><span class="math display">\[\nabla\]</span></p>
-<p><strong>Example 1.22 - Recidivism Rates for Juvenile Offenders</strong></p>
+<p><strong>Example 2.22 - Recidivism Rates for Juvenile Offenders</strong></p>
 <p>A study compared recidivism rates among juvenile offenders in 2 conditions: transferred to adult court and not transferred to adult court, that is, tried in juvenile court <span class="citation">(<a href="#ref-bishop_1996">Bishop et al. 1996</a>)</span>.
 A database of past criminal record including number and severity of prior and current charges, gender, and age was created, and matches were created where within each pair, one had been transferred, the other had not. Subsequent recidivism was observed within each pair.</p>
 <p><span class="math display">\[\nabla\]</span></p>
 
 </div>
 </div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-beata_2007" class="csl-entry">
 Beata, C., J. Cordel, and N. Marlois. 2007. <span>“Effect of Alpha-Casozepine (Zylkene) on Cats with Anxiety.”</span> <em>Journal of Veterinary Behavior: Clinical Applications and Research</em> 2 (2): 40–46.

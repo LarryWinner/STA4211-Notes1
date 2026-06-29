@@ -23,7 +23,7 @@
 <meta name="author" content="Larry Winner" />
 
 
-<meta name="date" content="2026-06-19" />
+<meta name="date" content="2026-06-29" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="analysis-of-covariance-ancova.html"/>
-
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -319,6 +319,7 @@ div.csl-indent {
 <li class="chapter" data-level="14.1" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#response-surface-designs"><i class="fa fa-check"></i><b>14.1</b> Response Surface Designs</a></li>
 <li class="chapter" data-level="14.2" data-path="response-surface-and-mixture-designs.html"><a href="response-surface-and-mixture-designs.html#mixture-models"><i class="fa fa-check"></i><b>14.2</b> Mixture Models</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -386,7 +387,7 @@ in the summary of the <strong>rsm</strong> fit.</p>
 <p>Two commonly used designs for response surfaces are the <strong>Central Composite Design</strong> and the <strong>Box-Behnken Design</strong>.</p>
 <p>In the Central Composite Design, there are <span class="math inline">\(k\)</span> factors, each with three equally spaced levels coded <span class="math inline">\(-1,0,+1\)</span>. A <span class="math inline">\(2^k\)</span> factorial is set up with each factor at <span class="math inline">\(+/-1\)</span>. Then <span class="math inline">\(2k\)</span> observations are made with <span class="math inline">\(k-1\)</span> variables at their 0 levels and the remaining factor at <span class="math inline">\(\pm \alpha\)</span> where <span class="math inline">\(\alpha\)</span> is commonly <span class="math inline">\(\sqrt{2}\)</span>, <span class="math inline">\(\sqrt{3}\)</span>, or 2, these are labelled “axial points.”
 Finally, there are <span class="math inline">\(c\)</span> observations with each of the <span class="math inline">\(k\)</span> factors at their center (0) levels, which permits a goodness of fit test.</p>
-<p><strong>Example 13.1 - Solar Drying of Avocado Pulp</strong></p>
+<p><strong>Example 14.1 - Solar Drying of Avocado Pulp</strong></p>
 <p>A study was conducted as a response surface design with <span class="math inline">\(k=4\)</span> factors to measure solar drying of avocado pulp <span class="citation">(<a href="#ref-kowarit_2024">Kowarit, Sathpornprasath, and Jansri 2024</a>)</span>. The 4 factors are described below, and the response was moisture content of the avocado pulp (lower values are better). This is a central composite design with <span class="math inline">\(\alpha=2\)</span>.</p>
 <ul>
 <li><strong>Hot Air Temperature</strong> (<span class="math inline">\(X_1\)</span>, Celsius): -1=40, 0=55, +1=70 (axial points at 25, 85)</li>
@@ -501,7 +502,7 @@ The stationary (optimal) point is <span class="math inline">\(x^*\)</span>=(67.1
 <p><span class="math display">\[\nabla \]</span></p>
 <p>The Box-Behnken design places runs at every combination of <span class="math inline">\(\pm 1\)</span> for each pair of factors, with all other factors at their 0 (central) level. There are multiple runs for each factor at their central level.
 The analysis is the same as for the Central Composite Design.</p>
-<p><strong>Example 13.2 – Gels of Diclofenac and Curcumin for Transdermal Drug Delivery</strong></p>
+<p><strong>Example 14.2 – Gels of Diclofenac and Curcumin for Transdermal Drug Delivery</strong></p>
 <p>A study (Chaudhary, et al (2011)) had 3 factors, each at 3 levels
 <span class="citation">(<a href="#ref-chaudhary_2011">Chaudhary et al. 2011</a>)</span>.
 The factors were as follow.</p>
@@ -711,7 +712,7 @@ E\{Y\}=\sum_{i=1}^k \beta_iX_i +
 \sum_{i=1}^{k-2}\sum_{i&#39;=i+1}^{k-1}\sum_{i&#39;&#39;=i&#39;+1}^k\beta_{ii&#39;i&#39;&#39;}X_iX_{i&#39;}X_{i&#39;&#39;}
 \]</span>
 The goal is to choose the mixture that optimizes the output.</p>
-<p><strong>Example 13.3 - Breaking Strength of Lipstick Blends</strong></p>
+<p><strong>Example 14.3 - Breaking Strength of Lipstick Blends</strong></p>
 <p>A mixture experiment considered <span class="math inline">\(k=3\)</span> inputs for lipstick <span class="citation">(<a href="#ref-hui_2017">Hui, Tamburic, and Grant-Poss 2017</a>)</span>.
 One response was breaking strength (grams), with the following inputs,
 this was Stage 1C in the paper, and the Full Cubic model was fit.</p>
@@ -835,152 +836,9 @@ Figure 14.3: Mixture Plot for lipstick study
 <p>The highest breaking strengths <span class="math inline">\((&gt;360)\)</span> appear at blends of approximately 50/50% between Sweet Almond Oil and Octydodecanol, based on the plot of the simplex.</p>
 <p><span class="math display">\[\nabla \]</span></p>
 
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
-<div class="csl-entry">
-Aksu, M. I., H. Imik, and M. Karoglu. 2007. <span>“Influence of Dietary Sorghum (Sorghum Vulgare) and Corn Supplemented with Methionine on Cut-up Pieces Weights of Broiler Carcass and Quality Properties of Breast and Drumsticks Meat.”</span> <em>Food Science and Technology International</em> 13 (5): 361–67.
-</div>
-<div class="csl-entry">
-Beata, C., J. Cordel, and N. Marlois. 2007. <span>“Effect of Alpha-Casozepine (Zylkene) on Cats with Anxiety.”</span> <em>Journal of Veterinary Behavior: Clinical Applications and Research</em> 2 (2): 40–46.
-</div>
-<div class="csl-entry">
-Bishop, D., C. E. Frazier, L. Lanza-Kaduce, and L. Winner. 1996. <span>“The Transfer of Juveniles to Criminal Court: Does It Make a Difference?”</span> <em>Crime &amp; Delinquency</em> 42: 171–91.
-</div>
-<div class="csl-entry">
-Bronet, F., M-C. Nogales, E. Martinez, M. Ariza, C. Rubio, J-A. Garcia-Velasco, and M. Meseguer. 2015. <span>“Is There a Relationship Between Time-Lapse Parameters and Embryo Sex?”</span> <em>Fertility and Sterility</em> 103 (2): 396–401.
-</div>
-<div class="csl-entry">
-Carr, D. J., C. Lankester, A. Peare, N. Fabri, and N. Gridley. 2012. <span>“Does Quilting Improve the Fragment Protective Performance of Body Armour?”</span> <em>Textile Research Journal</em> 82 (9): 883–88.
-</div>
-<div class="csl-entry">
-Carraro, A., C. A. Elliott, and E. Gobbi. 2019. <span>“Perceived Treadmill Function Is Correlated with Enjoyment of Use in Trained Runners: A User-Centered Approach.”</span> <em>Applied Ergonomics</em> 74: 37–40.
-</div>
-<div class="csl-entry">
-Chang, P.-C., S.-Y. Chou, and K.-K. Shieh. 2013. <span>“Reading Performance and Visual Fatigue When Using Electronic Displays in Long-Duration Reading Tasks Under Various Lighting Conditions.”</span> <em>Displays</em> 34: 208–14.
-</div>
-<div class="csl-entry">
-Chaudhary, H., K. Kohli, S. Amin, P. Rathee, and V. Kumar. 2011. <span>“Optimization and Formulation Design of Gels of Diclfenac and Curcumin for Transdermal Drug Delivery by Box-Behnken Statistical Design.”</span> <em>Journal of Pharmaceutical Sciences</em> 100 (2): 580–93.
-</div>
-<div class="csl-entry">
-Cook, S. R., and G. Proulx. 1989. <span>“Mechanical Evaluation and Performance Improvement of the Rotating Jaw Conibear 120 Trap.”</span> <em>Journal of Testing and Evaluation</em> 17 (3): 190–95.
-</div>
-<div class="csl-entry">
-Deverajan, S., R. H. McQueen, and S. Wen. 2017. <span>“Can Common Finishing Treatments Used in Chef Jacket Fabrics Improve Protection Against Scald Injury?”</span> <em>Fashion &amp; Textiles</em> 4 (19): 1:15. <a href="https://doi.org/10.1186/s40691-017-0103-3">https://doi.org/10.1186/s40691-017-0103-3</a>.
-</div>
-<div class="csl-entry">
-Fidaleo, M., M. Moresi, A. Cammaroto, M. Ladrange, and R. Nardi. 2012. <span>“Soy Sauce Desalting by Electrodialysis.”</span> <em>Journal of Food Engineering</em> 110: 175–81.
-</div>
-<div class="csl-entry">
-Garcia, M. L., and J. Diaz. 1976. <span>“Combability Measurements on Human Hair.”</span> <em>Journal of the Society of Cosmetic Chemists</em> 27: 379–98.
-</div>
-<div class="csl-entry">
-Genova, G., P. Iacopini, M. Baldi, A. Ranieri, P. Storchi, and L. Sebastiani. 2012. <span>“Temperature and Storage Effects on Antioxidant Activity of Juice from Red and White Grapes.”</span> <em>International Journal of Food Science &amp; Technology</em> 47: 13–23.
-</div>
-<div class="csl-entry">
-Grand, A. N., and L. N. Bell. 1997. <span>“Caffeine Content of Fountain and Private Label Store Brand Carbonated Beverages.”</span> <em>Journal of the American Dietetic Association</em> 97 (2): 179–82.
-</div>
-<div class="csl-entry">
-Gullberg, R. G. 2008. <span>“Employing Components-of-Variance to Evaluate Forensic Breath Test Instruments.”</span> <em>Science and Justice</em> 48: 2–7.
-</div>
-<div class="csl-entry">
-Hanihara, T., Y. Dodo, O. Kondo, T. Nara, N. Doi, and N. Sensui. 1999. <span>“Intra- and Inter-Observer Errors in Facial Flatness Measurements.”</span> <em>Anthropological Science</em> 107 (1): 25–39.
-</div>
-<div class="csl-entry">
-Hinneh, M., E. E. Abotsi, D. Van de Walle, D. A. Tzompa-Sosa, A. De Winne, J. Simonis, J. Messens K. anf Van Durme, E. O. Afoakwa, L. De Cooman, and K. Dewettink. 2020. <span>“Pod Storage with Roasting: A Tool to Diversifying the Flavor Profiles of Dark Chocolates Produced from ???bulk??? Cocoa Beans? (Part II: Quality and Sensory Profiling of Chocolates).”</span> <em>Food Research International</em> 132 (109116).
-</div>
-<div class="csl-entry">
-Hsu, S.-H., and S.-P. Wu. 1991. <span>“An Investigation for Determining the Optimal Length of Chopsticks.”</span> <em>Applied Ergonomics</em> 22 (6): 395–400.
-</div>
-<div class="csl-entry">
-Hui, W. N., S. Tamburic, and P. Grant-Poss. 2017. <span>“Lip-Smacking Results.”</span> <em>Cosmetics &amp; Toiletries</em> 132 (3): 48–68.
-</div>
-<div class="csl-entry">
-Hyllegard, K., J. Ogle, and R.-N. Yan. 2009. <span>“The Impact of Advertising Message Strategy - Fair Labour v Sex Appeal - Upon Gen y Consumers’ Intent to Patronize an Apparel Retailer.”</span> <em>Journal of Fashion Marketing and Management</em> 13 (1): 109–27.
-</div>
-<div class="csl-entry">
-Ismail, S., S. Siddiqui, F. Shafiq, M. Ishaq, and S. Khan. 2014. <span>“Blood Transfusion in Patients Having Caesarean Section: A Prospective Multicentre Observational Study of Practice in Three Pakistan Hospitals.”</span> <em>International Journal of Obstetric Anesthesia</em> 23: 253–59.
-</div>
-<div class="csl-entry">
-Jensen, C. R. 2002. <span>“Variance Components Calculations: Common Methods and Misapplications in the Semiconductor Industry.”</span> <em>Quality Engineering</em> 14 (4): 647–57.
-</div>
-<div class="csl-entry">
-Jung, J., and Y. J. Ahn. 2018. <span>“Effects of Interface on Procedural Skill Transfer in Virtual Training: Lifeboat Launching Operation Study.”</span> <em>Computer Animation and Virtual Worlds</em> 29: e1812. <a href="https://doi.org/10.1002/cav.1812">https://doi.org/10.1002/cav.1812</a>.
-</div>
-<div class="csl-entry">
-Keshtkaran, Z., F. Sharif, and M. Rambod. 2014. <span>“Students’ Readiness for and Perception of Inter-Professional Learning: A Cross-Sectional Study.”</span> <em>Nurse Education Today</em> 34: 991–98.
-</div>
-<div class="csl-entry">
-Kowarit, S., K. Sathpornprasath, and S. N. Jansri. 2024. <span>“Application of Hot Air-Derived RSM Conditions and Shading for Solar Drying of Avocado Pulp and Its Properties.”</span> <em>Solar Energy</em> 278: 1–12. <a href="https://doi.org/10.1016/j.solener.2024.112768">https://doi.org/10.1016/j.solener.2024.112768</a>.
-</div>
-<div class="csl-entry">
-Landy, D., and H. Sigall. 1974. <span>“Beauty Is Talent: Task Evaluation as a Function of the Performer’s Physical Attraction.”</span> <em>Journal of Personality and Social Psychology</em> 29 (3): 299–304.
-</div>
-<div class="csl-entry">
-Ma’Or, Z., S. Yehuda, and W. Voss. 1997. <span>“Skin Smoothing Effects of Dead Sea Minerals: Comparative Profilometric Evaluation of Skin Surface.”</span> <em>International Journal of Cosmetic Science</em> 19: 105–10.
-</div>
-<div class="csl-entry">
-Marchiori, D., O. Cornielle, and O. Klein. 2012. <span>“Container Size Influences Snack Food Intake Independently of Portion Size.”</span> <em>Appetite</em> 58: 814–17.
-</div>
-<div class="csl-entry">
-Meilgaard, M. 1960. <span>“Hop Analysis, Cohumulone Factor and the Bitterness of Beer: Review and Critical Evaluation.”</span> <em>Journal of the Institute of Brewing</em> 66 (1): 35–50.
-</div>
-<div class="csl-entry">
-O’Hare, D., and N. Stenhouse. 2009. <span>“Under the Weather: An Evaluation of Different Modes of Presenting Meteorological Information for Pilots.”</span> <em>Applied Ergonomics</em> 40: 688–93.
-</div>
-<div class="csl-entry">
-O’Keeffe, C., and R. Wiseman. 2005. <span>“Testing Alleged Mediumship: Methods and Results.”</span> <em>British Journal of Psychology</em> 96: 165–79.
-</div>
-<div class="csl-entry">
-Oliveira, A. S., F. M. Dalla Nora, R. O. Mello, P. A. Mello, B. Tischer, A. B. Costa, and J. S. Barin. 2017. <span>“One-Shot, Reagent-Free Determination of the Alcohol Content of Distilled Beverages by Thermal Infrared Enthalpimetry.”</span> <em>Talanta</em> 171: 335–40. <a href="https://doi.org/10.1016/j.talanta.2017.05.011">https://doi.org/10.1016/j.talanta.2017.05.011</a>.
-</div>
-<div class="csl-entry">
-Ouedrhiria, W., M. Balouiri, S. Bouhdid, M., S. Moja, F. O. Chahdie, M. Taleb, and H. Greche. 2016. <span>“Mixture Designs of Origanum Compactum, Origanum Majorana and Thymus Serpyllum Essential Oils: Optimization of Their Antibacterial Effect.”</span> <em>Industrial Crops and Products</em> 89: 1–9.
-</div>
-<div class="csl-entry">
-Ranthinam, A., J. R. Rao, and B. U. Nair. 2011. <span>“Adsorption of Phenol onto Activated Carbon from Seaweed: Determination of the Optimal Experimental Parameters Using Factorial Design.”</span> <em>Journal of the Taiwan Institute of Chemical Engineers</em> 42: 952–56.
-</div>
-<div class="csl-entry">
-Schultz, A. M., and H. H. Biswell. 1952. <span>“Competition Between Grasses Reseeded on Burned Brushlands in California.”</span> <em>Journal of Range Management</em> 5 (5): 338–45.
-</div>
-<div class="csl-entry">
-Simonson, D. K. 2007. <span>“Creative Life Cycles in Literature: Poets Vs Novelists or Conceptualists Versus Experimentalists?”</span> <em>Psychology of Aesthetics, Creativity, and the Arts</em> 1 (3): 133–39.
-</div>
-<div class="csl-entry">
-Smith, K. V. 1969. <span>“Stock Price and Economic Indexes for Generating Efficient Portfolios.”</span> <em>The Journal of Business</em> 42 (3): 332–36.
-</div>
-<div class="csl-entry">
-Smith, P. K., T. Niiler, and P. W. McCullough. 2010. <span>“Evaluating Makiwara Punching Board Performance.”</span> <em>Journal of Asian Martial Arts</em> 19 (2): 34–45.
-</div>
-<div class="csl-entry">
-Snedecor, George W., and William G. Cochran. 1967. <em>Statistical Methods</em>. 6th ed. Ames, Iowa: The Iowa State University Press.
-</div>
-<div class="csl-entry">
-Song, X-j., M. Zhang, and A. S. Mujumdar. 2007. <span>“Optimization of Vacuum Microwave Predrying and Vacuum Frying Conditions to Produce Fried Potato Chips.”</span> <em>Drying Technology</em> 25: 2027–34.
-</div>
-<div class="csl-entry">
-Suaria, G., and S. Aliani. 2014. <span>“Floating Debris in the Mediterranean Sea.”</span> <em>Marine Pollution Bulletin</em> 86: 494–504.
-</div>
-<div class="csl-entry">
-Tan, K. S., S. V. Wong, R. S. Radin Umar, A. M. S. Hamouda, and N. K. Gupta. 2009. <span>“Impact Behavior Modeling of Motorcycle Front Wheel-Tire Assembly.”</span> <em>International Journal of Automotive Technology</em> 10 (3): 329–39.
-</div>
-<div class="csl-entry">
-To, W. M., T. W. Yu, T. M. Lai, and S. P. Li. 2007. <span>“Characterization of Commercial Clothes Dryers Based on Energy-Efficiency Analysis.”</span> <em>International Journal of Clothing Science and Technology</em> 19 (5): 270–90.
-</div>
-<div class="csl-entry">
-Wohlgemuth, K. J., A. Jesko, V. Frost, M. J. Conner, and J. A. Mota. 2024. <span>“Characteristics of Slow and Fast Performers on a Firefighter Air Consumption Test.”</span> <em>Applied Ergonomics</em> 118. <a href="https://doi.org/10.1016/j.apergo.2024.104262">https://doi.org/10.1016/j.apergo.2024.104262</a>.
-</div>
-<div class="csl-entry">
-Wu, F-G., H. Lin, and M. You. 2011. <span>“The Enhanced Navigator for the Touch Screen: A Comparative Study on Navigational Techniques of Web Maps.”</span> <em>Displays</em> 32: 284–95.
-</div>
-<div class="csl-entry">
-Zeng, R., J. Lin, S. Wu, L. Chen, S. Chen, H. Gao, Y. Zheng, and H. Ma. 2015. <span>“A Randomized Controlled Trial: Preoperative Home-Based Combined Tai Chi and Strength Training (TCST) to Improve Balance and Aerobic Capacity in Patients with Total Hip Arthroplasty (THA).”</span> <em>Archives of Gerontology and Geriatrics</em> 60: 265–71.
-</div>
-<div class="csl-entry">
-Zouid, I., R. Siret, F. Jourjon, E. Mehinagic, and L. Rolle. 2013. <span>“Impact of Grapes Heterogeneity According to Sugar Level on Both Physical and Mechanical Berries Properties and Their Anthocyanins Extractability at Harvest.”</span> <em>Journal of Texture Studies</em> 44: 95–103.
 </div>
 </div>
-</div>
-</div>
-<h3>References</h3>
+<h3>References<a href="references.html#references" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-chaudhary_2011" class="csl-entry">
 Chaudhary, H., K. Kohli, S. Amin, P. Rathee, and V. Kumar. 2011. <span>“Optimization and Formulation Design of Gels of Diclfenac and Curcumin for Transdermal Drug Delivery by Box-Behnken Statistical Design.”</span> <em>Journal of Pharmaceutical Sciences</em> 100 (2): 580–93.
@@ -997,8 +855,8 @@ Kowarit, S., K. Sathpornprasath, and S. N. Jansri. 2024. <span>“Application of
           </div>
         </div>
       </div>
-<a href="analysis-of-covariance-ancova.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="analysis-of-covariance-ancova.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

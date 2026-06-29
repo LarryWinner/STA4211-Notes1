@@ -243,7 +243,7 @@ $$
 $$
 
 
-**Example 11.1 - Determination of Alcohol Content in Liquor**
+**Example 12.1 - Determination of Alcohol Content in Liquor**
 
 A study was conducted to measure alcohol content in 3 types of spirits
 [@oliveira_2017]. The researchers bought 3 brands each of Vodka, Whisky, and Cachaca. Factor A with $a=3$ is the spirit type (Vodka, Whisky, Cachaca).
@@ -405,7 +405,7 @@ $$
 \right]
 $$
 
-**Example 11.2 - Momentum of Animal Traps**
+**Example 12.2 - Momentum of Animal Traps**
 
 A study compared $a=8$ models of animal traps in terms of momentum
 [@cook_1989]. Within each model, $b=3$ traps were built. Each trap was measured $n=10$ times. We will treat the models as a fixed factor, and the traps within models as a random factor (any number could have been assembled for each model). The response measured was the momentum at HDISP (when both jaws displayed half way). The response has been multiplied by 100 to avoid small variance estimates.
@@ -530,7 +530,7 @@ $$
 The test and Confidence Interval for $\sigma_{\beta(\alpha)}^2$ are
 the same for the random effects model as for the mixed effects model.
 
-**Example 11.3 - Measurements on Semiconductor Wafers**
+**Example 12.3 - Measurements on Semiconductor Wafers**
 
 An instructional paper described making measurements on semiconducter wafers [@jensen_2002]. There were $a=20$ lots (batches) sampled, within each lot, there were $b=2$ wafers sampled, and each wafer was measured at $n=9$ locations (replicates). The response variable was not given for proprietary reasons. In this example, we treat lot and wafer(lot) as random factors. There are two wafer variables, **wafer1** takes on the values
 1 and 2 within each lot, **wafer2** gives each wafer a unique value (1-40) and is less risky of creating an error in computing.
@@ -803,7 +803,7 @@ $$
 \left(\overline{Y}_{i\bullet k}-
 \overline{Y}_{i'\bullet k}\right) \pm HSD_k
 $$
-**Example 11.4 - Treating Cats with Anxiety**
+**Example 12.4 - Treating Cats with Anxiety**
 
 A study was conducted to test a drug zylkene versus placebo in cats with anxiety [@beata_2007]. There were $a=2$ treatments (zylkene $i=1$ and placebo $i=2$), with $b=17$ cats randomized to each treatment (34 total) and each cat was observed at each of $c=5$ time points. The response was a clinical globel impression (higher scores mean less anxiety and are better). R code and output are given below.
 
