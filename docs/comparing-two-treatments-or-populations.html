@@ -416,28 +416,28 @@ of vertical leaps within players is <span class="math inline">\(\sigma_{12}\)</s
 to be positive, as players will tend to be above or below the mean for both brands, depending on their natural jumping ability. Suppose there are a sample of <span class="math inline">\(n\)</span> players in the experiment.
 We observe the pairs
 <span class="math inline">\(\left\{\left(Y_{11},Y_{21}\right),\ldots,\left(Y_{1n},Y_{2n}\right)\right\}\)</span> and
-we are interested in the difference in the leaps for the players <span class="math inline">\(D_i=Y_{1i}-Y_{2i}\)</span>.
+we are interested in the difference in the leaps for the players <span class="math inline">\(D_j=Y_{1j}-Y_{2j}\)</span>.
 Note that by definition, the within player covariance is
 <span class="math inline">\(\sigma_{12}=\rho\sigma_1\sigma_2\)</span>, where <span class="math inline">\(\rho\)</span> is the correlation between the within
 player measurements. Now we derive the distribution of the within player differences,
 and the mean difference, where we assume differences across players are independent.</p>
 <p><span class="math display">\[
-E\left\{Y_{1i}\right\}=\mu_1 \quad E\left\{Y_{2i}\right\}=\mu_2 \qquad
-V\left\{Y_{1i}\right\}=V\left\{Y_{2i}\right\}=\sigma^2 \qquad
-\mbox{COV}\left\{Y_{1i},Y_{2i}\right\}=\sigma_{12}=\rho\sigma^2
+E\left\{Y_{1j}\right\}=\mu_1 \quad E\left\{Y_{2j}\right\}=\mu_2 \qquad
+V\left\{Y_{1j}\right\}=V\left\{Y_{2j}\right\}=\sigma^2 \qquad
+\mbox{COV}\left\{Y_{1j},Y_{2j}\right\}=\sigma_{12}=\rho\sigma^2
 \]</span>
 <span class="math display">\[
-D_i=Y_{1i}-Y_{2i}=(1)Y_{1i} + (-1)Y_{2i} \quad \Rightarrow \quad a_1=1,a_2=-1
+D_j=Y_{1j}-Y_{2j}=(1)Y_{1j} + (-1)Y_{2j} \quad \Rightarrow \quad a_1=1,a_2=-1
 \]</span>
 <span class="math display">\[
-E\left\{D_i\right\}=E\left\{Y_{1i}-Y_{2i}\right\}=
+E\left\{D_j\right\}=E\left\{Y_{1j}-Y_{2j}\right\}=
 (1)
-E\left\{Y_{1i}\right\}+(-1)E\left\{Y_{2i}\right\}=\mu_1-\mu_2=\mu_D
+E\left\{Y_{1j}\right\}+(-1)E\left\{Y_{2j}\right\}=\mu_1-\mu_2=\mu_D
 \]</span>
 <span class="math display">\[
-V\left\{D_i\right\}=V\left\{Y_{1i}-Y_{2i}\right\}=
-(1)^2V\left\{Y_{1i}\right\}+(-1)^2V\left\{Y_{2i}\right\}+
-2(1)(-1)\mbox{COV}\left\{Y_{1i},Y_{2i}\right\}=
+V\left\{D_j\right\}=V\left\{Y_{1j}-Y_{2j}\right\}=
+(1)^2V\left\{Y_{1j}\right\}+(-1)^2V\left\{Y_{2j}\right\}+
+2(1)(-1)\mbox{COV}\left\{Y_{1j},Y_{2j}\right\}=
 \]</span>
 <span class="math display">\[
 \sigma_1^2+\sigma_2^2-2\rho\sigma_1\sigma_2=2\sigma^2-2\rho\sigma^2=
@@ -528,8 +528,8 @@ individual observations. Next we consider independent samples, first assuming eq
 <h3><span class="header-section-number">1.3.1</span> Inference for the Population Mean Difference for Paired Samples<a href="comparing-two-treatments-or-populations.html#inference-for-the-population-mean-difference-for-paired-samples" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Note that for the paired data case described above, we have the following results.</p>
 <p><span class="math display">\[
-D_i=Y_{1i}-Y_{2i} \quad i=1,\ldots,n \qquad \overline{D}=\frac{1}{n}\sum_{i=1}^nD_i   \qquad  
-S_D^2 = \frac{1}{n-1}\sum_{i=1}^n\left(D_i-\overline{D}\right)^2
+D_j=Y_{1j}-Y_{2j} \quad j=1,\ldots,n \qquad \overline{D}=\frac{1}{n}\sum_{j=1}^nD_j   \qquad  
+S_D^2 = \frac{1}{n-1}\sum_{j=1}^n\left(D_j-\overline{D}\right)^2
 \]</span>
 <span class="math display">\[
 \overline{D} \sim N\left(\mu_D,\frac{\sigma_D^2}{n}\right)  \qquad
@@ -563,16 +563,16 @@ means.</p>
 We consider two cases, equal variances <span class="math inline">\(\left(\sigma_1^2=\sigma_2^2=\sigma^2\right)\)</span>
 and unequal variances <span class="math inline">\(\left(\sigma_1^2\neq\sigma_2^2\right)\)</span>. In each case we assume
 the following data structure.</p>
-<p><span class="math display">\[Y_{1i} \sim NID\left(\mu_1,\sigma_1^2\right) \quad i=1,\ldots,n_1 \qquad
-Y_{2i} \sim NID\left(\mu_2,\sigma_2^2\right) \quad i=1,\ldots,n_2
+<p><span class="math display">\[Y_{1j} \sim NID\left(\mu_1,\sigma_1^2\right) \quad j=1,\ldots,n_1 \qquad
+Y_{2j} \sim NID\left(\mu_2,\sigma_2^2\right) \quad j=1,\ldots,n_2
 \]</span>
 <span class="math display">\[
-\overline{Y}_1 \sim N\left(\mu_1,\frac{\sigma_1^2}{n_1}\right)  \qquad
-\overline{Y}_2 \sim N\left(\mu_2,\frac{\sigma_2^2}{n_2}\right) \qquad
-\overline{Y}_1 \perp \overline{Y}_2
+\overline{Y}_{1\bullet} \sim N\left(\mu_1,\frac{\sigma_1^2}{n_1}\right)  \qquad
+\overline{Y}_{2\bullet} \sim N\left(\mu_2,\frac{\sigma_2^2}{n_2}\right) \qquad
+\overline{Y}_{1\bullet} \perp \overline{Y}_{2\bullet}
 \]</span>
 <span class="math display">\[
-\overline{Y}_1 - \overline{Y}_2 \sim
+\overline{Y}_{1\bullet} - \overline{Y}_{2\bullet} \sim
 N\left(\mu_1-\mu_2,\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}\right)
 \]</span></p>
 <div id="equal-variances" class="section level4 hasAnchor" number="1.3.2.1">
@@ -580,7 +580,7 @@ N\left(\mu_1-\mu_2,\frac{\sigma_1^2}{n_1}+\frac{\sigma_2^2}{n_2}\right)
 <p>When the population variances are equal <span class="math inline">\(\left(\sigma_1^2=\sigma_2^2=\sigma^2\right)\)</span>,
 we obtain the following sampling distribution for the difference in means.</p>
 <p><span class="math display">\[
-\overline{Y}_1 - \overline{Y}_2 \sim
+\overline{Y}_{1\bullet} - \overline{Y}_{2\bullet} \sim
 N\left(\mu_1-\mu_2,\sigma^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]\right)
 \]</span>
 We can use the pooled variance <span class="math inline">\(S_p^2\)</span> as the estimator for the common <span class="math inline">\(\sigma^2\)</span>.
@@ -592,25 +592,25 @@ S_p^2=\frac{\left(n_1-1\right)S_1^2+\left(n_2-1\right)S_2^2}{n_1+n_2-2} \qquad \
 Then we can obtain the estimated standard error of
 <span class="math inline">\(\overline{Y}_1 - \overline{Y}_2\)</span>, by replacing <span class="math inline">\(\sigma^2\)</span> with <span class="math inline">\(S_p^2\)</span>.</p>
 <p><span class="math display">\[
-\frac{\overline{Y}_1 - \overline{Y}_2}{
+\frac{\overline{Y}_{1\bullet} - \overline{Y}_{2\bullet}}{
 \sqrt{S_p^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]}}=
-\frac{\overline{Y}_1 - \overline{Y}_2}{
-\hat{SE}\left\{\overline{Y}_1 - \overline{Y}_2\right\}} \sim t_{n_1+n_2-2}
+\frac{\overline{Y}_{1\bullet} - \overline{Y}_{2\bullet}}{
+\hat{SE}\left\{\overline{Y}_{1\bullet} - \overline{Y}_{2\bullet}\right\}} \sim t_{n_1+n_2-2}
 \]</span>
 From this, we can construct Confidence Intervals and conduct hypothesis tests for
 <span class="math inline">\(\mu_1-\mu_2\)</span>.</p>
 <p><span class="math display">\[
 (1-\alpha)100\% \mbox{ CI for } \mu_1-\mu_2:
-\left(\overline{y}_1-\overline{y}_2\right) \pm
+\left(\overline{y}_{1\bullet}-\overline{y}_{2\bullet}\right) \pm
 t_{1-\alpha/2;n_1+n_2-2}\sqrt{s_p^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]}
 \]</span>
 <span class="math display">\[
-\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}=
+\hat{SE}\left\{\overline{Y}_{1\bullet}-\overline{Y}_{2\bullet}\right\}=
 \sqrt{s_p^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]}
 \]</span></p>
 <p><span class="math display">\[
 H_0:\mu_1-\mu_2=\Delta_0 \qquad H_A:\mu_1-\mu_2 \neq \Delta_0 \qquad
-TS:t^*=\frac{\left(\overline{y}_1-\overline{y}_2\right)-\Delta_0}{
+TS:t^*=\frac{\left(\overline{y}_{1\bullet}-\overline{y}_{2\bullet}\right)-\Delta_0}{
 \sqrt{s_p^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]}}
 \]</span></p>
 <p><span class="math display">\[
@@ -624,18 +624,18 @@ RR:|t^*|\geq t_{1-\alpha/2;n_1+n_2-2}
 <p>When the population variances are unequal <span class="math inline">\(\left(\sigma_1^2\neq\sigma_2^2\right)\)</span>,
 we obtain the following sampling distribution for the difference in means.</p>
 <p><span class="math display">\[
-\overline{Y}_1 - \overline{Y}_2 \sim
+\overline{Y}_{1\bullet} - \overline{Y}_{2\bullet} \sim
 N\left(\mu_1-\mu_2,\frac{\sigma^2_1}{n_1}+\frac{\sigma_2^2}{n_2}\right)
 \]</span></p>
-<p>We can estimate <span class="math inline">\(V\left\{\overline{Y}_1 - \overline{Y}_2\right\}\)</span> by replacing <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span> with <span class="math inline">\(S_1^2\)</span> and <span class="math inline">\(S_2^2\)</span>. The problem is that we don’t obtain a Chi-Square
+<p>We can estimate <span class="math inline">\(V\left\{\overline{Y}_{1\bullet} - \overline{Y}_{2\bullet}\right\}\)</span> by replacing <span class="math inline">\(\sigma_1^2\)</span> and <span class="math inline">\(\sigma_2^2\)</span> with <span class="math inline">\(S_1^2\)</span> and <span class="math inline">\(S_2^2\)</span>. The problem is that we don’t obtain a Chi-Square
 distribution for a function of <span class="math inline">\(S_1^2\)</span> and <span class="math inline">\(S_2^2\)</span> as we did in the equal variance case.</p>
 <p><strong>Welch’s <span class="math inline">\(t\)</span>-test</strong> replaces the population variances with the sample variances in
 the estimated standard error of
-<span class="math inline">\(\overline{Y}_1 - \overline{Y}_2\)</span> and then makes an adjustment to the degrees of freedom
+<span class="math inline">\(\overline{Y}_{1\bullet} - \overline{Y}_{2\bullet}\)</span> and then makes an adjustment to the degrees of freedom
 for the approximate Chi-Square distribution, matching the mean and variance of the quantity
 in the denominator of the <span class="math inline">\(T=Z/\sqrt{W/{\nu}}\)</span>. We briefly describe the method here.</p>
 <p><span class="math display">\[
-Z=\frac{\left(\overline{Y}_1 - \overline{Y}_2\right)-\left(\mu_1 - \mu_2\right)}{
+Z=\frac{\left(\overline{Y}_{1\bullet} - \overline{Y}_{2\bullet}\right)-\left(\mu_1 - \mu_2\right)}{
 \sqrt{\frac{\sigma^2_1}{n_1}+\frac{\sigma_2^2}{n_2}}} \sim N(0,1)
 \]</span>
 We next want to replace the population variances in the denominator with the sample
@@ -643,15 +643,15 @@ variances. For <span class="math inline">\(W\sim \chi_{\nu}^2\)</span> the mean 
 respectively. Now, consider the ratio we will need in the denominator for our approximate
 <span class="math inline">\(T\)</span> ratio. First, we consider the distributions of <span class="math inline">\(S_1^2\)</span> and <span class="math inline">\(S_2^2\)</span>.</p>
 <p><span class="math display">\[
-j=1,2: \quad W_j=\frac{\left(n_j-1\right)S_j^2}{\sigma_j^2} \sim \chi_{n_j-1}^2
-\quad\Rightarrow\quad E\left\{W_j\right\}=n_j-1 \quad V\left\{W_j\right\}=
-2\left(n_j-1\right)
+i=1,2: \quad W_i=\frac{\left(n_i-1\right)S_i^2}{\sigma_i^2} \sim \chi_{n_i-1}^2
+\quad\Rightarrow\quad E\left\{W_i\right\}=n_i-1 \quad V\left\{W_i\right\}=
+2\left(n_i-1\right)
 \]</span>
 <span class="math display">\[
-\quad\Rightarrow\quad E\left\{S_j^2\right\}=
-\frac{\left(n_j-1\right)\sigma_j^2}{\left(n_j-1\right)}=\sigma_j^2 \qquad
-V\left\{S_j^2\right\}=\frac{2\left(n_j-1\right)\sigma_j^4}{\left(n_j-1\right)^2}
-=\frac{2\sigma_j^4}{\left(n_j-1\right)}
+\quad\Rightarrow\quad E\left\{S_i^2\right\}=
+\frac{\left(n_i-1\right)\sigma_i^2}{\left(n_i-1\right)}=\sigma_i^2 \qquad
+V\left\{S_i^2\right\}=\frac{2\left(n_i-1\right)\sigma_j^4}{\left(n_i-1\right)^2}
+=\frac{2\sigma_i^4}{\left(n_i-1\right)}
 \]</span></p>
 <p><span class="math display">\[
 \frac{W^*}{\nu^*}=
@@ -678,30 +678,30 @@ V\left\{\frac{W^*}{\nu^*}\right\} =
 \frac{\left(\sigma_1^2/n_1\right)^2}{\left(n_1-1\right)} +
 \frac{\left(\sigma_2^2/n_2\right)^2}{\left(n_2-1\right)}}
 \]</span>
-Replacing the unknown <span class="math inline">\(\sigma_j^2\)</span> with <span class="math inline">\(S_j^2\)</span>, we get <strong>Satterthwaite’s</strong> approximation
+Replacing the unknown <span class="math inline">\(\sigma_i^2\)</span> with <span class="math inline">\(S_i^2\)</span>, we get <strong>Satterthwaite’s</strong> approximation
 for the degrees of freedom for Welch’s <span class="math inline">\(t\)</span>-test.</p>
 <p><span class="math display">\[
 \hat{\nu}^*=
 \frac{\left(\frac{S_1^2}{n_1}+\frac{S_2^2}{n_2}\right)^2}{
 \frac{\left(S_1^2/n_1\right)^2}{\left(n_1-1\right)} +
 \frac{\left(S_2^2/n_2\right)^2}{\left(n_2-1\right)}} =
-\frac{\left(\sum_{j=1}^2g_jMS_j\right)^2}{\sum_{j=1}^2
-\frac{\left(g_jMS_j\right)^2}{\nu_j}}  \quad \mbox{ where } \quad
-g_j=\frac{1}{n_j}  \quad MS_j=S_j^2 \quad \nu_j=n_j-1
+\frac{\left(\sum_{i=1}^2g_iMS_i\right)^2}{\sum_{i=1}^2
+\frac{\left(g_iMS_i\right)^2}{\nu_i}}  \quad \mbox{ where } \quad
+g_i=\frac{1}{n_i}  \quad MS_i=S_i^2 \quad \nu_i=n_i-1
 \]</span></p>
 <p>The approximate <span class="math inline">\((1-\alpha)100\%\)</span> Confidence Interval and test of hypothesis for the population mean difference for the unequal variance case are as follow.</p>
 <p><span class="math display">\[
 (1-\alpha)100\% \mbox{ CI for } \mu_1-\mu_2:
-\left(\overline{y}_1-\overline{y}_2\right) \pm
+\left(\overline{y}_{1\bullet}-\overline{y}_{2\bullet}\right) \pm
 t_{1-\alpha/2;\hat{\nu}^*}\sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
 \]</span>
 <span class="math display">\[
-\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}=
+\hat{SE}\left\{\overline{Y}_{1\bullet}-\overline{Y}_{2\bullet}\right\}=
 \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
 \]</span>
 <span class="math display">\[
 H_0:\mu_1-\mu_2=\Delta_0 \qquad H_A:\mu_1-\mu_2 \neq \Delta_0 \qquad
-TS:t^*=\frac{\left(\overline{y}_1-\overline{y}_2\right)-\Delta_0}{
+TS:t^*=\frac{\left(\overline{y}_{1\bullet}-\overline{y}_{2\bullet}\right)-\Delta_0}{
 \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}}
 \]</span>
 <span class="math display">\[
@@ -722,8 +722,8 @@ we will briefly cover a method that can be used for paired samples.</p>
 <p>Returning to the estimated variances for independent samples, we have the following
 results for independent random samples from normal distributions.</p>
 <p><span class="math display">\[
-j=1,2: \quad S_j^2=\frac{1}{n_j-1}\sum_{i=1}^{n_j}\left(Y_{ji}-\overline{Y}_j\right)^2
-\qquad \frac{\left(n_j-1\right)S_j^2}{\sigma_j^2}\sim \chi_{n_j-1}^2 \qquad
+i=1,2: \quad S_i^2=\frac{1}{n_i-1}\sum_{j=1}^{n_i}\left(Y_{ij}-\overline{Y}_{i\bullet}\right)^2
+\qquad \frac{\left(n_i-1\right)S_i^2}{\sigma_i^2}\sim \chi_{n_i-1}^2 \qquad
 S_1^2 \perp S_2^2
 \]</span></p>
 <p>When we have two independent Chi-Square random variables with <span class="math inline">\(\nu_1\)</span>, and <span class="math inline">\(\nu_2\)</span>
@@ -928,13 +928,15 @@ direct computation of the mean, variance, and standard deviations among the team
 <span class="math inline">\(D=A-P\)</span> based on rules for linear functions of random variables.</p>
 <p><span class="math display">\[ E\{D\}=\mu_D=E\{A-P\}=\mu_A-\mu_P=79.87-79.79=0.08 \]</span>
 <span class="math display">\[ V\{D\}=\sigma_D^2=V\{A-P\}=\sigma_A^2+\sigma_P^2-2\rho_{AP}\sigma_A\sigma_P = \]</span>
-<span class="math display">\[=131.85+33.08-2(.479)(11.48)(5.75) = 101.62
-\quad \Rightarrow \quad \sigma_D = 10.08 \]</span></p>
+<span class="math display">\[
+=131.85+33.08-2(.479)(11.48)(5.75) = 101.62
+\quad \Rightarrow \quad \sigma_D = 10.08
+\]</span></p>
 <p><strong>Treating these Team-Games as a Sample from a Conceptual or “Metaphorical” Population </strong></p>
 <p>We obtain a 95% Confidence Interval for <span class="math inline">\(\mu_D\)</span> and a test of <span class="math inline">\(H_0:\mu_D=0\)</span> for the
 population mean Difference as follow with <span class="math inline">\(\overline{d}=0.0814\)</span>, <span class="math inline">\(s_d^2=101.6167\)</span>, <span class="math inline">\(n=6118\)</span>,
 <span class="math inline">\(\sqrt{s_d^2/n}=0.1289\)</span>,and <span class="math inline">\(t_{.975;6118-1}=1.9604\)</span>.</p>
-<p><span class="math display">\[ \overline{d} \pm t_{.025;n-1}\sqrt{\frac{s_d^2}{n}}  \equiv  0.0814 \pm 1.9604(0.1289)  \equiv  0.0814 \pm 0.2527
+<p><span class="math display">\[ \overline{d} \pm t_{.975;n-1}\sqrt{\frac{s_d^2}{n}}  \equiv  0.0814 \pm 1.9604(0.1289)  \equiv  0.0814 \pm 0.2527
 \equiv  (-0.1713, 0.3341) \]</span></p>
 <p>The interval contains 0, showing no evidence of a systematic “bias” in team point predictions.</p>
 <p><span class="math display">\[
@@ -1283,27 +1285,27 @@ F^*\geq F_{.025,19915,3058}= 1.056
 <p>Then we will consider the unequal variance case.</p>
 <p>The summary statistics and calculations are given below.</p>
 <p><span class="math display">\[
-\mbox{NBA: } n_1=19116 \quad \overline{y}_1=0.443 \quad s_1^2 = 313.89 \qquad
-\mbox{WNBA: } n_2=3059 \quad \overline{y}_2=0.163 \quad s_2^2 = 264.75
+\mbox{NBA: } n_1=19116 \quad \overline{y}_{1\bullet}=0.443 \quad s_1^2 = 313.89 \qquad
+\mbox{WNBA: } n_2=3059 \quad \overline{y}_{2\bullet}=0.163 \quad s_2^2 = 264.75
 \]</span>
 <span class="math display">\[
 s_P^2 = \frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}=
 \frac{(19116-1)(313.89)+(3059-1)(264.75)}{19119+3059-2} = 307.11
 \]</span>
 <span class="math display">\[
-\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}=
+\hat{SE}\left\{\overline{Y}_{1\bullet}-\overline{Y}_{2\bullet}\right\}=
 \sqrt{s_P^2\left[\frac{1}{n_1}+\frac{1}{n_2}\right]}
 =\sqrt{307.11\left[\frac{1}{19116}+\frac{1}{3059}\right]}=0.341
 \]</span>
 We obtain a 95% Confidence Interval for <span class="math inline">\(\mu_1-\mu_2\)</span> and a test of <span class="math inline">\(H_0:\mu_1-\mu_2=0\)</span> for the
-population mean Difference as follow with <span class="math inline">\(\overline{y}_1-\overline{y}_2=0.280\)</span>,
-<span class="math inline">\(\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}=0.341\)</span>, and <span class="math inline">\(t_{.975;19116+3059-2}=1.9601\)</span>.</p>
-<p><span class="math display">\[ \overline{y}_1-\overline{y}_2 \pm t_{.975;n_1+n_2-2}\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}  \equiv  0.280 \pm 1.9601(0.341)  \equiv  0.280 \pm 0.668
+population mean Difference as follow with <span class="math inline">\(\overline{y}_{1\bullet}-\overline{y}_{2\bullet}=0.280\)</span>,
+<span class="math inline">\(\hat{SE}\left\{\overline{Y}_{1\bullet}-\overline{Y}_{2\bullet}\right\}=0.341\)</span>, and <span class="math inline">\(t_{.975;19116+3059-2}=1.9601\)</span>.</p>
+<p><span class="math display">\[ \overline{y}_{1\bullet}-\overline{y}_{2\bullet} \pm t_{.975;n_1+n_2-2}\hat{SE}\left\{\overline{Y}_{1\bullet}-\overline{Y}_{2\bullet}\right\}  \equiv  0.280 \pm 1.9601(0.341)  \equiv  0.280 \pm 0.668
 \equiv  (-0.388,0.948)
 \]</span>
 <span class="math display">\[
 H_0:\mu_1-\mu_2=0 \quad H_A:\mu_1-\mu_2\neq 0 \qquad
-TS:t^*=\frac{\overline{y}_1-\overline{y}_2}{\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}}=\frac{0.280}{0.341}=0.821
+TS:t^*=\frac{\overline{y}_{1\bullet}-\overline{y}_{2\bullet}}{\hat{SE}\left\{\overline{Y}_{1\bullet}-\overline{Y}_{2\bullet}\right\}}=\frac{0.280}{0.341}=0.821
 \]</span>
 <span class="math display">\[
 RR: |t^*| \geq t_{.975;22173} = 1.9601
@@ -1313,7 +1315,7 @@ P=2P\left(t_{22173}\geq|t^*|\right)=.4117
 <p>Now, we consider the unequal variance case (Welch’s Test, with Satterthwaite’s Approximation for the degrees of freedom). The sample mean difference doesn’t change.
 We obtain the estimated standard error of the mean difference and approximate degrees of freedom here.</p>
 <p><span class="math display">\[
-\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}=
+\hat{SE}\left\{\overline{Y}_{1\bullet}-\overline{Y}_{2\bullet}\right\}=
 \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}=\sqrt{\frac{313.89}{19116}+\frac{264.75}{3059}}
 =0.321
 \]</span>
@@ -1344,7 +1346,7 @@ RR: |t^*| \geq 1.9605 \qquad P=2P\left(t_{4303.65}\geq |t^*|\right)=.3833
 in repeated sampling, based on both the equal and unequal variance cases.
 We take 100000 random samples of sizes <span class="math inline">\(n_1=40\)</span> NBA and <span class="math inline">\(n_2=20\)</span> WNBA games.</p>
 <p>First, we compute the value
-<span class="math inline">\(t=\left[\left(\overline{y}_1-\overline{y}_2\right)-\left(\mu_1-\mu_2\right)\right]/\hat{SE}\left\{\overline{Y}_1-\overline{Y}_2\right\}\)</span> for
+<span class="math inline">\(t=\left[\left(\overline{y}_{1\bullet}-\overline{y}_{2\bullet}\right)-\left(\mu_1-\mu_2\right)\right]/\hat{SE}\left\{\overline{Y}_{1\bullet}-\overline{Y}_{2\bullet}\right\}\)</span> for
 each sample, where <span class="math inline">\(\mu_1-\mu_2=0.280\)</span> with <span class="math inline">\(n_1=40\)</span> and <span class="math inline">\(n_2=20\)</span>. Figure <a href="comparing-two-treatments-or-populations.html#fig:chapter1b2">1.6</a> gives a histogram of the <span class="math inline">\(t\)</span>-values, with a superimposed <span class="math inline">\(t_{58}\)</span> distribution. The model gives a reasonable fit, but does not fit as well as in Example 1.1, due to unequal variances and sample sizes.</p>
 <p>As we have computed Confidence Intervals and tests for the “full sample”, we will
 not repeat the calculations for our first random samples here.</p>
